@@ -4,239 +4,4658 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta
       name="description"
-      content="DOCENCIA360: plataforma integral para la gestión, planificación y seguimiento docente."
+      content="DOCENCIA360 es una plataforma integral para docentes: planificación, seguimiento estudiantil, evaluaciones, recursos y analítica pedagógica."
     />
-    <meta name="theme-color" content="#1d4ed8" />
-    <title>DOCENCIA360 | Plataforma docente</title>
+    <meta
+      name="keywords"
+      content="docencia, educación, planificación docente, estudiantes, evaluaciones, plataforma educativa"
+    />
+    <meta name="author" content="DOCENCIA360" />
+    <meta name="theme-color" content="#0d1b3e" />
 
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <title>DOCENCIA360 | Enseña con visión, acompaña con propósito</title>
+
+    <style>
+      /* ============================================================
+         DOCENCIA360 — LANDING + ACCESO
+         Archivo autónomo sin librerías, APIs ni recursos externos.
+         ============================================================ */
+
+      /* ============================================================
+         1. VARIABLES Y BASE
+         ============================================================ */
+      :root {
+        --font-sans:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+
+        --navy-950: #071126;
+        --navy-900: #0b1c3d;
+        --navy-850: #10254c;
+        --navy-800: #112b59;
+        --navy-700: #1b3e79;
+        --navy-600: #2755a0;
+
+        --blue-700: #1d4ed8;
+        --blue-600: #2563eb;
+        --blue-500: #3b82f6;
+        --blue-400: #60a5fa;
+        --blue-100: #dbeafe;
+        --blue-50: #eff6ff;
+
+        --indigo-700: #4338ca;
+        --indigo-600: #4f46e5;
+        --indigo-500: #6366f1;
+        --indigo-100: #e0e7ff;
+        --indigo-50: #eef2ff;
+
+        --cyan-600: #0891b2;
+        --cyan-500: #06b6d4;
+        --cyan-100: #cffafe;
+        --cyan-50: #ecfeff;
+
+        --emerald-700: #047857;
+        --emerald-600: #059669;
+        --emerald-500: #10b981;
+        --emerald-100: #d1fae5;
+        --emerald-50: #ecfdf5;
+
+        --amber-600: #d97706;
+        --amber-500: #f59e0b;
+        --amber-100: #fef3c7;
+        --amber-50: #fffbeb;
+
+        --rose-600: #e11d48;
+        --rose-500: #f43f5e;
+        --rose-100: #ffe4e6;
+        --rose-50: #fff1f2;
+
+        --slate-950: #0f172a;
+        --slate-900: #1e293b;
+        --slate-800: #334155;
+        --slate-700: #475569;
+        --slate-600: #64748b;
+        --slate-500: #94a3b8;
+        --slate-400: #cbd5e1;
+        --slate-300: #d9e1ec;
+        --slate-200: #e2e8f0;
+        --slate-100: #f1f5f9;
+        --slate-50: #f8fafc;
+
+        --white: #ffffff;
+        --black: #000000;
+
+        --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.05);
+        --shadow-sm:
+          0 2px 4px rgb(15 23 42 / 0.04), 0 4px 12px rgb(15 23 42 / 0.04);
+        --shadow-md:
+          0 4px 8px rgb(15 23 42 / 0.04), 0 12px 24px rgb(15 23 42 / 0.08);
+        --shadow-lg:
+          0 8px 16px rgb(15 23 42 / 0.06), 0 20px 40px rgb(15 23 42 / 0.12);
+        --shadow-xl:
+          0 12px 24px rgb(15 23 42 / 0.08), 0 32px 64px rgb(15 23 42 / 0.18);
+        --shadow-blue:
+          0 10px 24px rgb(37 99 235 / 0.22), 0 4px 10px rgb(37 99 235 / 0.14);
+
+        --radius-xs: 8px;
+        --radius-sm: 12px;
+        --radius-md: 16px;
+        --radius-lg: 22px;
+        --radius-xl: 28px;
+        --radius-2xl: 36px;
+        --radius-pill: 999px;
+
+        --header-height: 76px;
+        --container-width: 1240px;
+        --transition-fast: 160ms ease;
+        --transition-normal: 250ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        background: var(--white);
+      }
+
+      body {
+        min-width: 320px;
+        margin: 0;
+        overflow-x: hidden;
+        color: var(--slate-800);
+        background: var(--white);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+      }
+
+      button,
+      a,
+      input[type="checkbox"] {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      ul,
+      ol {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgb(96 165 250 / 0.85);
+        outline-offset: 3px;
+      }
+
+      ::selection {
+        color: var(--white);
+        background: var(--blue-600);
+      }
+
+      /* ============================================================
+         2. UTILIDADES GENERALES
+         ============================================================ */
+      .container {
+        width: min(calc(100% - 48px), var(--container-width));
+        margin-inline: auto;
+      }
+
+      .section {
+        position: relative;
+        padding: 112px 0;
+      }
+
+      .section-heading {
+        width: min(100%, 690px);
+        margin: 0 auto 58px;
+        text-align: center;
+      }
+
+      .section-heading--left {
+        width: 100%;
+        max-width: 600px;
+        margin: 0;
+        text-align: left;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+        color: var(--blue-700);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.13em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 22px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+        content: "";
+      }
+
+      .eyebrow--light {
+        color: var(--blue-100);
+      }
+
+      .section-title {
+        margin-bottom: 18px;
+        color: var(--navy-900);
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 780;
+        letter-spacing: -0.055em;
+        line-height: 1.08;
+      }
+
+      .section-description {
+        max-width: 620px;
+        margin-inline: auto;
+        color: var(--slate-600);
+        font-size: 1.06rem;
+        line-height: 1.72;
+      }
+
+      .section-heading--left .section-description {
+        margin-inline: 0;
+      }
+
+      .text-gradient {
+        background: linear-gradient(125deg, var(--blue-600), var(--indigo-600));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 1000;
+        top: -100px;
+        left: 24px;
+        padding: 12px 18px;
+        color: var(--white);
+        background: var(--navy-900);
+        border-radius: var(--radius-xs);
+        box-shadow: var(--shadow-lg);
+        transition: top var(--transition-fast);
+      }
+
+      .skip-link:focus {
+        top: 18px;
+      }
+
+      /* ============================================================
+         3. BOTONES
+         ============================================================ */
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 48px;
+        padding: 0 20px;
+        border: 1px solid transparent;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-size: 0.92rem;
+        font-weight: 730;
+        line-height: 1;
+        white-space: nowrap;
+        transition:
+          transform var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          color var(--transition-fast);
+      }
+
+      .button svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      .button--primary {
+        color: var(--white);
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        box-shadow: var(--shadow-blue);
+      }
+
+      .button--primary:hover {
+        background: linear-gradient(135deg, var(--blue-700), var(--indigo-700));
+        box-shadow:
+          0 14px 26px rgb(37 99 235 / 0.28),
+          0 6px 12px rgb(37 99 235 / 0.16);
+      }
+
+      .button--secondary {
+        color: var(--navy-800);
+        background: var(--white);
+        border-color: var(--slate-200);
+        box-shadow: var(--shadow-xs);
+      }
+
+      .button--secondary:hover {
+        border-color: var(--blue-200, #bfdbfe);
+        background: var(--blue-50);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .button--ghost {
+        min-height: 42px;
+        padding-inline: 14px;
+        color: var(--slate-700);
+        background: transparent;
+      }
+
+      .button--ghost:hover {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .button--large {
+        min-height: 56px;
+        padding-inline: 24px;
+        border-radius: 14px;
+        font-size: 0.98rem;
+      }
+
+      .button--full {
+        width: 100%;
+      }
+
+      /* ============================================================
+         4. LOGOTIPO
+         ============================================================ */
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--navy-900);
+      }
+
+      .brand__mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        border-radius: 11px;
+        box-shadow: 0 5px 12px rgb(37 99 235 / 0.25);
+      }
+
+      .brand__mark svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .brand__name {
+        font-size: 1.18rem;
+        font-weight: 850;
+        letter-spacing: -0.055em;
+        line-height: 1;
+      }
+
+      .brand__name strong {
+        color: var(--blue-600);
+        font-weight: 850;
+      }
+
+      .brand--light {
+        color: var(--white);
+      }
+
+      .brand--light .brand__mark {
+        color: var(--blue-700);
+        background: var(--white);
+        box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+      }
+
+      .brand--light .brand__name strong {
+        color: var(--blue-300, #93c5fd);
+      }
+
+      /* ============================================================
+         5. NAVEGACIÓN PRINCIPAL
+         ============================================================ */
+      .site-header {
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: var(--header-height);
+        border-bottom: 1px solid transparent;
+        background: rgb(255 255 255 / 0);
+        transition:
+          background var(--transition-normal),
+          box-shadow var(--transition-normal),
+          border-color var(--transition-normal),
+          backdrop-filter var(--transition-normal);
+      }
+
+      .site-header.is-scrolled {
+        border-color: rgb(226 232 240 / 0.85);
+        background: rgb(255 255 255 / 0.9);
+        box-shadow: 0 2px 18px rgb(15 23 42 / 0.05);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-left: auto;
+        margin-right: 26px;
+      }
+
+      .nav-menu a {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 0 12px;
+        color: var(--slate-600);
+        border-radius: 8px;
+        font-size: 0.89rem;
+        font-weight: 650;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .nav-menu a::after {
+        position: absolute;
+        right: 12px;
+        bottom: 3px;
+        left: 12px;
+        height: 2px;
+        background: var(--blue-600);
+        border-radius: var(--radius-pill);
+        content: "";
+        opacity: 0;
+        transform: scaleX(0.4);
+        transition:
+          opacity var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .nav-menu a:hover,
+      .nav-menu a:focus-visible {
+        color: var(--navy-900);
+        background: var(--slate-50);
+      }
+
+      .nav-menu a:hover::after,
+      .nav-menu a:focus-visible::after {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .nav-actions .button--primary {
+        min-height: 42px;
+      }
+
+      .mobile-menu-button {
+        display: none;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        place-items: center;
+        color: var(--navy-900);
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: var(--shadow-xs);
+      }
+
+      .mobile-menu-button svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      .mobile-menu-button .icon-close {
+        display: none;
+      }
+
+      .mobile-menu-button[aria-expanded="true"] .icon-menu {
+        display: none;
+      }
+
+      .mobile-menu-button[aria-expanded="true"] .icon-close {
+        display: block;
+      }
+
+      /* ============================================================
+         6. HERO
+         ============================================================ */
+      .hero {
+        position: relative;
+        min-height: 790px;
+        padding: calc(var(--header-height) + 74px) 0 88px;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 7% 10%,
+            rgb(219 234 254 / 0.88) 0,
+            rgb(219 234 254 / 0) 27%
+          ),
+          radial-gradient(
+            circle at 92% 18%,
+            rgb(224 231 255 / 0.8) 0,
+            rgb(224 231 255 / 0) 26%
+          ),
+          linear-gradient(180deg, #fbfdff 0%, #f5f9ff 100%);
+      }
+
+      .hero__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(510px, 1.08fr);
+        align-items: center;
+        gap: clamp(34px, 6vw, 88px);
+      }
+
+      .hero__content {
+        position: relative;
+        z-index: 2;
+        max-width: 600px;
+      }
+
+      .hero__pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        min-height: 34px;
+        padding: 0 12px 0 8px;
+        margin-bottom: 25px;
+        color: var(--navy-700);
+        background: rgb(255 255 255 / 0.82);
+        border: 1px solid rgb(191 219 254 / 0.9);
+        border-radius: var(--radius-pill);
+        box-shadow: var(--shadow-sm);
+        font-size: 0.76rem;
+        font-weight: 750;
+      }
+
+      .hero__pill-icon {
+        display: grid;
+        width: 20px;
+        height: 20px;
+        place-items: center;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        border-radius: 50%;
+      }
+
+      .hero__pill-icon svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .hero__title {
+        max-width: 620px;
+        margin-bottom: 24px;
+        color: var(--navy-950);
+        font-size: clamp(2.7rem, 5.1vw, 4.5rem);
+        font-weight: 820;
+        letter-spacing: -0.07em;
+        line-height: 1.035;
+      }
+
+      .hero__title .highlight {
+        position: relative;
+        display: inline-block;
+        color: var(--blue-600);
+      }
+
+      .hero__title .highlight::after {
+        position: absolute;
+        z-index: -1;
+        right: 1%;
+        bottom: 4%;
+        left: 1%;
+        height: 23%;
+        background: rgb(147 197 253 / 0.38);
+        border-radius: 3px;
+        content: "";
+        transform: rotate(-1.5deg);
+      }
+
+      .hero__description {
+        max-width: 548px;
+        margin-bottom: 31px;
+        color: var(--slate-600);
+        font-size: clamp(1rem, 1.6vw, 1.13rem);
+        line-height: 1.73;
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 31px;
+      }
+
+      .hero__trust {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        color: var(--slate-600);
+        font-size: 0.81rem;
+        font-weight: 570;
+      }
+
+      .avatars {
+        display: flex;
+        align-items: center;
+        padding-left: 6px;
+      }
+
+      .avatar {
+        display: grid;
+        width: 29px;
+        height: 29px;
+        margin-left: -6px;
+        place-items: center;
+        overflow: hidden;
+        color: var(--white);
+        border: 2px solid #f8fbff;
+        border-radius: 50%;
+        font-size: 0.62rem;
+        font-weight: 800;
+      }
+
+      .avatar:nth-child(1) {
+        background: linear-gradient(135deg, #f97316, #ea580c);
+      }
+
+      .avatar:nth-child(2) {
+        background: linear-gradient(135deg, #14b8a6, #0f766e);
+      }
+
+      .avatar:nth-child(3) {
+        background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      }
+
+      .avatar:nth-child(4) {
+        background: linear-gradient(135deg, #ec4899, #be185d);
+      }
+
+      .hero__trust strong {
+        color: var(--navy-800);
+      }
+
+      .hero__visual {
+        position: relative;
+        z-index: 1;
+        min-height: 570px;
+      }
+
+      .hero-orbit {
+        position: absolute;
+        border: 1px solid rgb(147 197 253 / 0.3);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .hero-orbit--one {
+        top: 28px;
+        right: -38px;
+        width: 540px;
+        height: 540px;
+      }
+
+      .hero-orbit--two {
+        top: 85px;
+        right: 30px;
+        width: 425px;
+        height: 425px;
+        border-color: rgb(165 180 252 / 0.35);
+      }
+
+      .hero__glow {
+        position: absolute;
+        right: 2%;
+        bottom: 3%;
+        width: 280px;
+        height: 280px;
+        background: rgb(96 165 250 / 0.2);
+        border-radius: 50%;
+        filter: blur(60px);
+      }
+
+      /* ============================================================
+         7. PREVIEW PRINCIPAL DEL PRODUCTO
+         ============================================================ */
+      .product-window {
+        position: absolute;
+        z-index: 2;
+        top: 44px;
+        right: 0;
+        width: min(100%, 624px);
+        overflow: hidden;
+        background: var(--white);
+        border: 1px solid rgb(203 213 225 / 0.9);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        transform: perspective(1400px) rotateY(-3deg) rotateX(1deg);
+        transform-origin: center center;
+      }
+
+      .product-window__topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 48px;
+        padding: 0 18px;
+        background: var(--slate-50);
+        border-bottom: 1px solid var(--slate-200);
+      }
+
+      .window-dots {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .window-dots span {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+      }
+
+      .window-dots span:nth-child(1) {
+        background: #fb7185;
+      }
+
+      .window-dots span:nth-child(2) {
+        background: #fbbf24;
+      }
+
+      .window-dots span:nth-child(3) {
+        background: #4ade80;
+      }
+
+      .window-address {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        color: var(--slate-500);
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        border-radius: 6px;
+        font-size: 0.62rem;
+        font-weight: 600;
+      }
+
+      .window-address svg {
+        width: 11px;
+        height: 11px;
+        color: var(--emerald-600);
+      }
+
+      .window-profile {
+        width: 21px;
+        height: 21px;
+        background: linear-gradient(135deg, #f59e0b, #ea580c);
+        border: 2px solid var(--white);
+        border-radius: 50%;
+      }
+
+      .app-preview {
+        display: grid;
+        grid-template-columns: 115px minmax(0, 1fr);
+        min-height: 422px;
+      }
+
+      .app-sidebar {
+        padding: 17px 10px;
+        background: var(--navy-900);
+      }
+
+      .app-sidebar__brand {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 0 7px 16px;
+        margin-bottom: 10px;
+        color: var(--white);
+        border-bottom: 1px solid rgb(255 255 255 / 0.1);
+        font-size: 0.58rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .app-sidebar__brand-icon {
+        display: grid;
+        width: 19px;
+        height: 19px;
+        place-items: center;
+        color: var(--blue-700);
+        background: var(--white);
+        border-radius: 5px;
+      }
+
+      .app-sidebar__brand-icon svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .app-sidebar__nav {
+        display: grid;
+        gap: 4px;
+      }
+
+      .app-sidebar__nav-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 29px;
+        padding: 0 7px;
+        color: rgb(203 213 225 / 0.72);
+        border-radius: 5px;
+        font-size: 0.52rem;
+        font-weight: 620;
+      }
+
+      .app-sidebar__nav-item svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      .app-sidebar__nav-item--active {
+        color: var(--white);
+        background: rgb(59 130 246 / 0.25);
+      }
+
+      .app-preview__main {
+        padding: 19px 20px 18px;
+        overflow: hidden;
+        background: #f8fafc;
+      }
+
+      .app-preview__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 17px;
+      }
+
+      .app-preview__breadcrumb {
+        margin-bottom: 4px;
+        color: var(--slate-500);
+        font-size: 0.48rem;
+        font-weight: 650;
+      }
+
+      .app-preview__title {
+        color: var(--navy-900);
+        font-size: 0.98rem;
+        font-weight: 780;
+        letter-spacing: -0.045em;
+      }
+
+      .app-preview__date {
+        padding: 5px 7px;
+        color: var(--slate-600);
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        border-radius: 5px;
+        font-size: 0.46rem;
+        font-weight: 650;
+      }
+
+      .preview-welcome {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 14px;
+        margin-bottom: 13px;
+        color: var(--white);
+        background:
+          radial-gradient(
+            circle at 86% 30%,
+            rgb(96 165 250 / 0.52),
+            transparent 24%
+          ),
+          linear-gradient(120deg, var(--blue-700), var(--indigo-600));
+        border-radius: 10px;
+      }
+
+      .preview-welcome p {
+        margin-bottom: 3px;
+        font-size: 0.54rem;
+        font-weight: 540;
+        opacity: 0.82;
+      }
+
+      .preview-welcome h4 {
+        font-size: 0.72rem;
+        font-weight: 720;
+        letter-spacing: -0.025em;
+      }
+
+      .preview-welcome__badge {
+        display: grid;
+        width: 31px;
+        height: 31px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-700);
+        background: rgb(255 255 255 / 0.95);
+        border-radius: 8px;
+      }
+
+      .preview-welcome__badge svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .preview-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .preview-metric {
+        padding: 10px;
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+      }
+
+      .preview-metric__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 7px;
+      }
+
+      .preview-metric__label {
+        color: var(--slate-500);
+        font-size: 0.43rem;
+        font-weight: 650;
+      }
+
+      .preview-metric__icon {
+        display: grid;
+        width: 15px;
+        height: 15px;
+        place-items: center;
+        border-radius: 4px;
+      }
+
+      .preview-metric__icon svg {
+        width: 9px;
+        height: 9px;
+      }
+
+      .preview-metric__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .preview-metric__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .preview-metric__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      .preview-metric__value {
+        color: var(--navy-900);
+        font-size: 0.94rem;
+        font-weight: 780;
+        letter-spacing: -0.04em;
+      }
+
+      .preview-metric__detail {
+        margin-top: 2px;
+        color: var(--emerald-600);
+        font-size: 0.39rem;
+        font-weight: 700;
+      }
+
+      .preview-bottom-grid {
+        display: grid;
+        grid-template-columns: 1.23fr 0.77fr;
+        gap: 10px;
+      }
+
+      .preview-card {
+        padding: 11px;
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+      }
+
+      .preview-card__title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .preview-card__title {
+        color: var(--navy-800);
+        font-size: 0.53rem;
+        font-weight: 760;
+      }
+
+      .preview-card__link {
+        color: var(--blue-600);
+        font-size: 0.4rem;
+        font-weight: 700;
+      }
+
+      .class-mini-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 0;
+        border-top: 1px solid var(--slate-100);
+      }
+
+      .class-mini-item:first-of-type {
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .class-mini-item__time {
+        min-width: 25px;
+        color: var(--blue-700);
+        font-size: 0.43rem;
+        font-weight: 800;
+      }
+
+      .class-mini-item__info {
+        min-width: 0;
+      }
+
+      .class-mini-item__name {
+        overflow: hidden;
+        color: var(--slate-700);
+        font-size: 0.43rem;
+        font-weight: 720;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .class-mini-item__course {
+        margin-top: 1px;
+        color: var(--slate-500);
+        font-size: 0.37rem;
+        font-weight: 550;
+      }
+
+      .progress-circle {
+        display: grid;
+        width: 58px;
+        height: 58px;
+        margin: 5px auto 6px;
+        place-items: center;
+        background: conic-gradient(var(--blue-600) 0 76%, var(--blue-100) 76% 100%);
+        border-radius: 50%;
+      }
+
+      .progress-circle__inside {
+        display: grid;
+        width: 45px;
+        height: 45px;
+        place-items: center;
+        color: var(--navy-800);
+        background: var(--white);
+        border-radius: 50%;
+        font-size: 0.55rem;
+        font-weight: 820;
+      }
+
+      .preview-progress__label {
+        color: var(--slate-600);
+        font-size: 0.4rem;
+        font-weight: 650;
+        text-align: center;
+      }
+
+      .preview-progress__sub-label {
+        margin-top: 2px;
+        color: var(--slate-400);
+        font-size: 0.35rem;
+        text-align: center;
+      }
+
+      /* ============================================================
+         8. TARJETAS FLOTANTES DEL HERO
+         ============================================================ */
+      .floating-card {
+        position: absolute;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 13px;
+        background: rgb(255 255 255 / 0.96);
+        border: 1px solid rgb(255 255 255 / 0.9);
+        border-radius: 13px;
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .floating-card__icon {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 9px;
+      }
+
+      .floating-card__icon svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .floating-card__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-100);
+      }
+
+      .floating-card__icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-100);
+      }
+
+      .floating-card__copy p {
+        margin-bottom: 2px;
+        color: var(--slate-500);
+        font-size: 0.6rem;
+        font-weight: 600;
+      }
+
+      .floating-card__copy strong {
+        display: block;
+        color: var(--navy-800);
+        font-size: 0.7rem;
+        font-weight: 780;
+        letter-spacing: -0.02em;
+      }
+
+      .floating-card--progress {
+        top: 5px;
+        left: -35px;
+        animation: float-card 5s ease-in-out infinite;
+      }
+
+      .floating-card--alert {
+        right: -22px;
+        bottom: 28px;
+        animation: float-card 5.8s ease-in-out 0.8s infinite;
+      }
+
+      @keyframes float-card {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /* ============================================================
+         9. FRANJA DE CONFIANZA
+         ============================================================ */
+      .trust-strip {
+        position: relative;
+        z-index: 5;
+        margin-top: -1px;
+        background: var(--white);
+        border-top: 1px solid var(--slate-100);
+        border-bottom: 1px solid var(--slate-100);
+      }
+
+      .trust-strip__inner {
+        display: grid;
+        grid-template-columns: 1.15fr repeat(3, 1fr);
+        min-height: 126px;
+        align-items: center;
+      }
+
+      .trust-strip__intro {
+        padding-right: 36px;
+      }
+
+      .trust-strip__intro p {
+        color: var(--slate-500);
+        font-size: 0.8rem;
+        font-weight: 620;
+        line-height: 1.55;
+      }
+
+      .trust-strip__intro strong {
+        color: var(--navy-800);
+      }
+
+      .trust-stat {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 56px;
+        padding-left: 28px;
+        border-left: 1px solid var(--slate-200);
+      }
+
+      .trust-stat__icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 10px;
+      }
+
+      .trust-stat__icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .trust-stat__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .trust-stat__icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      .trust-stat__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .trust-stat strong {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--navy-900);
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: -0.045em;
+        line-height: 1;
+      }
+
+      .trust-stat span {
+        display: block;
+        color: var(--slate-500);
+        font-size: 0.69rem;
+        font-weight: 600;
+      }
+
+      /* ============================================================
+         10. SECCIÓN DE MÓDULOS
+         ============================================================ */
+      .features {
+        background:
+          radial-gradient(
+            circle at 95% 0%,
+            rgb(224 231 255 / 0.55),
+            transparent 25%
+          ),
+          var(--white);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .feature-card {
+        position: relative;
+        min-height: 270px;
+        padding: 29px;
+        overflow: hidden;
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xs);
+        transition:
+          transform var(--transition-normal),
+          box-shadow var(--transition-normal),
+          border-color var(--transition-normal);
+      }
+
+      .feature-card:hover {
+        border-color: rgb(147 197 253 / 0.85);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-7px);
+      }
+
+      .feature-card__number {
+        position: absolute;
+        top: 22px;
+        right: 24px;
+        color: var(--slate-100);
+        font-size: 3.5rem;
+        font-weight: 850;
+        letter-spacing: -0.09em;
+        line-height: 1;
+        transition: color var(--transition-normal);
+      }
+
+      .feature-card:hover .feature-card__number {
+        color: var(--blue-50);
+      }
+
+      .feature-card__icon {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        width: 50px;
+        height: 50px;
+        place-items: center;
+        margin-bottom: 23px;
+        border-radius: 15px;
+      }
+
+      .feature-card__icon svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      .feature-card__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .feature-card__icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      .feature-card__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .feature-card__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      .feature-card__icon--cyan {
+        color: var(--cyan-600);
+        background: var(--cyan-50);
+      }
+
+      .feature-card__icon--rose {
+        color: var(--rose-600);
+        background: var(--rose-50);
+      }
+
+      .feature-card h3 {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 10px;
+        color: var(--navy-900);
+        font-size: 1.08rem;
+        font-weight: 780;
+        letter-spacing: -0.035em;
+      }
+
+      .feature-card p {
+        position: relative;
+        z-index: 1;
+        max-width: 290px;
+        color: var(--slate-600);
+        font-size: 0.88rem;
+        line-height: 1.68;
+      }
+
+      .feature-card__link {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 19px;
+        color: var(--blue-700);
+        font-size: 0.8rem;
+        font-weight: 750;
+      }
+
+      .feature-card__link svg {
+        width: 15px;
+        height: 15px;
+        transition: transform var(--transition-fast);
+      }
+
+      .feature-card:hover .feature-card__link svg {
+        transform: translateX(4px);
+      }
+
+      /* ============================================================
+         11. SECCIÓN EXPERIENCIA DE USO
+         ============================================================ */
+      .experience {
+        overflow: hidden;
+        background: var(--slate-50);
+      }
+
+      .experience__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(490px, 1.1fr);
+        align-items: center;
+        gap: clamp(40px, 7vw, 104px);
+      }
+
+      .experience__content {
+        padding: 24px 0;
+      }
+
+      .experience__content .section-title {
+        max-width: 500px;
+      }
+
+      .experience__content .section-description {
+        max-width: 520px;
+        margin-bottom: 29px;
+      }
+
+      .benefit-list {
+        display: grid;
+        gap: 18px;
+      }
+
+      .benefit-list__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .benefit-list__check {
+        display: grid;
+        width: 26px;
+        height: 26px;
+        flex: 0 0 auto;
+        place-items: center;
+        margin-top: 1px;
+        color: var(--emerald-600);
+        background: var(--emerald-100);
+        border-radius: 50%;
+      }
+
+      .benefit-list__check svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .benefit-list__copy strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--navy-800);
+        font-size: 0.94rem;
+        font-weight: 760;
+      }
+
+      .benefit-list__copy span {
+        display: block;
+        color: var(--slate-600);
+        font-size: 0.85rem;
+        line-height: 1.58;
+      }
+
+      .analytics-showcase {
+        position: relative;
+        min-height: 493px;
+      }
+
+      .analytics-showcase__backdrop {
+        position: absolute;
+        top: 24px;
+        right: -53%;
+        width: 700px;
+        height: 440px;
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        border-radius: 60px;
+        opacity: 0.95;
+        transform: rotate(-8deg);
+      }
+
+      .analytics-panel {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 570px;
+        padding: 26px;
+        margin: 36px auto 0;
+        background: var(--white);
+        border: 1px solid rgb(203 213 225 / 0.9);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .analytics-panel__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 19px;
+        border-bottom: 1px solid var(--slate-100);
+      }
+
+      .analytics-panel__eyebrow {
+        margin-bottom: 5px;
+        color: var(--slate-500);
+        font-size: 0.68rem;
+        font-weight: 720;
+      }
+
+      .analytics-panel__title {
+        color: var(--navy-900);
+        font-size: 1.1rem;
+        font-weight: 790;
+        letter-spacing: -0.04em;
+      }
+
+      .analytics-panel__period {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 10px;
+        color: var(--slate-600);
+        background: var(--slate-50);
+        border: 1px solid var(--slate-200);
+        border-radius: 8px;
+        font-size: 0.68rem;
+        font-weight: 680;
+      }
+
+      .analytics-panel__period svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .analytics-kpis {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        padding: 20px 0;
+      }
+
+      .analytics-kpi {
+        padding: 13px;
+        background: var(--slate-50);
+        border-radius: 12px;
+      }
+
+      .analytics-kpi span {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--slate-500);
+        font-size: 0.65rem;
+        font-weight: 650;
+      }
+
+      .analytics-kpi strong {
+        display: block;
+        color: var(--navy-900);
+        font-size: 1.24rem;
+        font-weight: 810;
+        letter-spacing: -0.05em;
+        line-height: 1;
+      }
+
+      .analytics-kpi small {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        margin-top: 7px;
+        color: var(--emerald-600);
+        font-size: 0.63rem;
+        font-weight: 720;
+      }
+
+      .analytics-kpi small svg {
+        width: 11px;
+        height: 11px;
+      }
+
+      .chart-card {
+        padding: 17px 17px 14px;
+        border: 1px solid var(--slate-200);
+        border-radius: 14px;
+      }
+
+      .chart-card__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
+
+      .chart-card__header strong {
+        color: var(--navy-800);
+        font-size: 0.78rem;
+        font-weight: 750;
+      }
+
+      .chart-card__legend {
+        display: inline;
+        align-items: center;
+        gap: 5px;
+        color: var(--slate-500);
+        font-size: 0.62rem;
+        font-weight: 630;
+      }
+
+      .chart-card__legend::before {
+        width: 7px;
+        height: 7px;
+        background: var(--blue-500);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .bar-chart {
+        display: flex;
+        height: 117px;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 9px;
+      }
+
+      .bar-chart__column {
+        display: grid;
+        height: 100%;
+        flex: 1;
+        align-items: end;
+        gap: 6px;
+      }
+
+      .bar-chart__bar {
+        width: 100%;
+        min-height: 10px;
+        background: linear-gradient(180deg, var(--blue-400), var(--blue-600));
+        border-radius: 5px 5px 3px 3px;
+      }
+
+      .bar-chart__column:nth-child(2) .bar-chart__bar,
+      .bar-chart__column:nth-child(4) .bar-chart__bar {
+        background: linear-gradient(180deg, var(--indigo-400, #818cf8), var(--indigo-600));
+      }
+
+      .bar-chart__label {
+        color: var(--slate-400);
+        font-size: 0.58rem;
+        font-weight: 650;
+        text-align: center;
+      }
+
+      .analytics-floating-note {
+        position: absolute;
+        z-index: 4;
+        right: -15px;
+        bottom: 3px;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 11px 13px;
+        background: var(--white);
+        border: 1px solid var(--slate-100);
+        border-radius: 13px;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .analytics-floating-note__icon {
+        display: grid;
+        width: 31px;
+        height: 31px;
+        place-items: center;
+        color: var(--amber-600);
+        background: var(--amber-100);
+        border-radius: 9px;
+      }
+
+      .analytics-floating-note__icon svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .analytics-floating-note p {
+        color: var(--slate-500);
+        font-size: 0.58rem;
+        font-weight: 600;
+      }
+
+      .analytics-floating-note strong {
+        display: block;
+        margin-top: 1px;
+        color: var(--navy-800);
+        font-size: 0.67rem;
+        font-weight: 780;
+      }
+
+      /* ============================================================
+         12. SECCIÓN DE ACCESO
+         ============================================================ */
+      .access {
+        position: relative;
+        padding: 112px 0;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 12% 50%,
+            rgb(59 130 246 / 0.34),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 87% 10%,
+            rgb(99 102 241 / 0.32),
+            transparent 22%
+          ),
+          linear-gradient(135deg, var(--navy-950), var(--navy-800));
+      }
+
+      .access__pattern {
+        position: absolute;
+        inset: 0;
+        opacity: 0.23;
+        background-image:
+          linear-gradient(rgb(255 255 255 / 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgb(255 255 255 / 0.1) 1px, transparent 1px);
+        background-size: 42px 42px;
+        mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 20%,
+          black 80%,
+          transparent
+        );
+      }
+
+      .access__grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(420px, 0.8fr);
+        align-items: center;
+        gap: clamp(44px, 9vw, 140px);
+      }
+
+      .access__content {
+        max-width: 570px;
+      }
+
+      .access__content .eyebrow {
+        color: var(--blue-200, #bfdbfe);
+      }
+
+      .access__title {
+        margin-bottom: 20px;
+        color: var(--white);
+        font-size: clamp(2.2rem, 4vw, 3.35rem);
+        font-weight: 790;
+        letter-spacing: -0.06em;
+        line-height: 1.09;
+      }
+
+      .access__title span {
+        color: var(--blue-300, #93c5fd);
+      }
+
+      .access__description {
+        max-width: 500px;
+        margin-bottom: 30px;
+        color: rgb(219 234 254 / 0.8);
+        font-size: 1.01rem;
+        line-height: 1.7;
+      }
+
+      .access-points {
+        display: grid;
+        gap: 15px;
+      }
+
+      .access-points li {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        color: rgb(239 246 255 / 0.9);
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
+      .access-points__icon {
+        display: grid;
+        width: 25px;
+        height: 25px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-200, #bfdbfe);
+        background: rgb(59 130 246 / 0.2);
+        border: 1px solid rgb(147 197 253 / 0.22);
+        border-radius: 50%;
+      }
+
+      .access-points__icon svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .login-card {
+        width: 100%;
+        max-width: 440px;
+        padding: 34px;
+        margin-left: auto;
+        background: rgb(255 255 255 / 0.98);
+        border: 1px solid rgb(255 255 255 / 0.8);
+        border-radius: var(--radius-xl);
+        box-shadow:
+          0 30px 60px rgb(0 0 0 / 0.24),
+          0 10px 24px rgb(0 0 0 / 0.12);
+      }
+
+      .login-card__header {
+        margin-bottom: 25px;
+      }
+
+      .login-card__logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 22px;
+        color: var(--navy-800);
+      }
+
+      .login-card__logo-icon {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        color: var(--white);
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        border-radius: 8px;
+      }
+
+      .login-card__logo-icon svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .login-card__logo span {
+        font-size: 0.84rem;
+        font-weight: 850;
+        letter-spacing: -0.04em;
+      }
+
+      .login-card__header h3 {
+        margin-bottom: 8px;
+        color: var(--navy-900);
+        font-size: 1.45rem;
+        font-weight: 790;
+        letter-spacing: -0.05em;
+      }
+
+      .login-card__header p {
+        color: var(--slate-600);
+        font-size: 0.85rem;
+        line-height: 1.55;
+      }
+
+      .login-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .form-field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .form-field__label-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .form-field label {
+        color: var(--slate-700);
+        font-size: 0.79rem;
+        font-weight: 720;
+      }
+
+      .form-field__label-row a {
+        color: var(--blue-600);
+        font-size: 0.73rem;
+        font-weight: 700;
+      }
+
+      .form-field__label-row a:hover {
+        color: var(--blue-700);
+        text-decoration: underline;
+      }
+
+      .input-group {
+        position: relative;
+      }
+
+      .input-group__icon {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 13px;
+        width: 18px;
+        height: 18px;
+        color: var(--slate-400);
+        pointer-events: none;
+        transform: translateY(-50%);
+      }
+
+      .input-group input {
+        width: 100%;
+        height: 49px;
+        padding: 0 43px 0 42px;
+        color: var(--slate-800);
+        background: var(--white);
+        border: 1px solid var(--slate-300);
+        border-radius: 10px;
+        font-size: 0.86rem;
+        font-weight: 550;
+        outline: none;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .input-group input::placeholder {
+        color: var(--slate-400);
+        opacity: 1;
+      }
+
+      .input-group input:hover {
+        border-color: var(--slate-400);
+      }
+
+      .input-group input:focus {
+        background: var(--blue-50);
+        border-color: var(--blue-500);
+        box-shadow: 0 0 0 4px rgb(59 130 246 / 0.13);
+      }
+
+      .password-toggle {
+        position: absolute;
+        top: 50%;
+        right: 7px;
+        display: grid;
+        width: 35px;
+        height: 35px;
+        padding: 0;
+        place-items: center;
+        color: var(--slate-500);
+        background: transparent;
+        border-radius: 7px;
+        cursor: pointer;
+        transform: translateY(-50%);
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .password-toggle:hover {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .password-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .password-toggle .icon-eye-off {
+        display: none;
+      }
+
+      .password-toggle.is-visible .icon-eye {
+        display: none;
+      }
+
+      .password-toggle.is-visible .icon-eye-off {
+        display: block;
+      }
+
+      .form-options {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 1px;
+      }
+
+      .checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--slate-600);
+        cursor: pointer;
+        font-size: 0.75rem;
+        font-weight: 600;
+        user-select: none;
+      }
+
+      .checkbox input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      .checkbox__box {
+        position: relative;
+        display: grid;
+        width: 17px;
+        height: 17px;
+        flex: 0 0 auto;
+        place-items: center;
+        background: var(--white);
+        border: 1.5px solid var(--slate-300);
+        border-radius: 5px;
+        transition:
+          background var(--transition-fast),
+          border-color var(--transition-fast);
+      }
+
+      .checkbox__box svg {
+        width: 11px;
+        height: 11px;
+        color: var(--white);
+        opacity: 0;
+        transform: scale(0.5);
+        transition:
+          opacity var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .checkbox input:focus-visible + .checkbox__box {
+        outline: 3px solid rgb(96 165 250 / 0.7);
+        outline-offset: 2px;
+      }
+
+      .checkbox input:checked + .checkbox__box {
+        background: var(--blue-600);
+        border-color: var(--blue-600);
+      }
+
+      .checkbox input:checked + .checkbox__box svg {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .login-form .button {
+        margin-top: 4px;
+      }
+
+      .login-card__divider {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin: 20px 0;
+        color: var(--slate-400);
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+
+      .login-card__divider::before,
+      .login-card__divider::after {
+        height: 1px;
+        flex: 1;
+        background: var(--slate-200);
+        content: "";
+      }
+
+      .login-card__demo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        min-height: 45px;
+        color: var(--navy-700);
+        background: var(--blue-50);
+        border: 1px solid var(--blue-100);
+        border-radius: 10px;
+        font-size: 0.81rem;
+        font-weight: 740;
+        transition:
+          color var(--transition-fast),
+          border-color var(--transition-fast),
+          background var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .login-card__demo:hover {
+        color: var(--blue-700);
+        background: var(--white);
+        border-color: var(--blue-400);
+        transform: translateY(-1px);
+      }
+
+      .login-card__demo svg {
+        width: 17px;
+        height: 17px;
+      }
+
+      .login-card__footer {
+        margin-top: 20px;
+        color: var(--slate-500);
+        font-size: 0.7rem;
+        line-height: 1.55;
+        text-align: center;
+      }
+
+      .login-card__footer strong {
+        color: var(--slate-600);
+        font-weight: 720;
+      }
+
+      /* ============================================================
+         13. FOOTER
+         ============================================================ */
+      .site-footer {
+        padding: 64px 0 26px;
+        color: rgb(203 213 225 / 0.8);
+        background: var(--navy-950);
+      }
+
+      .footer__top {
+        display: grid;
+        grid-template-columns: 1.45fr repeat(3, 0.75fr);
+        gap: 48px;
+        padding-bottom: 48px;
+        border-bottom: 1px solid rgb(148 163 184 / 0.16);
+      }
+
+      .footer__brand-copy {
+        max-width: 325px;
+        margin-top: 17px;
+        color: rgb(203 213 225 / 0.72);
+        font-size: 0.82rem;
+        line-height: 1.68;
+      }
+
+      .footer__column h4 {
+        margin: 4px 0 15px;
+        color: var(--white);
+        font-size: 0.78rem;
+        font-weight: 750;
+      }
+
+      .footer__links {
+        display: grid;
+        gap: 10px;
+      }
+
+      .footer__links a {
+        color: rgb(203 213 225 / 0.7);
+        font-size: 0.78rem;
+        font-weight: 560;
+        transition: color var(--transition-fast);
+      }
+
+      .footer__links a:hover {
+        color: var(--blue-300, #93c5fd);
+      }
+
+      .footer__bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 25px;
+      }
+
+      .footer__bottom p {
+        color: rgb(148 163 184 / 0.75);
+        font-size: 0.72rem;
+        font-weight: 550;
+      }
+
+      .footer__legal {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .footer__legal a {
+        color: rgb(148 163 184 / 0.75);
+        font-size: 0.72rem;
+        font-weight: 560;
+        transition: color var(--transition-fast);
+      }
+
+      .footer__legal a:hover {
+        color: var(--white);
+      }
+
+      /* ============================================================
+         14. MODAL DE INFORMACIÓN LOCAL
+         ============================================================ */
+      .modal {
+        position: fixed;
+        z-index: 300;
+        inset: 0;
+        display: grid;
+        padding: 24px;
+        place-items: center;
+        background: rgb(7 17 38 / 0.58);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-normal);
+      }
+
+      .modal.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal__dialog {
+        width: min(100%, 430px);
+        padding: 30px;
+        background: var(--white);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+        transition: transform var(--transition-normal), opacity var(--transition-normal);
+      }
+
+      .modal.is-open .modal__dialog {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .modal__icon {
+        display: grid;
+        width: 50px;
+        height: 50px;
+        place-items: center;
+        margin-bottom: 18px;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 15px;
+      }
+
+      .modal__icon svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      .modal__dialog h3 {
+        margin-bottom: 10px;
+        color: var(--navy-900);
+        font-size: 1.3rem;
+        font-weight: 790;
+        letter-spacing: -0.04em;
+      }
+
+      .modal__dialog p {
+        margin-bottom: 22px;
+        color: var(--slate-600);
+        font-size: 0.89rem;
+        line-height: 1.64;
+      }
+
+      .modal__dialog p strong {
+        color: var(--navy-800);
+      }
+
+      /* ============================================================
+         15. RESPONSIVE — TABLET HORIZONTAL
+         ============================================================ */
+      @media (max-width: 1120px) {
+        .hero__grid {
+          grid-template-columns: minmax(0, 0.88fr) minmax(450px, 1.12fr);
+          gap: 35px;
+        }
+
+        .hero__visual {
+          min-height: 515px;
+        }
+
+        .product-window {
+          top: 44px;
+          width: 570px;
+        }
+
+        .floating-card--progress {
+          left: -12px;
+        }
+
+        .floating-card--alert {
+          right: -6px;
+        }
+
+        .experience__grid {
+          grid-template-columns: minmax(0, 0.85fr) minmax(440px, 1.15fr);
+          gap: 55px;
+        }
+
+        .access__grid {
+          gap: 65px;
+        }
+      }
+
+      /* ============================================================
+         16. RESPONSIVE — TABLET / MÓVIL GRANDE
+         ============================================================ */
+      @media (max-width: 920px) {
+        :root {
+          --header-height: 70px;
+        }
+
+        .section {
+          padding: 88px 0;
+        }
+
+        .nav-menu,
+        .nav-actions .button--ghost {
+          display: none;
+        }
+
+        .mobile-menu-button {
+          display: grid;
+        }
+
+        .nav-actions {
+          margin-left: auto;
+          margin-right: 10px;
+        }
+
+        .mobile-nav {
+          position: fixed;
+          z-index: 90;
+          top: var(--header-height);
+          right: 0;
+          left: 0;
+          display: grid;
+          gap: 8px;
+          padding: 18px 24px 24px;
+          background: rgb(255 255 255 / 0.98);
+          border-bottom: 1px solid var(--slate-200);
+          box-shadow: var(--shadow-lg);
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-12px);
+          transition:
+            opacity var(--transition-normal),
+            transform var(--transition-normal);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+        }
+
+        .mobile-nav.is-open {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+
+        .mobile-nav a {
+          display: flex;
+          align-items: center;
+          min-height: 46px;
+          padding: 0 13px;
+          color: var(--slate-700);
+          border-radius: 9px;
+          font-size: 0.91rem;
+          font-weight: 680;
+        }
+
+        .mobile-nav a:hover {
+          color: var(--blue-700);
+          background: var(--blue-50);
+        }
+
+        .mobile-nav .button {
+          margin-top: 5px;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: calc(var(--header-height) + 62px);
+        }
+
+        .hero__grid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .hero__content {
+          max-width: 670px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .hero__pill,
+        .hero__actions,
+        .hero__trust {
+          justify-content: center;
+        }
+
+        .hero__description {
+          margin-right: auto;
+          margin-left: auto;
+        }
+
+        .hero__visual {
+          width: min(100%, 665px);
+          min-height: 543px;
+          margin: 20px auto 0;
+        }
+
+        .product-window {
+          right: 50%;
+          width: min(100% - 42px, 624px);
+          transform: translateX(50%);
+        }
+
+        .hero-orbit--one {
+          right: 50%;
+          transform: translateX(50%);
+        }
+
+        .hero-orbit--two {
+          right: 50%;
+          transform: translateX(50%);
+        }
+
+        .floating-card--progress {
+          top: 12px;
+          left: 0;
+        }
+
+        .floating-card--alert {
+          right: 0;
+          bottom: 20px;
+        }
+
+        .trust-strip__inner {
+          grid-template-columns: repeat(3, 1fr);
+          padding: 26px 0;
+          gap: 14px;
+        }
+
+        .trust-strip__intro {
+          grid-column: 1 / -1;
+          padding: 0 0 5px;
+          text-align: center;
+        }
+
+        .trust-stat {
+          justify-content: center;
+          padding-left: 14px;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .experience__grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+
+        .experience__content {
+          max-width: 640px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .experience__content .section-description {
+          margin-right: auto;
+          margin-left: auto;
+        }
+
+        .benefit-list {
+          width: min(100%, 570px);
+          margin: 0 auto;
+          text-align: left;
+        }
+
+        .analytics-showcase {
+          width: min(100%, 620px);
+          margin: 0 auto;
+        }
+
+        .access__grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .access__content {
+          max-width: 640px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .access__description {
+          margin-right: auto;
+          margin-left: auto;
+        }
+
+        .access-points {
+          width: fit-content;
+          margin: 0 auto;
+          text-align: left;
+        }
+
+        .login-card {
+          margin: 0 auto;
+        }
+
+        .footer__top {
+          grid-template-columns: 1.3fr repeat(3, 1fr);
+          gap: 28px;
+        }
+      }
+
+      /* ============================================================
+         17. RESPONSIVE — MÓVIL
+         ============================================================ */
+      @media (max-width: 640px) {
+        .container {
+          width: min(calc(100% - 32px), var(--container-width));
+        }
+
+        .section {
+          padding: 70px 0;
+        }
+
+        .section-heading {
+          margin-bottom: 38px;
+        }
+
+        .section-title {
+          font-size: clamp(1.8rem, 9vw, 2.35rem);
+        }
+
+        .section-description {
+          font-size: 0.95rem;
+        }
+
+        .site-header {
+          height: 66px;
+        }
+
+        .brand {
+          gap: 8px;
+        }
+
+        .brand__mark {
+          width: 34px;
+          height: 34px;
+          border-radius: 10px;
+        }
+
+        .brand__mark svg {
+          width: 21px;
+          height: 21px;
+        }
+
+        .brand__name {
+          font-size: 1.06rem;
+        }
+
+        .nav-actions .button--primary {
+          display: none;
+        }
+
+        .nav-actions {
+          margin-right: 8px;
+        }
+
+        .mobile-menu-button {
+          width: 39px;
+          height: 39px;
+        }
+
+        .mobile-nav {
+          top: 66px;
+          padding: 14px 16px 20px;
+        }
+
+        .hero {
+          padding: calc(66px + 48px) 0 61px;
+        }
+
+        .hero__pill {
+          min-height: 31px;
+          margin-bottom: 20px;
+          font-size: 0.66rem;
+        }
+
+        .hero__title {
+          margin-bottom: 18px;
+          font-size: clamp(2.35rem, 11vw, 3.35rem);
+          letter-spacing: -0.072em;
+        }
+
+        .hero__description {
+          margin-bottom: 25px;
+          font-size: 0.95rem;
+          line-height: 1.68;
+        }
+
+        .hero__actions {
+          display: grid;
+          grid-template-columns: 1fr;
+          width: 100%;
+          gap: 10px;
+          margin-bottom: 25px;
+        }
+
+        .hero__actions .button {
+          width: 100%;
+        }
+
+        .hero__trust {
+          gap: 9px;
+          font-size: 0.72rem;
+          line-height: 1.45;
+          text-align: left;
+        }
+
+        .avatars {
+          flex: 0 0 auto;
+        }
+
+        .hero__visual {
+          min-height: 405px;
+          margin-top: 5px;
+        }
+
+        .product-window {
+          top: 36px;
+          width: calc(100% - 4px);
+          border-radius: 16px;
+          transform: translateX(50%);
+        }
+
+        .product-window__topbar {
+          min-height: 36px;
+          padding: 0 12px;
+        }
+
+        .window-dots span {
+          width: 6px;
+          height: 6px;
+        }
+
+        .window-address {
+          padding: 3px 7px;
+          font-size: 0.45rem;
+        }
+
+        .window-profile {
+          width: 16px;
+          height: 16px;
+        }
+
+        .app-preview {
+          grid-template-columns: 76px minmax(0, 1fr);
+          min-height: 272px;
+        }
+
+        .app-sidebar {
+          padding: 10px 6px;
+        }
+
+        .app-sidebar__brand {
+          gap: 3px;
+          padding: 0 3px 9px;
+          margin-bottom: 6px;
+          font-size: 0.4rem;
+        }
+
+        .app-sidebar__brand-icon {
+          width: 13px;
+          height: 13px;
+          border-radius: 3px;
+        }
+
+        .app-sidebar__brand-icon svg {
+          width: 8px;
+          height: 8px;
+        }
+
+        .app-sidebar__nav {
+          gap: 2px;
+        }
+
+        .app-sidebar__nav-item {
+          gap: 3px;
+          min-height: 20px;
+          padding: 0 3px;
+          border-radius: 3px;
+          font-size: 0.34rem;
+        }
+
+        .app-sidebar__nav-item svg {
+          width: 8px;
+          height: 8px;
+        }
+
+        .app-preview__main {
+          padding: 11px 10px;
+        }
+
+        .app-preview__header {
+          margin-bottom: 8px;
+        }
+
+        .app-preview__breadcrumb {
+          margin-bottom: 2px;
+          font-size: 0.33rem;
+        }
+
+        .app-preview__title {
+          font-size: 0.62rem;
+        }
+
+        .app-preview__date {
+          padding: 3px 4px;
+          font-size: 0.31rem;
+        }
+
+        .preview-welcome {
+          padding: 8px;
+          margin-bottom: 8px;
+          border-radius: 6px;
+        }
+
+        .preview-welcome p {
+          margin-bottom: 1px;
+          font-size: 0.34rem;
+        }
+
+        .preview-welcome h4 {
+          font-size: 0.45rem;
+        }
+
+        .preview-welcome__badge {
+          width: 20px;
+          height: 20px;
+          border-radius: 5px;
+        }
+
+        .preview-welcome__badge svg {
+          width: 11px;
+          height: 11px;
+        }
+
+        .preview-metrics {
+          gap: 4px;
+          margin-bottom: 6px;
+        }
+
+        .preview-metric {
+          padding: 5px;
+          border-radius: 5px;
+        }
+
+        .preview-metric__top {
+          margin-bottom: 3px;
+        }
+
+        .preview-metric__label {
+          font-size: 0.28rem;
+        }
+
+        .preview-metric__icon {
+          width: 9px;
+          height: 9px;
+          border-radius: 2px;
+        }
+
+        .preview-metric__icon svg {
+          width: 6px;
+          height: 6px;
+        }
+
+        .preview-metric__value {
+          font-size: 0.55rem;
+        }
+
+        .preview-metric__detail {
+          font-size: 0.26rem;
+        }
+
+        .preview-bottom-grid {
+          gap: 5px;
+        }
+
+        .preview-card {
+          padding: 6px;
+          border-radius: 5px;
+        }
+
+        .preview-card__title-row {
+          margin-bottom: 5px;
+        }
+
+        .preview-card__title {
+          font-size: 0.34rem;
+        }
+
+        .preview-card__link {
+          font-size: 0.28rem;
+        }
+
+        .class-mini-item {
+          gap: 4px;
+          padding: 3px 0;
+        }
+
+        .class-mini-item__time {
+          min-width: 16px;
+          font-size: 0.27rem;
+        }
+
+        .class-mini-item__name {
+          font-size: 0.28rem;
+        }
+
+        .class-mini-item__course {
+          font-size: 0.24rem;
+        }
+
+        .progress-circle {
+          width: 33px;
+          height: 33px;
+          margin: 2px auto 3px;
+        }
+
+        .progress-circle__inside {
+          width: 25px;
+          height: 25px;
+          font-size: 0.3rem;
+        }
+
+        .preview-progress__label {
+          font-size: 0.27rem;
+        }
+
+        .preview-progress__sub-label {
+          font-size: 0.23rem;
+        }
+
+        .hero-orbit--one {
+          top: 18px;
+          width: 370px;
+          height: 370px;
+        }
+
+        .hero-orbit--two {
+          top: 53px;
+          width: 290px;
+          height: 290px;
+        }
+
+        .floating-card {
+          gap: 6px;
+          padding: 7px 8px;
+          border-radius: 9px;
+        }
+
+        .floating-card__icon {
+          width: 22px;
+          height: 22px;
+          border-radius: 6px;
+        }
+
+        .floating-card__icon svg {
+          width: 12px;
+          height: 12px;
+        }
+
+        .floating-card__copy p {
+          margin-bottom: 1px;
+          font-size: 0.4rem;
+        }
+
+        .floating-card__copy strong {
+          font-size: 0.47rem;
+        }
+
+        .floating-card--progress {
+          top: 12px;
+          left: -4px;
+        }
+
+        .floating-card--alert {
+          right: -4px;
+          bottom: 4px;
+        }
+
+        .trust-strip__inner {
+          grid-template-columns: 1fr;
+          gap: 0;
+          padding: 21px 0;
+        }
+
+        .trust-strip__intro {
+          padding-bottom: 16px;
+        }
+
+        .trust-strip__intro p {
+          font-size: 0.74rem;
+        }
+
+        .trust-stat {
+          justify-content: flex-start;
+          min-height: 54px;
+          padding: 10px 0;
+          border-top: 1px solid var(--slate-100);
+          border-left: 0;
+        }
+
+        .trust-stat__icon {
+          width: 33px;
+          height: 33px;
+        }
+
+        .trust-stat__icon svg {
+          width: 17px;
+          height: 17px;
+        }
+
+        .trust-stat strong {
+          font-size: 1rem;
+        }
+
+        .trust-stat span {
+          font-size: 0.64rem;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+          gap: 13px;
+        }
+
+        .feature-card {
+          min-height: 0;
+          padding: 23px;
+          border-radius: 17px;
+        }
+
+        .feature-card__number {
+          top: 18px;
+          right: 20px;
+          font-size: 2.8rem;
+        }
+
+        .feature-card__icon {
+          width: 45px;
+          height: 45px;
+          margin-bottom: 18px;
+          border-radius: 13px;
+        }
+
+        .feature-card__icon svg {
+          width: 23px;
+          height: 23px;
+        }
+
+        .feature-card h3 {
+          font-size: 1rem;
+        }
+
+        .feature-card p {
+          font-size: 0.84rem;
+        }
+
+        .experience__content {
+          padding: 0;
+        }
+
+        .benefit-list {
+          gap: 15px;
+        }
+
+        .benefit-list__item {
+          gap: 11px;
+        }
+
+        .benefit-list__check {
+          width: 23px;
+          height: 23px;
+        }
+
+        .benefit-list__copy strong {
+          font-size: 0.88rem;
+        }
+
+        .benefit-list__copy span {
+          font-size: 0.79rem;
+        }
+
+        .analytics-showcase {
+          min-height: 385px;
+        }
+
+        .analytics-showcase__backdrop {
+          top: 17px;
+          right: -70%;
+          width: 510px;
+          height: 330px;
+          border-radius: 40px;
+        }
+
+        .analytics-panel {
+          padding: 17px;
+          margin-top: 25px;
+          border-radius: 18px;
+        }
+
+        .analytics-panel__header {
+          padding-bottom: 13px;
+        }
+
+        .analytics-panel__eyebrow {
+          margin-bottom: 3px;
+          font-size: 0.56rem;
+        }
+
+        .analytics-panel__title {
+          font-size: 0.88rem;
+        }
+
+        .analytics-panel__period {
+          padding: 5px 6px;
+          font-size: 0.54rem;
+        }
+
+        .analytics-panel__period svg {
+          width: 11px;
+          height: 11px;
+        }
+
+        .analytics-kpis {
+          gap: 6px;
+          padding: 13px 0;
+        }
+
+        .analytics-kpi {
+          padding: 8px;
+          border-radius: 8px;
+        }
+
+        .analytics-kpi span {
+          margin-bottom: 5px;
+          font-size: 0.49rem;
+        }
+
+        .analytics-kpi strong {
+          font-size: 0.94rem;
+        }
+
+        .analytics-kpi small {
+          margin-top: 4px;
+          font-size: 0.46rem;
+        }
+
+        .chart-card {
+          padding: 11px;
+          border-radius: 10px;
+        }
+
+        .chart-card__header {
+          margin-bottom: 8px;
+        }
+
+        .chart-card__header strong {
+          font-size: 0.61rem;
+        }
+
+        .chart-card__legend {
+          font-size: 0.48rem;
+        }
+
+        .bar-chart {
+          height: 82px;
+          gap: 5px;
+        }
+
+        .bar-chart__label {
+          font-size: 0.44rem;
+        }
+
+        .analytics-floating-note {
+          right: -7px;
+          bottom: -10px;
+          gap: 6px;
+          padding: 7px 8px;
+          border-radius: 9px;
+        }
+
+        .analytics-floating-note__icon {
+          width: 23px;
+          height: 23px;
+          border-radius: 6px;
+        }
+
+        .analytics-floating-note__icon svg {
+          width: 13px;
+          height: 13px;
+        }
+
+        .analytics-floating-note p {
+          font-size: 0.44rem;
+        }
+
+        .analytics-floating-note strong {
+          font-size: 0.5rem;
+        }
+
+        .access {
+          padding: 70px 0;
+        }
+
+        .access__title {
+          font-size: clamp(1.95rem, 9vw, 2.65rem);
+        }
+
+        .access__description {
+          font-size: 0.92rem;
+        }
+
+        .access-points {
+          gap: 12px;
+        }
+
+        .access-points li {
+          font-size: 0.8rem;
+        }
+
+        .access-points__icon {
+          width: 22px;
+          height: 22px;
+        }
+
+        .login-card {
+          padding: 24px 19px;
+          border-radius: 19px;
+        }
+
+        .login-card__header {
+          margin-bottom: 20px;
+        }
+
+        .login-card__logo {
+          margin-bottom: 17px;
+        }
+
+        .login-card__header h3 {
+          font-size: 1.25rem;
+        }
+
+        .login-card__header p {
+          font-size: 0.8rem;
+        }
+
+        .form-options {
+          align-items: flex-start;
+        }
+
+        .checkbox {
+          font-size: 0.69rem;
+          line-height: 1.35;
+        }
+
+        .form-field__label-row a {
+          font-size: 0.68rem;
+        }
+
+        .login-card__footer {
+          font-size: 0.65rem;
+        }
+
+        .site-footer {
+          padding: 48px 0 21px;
+        }
+
+        .footer__top {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px 20px;
+          padding-bottom: 35px;
+        }
+
+        .footer__top > :first-child {
+          grid-column: 1 / -1;
+        }
+
+        .footer__brand-copy {
+          max-width: 350px;
+          margin-top: 13px;
+        }
+
+        .footer__bottom {
+          display: grid;
+          gap: 16px;
+          padding-top: 21px;
+        }
+
+        .footer__legal {
+          gap: 13px;
+        }
+
+        .modal {
+          padding: 16px;
+        }
+
+        .modal__dialog {
+          padding: 24px;
+        }
+      }
+
+      /* ============================================================
+         18. ACCESIBILIDAD: REDUCCIÓN DE MOVIMIENTO
+         ============================================================ */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
   </head>
 
-  <body class="auth-page">
-    <main class="auth-layout">
-      <section class="auth-brand-panel" aria-labelledby="brand-title">
-        <div class="auth-brand-content">
-          <a class="brand-logo brand-logo--light" href="index.html" aria-label="DOCENCIA360, inicio">
-            <span class="brand-logo__icon" aria-hidden="true">
-              <svg viewBox="0 0 48 48" role="img" focusable="false">
-                <path
-                  d="M24 5.5 6.5 14.2 24 23l14.2-7.1v11.3h4.8V13.5L24 5.5Z"
-                  fill="currentColor"
-                />
-                <path
-                  d="M11 22.2v10.2c0 4.3 5.8 8.3 13 8.3s13-4 13-8.3V22.2L24 28.7 11 22.2Z"
-                  fill="currentColor"
-                  opacity="0.78"
-                />
-                <path
-                  d="M42.9 16.4v13.4"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-width="3"
-                />
-                <circle cx="42.9" cy="31.9" r="2.7" fill="currentColor" />
-              </svg>
-            </span>
-            <span class="brand-logo__text">DOCENCIA<span>360</span></span>
-          </a>
+  <body>
+    <a class="skip-link" href="#contenido-principal">
+      Ir al contenido principal
+    </a>
 
-          <div class="auth-brand-copy">
-            <p class="eyebrow eyebrow--light">PLATAFORMA EDUCATIVA</p>
-            <h1 id="brand-title">
-              Todo lo que necesitas para enseñar, en un solo lugar.
+    <!-- ==========================================================
+         ICONOS SVG REUTILIZABLES
+         ========================================================== -->
+    <svg
+      class="sr-only"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <symbol id="icon-graduation" viewBox="0 0 24 24">
+          <path
+            d="m3 9 9-5 9 5-9 5-9-5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M6.5 11.1V16c0 1.7 2.5 3.1 5.5 3.1s5.5-1.4 5.5-3.1v-4.9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M21 9v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+          <path
+            d="M5 12h13M14 7l5 5-5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-play" viewBox="0 0 24 24">
+          <path
+            d="m9 7 8 5-8 5V7Z"
+            fill="currentColor"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+          />
+        </symbol>
+
+        <symbol id="icon-check" viewBox="0 0 24 24">
+          <path
+            d="m5 12 4.2 4.2L19.5 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.2"
+          />
+        </symbol>
+
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="15"
+            rx="2.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M7.5 3.5v4M16.5 3.5v4M3.5 10h17"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-users" viewBox="0 0 24 24">
+          <circle
+            cx="9"
+            cy="8"
+            r="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M3.5 19c.5-3.2 2.5-5 5.5-5s5 1.8 5.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M16 5.4a2.8 2.8 0 0 1 0 5.2M20.5 18.8a4.5 4.5 0 0 0-3.2-4.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.7"
+          />
+        </symbol>
+
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+          <path
+            d="M4 20V4M4 20h17"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="m7 15 3.2-3.5 3 2 4.8-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <circle cx="18" cy="7.5" r="1.3" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-book" viewBox="0 0 24 24">
+          <path
+            d="M4.5 5.7A2.7 2.7 0 0 1 7.2 3h4.2A2.6 2.6 0 0 1 14 5.6V20a2.6 2.6 0 0 0-2.6-2.6H7.2A2.7 2.7 0 0 0 4.5 20V5.7ZM19.5 5.7A2.7 2.7 0 0 0 16.8 3H14v17a2.6 2.6 0 0 1 2.6-2.6h.2a2.7 2.7 0 0 1 2.7 2.6V5.7Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-clipboard" viewBox="0 0 24 24">
+          <rect
+            x="5"
+            y="4.5"
+            width="14"
+            height="16"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M9 4.5V3.7c0-.9.7-1.7 1.7-1.7h2.6c.9 0 1.7.8 1.7 1.7v.8M8.5 10h7M8.5 14h7"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-folder" viewBox="0 0 24 24">
+          <path
+            d="M3.5 7.2A2.2 2.2 0 0 1 5.7 5h4l1.8 2h6.8a2.2 2.2 0 0 1 2.2 2.2v8.6a2.2 2.2 0 0 1-2.2 2.2H5.7a2.2 2.2 0 0 1-2.2-2.2V7.2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-sparkles" viewBox="0 0 24 24">
+          <path
+            d="m12 3 1.2 4.1L17.3 8 13.2 9.2 12 13.3l-1.2-4.1L6.7 8l4.1-.9L12 3ZM18.5 14l.8 2.7L22 17.5l-2.7.8-.8 2.7-.8-2.7-2.7-.8 2.7-.8.8-2.7ZM5.2 14.5l.7 2.2 2.2.8-2.2.7-.7 2.3-.8-2.3-2.2-.7 2.2-.8.8-2.2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width1.6"
+          />
+        </symbol>
+
+        <symbol id="icon-menu" viewBox="0 0 24 24">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-close" viewBox="0 0 24 24">
+          <path
+            d="m6 6 12 12M18 6 6 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-mail" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="13"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="m4.5 7 7.5 5.7L19.5 7"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-lock" viewBox="0 0 24 24">
+          <rect
+            x="5"
+            y="10"
+            width="14"
+            height="10"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M8 10V7.5a4 4 0 0 1 8 0V10"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="12" cy="15" r="1.2" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-eye" viewBox="0 0 24 24">
+          <path
+            d="M2.8 12s3.2-5 9.2-5 9.2 5 9.2 5-3.2 5-9.2 5-9.2-5-9.2-5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            r="2.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-eye-off" viewBox="0 0 24 24">
+          <path
+            d="m3 3 18 18M10.5 6.2A10.7 10.7 0 0 1 12 6c6 0 9.2 6 9.2 6a16.5 16.5 0 0 1-3 3.6M6.2 6.2A16.5 16.5 0 0 0 2.8 12S6 18 12 18c1 0 1.9-.2 2.7-.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M9.8 9.8a3 3 0 0 0 4.3 4.3"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-shield" viewBox="0 0 24 24">
+          <path
+            d="M12 3 20 6v5.8c0 4.8-3.3 7.8-8 9.2-4.7-1.4-8-4.4-8-9.2V6l8-3Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="m8.5 12 2.2 2.2 4.8-4.8"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-trending-up" viewBox="0 0 24 24">
+          <path
+            d="M4 16 9 11l3.2 3.2L20 6.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <path
+            d="M15 6.5h5v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-bell" viewBox="0 0 24 24">
+          <path
+            d="M18 10a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-layers" viewBox="0 0 24 24">
+          <path
+            d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ==========================================================
+         NAVEGACIÓN
+         ========================================================== -->
+    <header class="site-header" id="site-header">
+      <div class="container navbar">
+        <a class="brand" href="index.html" aria-label="DOCENCIA360, inicio">
+          <span class="brand__mark" aria-hidden="true">
+            <svg><use href="#icon-graduation"></use></svg>
+          </span>
+          <span class="brand__name">DOCENCIA<strong>360</strong></span>
+        </a>
+
+        <nav class="nav-menu" aria-label="Navegación principal">
+          <a href="#plataforma">Plataforma</a>
+          <a href="#experiencia">Experiencia</a>
+          <a href="#acceso">Acceso docente</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="button button--ghost" href="#acceso">Iniciar sesión</a>
+          <a class="button button--primary" href="dashboard.html">
+            Explorar demo
+            <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+          </a>
+        </div>
+
+        <button
+          class="mobile-menu-button"
+          id="mobile-menu-button"
+          type="button"
+          aria-label="Abrir menú de navegación"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+        >
+          <svg class="icon-menu" aria-hidden="true">
+            <use href="#icon-menu"></use>
+          </svg>
+          <svg class="icon-close" aria-hidden="true">
+            <use href="#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Navegación móvil">
+      <a href="#plataforma">Plataforma</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#acceso">Acceso docente</a>
+      <a class="button button--primary" href="dashboard.html">
+        Explorar demostración
+        <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+      </a>
+    </nav>
+
+    <!-- ==========================================================
+         CONTENIDO PRINCIPAL
+         ========================================================== -->
+    <main id="contenido-principal">
+      <!-- ========================================================
+           HERO
+           ======================================================== -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero__grid">
+          <div class="hero__content">
+            <p class="hero__pill">
+              <span class="hero__pill-icon" aria-hidden="true">
+                <svg><use href="#icon-sparkles"></use></svg>
+              </span>
+              La nueva forma de gestionar tu aula
+            </p>
+
+            <h1 class="hero__title" id="hero-title">
+              Enseña con visión.<br />
+              Acompaña con <span class="highlight">propósito.</span>
             </h1>
+
+            <p class="hero__description">
+              DOCENCIA360 reúne planificación, estudiantes, evaluaciones,
+              recursos y analítica pedagógica en un espacio creado para que
+              dediques más tiempo a enseñar y menos a administrar.
+            </p>
+
+            <div class="hero__actions">
+              <a class="button button--primary button--large" href="dashboard.html">
+                Conocer la plataforma
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+
+              <a class="button button--secondary button--large" href="#plataforma">
+                <svg aria-hidden="true"><use href="#icon-play"></use></svg>
+                Descubrir módulos
+              </a>
+            </div>
+
+            <div class="hero__trust" aria-label="Comunidad docente">
+              <div class="avatars" aria-hidden="true">
+                <span class="avatar">AM</span>
+                <span class="avatar">JS</span>
+                <span class="avatar">LR</span>
+                <span class="avatar">CP</span>
+              </div>
+              <p>
+                Diseñado para docentes que buscan una gestión
+                <strong>más clara y humana.</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="hero__visual" aria-label="Vista previa de DOCENCIA360">
+            <div class="hero-orbit hero-orbit--one" aria-hidden="true"></div>
+            <div class="hero-orbit hero-orbit--two" aria-hidden="true"></div>
+            <div class="hero__glow" aria-hidden="true"></div>
+
+            <article class="floating-card floating-card--progress">
+              <span class="floating-card__icon floating-card__icon--green" aria-hidden="true">
+                <svg><use href="#icon-trending-up"></use></svg>
+              </span>
+              <span class="floating-card__copy">
+                <p>Progreso semanal</p>
+                <strong>+12,4% de avance</strong>
+              </span>
+            </article>
+
+            <article class="product-window">
+              <div class="product-window__topbar" aria-hidden="true">
+                <div class="window-dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <div class="window-address">
+                  <svg><use href="#icon-shield"></use></svg>
+                  app.docencia360.edu
+                </div>
+
+                <span class="window-profile"></span>
+              </div>
+
+              <div class="app-preview">
+                <aside class="app-sidebar" aria-hidden="true">
+                  <div class="app-sidebar__brand">
+                    <span class="app-sidebar__brand-icon">
+                      <svg><use href="#icon-graduation"></use></svg>
+                    </span>
+                    D360
+                  </div>
+
+                  <div class="app-sidebar__nav">
+                    <div class="app-sidebar__nav-item app-sidebar__nav-item--active">
+                      <svg><use href="#icon-layers"></use></svg>
+                      Panel
+                    </div>
+                    <div class="app-sidebar__nav-item">
+                      <svg><use href="#icon-calendar"></use></svg>
+                      Clases
+                    </div>
+                    <div class="app-sidebar__nav-item">
+                      <svg><use href="#icon-users"></use></svg>
+                      Alumnos
+                    </div>
+                    <div class="app-sidebar__nav-item">
+                      <svg><use href="#icon-clipboard"></use></svg>
+                      Evaluar
+                    </div>
+                    <div class="app-sidebar__nav-item">
+                      <svg><use href="#icon-folder"></use></svg>
+                      Recursos
+                    </div>
+                  </div>
+                </aside>
+
+                <section class="app-preview__main" aria-label="Panel de control de ejemplo">
+                  <header class="app-preview__header">
+                    <div>
+                      <p class="app-preview__breadcrumb">Inicio / Resumen</p>
+                      <h2 class="app-preview__title">Buenos días, profesora Ana</h2>
+                    </div>
+                    <span class="app-preview__date">Mar, 15 oct.</span>
+                  </header>
+
+                  <div class="preview-welcome">
+                    <div>
+                      <p>Tu jornada está organizada</p>
+                      <h4>Hoy tienes 3 clases programadas</h4>
+                    </div>
+                    <span class="preview-welcome__badge">
+                      <svg><use href="#icon-calendar"></use></svg>
+                    </span>
+                  </div>
+
+                  <div class="preview-metrics">
+                    <article class="preview-metric">
+                      <div class="preview-metric__top">
+                        <span class="preview-metric__label">Estudiantes</span>
+                        <span class="preview-metric__icon preview-metric__icon--blue">
+                          <svg><use href="#icon-users"></use></svg>
+                        </span>
+                      </div>
+                      <strong class="preview-metric__value">126</strong>
+                      <span class="preview-metric__detail">+8 este periodo</span>
+                    </article>
+
+                    <article class="preview-metric">
+                      <div class="preview-metric__top">
+                        <span class="preview-metric__label">Asistencia</span>
+                        <span class="preview-metric__icon preview-metric__icon--green">
+                          <svg><use href="#icon-check"></use></svg>
+                        </span>
+                      </div>
+                      <strong class="preview-metric__value">94%</strong>
+                      <span class="preview-metric__detail">+2,1% semanal</span>
+                    </article>
+
+                    <article class="preview-metric">
+                      <div class="preview-metric__top">
+                        <span class="preview-metric__label">Pendientes</span>
+                        <span class="preview-metric__icon preview-metric__icon--amber">
+                          <svg><use href="#icon-clipboard"></use></svg>
+                        </span>
+                      </div>
+                      <strong class="preview-metric__value">08</strong>
+                      <span class="preview-metric__detail">Por revisar</span>
+                    </article>
+                  </div>
+
+                  <div class="preview-bottom-grid">
+                    <article class="preview-card">
+                      <div class="preview-card__title-row">
+                        <strong class="preview-card__title">Próximas clases</strong>
+                        <span class="preview-card__link">Ver agenda</span>
+                      </div>
+
+                      <div class="class-mini-item">
+                        <span class="class-mini-item__time">08:00</span>
+                        <div class="class-mini-item__info">
+                          <p class="class-mini-item__name">Matemáticas aplicadas</p>
+                          <p class="class-mini-item__course">10° A · Aula 204</p>
+                        </div>
+                      </div>
+
+                      <div class="class-mini-item">
+                        <span class="class-mini-item__time">10:30</span>
+                        <div class="class-mini-item__info">
+                          <p class="class-mini-item__name">Álgebra y funciones</p>
+                          <p class="class-mini-item__course">9° B · Aula 108</p>
+                        </div>
+                      </div>
+                    </article>
+
+                    <article class="preview-card">
+                      <div class="preview-card__title-row">
+                        <strong class="preview-card__title">Cobertura</strong>
+                      </div>
+
+                      <div class="progress-circle">
+                        <span class="progress-circle__inside">76%</span>
+                      </div>
+                      <p class="preview-progress__label">Planificación anual</p>
+                      <p class="preview-progress__sub-label">12 de 16 unidades</p>
+                    </article>
+                  </div>
+                </section>
+              </div>
+            </article>
+
+            <article class="floating-card floating-card--alert">
+              <span class="floating-card__icon floating-card__icon--indigo" aria-hidden="true">
+                <svg><use href="#icon-bell"></use></svg>
+              </span>
+              <span class="floating-card__copy">
+                <p>Recordatorio</p>
+                <strong>8 evaluaciones por revisar</strong>
+              </span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           INDICADORES DE CONFIANZA
+           ======================================================== -->
+      <section class="trust-strip" aria-label="Resumen de la plataforma">
+        <div class="container trust-strip__inner">
+          <div class="trust-strip__intro">
             <p>
-              Planifica tus clases, acompaña a tus estudiantes, evalúa el progreso
-              y transforma tu gestión docente.
+              Una plataforma pensada para poner la
+              <strong>experiencia docente</strong> en el centro.
             </p>
           </div>
 
-          <ul class="auth-benefits" aria-label="Beneficios de DOCENCIA360">
-            <li>
-              <span class="auth-benefits__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                  <path d="M5 3.5h14v17H5z" stroke="currentColor" stroke-width="1.8" />
-                  <path d="M8 8h8M8 12h8M8 16h4" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
-                </svg>
-              </span>
-              <span>
-                <strong>Planificación organizada</strong>
-                <small>Diseña y consulta tus clases con claridad.</small>
-              </span>
-            </li>
+          <article class="trust-stat">
+            <span class="trust-stat__icon trust-stat__icon--blue" aria-hidden="true">
+              <svg><use href="#icon-layers"></use></svg>
+            </span>
+            <div>
+              <strong>6 módulos</strong>
+              <span>en un mismo ecosistema</span>
+            </div>
+          </article>
 
-            <li>
-              <span class="auth-benefits__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                  <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8" />
-                  <path d="M5.5 20c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
-                  <path d="M18 7.5a2.5 2.5 0 0 1 0 4.8M20.5 17.5a4.2 4.2 0 0 0-2.3-2.2" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" />
-                </svg>
-              </span>
-              <span>
-                <strong>Seguimiento personalizado</strong>
-                <small>Visualiza el avance de cada estudiante.</small>
-              </span>
-            </li>
+          <article class="trust-stat">
+            <span class="trust-stat__icon trust-stat__icon--indigo" aria-hidden="true">
+              <svg><use href="#icon-chart"></use></svg>
+            </span>
+            <div>
+              <strong>Visión 360°</strong>
+              <span>del proceso de aprendizaje</span>
+            </div>
+          </article>
 
-            <li>
-              <span class="auth-benefits__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                  <path d="M4 19.5V4.5M4 19.5h16" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
-                  <path d="m7 15 3.3-3.4 2.7 1.9L18 8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
-                  <circle cx="18" cy="8" r="1.2" fill="currentColor" />
-                </svg>
-              </span>
-              <span>
-                <strong>Decisiones con información</strong>
-                <small>Convierte los datos de tu aula en acciones.</small>
-              </span>
-            </li>
-          </ul>
+          <article class="trust-stat">
+            <span class="trust-stat__icon trust-stat__icon--green" aria-hidden="true">
+              <svg><use href="#icon-shield"></use></svg>
+            </span>
+            <div>
+              <strong>Tu espacio</strong>
+              <span>preparado para crecer contigo</span>
+            </div>
+          </article>
         </div>
-
-        <div class="auth-brand-decoration auth-brand-decoration--one" aria-hidden="true"></div>
-        <div class="auth-brand-decoration auth-brand-decoration--two" aria-hidden="true"></div>
-        <div class="auth-brand-decoration auth-brand-decoration--three" aria-hidden="true"></div>
-
-        <p class="auth-brand-footer">
-          © 2025 DOCENCIA360 · Herramientas para educar mejor.
-        </p>
       </section>
 
-      <section class="auth-form-panel" aria-labelledby="access-title">
-        <div class="auth-form-container">
-          <div class="auth-mobile-brand">
-            <a class="brand-logo" href="index.html" aria-label="DOCENCIA360, inicio">
-              <span class="brand-logo__icon" aria-hidden="true">
-                <svg viewBox="0 0 48 48" role="img" focusable="false">
-                  <path
-                    d="M24 5.5 6.5 14.2 24 23l14.2-7.1v11.3h4.8V13.5L24 5.5Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M11 22.2v10.2c0 4.3 5.8 8.3 13 8.3s13-4 13-8.3V22.2L24 28.7 11 22.2Z"
-                    fill="currentColor"
-                    opacity="0.78"
-                  />
-                  <path
-                    d="M42.9 16.4v13.4"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-width="3"
-                  />
-                  <circle cx="42.9" cy="31.9" r="2.7" fill="currentColor" />
-                </svg>
-              </span>
-              <span class="brand-logo__text">DOCENCIA<span>360</span></span>
-            </a>
-          </div>
-
-          <header class="auth-form-header">
-            <p class="eyebrow">BIENVENIDO/A</p>
-            <h2 id="access-title">Ingresa a tu espacio docente</h2>
-            <p>
-              Accede a tus clases, estudiantes, recursos y planificación desde un
-              único panel.
+      <!-- ========================================================
+           MÓDULOS DE PLATAFORMA
+           ======================================================== -->
+      <section class="section features" id="plataforma" aria-labelledby="platform-title">
+        <div class="container">
+          <header class="section-heading">
+            <p class="eyebrow">UN ECOSISTEMA DOCENTE</p>
+            <h2 class="section-title" id="platform-title">
+              Cada parte de tu trabajo,
+              <span class="text-gradient">mejor conectada.</span>
+            </h2>
+            <p class="section-description">
+              Desde la planificación de una clase hasta el análisis del progreso,
+              DOCENCIA360 organiza las tareas clave de tu práctica pedagógica.
             </p>
           </header>
 
-          <form class="auth-form" action="dashboard.html" method="get">
-            <div class="form-field">
-              <label for="email">Correo electrónico</label>
-              <div class="input-wrapper">
-                <span class="input-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                    <rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" stroke-width="1.8" />
-                    <path d="m4.5 7 7.5 5.7L19.5 7" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" />
-                  </svg>
-                </span>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  placeholder="nombre@institucion.edu"
-                  required
-                />
-              </div>
-            </div>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <span class="feature-card__number" aria-hidden="true">01</span>
+              <span class="feature-card__icon feature-card__icon--blue" aria-hidden="true">
+                <svg><use href="#icon-calendar"></use></svg>
+              </span>
+              <h3>Planificación de clases</h3>
+              <p>
+                Diseña sesiones, estructura unidades y visualiza tu calendario
+                académico con una perspectiva clara y flexible.
+              </p>
+              <a class="feature-card__link" href="#acceso">
+                Explorar planificación
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </article>
 
-            <div class="form-field">
-              <div class="form-field__label-row">
-                <label for="password">Contraseña</label>
-                <a href="#recuperar-acceso">¿Olvidaste tu contraseña?</a>
-              </div>
+            <article class="feature-card">
+              <span class="feature-card__number" aria-hidden="true">02</span>
+              <span class="feature-card__icon feature-card__icon--indigo" aria-hidden="true">
+                <svg><use href="#icon-users"></use></svg>
+              </span>
+              <h3>Gestión de estudiantes</h3>
+              <p>
+                Centraliza perfiles, asistencia, observaciones y datos relevantes
+                para acompañar de cerca a cada estudiante.
+              </p>
+              <a class="feature-card__link" href="#acceso">
+                Ver estudiantes
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </article>
 
-              <div class="input-wrapper">
-                <span class="input-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                    <rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8" />
-                    <path d="M8 10V7.5a4 4 0 0 1 8 0V10" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
-                    <circle cx="12" cy="15" r="1.2" fill="currentColor" />
-                  </svg>
-                </span>
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="current-password"
-                  placeholder="Escribe tu contraseña"
-                  required
-                />
-              </div>
-            </div>
+            <article class="feature-card">
+              <span class="feature-card__number" aria-hidden="true">03</span>
+              <span class="feature-card__icon feature-card__icon--green" aria-hidden="true">
+                <svg><use href="#icon-clipboard"></use></svg>
+              </span>
+              <h3>Evaluación y evidencias</h3>
+              <p>
+                Registra resultados, utiliza rúbricas y mantén las evidencias de
+                aprendizaje ordenadas y accesibles.
+              </p>
+              <a class="feature-card__link" href="#acceso">
+                Gestionar evaluaciones
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </article>
 
-            <label class="checkbox-field" for="remember-session">
-              <input id="remember-session" name="remember" type="checkbox" />
-              <span class="checkbox-field__box" aria-hidden="true"></span>
-              <span>Recordar mi sesión en este dispositivo</span>
-            </label>
+            <article class="feature-card">
+              <span class="feature-card__number" aria-hidden="true">04</span>
+              <span class="feature-card__icon feature-card__icon--amber" aria-hidden="true">
+                <svg><use href="#icon-folder"></use></svg>
+              </span>
+              <h3>Biblioteca de recursos</h3>
+              <p>
+                Reúne guías, presentaciones, documentos y enlaces para encontrarlos
+                justo cuando los necesitas.
+              </p>
+              <a class="feature-card__link" href="#acceso">
+                Organizar recursos
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </article>
 
-            <button class="button button--primary button--full" type="submit">
-              <span>Ingresar a DOCENCIA360</span>
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
-                <path d="M5 12h13M14 7l5 5-5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-              </svg>
-            </button>
-          </form>
+            <article class="feature-card">
+              <span class="feature-card__number" aria-hidden="true">05</span>
+              <span class="feature-card__icon feature-card__icon--cyan" aria-hidden="true">
+                <svg><use href="#icon-chart"></use></svg>
+              </span>
+              <h3>Reportes pedagógicos</h3>
+              <p>
+                Convierte información del aula en reportes comprensibles para
+                detectar avances, brechas y oportunidades.
+              </p>
+              <a class="feature-card__link" href="#acceso">
+                Consultar reportes
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </article>
 
-          <div class="auth-divider" aria-hidden="true">
-            <span></span>
-            <small>o</small>
-            <span></span>
-          </div>
-
-          <a class="button button--secondary button--full" href="dashboard.html">
-            Explorar demostración
-          </a>
-
-          <p class="auth-register-text">
-            ¿Tu institución aún no tiene una cuenta?
-            <a href="#solicitar-acceso">Solicita información</a>
-          </p>
-
-          <div class="auth-help-box" id="recuperar-acceso">
-            <span class="auth-help-box__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" focusable="false">
-                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8" />
-                <path d="M9.7 9.3a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.9 1.4-1.9 2.9" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
-                <circle cx="12" cy="16.8" r="1" fill="currentColor" />
-              </svg>
-            </span>
-            <p>
-              <strong>Versión de demostración local.</strong>
-              La autenticación real será integrada en una etapa posterior.
-            </p>
+            <article class="feature-card">
+              <span class="feature-card__number" aria-hidden="true">06</span>
+              <span class="feature-card__icon feature-card__icon--rose" aria-hidden="true">
+                <svg><use href="#icon-sparkles"></use></svg>
+              </span>
+              <h3>Panel docente personal</h3>
+              <p>
+                Empieza cada jornada con prioridades, alertas y un resumen útil de
+                todo lo que ocurre en tus grupos.
+              </p>
+              <a class="feature-card__link" href="dashboard.html">
+                Abrir demostración
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </a>
+            </article>
           </div>
         </div>
       </section>
+
+      <!-- ========================================================
+           EXPERIENCIA / ANALÍTICA
+           ======================================================== -->
+      <section class="section experience" id="experiencia" aria-labelledby="experience-title">
+        <div class="container experience__grid">
+          <div class="experience__content">
+            <p class="eyebrow">INFORMACIÓN QUE ACOMPAÑA</p>
+            <h2 class="section-title" id="experience-title">
+              Menos tareas dispersas.
+              <span class="text-gradient">Más decisiones pedagógicas.</span>
+            </h2>
+
+            <p class="section-description">
+              Ten una lectura clara de lo que sucede en el aula sin perder el
+              contexto humano detrás de cada resultado. La información está ahí
+              para ayudarte a actuar a tiempo.
+            </p>
+
+            <ul class="benefit-list">
+              <li class="benefit-list__item">
+                <span class="benefit-list__check" aria-hidden="true">
+                  <svg><use href="#icon-check"></use></svg>
+                </span>
+                <span class="benefit-list__copy">
+                  <strong>Seguimiento por grupo y estudiante</strong>
+                  <span>
+                    Identifica rápidamente quién necesita apoyo, refuerzo o nuevos
+                    desafíos de aprendizaje.
+                  </span>
+                </span>
+              </li>
+
+              <li class="benefit-list__item">
+                <span class="benefit-list__check" aria-hidden="true">
+                  <svg><use href="#icon-check"></use></svg>
+                </span>
+                <span class="benefit-list__copy">
+                  <strong>Indicadores fáciles de interpretar</strong>
+                  <span>
+                    Visualiza asistencia, evaluaciones, progreso y cumplimiento de
+                    planificación sin hojas de cálculo complejas.
+                  </span>
+                </span>
+              </li>
+
+              <li class="benefit-list__item">
+                <span class="benefit-list__check" aria-hidden="true">
+                  <svg><use href="#icon-check"></use></svg>
+                </span>
+                <span class="benefit-list__copy">
+                  <strong>Una experiencia diseñada para docentes</strong>
+                  <span>
+                    Interfaz serena, organizada y enfocada en las decisiones que
+                    realmente importan durante tu jornada.
+                  </span>
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="analytics-showcase" aria-label="Vista de analítica pedagógica">
+            <div class="analytics-showcase__backdrop" aria-hidden="true"></div>
+
+            <article class="analytics-panel">
+              <header class="analytics-panel__header">
+                <div>
+                  <p class="analytics-panel__eyebrow">ANALÍTICA PEDAGÓGICA</p>
+                  <h3 class="analytics-panel__title">Panorama de aprendizaje</h3>
+                </div>
+
+                <span class="analytics-panel__period">
+                  <svg aria-hidden="true"><use href="#icon-calendar"></use></svg>
+                  Octubre
+                </span>
+              </header>
+
+              <div class="analytics-kpis">
+                <article class="analytics-kpi">
+                  <span>Asistencia promedio</span>
+                  <strong>94,2%</strong>
+                  <small>
+                    <svg aria-hidden="true"><use href="#icon-trending-up"></use></svg>
+                    2,1% mensual
+                  </small>
+                </article>
+
+                <article class="analytics-kpi">
+                  <span>Logro de objetivos</span>
+                  <strong>82%</strong>
+                  <small>
+                    <svg aria-hidden="true"><use href="#icon-trending-up"></use></svg>
+                    5,6% mensual
+                  </small>
+                </article>
+
+                <article class="analytics-kpi">
+                  <span>Actividades completadas</span>
+                  <strong>148</strong>
+                  <small>
+                    <svg aria-hidden="true"><use href="#icon-trending-up"></use></svg>
+                    18 esta semana
+                  </small>
+                </article>
+              </div>
+
+              <section class="chart-card" aria-label="Progreso promedio por grupo">
+                <header class="chart-card__header">
+                  <strong>Progreso promedio por grupo</strong>
+                  <span class="chart-card__legend">Nivel de logro</span>
+                </header>
+
+                <div class="bar-chart" aria-hidden="true">
+                  <div class="bar-chart__column">
+                    <span class="bar-chart__bar" style="height: 57%"></span>
+                    <span class="bar-chart__label">8° A</span>
+                  </div>
+                  <div class="bar-chart__column">
+                    <span class="bar-chart__bar" style="height: 73%"></span>
+                    <span class="bar-chart__label">8° B</span>
+                  </div>
+                  <div class="bar-chart__column">
+                    <span class="bar-chart__bar" style="height: 66%"></span>
+                    <span class="bar-chart__label">9° A</span>
+                  </div>
+                  <div class="bar-chart__column">
+                    <span class="bar-chart__bar" style="height: 85%"></span>
+                    <span class="bar-chart__label">9° B</span>
+                  </div>
+                  <div class="bar-chart__column">
+                    <span class="bar-chart__bar" style="height: 76%"></span>
+                    <span class="bar-chart__label">10° A</span>
+                  </div>
+                  <div class="bar-chart__column">
+                    <span class="bar-chart__bar" style="height: 69%"></span>
+                    <span class="bar-chart__label">10° B</span>
+                  </div>
+                </div>
+              </section>
+            </article>
+
+            <aside class="analytics-floating-note">
+              <span class="analytics-floating-note__icon" aria-hidden="true">
+                <svg><use href="#icon-sparkles"></use></svg>
+              </span>
+              <span>
+                <p>Hallazgo destacado</p>
+                <strong>9° B mejoró su progreso un 12%</strong>
+              </span>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           ACCESO DOCENTE
+           ======================================================== -->
+      <section class="access" id="acceso" aria-labelledby="access-title">
+        <div class="access__pattern" aria-hidden="true"></div>
+
+        <div class="container access__grid">
+          <div class="access__content">
+            <p class="eyebrow">TU ESPACIO DOCENTE</p>
+            <h2 class="access__title" id="access-title">
+              Tu jornada comienza con una
+              <span>visión más clara.</span>
+            </h2>
+
+            <p class="access__description">
+              Ingresa a tu espacio DOCENCIA360 y encuentra en un solo lugar la
+              información necesaria para planificar, acompañar y avanzar.
+            </p>
+
+            <ul class="access-points">
+              <li>
+                <span class="access-points__icon" aria-hidden="true">
+                  <svg><use href="#icon-check"></use></svg>
+                </span>
+                Acceso a clases, grupos y planificación.
+              </li>
+              <li>
+                <span class="access-points__icon" aria-hidden="true">
+                  <svg><use href="#icon-check"></use></svg>
+                </span>
+                Seguimiento de progreso y evaluaciones.
+              </li>
+              <li>
+                <span class="access-points__icon" aria-hidden="true">
+                  <svg><use href="#icon-check"></use></svg>
+                </span>
+                Experiencia preparada para una futura integración segura.
+              </li>
+            </ul>
+          </div>
+
+          <article class="login-card" aria-label="Formulario de acceso">
+            <header class="login-card__header">
+              <div class="login-card__logo">
+                <span class="login-card__logo-icon" aria-hidden="true">
+                  <svg><use href="#icon-graduation"></use></svg>
+                </span>
+                <span>DOCENCIA360</span>
+              </div>
+
+              <h3>Bienvenido/a de nuevo</h3>
+              <p>Ingresa tus datos para continuar a tu panel docente.</p>
+            </header>
+
+            <form class="login-form" id="login-form" action="dashboard.html" method="get">
+              <div class="form-field">
+                <label for="email">Correo electrónico</label>
+                <div class="input-group">
+                  <svg class="input-group__icon" aria-hidden="true">
+                    <use href="#icon-mail"></use>
+                  </svg>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="nombre@institucion.edu"
+                    autocomplete="email"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <div class="form-field__label-row">
+                  <label for="password">Contraseña</label>
+                  <a href="#recuperar-acceso" data-modal-trigger="recovery-modal">
+                    ¿Olvidaste tu contraseña?
+                  </a>
+                </div>
+
+                <div class="input-group">
+                  <svg class="input-group__icon" aria-hidden="true">
+                    <use href="#icon-lock"></use>
+                  </svg>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Escribe tu contraseña"
+                    autocomplete="current-password"
+                    required
+                  />
+
+                  <button
+                    class="password-toggle"
+                    id="password-toggle"
+                    type="button"
+                    aria-label="Mostrar contraseña"
+                    aria-pressed="false"
+                  >
+                    <svg class="icon-eye" aria-hidden="true">
+                      <use href="#icon-eye"></use>
+                    </svg>
+                    <svg class="icon-eye-off" aria-hidden="true">
+                      <use href="#icon-eye-off"></use>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-options">
+                <label class="checkbox" for="remember-session">
+                  <input id="remember-session" name="remember" type="checkbox" />
+                  <span class="checkbox__box" aria-hidden="true">
+                    <svg><use href="#icon-check"></use></svg>
+                  </span>
+                  Recordar sesión
+                </label>
+              </div>
+
+              <button class="button button--primary button--full" type="submit">
+                Ingresar a DOCENCIA360
+                <svg aria-hidden="true"><use href="#icon-arrow-right"></use></svg>
+              </button>
+            </form>
+
+            <div class="login-card__divider">o</div>
+
+            <a class="login-card__demo" href="dashboard.html">
+              <svg aria-hidden="true"><use href="#icon-play"></use></svg>
+              Explorar demostración local
+            </a>
+
+            <p class="login-card__footer">
+              <strong>Modo demostración:</strong> la autenticación real será
+              conectada posteriormente, sin modificar esta interfaz.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
+
+    <!-- ==========================================================
+         PIE DE PÁGINA
+         ========================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer__top">
+          <div>
+            <a class="brand brand--light" href="index.html" aria-label="DOCENCIA360, inicio">
+              <span class="brand__mark" aria-hidden="true">
+                <svg><use href="#icon-graduation"></use></svg>
+              </span>
+              <span class="brand__name">DOCENCIA<strong>360</strong></span>
+            </a>
+
+            <p class="footer__brand-copy">
+              Una plataforma educativa diseñada para hacer más clara, organizada y
+              significativa la experiencia docente.
+            </p>
+          </div>
+
+          <div class="footer__column">
+            <h4>Plataforma</h4>
+            <nav class="footer__links" aria-label="Enlaces de plataforma">
+              <a href="#plataforma">Módulos</a>
+              <a href="#experiencia">Analítica pedagógica</a>
+              <a href="dashboard.html">Demostración</a>
+            </nav>
+          </div>
+
+          <div class="footer__column">
+            <h4>Docentes</h4>
+            <nav class="footer__links" aria-label="Enlaces para docentes">
+              <a href="#acceso">Acceso docente</a>
+              <a href="#acceso">Solicitar información</a>
+              <a href="#acceso">Recuperar acceso</a>
+            </nav>
+          </div>
+
+          <div class="footer__column">
+            <h4>DOCENCIA360</h4>
+            <nav class="footer__links" aria-label="Enlaces corporativos">
+              <a href="#plataforma">Nuestra visión</a>
+              <a href="#experiencia">Experiencia</a>
+              <a href="#acceso">Contacto</a>
+            </nav>
+          </div>
+        </div>
+
+        <div class="footer__bottom">
+          <p>© 2025 DOCENCIA360. Herramientas para educar mejor.</p>
+
+          <nav class="footer__legal" aria-label="Enlaces legales">
+            <a href="#privacidad">Privacidad</a>
+            <a href="#terminos">Términos de uso</a>
+            <a href="#accesibilidad">Accesibilidad</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ==========================================================
+         MODAL LOCAL: RECUPERACIÓN DE ACCESO
+         No conecta a ningún servicio externo.
+         ========================================================== -->
+    <div
+      class="modal"
+      id="recovery-modal"
+      aria-hidden="true"
+      aria-labelledby="recovery-modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal__dialog">
+        <div class="modal__icon" aria-hidden="true">
+          <svg><use href="#icon-lock"></use></svg>
+        </div>
+
+        <h3 id="recovery-modal-title">Recuperación de acceso</h3>
+
+        <p>
+          Esta es una interfaz local de demostración. La recuperación real de
+          contraseña se habilitará cuando conectemos el sistema de autenticación.
+          <strong>No se ha enviado ninguna solicitud.</strong>
+        </p>
+
+        <button class="button button--primary button--full" type="button" data-modal-close>
+          Entendido
+        </button>
+      </div>
+    </div>
+
+    <!-- ==========================================================
+         JAVASCRIPT LOCAL
+         Sin APIs, sin peticiones externas y sin backend.
+         ========================================================== -->
+    <script>
+      (() => {
+        "use strict";
+
+        const header = document.getElementById("site-header");
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileNav = document.getElementById("mobile-nav");
+        const passwordInput = document.getElementById("password");
+        const passwordToggle = document.getElementById("password-toggle");
+        const loginForm = document.getElementById("login-form");
+        const modalTriggers = document.querySelectorAll("[data-modal-trigger]");
+        const modalCloseButtons = document.querySelectorAll("[data-modal-close]");
+
+        let lastFocusedElement = null;
+
+        /**
+         * Cambia el aspecto del header cuando la página se desplaza.
+         */
+        const updateHeaderState = () => {
+          header.classList.toggle("is-scrolled", window.scrollY > 12);
+        };
+
+        updateHeaderState();
+        window.addEventListener("scroll", updateHeaderState, { passive: true });
+
+        /**
+         * Abre o cierra el menú de navegación móvil.
+         */
+        const setMobileMenu = (isOpen) => {
+          mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+          mobileMenuButton.setAttribute(
+            "aria-label",
+            isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"
+          );
+
+          mobileNav.classList.toggle("is-open", isOpen);
+          document.body.classList.toggle("menu-open", isOpen);
+        };
+
+        mobileMenuButton.addEventListener("click", () => {
+          const isOpen =
+            mobileMenuButton.getAttribute("aria-expanded") === "true";
+
+          setMobileMenu(!isOpen);
+        });
+
+        mobileNav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => setMobileMenu(false));
+        });
+
+        /**
+         * Muestra u oculta la contraseña dentro del formulario local.
+         */
+        passwordToggle.addEventListener("click", () => {
+          const isCurrentlyVisible = passwordInput.type === "text";
+          passwordInput.type = isCurrentlyVisible ? "password" : "text";
+
+          passwordToggle.classList.toggle("is-visible", !isCurrentlyVisible);
+          passwordToggle.setAttribute(
+            "aria-label",
+            isCurrentlyVisible ? "Mostrar contraseña" : "Ocultar contraseña"
+          );
+          passwordToggle.setAttribute("aria-pressed", String(!isCurrentlyVisible));
+        });
+
+        /**
+         * Control básico del modal local.
+         */
+        const openModal = (modalId) => {
+          const modal = document.getElementById(modalId);
+
+          if (!modal) return;
+
+          lastFocusedElement = document.activeElement;
+          modal.classList.add("is-open");
+          modal.setAttribute("aria-hidden", "false");
+          document.body.classList.add("menu-open");
+
+          const closeButton = modal.querySelector("[data-modal-close]");
+
+          if (closeButton) {
+            closeButton.focus();
+          }
+        };
+
+        const closeModal = (modal) => {
+          if (!modal) return;
+
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("menu-open");
+
+          if (lastFocusedElement) {
+            lastFocusedElement.focus();
+          }
+        };
+
+        modalTriggers.forEach((trigger) => {
+          trigger.addEventListener("click", (event) => {
+            event.preventDefault();
+            openModal(trigger.dataset.modalTrigger);
+          });
+        });
+
+        modalCloseButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            closeModal(button.closest(".modal"));
+          });
+        });
+
+        document.querySelectorAll(".modal").forEach((modal) => {
+          modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+              closeModal(modal);
+            }
+          });
+        });
+
+        /**
+         * Cierra menú o modal usando la tecla Escape.
+         */
+        document.addEventListener("keydown", (event) => {
+          if (event.key !== "Escape") return;
+
+          const openModalElement = document.querySelector(".modal.is-open");
+
+          if (openModalElement) {
+            closeModal(openModalElement);
+            return;
+          }
+
+          if (mobileMenuButton.getAttribute("aria-expanded") === "true") {
+            setMobileMenu(false);
+            mobileMenuButton.focus();
+          }
+        });
+
+        /**
+         * La autenticación todavía no existe.
+         * Este submit permite navegar localmente a dashboard.html
+         * cuando ese archivo sea creado en el siguiente paso.
+         */
+        loginForm.addEventListener("submit", (event) => {
+          const email = document.getElementById("email");
+
+          if (!email.value.trim() || !passwordInput.value.trim()) {
+            event.preventDefault();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
