@@ -1,0 +1,6182 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Panel docente de DOCENCIA360: planificación, estudiantes, evaluaciones y seguimiento pedagógico."
+    />
+    <meta name="theme-color" content="#f5f8fc" />
+    <title>Panel docente | DOCENCIA360</title>
+
+    <style>
+      /* ==========================================================
+         DOCENCIA360 · DASHBOARD DOCENTE
+         Archivo autónomo:
+         - Sin librerías externas
+         - Sin APIs
+         - Sin backend
+         - Sin Supabase
+         - Preparado para integraciones futuras
+         ========================================================== */
+
+      /* ==========================================================
+         1. TOKENS DEL SISTEMA DE DISEÑO · MODO CLARO
+         ========================================================== */
+      :root {
+        --font-sans:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+
+        --sidebar-width: 276px;
+        --header-height: 78px;
+        --mobile-nav-height: 72px;
+        --content-max-width: 1540px;
+
+        --blue-800: #1e40af;
+        --blue-700: #1d4ed8;
+        --blue-600: #2563eb;
+        --blue-500: #3b82f6;
+        --blue-400: #60a5fa;
+        --blue-300: #93c5fd;
+        --blue-200: #bfdbfe;
+        --blue-100: #dbeafe;
+        --blue-50: #eff6ff;
+
+        --indigo-800: #3730a3;
+        --indigo-700: #4338ca;
+        --indigo-600: #4f46e5;
+        --indigo-500: #6366f1;
+        --indigo-400: #818cf8;
+        --indigo-100: #e0e7ff;
+        --indigo-50: #eef2ff;
+
+        --emerald-800: #065f46;
+        --emerald-700: #047857;
+        --emerald-600: #059669;
+        --emerald-500: #10b981;
+        --emerald-300: #6ee7b7;
+        --emerald-100: #d1fae5;
+        --emerald-50: #ecfdf5;
+
+        --amber-800: #92400e;
+        --amber-700: #b45309;
+        --amber-600: #d97706;
+        --amber-500: #f59e0b;
+        --amber-300: #fcd34d;
+        --amber-100: #fef3c7;
+        --amber-50: #fffbeb;
+
+        --rose-800: #9f1239;
+        --rose-700: #be123c;
+        --rose-600: #e11d48;
+        --rose-500: #f43f5e;
+        --rose-300: #fda4af;
+        --rose-100: #ffe4e6;
+        --rose-50: #fff1f2;
+
+        --cyan-700: #0e7490;
+        --cyan-600: #0891b2;
+        --cyan-500: #06b6d4;
+        --cyan-100: #cffafe;
+        --cyan-50: #ecfeff;
+
+        --violet-700: #6d28d9;
+        --violet-600: #7c3aed;
+        --violet-500: #8b5cf6;
+        --violet-100: #ede9fe;
+        --violet-50: #f5f3ff;
+
+        --slate-950: #0f172a;
+        --slate-900: #1e293b;
+        --slate-800: #334155;
+        --slate-700: #475569;
+        --slate-600: #64748b;
+        --slate-500: #94a3b8;
+        --slate-400: #cbd5e1;
+        --slate-300: #d9e2ec;
+        --slate-200: #e2e8f0;
+        --slate-150: #e9eef5;
+        --slate-100: #f1f5f9;
+        --slate-50: #f8fafc;
+
+        --page-bg: #f4f7fb;
+        --surface: #ffffff;
+        --surface-soft: #f8fafc;
+        --surface-muted: #eff4f9;
+        --surface-hover: #f5f9ff;
+
+        --text-strong: #102344;
+        --text: #34425a;
+        --text-muted: #71819a;
+        --text-faint: #9aa8bd;
+        --line: #e3eaf2;
+        --line-strong: #d5dfeb;
+
+        --sidebar-bg: #0c1c38;
+        --sidebar-bg-deep: #08152c;
+        --sidebar-text: #d9e6fb;
+        --sidebar-muted: #91a5c7;
+        --sidebar-line: rgb(203 213 225 / 0.11);
+        --sidebar-hover: rgb(255 255 255 / 0.07);
+        --sidebar-active: rgb(59 130 246 / 0.25);
+        --sidebar-active-text: #ffffff;
+
+        --accent: var(--blue-600);
+        --accent-hover: var(--blue-700);
+        --accent-soft: var(--blue-50);
+        --accent-line: var(--blue-100);
+
+        --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.04);
+        --shadow-sm:
+          0 2px 4px rgb(15 23 42 / 0.035),
+          0 6px 14px rgb(15 23 42 / 0.045);
+        --shadow-md:
+          0 5px 12px rgb(15 23 42 / 0.045),
+          0 16px 28px rgb(15 23 42 / 0.07);
+        --shadow-lg:
+          0 10px 24px rgb(15 23 42 / 0.07),
+          0 26px 45px rgb(15 23 42 / 0.1);
+        --shadow-xl:
+          0 16px 34px rgb(15 23 42 / 0.11),
+          0 35px 75px rgb(15 23 42 / 0.15);
+        --shadow-blue: 0 9px 19px rgb(37 99 235 / 0.21);
+
+        --radius-xs: 8px;
+        --radius-sm: 11px;
+        --radius-md: 14px;
+        --radius-lg: 18px;
+        --radius-xl: 23px;
+        --radius-2xl: 30px;
+        --radius-pill: 999px;
+
+        --transition-fast: 150ms ease;
+        --transition-normal: 240ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* ==========================================================
+         2. MODO OSCURO
+         ========================================================== */
+      html[data-theme="dark"] {
+        --page-bg: #0a1426;
+        --surface: #101e34;
+        --surface-soft: #14243d;
+        --surface-muted: #182941;
+        --surface-hover: #1b2d4a;
+
+        --text-strong: #ebf3ff;
+        --text: #c8d5e8;
+        --text-muted: #95a8c3;
+        --text-faint: #70849f;
+        --line: #243650;
+        --line-strong: #30445f;
+
+        --sidebar-bg: #081426;
+        --sidebar-bg-deep: #050f20;
+        --sidebar-text: #d9e6fb;
+        --sidebar-muted: #8fa5c7;
+        --sidebar-line: rgb(148 163 184 / 0.14);
+        --sidebar-hover: rgb(255 255 255 / 0.06);
+        --sidebar-active: rgb(59 130 246 / 0.25);
+        --sidebar-active-text: #ffffff;
+
+        --accent: #4f8cff;
+        --accent-hover: #78a8ff;
+        --accent-soft: rgb(59 130 246 / 0.14);
+        --accent-line: rgb(96 165 250 / 0.24);
+
+        --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.16);
+        --shadow-sm:
+          0 2px 5px rgb(0 0 0 / 0.12),
+          0 8px 18px rgb(0 0 0 / 0.16);
+        --shadow-md:
+          0 7px 16px rgb(0 0 0 / 0.18),
+          0 18px 34px rgb(0 0 0 / 0.2);
+        --shadow-lg:
+          0 12px 25px rgb(0 0 0 / 0.23),
+          0 30px 52px rgb(0 0 0 / 0.26);
+        --shadow-xl:
+          0 18px 38px rgb(0 0 0 / 0.3),
+          0 42px 80px rgb(0 0 0 / 0.32);
+      }
+
+      /* ==========================================================
+         3. RESET Y BASE
+         ========================================================== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--page-bg);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        color: var(--text);
+        background: var(--page-bg);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition:
+          background var(--transition-normal),
+          color var(--transition-normal);
+      }
+
+      body.no-scroll {
+        overflow: hidden;
+      }
+
+      body.sidebar-is-compact {
+        --sidebar-width: 92px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p {
+        margin: 0;
+      }
+
+      ul,
+      ol {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+      }
+
+      button,
+      a,
+      input,
+      select {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button,
+      a {
+        color: inherit;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgb(96 165 250 / 0.8);
+        outline-offset: 3px;
+      }
+
+      ::selection {
+        color: #ffffff;
+        background: var(--blue-600);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 1000;
+        top: -100px;
+        left: 20px;
+        padding: 11px 16px;
+        color: #ffffff;
+        background: var(--blue-700);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-lg);
+        font-size: 0.84rem;
+        font-weight: 700;
+        transition: top var(--transition-fast);
+      }
+
+      .skip-link:focus {
+        top: 18px;
+      }
+
+      /* ==========================================================
+         4. ICONOS, BOTONES Y ELEMENTOS REUTILIZABLES
+         ========================================================== */
+      .icon {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 auto;
+      }
+
+      .icon--xs {
+        width: 14px;
+        height: 14px;
+      }
+
+      .icon--sm {
+        width: 17px;
+        height: 17px;
+      }
+
+      .icon--lg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 15px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        font-size: 0.82rem;
+        font-weight: 730;
+        line-height: 1;
+        white-space: nowrap;
+        transition:
+          transform var(--transition-fast),
+          background var(--transition-fast),
+          color var(--transition-fast),
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .button:hover {
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      .button--primary {
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        border-color: transparent;
+        box-shadow: var(--shadow-blue);
+      }
+
+      .button--primary:hover {
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--blue-700), var(--indigo-700));
+        border-color: transparent;
+        box-shadow:
+          0 12px 24px rgb(37 99 235 / 0.27),
+          0 5px 10px rgb(37 99 235 / 0.14);
+      }
+
+      .button--secondary {
+        color: var(--blue-700);
+        background: var(--accent-soft);
+        border-color: var(--accent-line);
+        box-shadow: none;
+      }
+
+      .button--secondary:hover {
+        color: var(--blue-800);
+        background: var(--surface);
+        border-color: var(--blue-300);
+      }
+
+      .button--ghost {
+        color: var(--text-muted);
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      .button--ghost:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      .button--small {
+        min-height: 34px;
+        padding: 0 11px;
+        border-radius: 9px;
+        font-size: 0.74rem;
+      }
+
+      .button--icon {
+        width: 42px;
+        min-width: 42px;
+        padding: 0;
+      }
+
+      .button--icon.button--small {
+        width: 34px;
+        min-width: 34px;
+      }
+
+      .button--full {
+        width: 100%;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        min-height: 23px;
+        align-items: center;
+        gap: 5px;
+        padding: 0 8px;
+        border-radius: var(--radius-pill);
+        font-size: 0.65rem;
+        font-weight: 760;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .status-badge::before {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .status-badge--blue {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .status-badge--green {
+        color: var(--emerald-700);
+        background: var(--emerald-50);
+      }
+
+      .status-badge--amber {
+        color: var(--amber-700);
+        background: var(--amber-50);
+      }
+
+      .status-badge--rose {
+        color: var(--rose-700);
+        background: var(--rose-50);
+      }
+
+      html[data-theme="dark"] .status-badge--blue {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+      }
+
+      html[data-theme="dark"] .status-badge--green {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.13);
+      }
+
+      html[data-theme="dark"] .status-badge--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.13);
+      }
+
+      html[data-theme="dark"] .status-badge--rose {
+        color: var(--rose-300);
+        background: rgb(244 63 94 / 0.13);
+      }
+
+      .avatar {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        place-items: center;
+        overflow: hidden;
+        color: #ffffff;
+        border-radius: 50%;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .avatar--small {
+        width: 28px;
+        height: 28px;
+        font-size: 0.58rem;
+      }
+
+      .avatar--large {
+        width: 42px;
+        height: 42px;
+        font-size: 0.76rem;
+      }
+
+      .avatar--ana {
+        background: linear-gradient(135deg, #f59e0b, #ea580c);
+      }
+
+      .avatar--mateo {
+        background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+      }
+
+      .avatar--sofia {
+        background: linear-gradient(135deg, #ec4899, #be185d);
+      }
+
+      .avatar--lucas {
+        background: linear-gradient(135deg, #14b8a6, #047857);
+      }
+
+      .avatar--camila {
+        background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+      }
+
+      .avatar--diego {
+        background: linear-gradient(135deg, #f97316, #c2410c);
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xs);
+        transition:
+          background var(--transition-normal),
+          border-color var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card__header {
+        display: flex;
+        min-height: 68px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 19px 21px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .card__header-title {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 11px;
+      }
+
+      .card__header-icon {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 10px;
+      }
+
+      .card__header-icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      .card__header-icon--emerald {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .card__header-icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      html[data-theme="dark"] .card__header-icon {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.13);
+      }
+
+      html[data-theme="dark"] .card__header-icon--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.13);
+      }
+
+      html[data-theme="dark"] .card__header-icon--emerald {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.13);
+      }
+
+      html[data-theme="dark"] .card__header-icon--indigo {
+        color: var(--indigo-300, #c7d2fe);
+        background: rgb(99 102 241 / 0.14);
+      }
+
+      .card__eyebrow {
+        margin-bottom: 2px;
+        color: var(--text-faint);
+        font-size: 0.61rem;
+        font-weight: 760;
+        letter-spacing: 0.08em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .card__title {
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.96rem;
+        font-weight: 780;
+        letter-spacing: -0.035em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .card__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--accent);
+        font-size: 0.71rem;
+        font-weight: 740;
+        white-space: nowrap;
+      }
+
+      .card__link:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+      }
+
+      /* ==========================================================
+         5. ESTRUCTURA PRINCIPAL
+         ========================================================== */
+      .app-shell {
+        min-height: 100vh;
+      }
+
+      .app-main {
+        min-height: 100vh;
+        margin-left: var(--sidebar-width);
+        transition: margin-left var(--transition-normal);
+      }
+
+      .main-inner {
+        width: min(100%, calc(var(--content-max-width) + 64px));
+        padding: 28px 32px 54px;
+        margin: 0 auto;
+      }
+
+      /* ==========================================================
+         6. SIDEBAR
+         ========================================================== */
+      .sidebar {
+        position: fixed;
+        z-index: 120;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        width: var(--sidebar-width);
+        flex-direction: column;
+        color: var(--sidebar-text);
+        background:
+          radial-gradient(
+            circle at 15% 0%,
+            rgb(37 99 235 / 0.24),
+            transparent 28%
+          ),
+          linear-gradient(180deg, var(--sidebar-bg), var(--sidebar-bg-deep));
+        border-right: 1px solid rgb(148 163 184 / 0.09);
+        box-shadow: 10px 0 30px rgb(15 23 42 / 0.06);
+        transition:
+          width var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .sidebar__brand {
+        display: flex;
+        min-height: 78px;
+        align-items: center;
+        gap: 10px;
+        padding: 0 22px;
+        border-bottom: 1px solid var(--sidebar-line);
+        overflow: hidden;
+      }
+
+      .sidebar__brand-mark {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-700);
+        background: #ffffff;
+        border-radius: 11px;
+        box-shadow: 0 5px 12px rgb(0 0 0 / 0.18);
+      }
+
+      .sidebar__brand-mark svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .sidebar__brand-name {
+        color: #ffffff;
+        font-size: 1.08rem;
+        font-weight: 850;
+        letter-spacing: -0.055em;
+        white-space: nowrap;
+      }
+
+      .sidebar__brand-name strong {
+        color: var(--blue-300);
+        font-weight: 850;
+      }
+
+      .sidebar__workspace {
+        display: flex;
+        min-height: 72px;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 17px;
+        border-bottom: 1px solid var(--sidebar-line);
+        overflow: hidden;
+      }
+
+      .sidebar__workspace-icon {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-200);
+        background: rgb(59 130 246 / 0.2);
+        border: 1px solid rgb(147 197 253 / 0.15);
+        border-radius: 9px;
+      }
+
+      .sidebar__workspace-copy {
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .sidebar__workspace-copy small {
+        display: block;
+        margin-bottom: 1px;
+        color: var(--sidebar-muted);
+        font-size: 0.58rem;
+        font-weight: 620;
+      }
+
+      .sidebar__workspace-copy strong {
+        display: block;
+        overflow: hidden;
+        color: #f8fbff;
+        font-size: 0.72rem;
+        font-weight: 720;
+        text-overflow: ellipsis;
+      }
+
+      .sidebar__content {
+        flex: 1;
+        padding: 19px 12px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(148 163 184 / 0.25) transparent;
+      }
+
+      .sidebar__group + .sidebar__group {
+        margin-top: 23px;
+      }
+
+      .sidebar__group-label {
+        display: block;
+        padding: 0 11px;
+        margin: 0 0 8px;
+        color: var(--sidebar-muted);
+        font-size: 0.59rem;
+        font-weight: 750;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .sidebar__nav {
+        display: grid;
+        gap: 4px;
+      }
+
+      .sidebar__nav-link {
+        position: relative;
+        display: flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 12px;
+        padding: 0 11px;
+        overflow: hidden;
+        color: var(--sidebar-muted);
+        border-radius: 10px;
+        font-size: 0.79rem;
+        font-weight: 640;
+        white-space: nowrap;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .sidebar__nav-link:hover {
+        color: #ffffff;
+        background: var(--sidebar-hover);
+      }
+
+      .sidebar__nav-link--active {
+        color: var(--sidebar-active-text);
+        background: var(--sidebar-active);
+        font-weight: 730;
+      }
+
+      .sidebar__nav-link--active::before {
+        position: absolute;
+        left: 0;
+        width: 3px;
+        height: 21px;
+        background: var(--blue-400);
+        border-radius: 0 3px 3px 0;
+        content: "";
+      }
+
+      .sidebar__nav-link .icon {
+        width: 19px;
+        height: 19px;
+        flex: 0 0 auto;
+      }
+
+      .sidebar__nav-badge {
+        display: grid;
+        min-width: 19px;
+        height: 19px;
+        padding: 0 5px;
+        margin-left: auto;
+        place-items: center;
+        color: #ffffff;
+        background: var(--rose-500);
+        border-radius: var(--radius-pill);
+        font-size: 0.6rem;
+        font-weight: 780;
+      }
+
+      .sidebar__footer {
+        padding: 13px 12px 16px;
+        border-top: 1px solid var(--sidebar-line);
+      }
+
+      .sidebar__help {
+        display: flex;
+        min-height: 42px;
+        align-items: center;
+        gap: 11px;
+        padding: 0 11px;
+        color: var(--sidebar-muted);
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-weight: 650;
+        white-space: nowrap;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .sidebar__help:hover {
+        color: #ffffff;
+        background: var(--sidebar-hover);
+      }
+
+      .sidebar__collapse {
+        position: absolute;
+        top: 91px;
+        right: -15px;
+        display: grid;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        place-items: center;
+        color: var(--text-muted);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        box-shadow: var(--shadow-sm);
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          transform var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .sidebar__collapse:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+        transform: scale(1.06);
+      }
+
+      .sidebar__collapse .icon {
+        width: 17px;
+        height: 17px;
+        transition: transform var(--transition-normal);
+      }
+
+      body.sidebar-is-compact .sidebar__collapse .icon {
+        transform: rotate(180deg);
+      }
+
+      body.sidebar-is-compact .sidebar__brand,
+      body.sidebar-is-compact .sidebar__workspace {
+        justify-content: center;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      body.sidebar-is-compact .sidebar__brand-name,
+      body.sidebar-is-compact .sidebar__workspace-copy,
+      body.sidebar-is-compact .sidebar__group-label,
+      body.sidebar-is-compact .sidebar__nav-link span:not(.sidebar__nav-badge),
+      body.sidebar-is-compact .sidebar__help span,
+      body.sidebar-is-compact .sidebar__nav-badge {
+        display: none;
+      }
+
+      body.sidebar-is-compact .sidebar__nav-link,
+      body.sidebar-is-compact .sidebar__help {
+        justify-content: center;
+        padding: 0;
+      }
+
+      body.sidebar-is-compact .sidebar__nav-link--active::before {
+        left: 2px;
+      }
+
+      body.sidebar-is-compact .sidebar__footer {
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      /* ==========================================================
+         7. BARRA SUPERIOR
+         ========================================================== */
+      .topbar {
+        position: sticky;
+        z-index: 80;
+        top: 0;
+        display: flex;
+        min-height: var(--header-height);
+        align-items: center;
+        gap: 20px;
+        padding: 0 32px;
+        background: rgb(244 247 251 / 0.8);
+        border-bottom: 1px solid transparent;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition:
+          background var(--transition-normal),
+          border-color var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      html[data-theme="dark"] .topbar {
+        background: rgb(10 20 38 / 0.8);
+      }
+
+      .topbar.is-scrolled {
+        border-color: var(--line);
+        box-shadow: 0 3px 12px rgb(15 23 42 / 0.035);
+      }
+
+      .topbar__crumbs {
+        min-width: 180px;
+      }
+
+      .topbar__crumbs small {
+        display: block;
+        margin-bottom: 2px;
+        color: var(--text-faint);
+        font-size: 0.63rem;
+        font-weight: 680;
+        letter-spacing: 0.03em;
+      }
+
+      .topbar__crumbs strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.9rem;
+        font-weight: 760;
+        letter-spacing: -0.025em;
+      }
+
+      .topbar__search {
+        position: relative;
+        width: min(100%, 340px);
+        margin-left: auto;
+      }
+
+      .topbar__search-button {
+        display: flex;
+        width: 100%;
+        min-height: 40px;
+        align-items: center;
+        gap: 9px;
+        padding: 0 10px 0 12px;
+        color: var(--text-faint);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        font-size: 0.75rem;
+        text-align: left;
+        transition:
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .topbar__search-button:hover {
+        border-color: var(--blue-200);
+        background: var(--surface-hover);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .topbar__search-button span {
+        flex: 1;
+      }
+
+      .keyboard-key {
+        display: inline-flex;
+        min-width: 20px;
+        min-height: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+        color: var(--text-faint);
+        background: var(--surface-muted);
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        font-family: inherit;
+        font-size: 0.59rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .topbar__actions {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+      }
+
+      .topbar__action {
+        position: relative;
+        display: grid;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        place-items: center;
+        color: var(--text-muted);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          transform var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .topbar__action:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+
+      .topbar__notification-dot {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 7px;
+        height: 7px;
+        background: var(--rose-500);
+        border: 1.5px solid var(--surface);
+        border-radius: 50%;
+      }
+
+      .theme-icon-sun {
+        display: none;
+      }
+
+      html[data-theme="dark"] .theme-icon-moon {
+        display: none;
+      }
+
+      html[data-theme="dark"] .theme-icon-sun {
+        display: block;
+      }
+
+      .topbar__profile {
+        position: relative;
+        margin-left: 3px;
+      }
+
+      .topbar__profile-button {
+        display: flex;
+        min-height: 42px;
+        align-items: center;
+        gap: 9px;
+        padding: 3px 7px 3px 3px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .topbar__profile-button:hover {
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+
+      .topbar__profile-copy {
+        min-width: 0;
+        text-align: left;
+      }
+
+      .topbar__profile-copy strong {
+        display: block;
+        overflow: hidden;
+        max-width: 110px;
+        color: var(--text-strong);
+        font-size: 0.71rem;
+        font-weight: 750;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .topbar__profile-copy small {
+        display: block;
+        overflow: hidden;
+        max-width: 110px;
+        margin-top: 1px;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 580;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* ==========================================================
+         8. MENÚS FLOTANTES
+         ========================================================== */
+      .floating-menu {
+        position: absolute;
+        z-index: 200;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 290px;
+        overflow: hidden;
+        visibility: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-7px) scale(0.98);
+        transform-origin: top right;
+        transition:
+          opacity var(--transition-fast),
+          visibility var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .floating-menu.is-open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      .floating-menu__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 16px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .floating-menu__header h3 {
+        color: var(--text-strong);
+        font-size: 0.82rem;
+        font-weight: 770;
+      }
+
+      .floating-menu__header button {
+        padding: 0;
+        color: var(--accent);
+        background: transparent;
+        cursor: pointer;
+        font-size: 0.67rem;
+        font-weight: 720;
+      }
+
+      .notification-list {
+        display: grid;
+        max-height: 360px;
+        overflow-y: auto;
+      }
+
+      .notification-item {
+        display: flex;
+        gap: 10px;
+        padding: 13px 16px;
+        border-bottom: 1px solid var(--line);
+        cursor: pointer;
+        transition: background var(--transition-fast);
+      }
+
+      .notification-item:last-child {
+        border-bottom: 0;
+      }
+
+      .notification-item:hover {
+        background: var(--surface-hover);
+      }
+
+      .notification-item__icon {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 9px;
+      }
+
+      .notification-item__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .notification-item__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      .notification-item__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .notification-item__copy {
+        min-width: 0;
+      }
+
+      .notification-item__copy strong {
+        display: block;
+        margin-bottom: 2px;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.69rem;
+        font-weight: 720;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .notification-item__copy p {
+        display: -webkit-box;
+        overflow: hidden;
+        color: var(--text-muted);
+        font-size: 0.66rem;
+        line-height: 1.43;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+      }
+
+      .notification-item__copy time {
+        display: block;
+        margin-top: 3px;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 600;
+      }
+
+      .floating-menu__footer {
+        padding: 11px;
+        border-top: 1px solid var(--line);
+      }
+
+      .profile-menu {
+        width: 226px;
+      }
+
+      .profile-menu__identity {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .profile-menu__identity strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.75rem;
+        font-weight: 760;
+      }
+
+      .profile-menu__identity small {
+        display: block;
+        margin-top: 2px;
+        color: var(--text-muted);
+        font-size: 0.62rem;
+      }
+
+      .profile-menu__links {
+        display: grid;
+        gap: 2px;
+        padding: 7px;
+      }
+
+      .profile-menu__links a,
+      .profile-menu__links button {
+        display: flex;
+        min-height: 37px;
+        align-items: center;
+        gap: 9px;
+        padding: 0 9px;
+        color: var(--text-muted);
+        background: transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.72rem;
+        font-weight: 660;
+        text-align: left;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .profile-menu__links a:hover,
+      .profile-menu__links button:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      .profile-menu__links .danger-link {
+        color: var(--rose-600);
+      }
+
+      /* ==========================================================
+         9. ENCABEZADO DEL DASHBOARD
+         ========================================================== */
+      .dashboard-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 5px 0 26px;
+      }
+
+      .dashboard-heading__date {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 7px;
+        color: var(--blue-700);
+        font-size: 0.69rem;
+        font-weight: 760;
+        letter-spacing: 0.035em;
+        text-transform: capitalize;
+      }
+
+      .dashboard-heading__date .icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .dashboard-heading h1 {
+        color: var(--text-strong);
+        font-size: clamp(1.7rem, 3vw, 2.25rem);
+        font-weight: 810;
+        letter-spacing: -0.06em;
+        line-height: 1.1;
+      }
+
+      .dashboard-heading h1 span {
+        color: var(--accent);
+      }
+
+      .dashboard-heading__description {
+        max-width: 630px;
+        margin-top: 9px;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+        line-height: 1.62;
+      }
+
+      .heading-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 9px;
+      }
+
+      .new-action {
+        position: relative;
+      }
+
+      .new-action__menu {
+        top: calc(100% + 9px);
+        right: 0;
+        width: 245px;
+      }
+
+      .quick-create-list {
+        display: grid;
+        gap: 3px;
+        padding: 8px;
+      }
+
+      .quick-create-list button {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        gap: 10px;
+        padding: 0 9px;
+        color: var(--text);
+        background: transparent;
+        border-radius: 9px;
+        cursor: pointer;
+        text-align: left;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .quick-create-list button:hover {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .quick-create-list__icon {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 8px;
+      }
+
+      .quick-create-list__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .quick-create-list__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      .quick-create-list strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.71rem;
+        font-weight: 750;
+      }
+
+      .quick-create-list small {
+        display: block;
+        margin-top: 1px;
+        color: var(--text-faint);
+        font-size: 0.6rem;
+        font-weight: 560;
+      }
+
+      /* ==========================================================
+         10. BANNER DE JORNADA
+         ========================================================== */
+      .daily-banner {
+        position: relative;
+        display: flex;
+        min-height: 142px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 26px 29px;
+        margin-bottom: 22px;
+        overflow: hidden;
+        color: #ffffff;
+        background:
+          radial-gradient(
+            circle at 88% 17%,
+            rgb(147 197 253 / 0.45),
+            transparent 21%
+          ),
+          radial-gradient(
+            circle at 76% 100%,
+            rgb(129 140 248 / 0.55),
+            transparent 28%
+          ),
+          linear-gradient(120deg, #1749a2 0%, #2563eb 52%, #4338ca 100%);
+        border-radius: var(--radius-xl);
+        box-shadow:
+          0 13px 26px rgb(37 99 235 / 0.18),
+          0 4px 12px rgb(37 99 235 / 0.12);
+      }
+
+      .daily-banner::before {
+        position: absolute;
+        top: -95px;
+        right: 9%;
+        width: 240px;
+        height: 240px;
+        border: 1px solid rgb(255 255 255 / 0.17);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .daily-banner::after {
+        position: absolute;
+        right: -55px;
+        bottom: -74px;
+        width: 207px;
+        height: 207px;
+        border: 1px solid rgb(255 255 255 / 0.17);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .daily-banner__content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .daily-banner__eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 7px;
+        color: rgb(219 234 254 / 0.9);
+        font-size: 0.65rem;
+        font-weight: 750;
+        letter-spacing: 0.085em;
+        text-transform: uppercase;
+      }
+
+      .daily-banner__eyebrow::before {
+        width: 17px;
+        height: 2px;
+        background: var(--blue-200);
+        border-radius: 2px;
+        content: "";
+      }
+
+      .daily-banner__content h2 {
+        margin-bottom: 7px;
+        color: #ffffff;
+        font-size: clamp(1.1rem, 2vw, 1.42rem);
+        font-weight: 770;
+        letter-spacing: -0.04em;
+      }
+
+      .daily-banner__content p {
+        max-width: 630px;
+        color: rgb(239 246 255 / 0.82);
+        font-size: 0.81rem;
+        line-height: 1.55;
+      }
+
+      .daily-banner__summary {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        min-width: max-content;
+        align-items: center;
+        gap: 17px;
+        padding: 13px 16px;
+        background: rgb(255 255 255 / 0.13);
+        border: 1px solid rgb(255  255 / 0.18);
+        border-radius: 14px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+
+      .daily-banner__summary-icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        color: var(--blue-700);
+        background: #ffffff;
+        border-radius: 11px;
+      }
+
+      .daily-banner__summary-icon .icon {
+        width: 21px;
+        height: 21px;
+      }
+
+      .daily-banner__summary p {
+        margin-bottom: 1px;
+        color: rgb(219 234 254 / 0.83);
+        font-size: 0.62rem;
+        font-weight: 640;
+      }
+
+      .daily-banner__summary strong {
+        display: block;
+        color: #ffffff;
+        font-size: 0.89rem;
+        font-weight: 780;
+        letter-spacing: -0.02em;
+      }
+
+      /* ==========================================================
+         11. MÉTRICAS
+         ========================================================== */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 22px;
+      }
+
+      .metric-card {
+        position: relative;
+        min-height: 151px;
+        padding: 19px;
+        overflow: hidden;
+      }
+
+      .metric-card__top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .metric-card__label {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        font-weight: 680;
+      }
+
+      .metric-card__icon {
+        display: grid;
+        width: 35px;
+        height: 35px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 10px;
+      }
+
+      .metric-card__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .metric-card__icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      .metric-card__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .metric-card__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--blue {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.13);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--indigo {
+        color: #c7d2fe;
+        background: rgb(99 102 241 / 0.14);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--green {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.13);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.13);
+      }
+
+      .metric-card__value-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .metric-card__value {
+        color: var(--text-strong);
+        font-size: 1.72rem;
+        font-weight: 820;
+        letter-spacing: -0.065em;
+        line-height: 1;
+      }
+
+      .metric-card__trend {
+        display: inline-flex;
+        min-height: 20px;
+        align-items: center;
+        gap: 3px;
+        padding: 0 6px;
+        margin-bottom: 1px;
+        border-radius: var(--radius-pill);
+        font-size: 0.6rem;
+        font-weight: 760;
+      }
+
+      .metric-card__trend .icon {
+        width: 11px;
+        height: 11px;
+      }
+
+      .metric-card__trend--positive {
+        color: var(--emerald-700);
+        background: var(--emerald-50);
+      }
+
+      .metric-card__trend--neutral {
+        color: var(--amber-700);
+        background: var(--amber-50);
+      }
+
+      html[data-theme="dark"] .metric-card__trend--positive {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.13);
+      }
+
+      html[data-theme="dark"] .metric-card__trend--neutral {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.13);
+      }
+
+      .metric-card__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 13px;
+      }
+
+      .metric-card__detail {
+        color: var(--text-faint);
+        font-size: 0.63rem;
+        font-weight: 590;
+      }
+
+      .mini-sparkline {
+        width: 68px;
+        height: 24px;
+        overflow: visible;
+      }
+
+      .mini-sparkline__fill {
+        opacity: 0.1;
+      }
+
+      .mini-sparkline__line {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.2;
+      }
+
+      .mini-sparkline--blue .mini-sparkline__fill {
+        fill: var(--blue-500);
+      }
+
+      .mini-sparkline--blue .mini-sparkline__line {
+        stroke: var(--blue-500);
+      }
+
+      .mini-sparkline--indigo .mini-sparkline__fill {
+        fill: var(--indigo-500);
+      }
+
+      .mini-sparkline--indigo .mini-sparkline__line {
+        stroke: var(--indigo-500);
+      }
+
+      .mini-sparkline--green .mini-sparkline__fill {
+        fill: var(--emerald-500);
+      }
+
+      .mini-sparkline--green .mini-sparkline__line {
+        stroke: var(--emerald-500);
+      }
+
+      .mini-sparkline--amber .mini-sparkline__fill {
+        fill: var(--amber-500);
+      }
+
+      .mini-sparkline--amber .mini-sparkline__line {
+        stroke: var(--amber-500);
+      }
+
+      /* ==========================================================
+         12. DISTRIBUCIÓN DEL CONTENIDO
+         ========================================================== */
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.62fr) minmax(310px, 0.76fr);
+        gap: 22px;
+        align-items: start;
+      }
+
+      .dashboard-grid__main,
+      .dashboard-grid__aside {
+        display: grid;
+        gap: 22px;
+      }
+
+      .dashboard-bottom {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
+        gap: 22px;
+        margin-top: 22px;
+      }
+
+      /* ==========================================================
+         13. AGENDA DE CLASES
+         ========================================================== */
+      .schedule-card__body {
+        padding: 5px 21px 10px;
+      }
+
+      .schedule-day-tabs {
+        display: flex;
+        gap: 6px;
+        padding: 15px 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .schedule-day-tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .schedule-day-tab {
+        display: grid;
+        min-width: 49px;
+        min-height: 50px;
+        padding: 6px 8px;
+        place-items: center;
+        color: var(--text-faint);
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 0.62rem;
+        font-weight: 690;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast);
+      }
+
+      .schedule-day-tab strong {
+        color: inherit;
+        font-size: 0.85rem;
+        font-weight: 790;
+        line-height: 1.1;
+      }
+
+      .schedule-day-tab:hover {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .schedule-day-tab--active {
+        color: var(--blue-700);
+        background: var(--blue-50);
+        border-color: var(--blue-100);
+      }
+
+      html[data-theme="dark"] .schedule-day-tab--active {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+        border-color: rgb(96 165 250 / 0.21);
+      }
+
+      .schedule-list {
+        display: grid;
+      }
+
+      .schedule-item {
+        display: grid;
+        grid-template-columns: 51px minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        padding: 15px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .schedule-item__time {
+        color: var(--blue-700);
+        font-size: 0.72rem;
+        font-weight: 780;
+        letter-spacing: -0.015em;
+      }
+
+      .schedule-item__time small {
+        display: block;
+        margin-top: 1px;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 600;
+      }
+
+      .schedule-item__content {
+        min-width: 0;
+      }
+
+      .schedule-item__content h4 {
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.79rem;
+        font-weight: 750;
+        letter-spacing: -0.018em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .schedule-item__content p {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 3px;
+        overflow: hidden;
+        color: var(--text-muted);
+        font-size: 0.64rem;
+        font-weight: 580;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .schedule-item__content p .icon {
+        width: 13px;
+        height: 13px;
+      }
+
+      .schedule-item__action {
+        min-width: 108px;
+      }
+
+      .schedule-item__action .button {
+        min-height: 32px;
+        padding: 0 9px;
+        font-size: 0.66rem;
+      }
+
+      .schedule-card__footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 21px 17px;
+        border-top: 1px solid var(--line);
+      }
+
+      /* ==========================================================
+         14. RENDIMIENTO DE GRUPOS
+         ========================================================== */
+      .performance-card__body {
+        padding: 20px 21px 17px;
+      }
+
+      .performance-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .performance-summary__main {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .performance-summary__circle {
+        display: grid;
+        width: 52px;
+        height: 52px;
+        place-items: center;
+        background: conic-gradient(
+          var(--blue-600) 0 79%,
+          var(--blue-100) 79% 100%
+        );
+        border-radius: 50%;
+      }
+
+      .performance-summary__circle-inner {
+        display: grid;
+        width: 41px;
+        height: 41px;
+        place-items: center;
+        color: var(--text-strong);
+        background: var(--surface);
+        border-radius: 50%;
+        font-size: 0.69rem;
+        font-weight: 810;
+      }
+
+      .performance-summary__copy p {
+        margin-bottom: 2px;
+        color: var(--text-muted);
+        font-size: 0.66rem;
+        font-weight: 630;
+      }
+
+      .performance-summary__copy strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.85rem;
+        font-weight: 770;
+      }
+
+      .performance-summary__trend {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        color: var(--emerald-700);
+        font-size: 0.65rem;
+        font-weight: 730;
+      }
+
+      .performance-summary__trend .icon {
+        width: 14px;
+        height: 14px;
+      }
+
+      .performance-chart {
+        position: relative;
+        height: 175px;
+        padding: 11px 0 0;
+      }
+
+      .performance-chart__grid {
+        position: absolute;
+        inset: 8px 0 27px 0;
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+        pointer-events: none;
+      }
+
+      .performance-chart__grid span {
+        border-top: 1px dashed var(--line);
+      }
+
+      .performance-chart__svg {
+        position: absolute;
+        inset: 5px 0 23px;
+        width: 100%;
+        height: calc(100% - 28px);
+        overflow: visible;
+      }
+
+      .performance-chart__area {
+        fill: url(#performance-area-gradient);
+        opacity: 0.24;
+      }
+
+      .performance-chart__line {
+        fill: none;
+        stroke: var(--blue-600);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3;
+      }
+
+      .performance-chart__point {
+        fill: var(--surface);
+        stroke: var(--blue-600);
+        stroke-width: 2.5;
+      }
+
+      .performance-chart__labels {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 660;
+      }
+
+      .performance-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 11px;
+      }
+
+      .performance-legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--text-muted);
+        font-size: 0.61rem;
+        font-weight: 620;
+      }
+
+      .performance-legend span::before {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--blue-500);
+        content: "";
+      }
+
+      .performance-legend span:last-child::before {
+        background: var(--emerald-500);
+      }
+
+      /* ==========================================================
+         15. PRIORIDADES
+         ========================================================== */
+      .priorities-card__body {
+        padding: 7px 17px 13px;
+      }
+
+      .priority-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 13px 4px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .priority-item:last-child {
+        border-bottom: 0;
+      }
+
+      .priority-item__checkbox {
+        position: relative;
+        display: grid;
+        width: 19px;
+        height: 19px;
+        flex: 0 0 auto;
+        place-items: center;
+        margin-top: 1px;
+        color: #ffffff;
+        background: var(--surface);
+        border: 1.5px solid var(--line-strong);
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast);
+      }
+
+      .priority-item__checkbox:hover {
+        border-color: var(--blue-400);
+        background: var(--blue-50);
+      }
+
+      .priority-item__checkbox .icon {
+        width: 12px;
+        height: 12px;
+        opacity: 0;
+        transform: scale(0.4);
+        transition:
+          opacity var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .priority-item.is-done .priority-item__checkbox {
+        background: var(--emerald-500);
+        border-color: var(--emerald-500);
+      }
+
+      .priority-item.is-done .priority-item__checkbox .icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .priority-item.is-done .priority-item__copy strong {
+        color: var(--text-faint);
+        text-decoration: line-through;
+      }
+
+      .priority-item__copy {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .priority-item__copy strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.71rem;
+        font-weight: 710;
+        line-height: 1.4;
+        transition: color var(--transition-fast);
+      }
+
+      .priority-item__copy p {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 4px;
+        color: var(--text-faint);
+        font-size: 0.61rem;
+        font-weight: 590;
+      }
+
+      .priority-item__copy p .icon {
+        width: 12px;
+        height: 12px;
+      }
+
+      .priority-item__flag {
+        width: 7px;
+        height: 7px;
+        flex: 0 0 auto;
+        margin-top: 7px;
+        border-radius: 50%;
+      }
+
+      .priority-item__flag--rose {
+        background: var(--rose-500);
+        box-shadow: 0 0 0 3px var(--rose-100);
+      }
+
+      .priority-item__flag--amber {
+        background: var(--amber-500);
+        box-shadow: 0 0 0 3px var(--amber-100);
+      }
+
+      .priority-item__flag--blue {
+        background: var(--blue-500);
+        box-shadow: 0 0 0 3px var(--blue-100);
+      }
+
+      /* ==========================================================
+         16. ATENCIÓN REQUERIDA
+         ========================================================== */
+      .attention-card {
+        overflow: hidden;
+      }
+
+      .attention-card__intro {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 17px;
+        color: var(--amber-800);
+        background: var(--amber-50);
+        border-bottom: 1px solid var(--amber-100);
+        font-size: 0.66rem;
+        font-weight: 680;
+      }
+
+      .attention-card__intro .icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      html[data-theme="dark"] .attention-card__intro {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.1);
+        border-color: rgb(245 158 11 / 0.15);
+      }
+
+      .attention-list {
+        display: grid;
+        padding: 5px 17px 12px;
+      }
+
+      .attention-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 1px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .attention-item:last-child {
+        border-bottom: 0;
+      }
+
+      .attention-item__copy {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .attention-item__copy strong {
+        display: block;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.7rem;
+        font-weight: 730;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .attention-item__copy p {
+        margin-top: 2px;
+        overflow: hidden;
+        color: var(--text-muted);
+        font-size: 0.61rem;
+        font-weight: 580;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .attention-item__metric {
+        min-width: 37px;
+        color: var(--rose-600);
+        font-size: 0.66rem;
+        font-weight: 780;
+        text-align: right;
+      }
+
+      .attention-card__footer {
+        padding: 0 17px 16px;
+      }
+
+      /* ==========================================================
+         17. PLANIFICACIÓN
+         ========================================================== */
+      .planning-card__body {
+        padding: 20px 21px 22px;
+      }
+
+      .planning-progress {
+        display: grid;
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 24px;
+        align-items: center;
+      }
+
+      .planning-progress__score {
+        display: flex;
+        min-height: 135px;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        color: #ffffff;
+        background:
+          radial-gradient(
+            circle at 85% 12%,
+            rgb(147 197 253 / 0.32),
+            transparent 33%
+          ),
+          linear-gradient(135deg, var(--blue-700), var(--indigo-600));
+        border-radius: 14px;
+      }
+
+      .planning-progress__score small {
+        margin-bottom: 5px;
+        color: rgb(219 234 254 / 0.82);
+        font-size: 0.63rem;
+        font-weight: 650;
+      }
+
+      .planning-progress__score strong {
+        font-size: 2rem;
+        font-weight: 820;
+        letter-spacing: -0.075em;
+        line-height: 1;
+      }
+
+      .planning-progress__score span {
+        margin-top: 7px;
+        color: rgb(239 246 255 / 0.83);
+        font-size: 0.64rem;
+        font-weight: 610;
+      }
+
+      .planning-groups {
+        display: grid;
+        gap: 13px;
+      }
+
+      .planning-group {
+        display: grid;
+        grid-template-columns: minmax(100px, 1fr) minmax(100px, 2fr) 37px;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .planning-group__name {
+        color: var(--text);
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+
+      .planning-group__bar {
+        height: 8px;
+        overflow: hidden;
+        background: var(--surface-muted);
+        border-radius: var(--radius-pill);
+      }
+
+      .planning-group__bar span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--blue-500), var(--indigo-500));
+        border-radius: inherit;
+      }
+
+      .planning-group__percent {
+        color: var(--text-muted);
+        font-size: 0.64rem;
+        font-weight: 730;
+        text-align: right;
+      }
+
+      /* ==========================================================
+         18. ACTIVIDAD RECIENTE
+         ========================================================== */
+      .activity-card__body {
+        padding: 5px 20px 10px;
+      }
+
+      .activity-timeline {
+        display: grid;
+      }
+
+      .activity-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr);
+        gap: 11px;
+        padding: 14px 0;
+      }
+
+      .activity-item:not(:last-child)::after {
+        position: absolute;
+        top: 43px;
+        bottom: -1px;
+        left: 14px;
+        width: 1px;
+        background: var(--line);
+        content: "";
+      }
+
+      .activity-item__dot {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        width: 29px;
+        height: 29px;
+        place-items: center;
+        border-radius: 9px;
+      }
+
+      .activity-item__dot--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .activity-item__dot--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .activity-item__dot--violet {
+        color: var(--violet-600);
+        background: var(--violet-50);
+      }
+
+      html[data-theme="dark"] .activity-item__dot--blue {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.13);
+      }
+
+      html[data-theme="dark"] .activity-item__dot--green {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.13);
+      }
+
+      html[data-theme="dark"] .activity-item__dot--violet {
+        color: #ddd6fe;
+        background: rgb(139 92 246 / 0.13);
+      }
+
+      .activity-item__copy {
+        min-width: 0;
+      }
+
+      .activity-item__copy p {
+        color: var(--text);
+        font-size: 0.68rem;
+        line-height: 1.48;
+      }
+
+      .activity-item__copy p strong {
+        color: var(--text-strong);
+        font-weight: 740;
+      }
+
+      .activity-item__copy time {
+        display: block;
+        margin-top: 3px;
+        color: var(--text-faint);
+        font-size: 0.6rem;
+        font-weight: 590;
+      }
+
+      /* ==========================================================
+         19. NAVEGACIÓN MÓVIL
+         ========================================================== */
+      .mobile-brand,
+      .mobile-menu-toggle,
+      .mobile-bottom-nav,
+      .mobile-sidebar-backdrop {
+        display: none;
+      }
+
+      /* ==========================================================
+         20. MODAL DE ASISTENCIA
+         ========================================================== */
+      .modal-backdrop {
+        position: fixed;
+        z-index: 500;
+        inset: 0;
+        display: grid;
+        padding: 24px;
+        place-items: center;
+        background: rgb(6 15 31 / 0.62);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-normal);
+      }
+
+      .modal-backdrop.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .attendance-modal {
+        width: min(100%, 610px);
+        max-height: min(760px, calc(100dvh - 48px));
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        transform: translateY(16px) scale(0.985);
+        transition:
+          opacity var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .modal-backdrop.is-open .attendance-modal {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .attendance-modal__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 23px 24px 19px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .attendance-modal__title-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .attendance-modal__title-icon {
+        display: grid;
+        width: 39px;
+        height: 39px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 11px;
+      }
+
+      .attendance-modal__title-icon .icon {
+        width: 21px;
+        height: 21px;
+      }
+
+      .attendance-modal__header h2 {
+        color: var(--text-strong);
+        font-size: 1rem;
+        font-weight: 790;
+        letter-spacing: -0.035em;
+      }
+
+      .attendance-modal__header p {
+        margin-top: 3px;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+      }
+
+      .modal-close {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        place-items: center;
+        color: var(--text-muted);
+        background: var(--surface-muted);
+        border-radius: 9px;
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .modal-close:hover {
+        color: var(--rose-600);
+        background: var(--rose-50);
+      }
+
+      .attendance-modal__body {
+        max-height: calc(min(760px, 100dvh - 48px) - 177px);
+        padding: 18px 24px;
+        overflow-y: auto;
+      }
+
+      .attendance-summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 12px;
+        margin-bottom: 16px;
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .attendance-summary__item {
+        text-align: center;
+      }
+
+      .attendance-summary__item strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .attendance-summary__item span {
+        display: block;
+        margin-top: 1px;
+        color: var(--text-muted);
+        font-size: 0.57rem;
+        font-weight: 650;
+      }
+
+      .attendance-students {
+        display: grid;
+      }
+
+      .attendance-student {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 1px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .attendance-student:last-child {
+        border-bottom: 0;
+      }
+
+      .attendance-student__info {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .attendance-student__info strong {
+        display: block;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.72rem;
+        font-weight: 720;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .attendance-student__info small {
+        display: block;
+        margin-top: 2px;
+        color: var(--text-faint);
+        font-size: 0.59rem;
+      }
+
+      .attendance-select {
+        min-width: 91px;
+        height: 31px;
+        padding: 0 25px 0 8px;
+        color: var(--emerald-700);
+        background-color: var(--emerald-50);
+        background-image:
+          linear-gradient(45deg, transparent 50%, currentColor 50%),
+          linear-gradient(135deg, currentColor 50%, transparent 50%);
+        background-position:
+          calc(100% - 12px) 13px,
+          calc(100% - 8px) 13px;
+        background-repeat: no-repeat;
+        background-size: 4px 4px, 4px 4px;
+        border: 1px solid var(--emerald-100);
+        border-radius: 7px;
+        appearance: none;
+        cursor: pointer;
+        font-size: 0.62rem;
+        font-weight: 720;
+      }
+
+      .attendance-select option {
+        color: var(--slate-800);
+        background: #ffffff;
+      }
+
+      html[data-theme="dark"] .attendance-select {
+        color: var(--emerald-300);
+        background-color: rgb(16 185 129 / 0.13);
+        border-color: rgb(16 185 129 / 0.2);
+      }
+
+      .attendance-modal__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 24px;
+        border-top: 1px solid var(--line);
+      }
+
+      .attendance-modal__footer p {
+        color: var(--text-faint);
+        font-size: 0.61rem;
+        font-weight: 570;
+      }
+
+      /* ==========================================================
+         21. PALETA DE BÚSQUEDA
+         ========================================================== */
+      .command-modal {
+        width: min(100%, 590px);
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        transform: translateY(-10px) scale(0.98);
+        transition:
+          opacity var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .modal-backdrop.is-open .command-modal {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .command-search {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .command-search .icon {
+        color: var(--text-faint);
+      }
+
+      .command-search input {
+        width: 100%;
+        padding: 0;
+        color: var(--text-strong);
+        background: transparent;
+        border: 0;
+        outline: 0;
+        font-size: 0.86rem;
+        font-weight: 620;
+      }
+
+      .command-search input::placeholder {
+        color: var(--text-faint);
+      }
+
+      .command-list {
+        display: grid;
+        gap: 3px;
+        padding: 10px;
+      }
+
+      .command-list__label {
+        padding: 7px 8px 4px;
+        color: var(--text-faint);
+        font-size: 0.59rem;
+        font-weight: 760;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .command-item {
+        display: flex;
+        min-height: 48px;
+        align-items: center;
+        gap: 10px;
+        padding: 0 9px;
+        color: var(--text);
+        background: transparent;
+        border-radius: 9px;
+        cursor: pointer;
+        text-align: left;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .command-item:hover {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .command-item__icon {
+        display: grid;
+        width: 29px;
+        height: 29px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 8px;
+      }
+
+      .command-item strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 0.7rem;
+        font-weight: 740;
+      }
+
+      .command-item small {
+        display: block;
+        margin-top: 1px;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 580;
+      }
+
+      .command-item kbd {
+        margin-left: auto;
+      }
+
+      /* ==========================================================
+         22. TOASTS
+         ========================================================== */
+      .toast-container {
+        position: fixed;
+        z-index: 700;
+        right: 22px;
+        bottom: 22px;
+        display: grid;
+        width: min(calc(100% - 32px), 370px);
+        gap: 10px;
+        pointer-events: none;
+      }
+
+      .toast {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 13px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        transform: translateY(12px);
+        animation: toast-in 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .toast--success .toast__icon {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .toast--info .toast__icon {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .toast__icon {
+        display: grid;
+        width: 29px;
+        height: 29px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 8px;
+      }
+
+      .toast__icon .icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .toast p {
+        color: var(--text);
+        font-size: 0.71rem;
+        font-weight: 650;
+        line-height: 1.4;
+      }
+
+      .toast.is-leaving {
+        animation: toast-out 200ms ease forwards;
+      }
+
+      @keyframes toast-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes toast-out {
+        to {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+      }
+
+      /* ==========================================================
+         23. RESPONSIVE · LAPTOP Y TABLET HORIZONTAL
+         ========================================================== */
+      @media (max-width: 1250px) {
+        .main-inner {
+          padding: 25px 24px 46px;
+        }
+
+        .topbar {
+          padding: 0 24px;
+        }
+
+        .dashboard-grid {
+          grid-template-columns: minmax(0, 1.45fr) minmax(285px, 0.75fr);
+          gap: 18px;
+        }
+
+        .dashboard-grid__main,
+        .dashboard-grid__aside,
+        .dashboard-bottom {
+          gap: 18px;
+        }
+
+        .dashboard-bottom {
+          margin-top: 18px;
+        }
+      }
+
+      @media (max-width: 1120px) and (min-width: 761px) {
+        body {
+          --sidebar-width: 92px;
+        }
+
+        .sidebar__brand,
+        .sidebar__workspace {
+          justify-content: center;
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+
+        .sidebar__brand-name,
+        .sidebar__workspace-copy,
+        .sidebar__group-label,
+        .sidebar__nav-link span:not(.sidebar__nav-badge),
+        .sidebar__help span,
+        .sidebar__nav-badge,
+        .sidebar__collapse {
+          display: none;
+        }
+
+        .sidebar__nav-link,
+        .sidebar__help {
+          justify-content: center;
+          padding: 0;
+        }
+
+        .sidebar__nav-link--active::before {
+          left: 2px;
+        }
+
+        .sidebar__footer {
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+
+        .sidebar__nav-link {
+          position: relative;
+        }
+
+        .sidebar__nav-link::after,
+        .sidebar__help::after {
+          position: absolute;
+          z-index: 300;
+          left: calc(100% + 11px);
+          padding: 6px 8px;
+          color: #ffffff;
+          visibility: hidden;
+          background: var(--slate-900);
+          border-radius: 6px;
+          box-shadow: var(--shadow-md);
+          content: attr(data-tooltip);
+          font-size: 0.64rem;
+          font-weight: 680;
+          opacity: 0;
+          pointer-events: none;
+          transform: translateX(-5px);
+          transition:
+            opacity var(--transition-fast),
+            visibility var(--transition-fast),
+            transform var(--transition-fast);
+        }
+
+        .sidebar__nav-link:hover::after,
+        .sidebar__help:hover::after {
+          visibility: visible;
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .metrics-grid {
+          gap: 12px;
+        }
+
+        .metric-card {
+          padding: 16px;
+        }
+
+        .metric-card__value {
+          font-size: 1.52rem;
+        }
+
+        .dashboard-bottom {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ==========================================================
+         24. RESPONSIVE · TABLET VERTICAL
+         ========================================================== */
+      @media (max-width: 940px) {
+        .topbar__crumbs {
+          min-width: auto;
+        }
+
+        .topbar__search {
+          width: min(100%, 260px);
+        }
+
+        .metrics-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .dashboard-grid__aside {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          align-items: start;
+        }
+
+        .planning-progress {
+          grid-template-columns: 165px minmax(0, 1fr);
+        }
+      }
+
+      /* ==========================================================
+         25. RESPONSIVE · MÓVIL
+         ========================================================== */
+      @media (max-width: 760px) {
+        :root {
+          --sidebar-width: 0px;
+          --header-height: 64px;
+        }
+
+        body {
+          padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+        }
+
+        body.sidebar-is-compact {
+          --sidebar-width: 0px;
+        }
+
+        .sidebar {
+          z-index: 450;
+          width: min(82vw, 294px);
+          transform: translateX(-105%);
+          box-shadow: 16px 0 40px rgb(0 0 0 / 0.28);
+        }
+
+        body.mobile-sidebar-open .sidebar {
+          transform: translateX(0);
+        }
+
+        .sidebar__brand,
+        .sidebar__workspace {
+          justify-content: flex-start;
+          padding-right: 19px;
+          padding-left: 19px;
+        }
+
+        .sidebar__brand-name,
+        .sidebar__workspace-copy,
+        .sidebar__group-label,
+        .sidebar__nav-link span:not(.sidebar__nav-badge),
+        .sidebar__help span,
+        .sidebar__nav-badge {
+          display: initial;
+        }
+
+        .sidebar__nav-link,
+        .sidebar__help {
+          justify-content: flex-start;
+          padding: 0 11px;
+        }
+
+        .sidebar__nav-link--active::before {
+          left: 0;
+        }
+
+        .sidebar__collapse {
+          display: none;
+        }
+
+        .mobile-sidebar-backdrop {
+          position: fixed;
+          z-index: 400;
+          inset: 0;
+          display: block;
+          background: rgb(4 13 28 / 0.52);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity var(--transition-normal);
+        }
+
+        body.mobile-sidebar-open .mobile-sidebar-backdrop {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .app-main {
+          margin-left: 0;
+        }
+
+        .topbar {
+          gap: 10px;
+          padding: 0 16px;
+          background: rgb(244 247 251 / 0.88);
+        }
+
+        html[data-theme="dark"] .topbar {
+          background: rgb(10 20 38 / 0.88);
+        }
+
+        .mobile-brand {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .mobile-brand__mark {
+          display: grid;
+          width: 34px;
+          height: 34px;
+          place-items: center;
+          color: #ffffff;
+          background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+          border-radius: 10px;
+          box-shadow: var(--shadow-blue);
+        }
+
+        .mobile-brand__mark .icon {
+          width: 21px;
+          height: 21px;
+        }
+
+        .topbar__crumbs {
+          display: none;
+        }
+
+        .topbar__search {
+          flex: 1;
+          width: auto;
+          margin-left: 0;
+        }
+
+        .topbar__search-button {
+          min-height: 38px;
+          padding: 0 10px;
+        }
+
+        .topbar__search-button .keyboard-key {
+          display: none;
+        }
+
+        .topbar__actions {
+          gap: 5px;
+        }
+
+        .topbar__action {
+          width: 38px;
+          height: 38px;
+        }
+
+        .topbar__profile {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: grid;
+          width: 38px;
+          height: 38px;
+          padding: 0;
+          place-items: center;
+          color: var(--text-muted);
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          box-shadow: var(--shadow-xs);
+          cursor: pointer;
+        }
+
+        .main-inner {
+          padding: 20px 16px 26px;
+        }
+
+        .dashboard-heading {
+          display: block;
+          margin: 1px 0 20px;
+        }
+
+        .dashboard-heading__date {
+          margin-bottom: 6px;
+          font-size: 0.64rem;
+        }
+
+        .dashboard-heading h1 {
+          font-size: clamp(1.58rem, 7vw, 2rem);
+        }
+
+        .dashboard-heading__description {
+          margin-top: 7px;
+          font-size: 0.8rem;
+        }
+
+        .heading-actions {
+          justify-content: flex-start;
+          margin-top: 16px;
+        }
+
+        .heading-actions .button {
+          flex: 1;
+        }
+
+        .daily-banner {
+          min-height: 0;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 17px;
+          padding: 21px 20px;
+          margin-bottom: 16px;
+          border-radius: 18px;
+        }
+
+        .daily-banner__content h2 {
+          font-size: 1.04rem;
+        }
+
+        .daily-banner__content p {
+          font-size: 0.75rem;
+        }
+
+        .daily-banner__summary {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .metrics-grid {
+          gap: 11px;
+          margin-bottom: 16px;
+        }
+
+        .metric-card {
+          min-height: 137px;
+          padding: 15px;
+          border-radius: 14px;
+        }
+
+        .metric-card__label {
+          font-size: 0.64rem;
+        }
+
+        .metric-card__icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 9px;
+        }
+
+        .metric-card__icon .icon {
+          width: 17px;
+          height: 17px;
+        }
+
+        .metric-card__value-row {
+          gap: 5px;
+          margin-top: 13px;
+        }
+
+        .metric-card__value {
+          font-size: 1.45rem;
+        }
+
+        .metric-card__trend {
+          padding: 0 5px;
+          font-size: 0.54rem;
+        }
+
+        .metric-card__detail {
+          font-size: 0.57rem;
+        }
+
+        .mini-sparkline {
+          width: 48px;
+          height: 20px;
+        }
+
+        .dashboard-grid,
+        .dashboard-grid__main,
+        .dashboard-grid__aside,
+        .dashboard-bottom {
+          gap: 16px;
+        }
+
+        .dashboard-grid__aside {
+          grid-template-columns: 1fr;
+        }
+
+        .dashboard-bottom {
+          grid-template-columns: 1fr;
+          margin-top: 16px;
+        }
+
+        .card {
+          border-radius: 15px;
+        }
+
+        .card__header {
+          min-height: 62px;
+          padding: 15px 16px;
+        }
+
+        .card__header-icon {
+          width: 31px;
+          height: 31px;
+          border-radius: 9px;
+        }
+
+        .card__header-icon .icon {
+          width: 17px;
+          height: 17px;
+        }
+
+        .card__eyebrow {
+          font-size: 0.55rem;
+        }
+
+        .card__title {
+          font-size: 0.87rem;
+        }
+
+        .schedule-card__body {
+          padding: 4px 16px 8px;
+        }
+
+        .schedule-day-tabs {
+          padding: 12px 0;
+        }
+
+        .schedule-day-tab {
+          min-width: 45px;
+          min-height: 46px;
+          font-size: 0.58rem;
+        }
+
+        .schedule-day-tab strong {
+          font-size: 0.77rem;
+        }
+
+        .schedule-item {
+          grid-template-columns: 42px minmax(0, 1fr);
+          gap: 9px;
+          padding: 13px 0;
+        }
+
+        .schedule-item__time {
+          font-size: 0.65rem;
+        }
+
+        .schedule-item__content h4 {
+          font-size: 0.73rem;
+        }
+
+        .schedule-item__content p {
+          font-size: 0.59rem;
+        }
+
+        .schedule-item__action {
+          grid-column: 2;
+          min-width: 0;
+          margin-top: -2px;
+        }
+
+        .schedule-item__action .button {
+          min-height: 29px;
+          padding: 0 8px;
+          font-size: 0.61rem;
+               .schedule-card__footer {
+          padding: 12px 16px 14px;
+        }
+
+        .performance-card__body {
+          padding: 16px 16px 14px;
+        }
+
+        .performance-summary {
+          margin-bottom: 13px;
+        }
+
+        .performance-summary__circle {
+          width: 46px;
+          height: 46px;
+        }
+
+        .performance-summary__circle-inner {
+          width: 36px;
+          height: 36px;
+          font-size: 0.61rem;
+        }
+
+        .performance-summary__copy p {
+          font-size: 0.6rem;
+        }
+
+        .performance-summary__copy strong {
+          font-size: 0.76rem;
+        }
+
+        .performance-summary__trend {
+          font-size: 0.58rem;
+        }
+
+        .performance-chart {
+          height: 151px;
+        }
+
+        .performance-legend {
+          gap: 9px;
+          margin-top: 6px;
+        }
+
+        .performance-legend span {
+          font-size: 0.56rem;
+        }
+
+        .priorities-card__body {
+          padding: 5px 13px 10px;
+        }
+
+        .priority-item {
+          padding: 11px 3px;
+        }
+
+        .attention-card__intro {
+          padding: 11px 14px;
+          font-size: 0.62rem;
+        }
+
+        .attention-list {
+          padding-right: 14px;
+          padding-left: 14px;
+        }
+
+        .planning-card__body {
+          padding: 16px;
+        }
+
+        .planning-progress {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .planning-progress__score {
+          min-height: 100px;
+          padding: 17px;
+        }
+
+        .planning-progress__score strong {
+          font-size: 1.75rem;
+        }
+
+        .planning-group {
+          grid-template-columns: 85px minmax(60px, 1fr) 33px;
+          gap: 9px;
+        }
+
+        .planning-group__name {
+          font-size: 0.63rem;
+        }
+
+        .activity-card__body {
+          padding: 5px 16px 8px;
+        }
+
+        .mobile-bottom-nav {
+          position: fixed;
+          z-index: 200;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: grid;
+          height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+          grid-template-columns: repeat(5, 1fr);
+          padding: 7px 7px env(safe-area-inset-bottom);
+          background: rgb(255 255 255 / 0.93);
+          border-top: 1px solid var(--line);
+          box-shadow: 0 -6px 20px rgb(15 23 42 / 0.07);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+        }
+
+        html[data-theme="dark"] .mobile-bottom-nav {
+          background: rgb(16 30 52 / 0.94);
+        }
+
+        .mobile-bottom-nav a,
+        .mobile-bottom-nav button {
+          position: relative;
+          display: grid;
+          min-width: 0;
+          padding: 3px 0;
+          place-items: center;
+          color: var(--text-faint);
+          background: transparent;
+          cursor: pointer;
+          font-size: 0.55rem;
+          font-weight: 650;
+        }
+
+        .mobile-bottom-nav a .icon,
+        .mobile-bottom-nav button .icon {
+          width: 20px;
+          height: 20px;
+          margin-bottom: 2px;
+        }
+
+        .mobile-bottom-nav a.active {
+          color: var(--blue-600);
+        }
+
+        .mobile-bottom-nav a.active::before {
+          position: absolute;
+          top: 0;
+          width: 19px;
+          height: 3px;
+          background: var(--blue-600);
+          border-radius: 0 0 4px 4px;
+          content: "";
+        }
+
+        .mobile-bottom-nav__create {
+          position: relative;
+        }
+
+        .mobile-bottom-nav__create span {
+          display: grid;
+          width: 34px;
+          height: 34px;
+          margin-top: -18px;
+          place-items: center;
+          color: #ffffff;
+          background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+          border: 3px solid var(--page-bg);
+          border-radius: 50%;
+          box-shadow: var(--shadow-blue);
+        }
+
+        .mobile-bottom-nav__create .icon {
+          width: 19px;
+          height: 19px;
+          margin: 0;
+        }
+
+        .modal-backdrop {
+          padding: 14px;
+        }
+
+        .attendance-modal {
+          max-height: calc(100dvh - 28px);
+          border-radius: 18px;
+        }
+
+        .attendance-modal__header {
+          padding: 18px 17px 15px;
+        }
+
+        .attendance-modal__body {
+          max-height: calc(100dvh - 184px);
+          padding: 15px 17px;
+        }
+
+        .attendance-modal__footer {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 13px 17px;
+        }
+
+        .attendance-modal__footer .button {
+          width: 100%;
+        }
+
+        .command-modal {
+          border-radius: 16px;
+        }
+
+        .toast-container {
+          right: 12px;
+          bottom: calc(var(--mobile-nav-height) + 13px + env(safe-area-inset-bottom));
+          width: calc(100% - 24px);
+        }
+      }
+
+      /* ==========================================================
+         26. RESPONSIVE · TELÉFONOS PEQUEÑOS
+         ========================================================== */
+      @media (max-width: 420px) {
+        .topbar__search-button span {
+          display: none;
+        }
+
+        .topbar__search-button {
+          justify-content: center;
+          width: 40px;
+          padding: 0;
+        }
+
+        .topbar__search {
+          flex: 0 0 auto;
+          width: 40px;
+        }
+
+        .metrics-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric-card {
+          min-height: 116px;
+        }
+
+        .metric-card__value-row {
+          margin-top: 9px;
+        }
+
+        .daily-banner__summary {
+          padding: 11px;
+        }
+
+        .heading-actions {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        .heading-actions .button {
+          width: 100%;
+        }
+
+        .schedule-item__action .button {
+          width: 100%;
+        }
+
+        .attendance-summary {
+          gap: 4px;
+          padding: 9px 5px;
+        }
+
+        .attendance-select {
+          min-width: 77px;
+          padding-left: 6px;
+          font-size: 0.56rem;
+        }
+
+        .attendance-student {
+          gap: 7px;
+        }
+
+        .attendance-student .avatar {
+          width: 25px;
+          height: 25px;
+          font-size: 0.52rem;
+        }
+      }
+
+      /* ==========================================================
+         27. ACCESIBILIDAD · REDUCCIÓN DE MOVIMIENTO
+         ========================================================== */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido-principal">
+      Ir al contenido principal
+    </a>
+
+    <!-- ==========================================================
+         SPRITE DE ICONOS SVG LOCAL
+         ========================================================== -->
+    <svg
+      class="sr-only"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <linearGradient id="performance-area-gradient" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.75" />
+          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
+        </linearGradient>
+
+        <symbol id="icon-graduation" viewBox="0 0 24 24">
+          <path
+            d="m3 9 9-5 9 5-9 5-9-5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M6.5 11.1V16c0 1.7 2.5 3.1 5.5 3.1s5.5-1.4 5.5-3.1v-4.9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M21 9v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-dashboard" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="3.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="13.5"
+            y="3.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="3.5"
+            y="13.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="13.5"
+            y="13.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="15"
+            rx="2.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M7.5 3.5v4M16.5 3.5v4M3.5 10h17"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-users" viewBox="0 0 24 24">
+          <circle
+            cx="9"
+            cy="8"
+            r="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M3.5 19c.5-3.2 2.5-5 5.5-5s5 1.8 5.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M16 5.4a2.8 2.8 0 0 1 0 5.2M20.5 18.8a4.5 4.5 0 0 0-3.2-4.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.7"
+          />
+        </symbol>
+
+        <symbol id="icon-book" viewBox="0 0 24 24">
+          <path
+            d="M4.5 5.7A2.7 2.7 0 0 1 7.2 3h4.2A2.6 2.6 0 0 1 14 5.6V20a2.6 2.6 0 0 0-2.6-2.6H7.2A2.7 2.7 0 0 0 4.5 20V5.7ZM19.5 5.7A2.7 2.7 0 0 0 16.8 3H14v17a2.6 2.6 0 0 1 2.6-2.6h.2a2.7 2.7 0 0 1 2.7 2.6V5.7Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-clipboard" viewBox="0 0 24 24">
+          <rect
+            x="5"
+            y="4.5"
+            width="14"
+            height="16"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M9 4.5V3.7c0-.9.7-1.7 1.7-1.7h2.6c.9 0 1.7.8 1.7 1.7v.8M8.5 10h7M8.5 14h7"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-folder" viewBox="0 0 24 24">
+          <path
+            d="M3.5 7.2A2.2 2.2 0 0 1 5.7 5h4l1.8 2h6.8a2.2 2.2 0 0 1 2.2 2.2v8.6a2.2 2.2 0 0 1-2.2 2.2H5.7a2.2 2.2 0 0 1-2.2-2.2V7.2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+          <path
+            d="M4 20V4M4 20h17"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="m7 15 3.2-3.5 3 2 4.8-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <circle cx="18" cy="7.5" r="1.3" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-settings" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1-2.1 2.1-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.3h-3v-.3a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-2.1-2.1.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H5v-3h.3a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 2.1-2.1.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V4h3v.3a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 2.1 2.1-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.3v3h-.3a1.7 1.7 0 0 0-1.5 1Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.4"
+          />
+        </symbol>
+
+        <symbol id="icon-help" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M9.7 9.3a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.9 1.4-1.9 2.9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="12" cy="16.8" r="1" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-search" viewBox="0 0 24 24">
+          <circle
+            cx="10.8"
+            cy="10.8"
+            r="6.3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+          />
+          <path
+            d="m16 16 4 4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.9"
+          />
+        </symbol>
+
+        <symbol id="icon-bell" viewBox="0 0 24 24">
+          <path
+            d="M18 10a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="3.8"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+          <path
+            d="M20.4 14.8A8.5 8.5 0 0 1 9.2 3.6 8.5 8.5 0 1 0 20.4 14.8Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-plus" viewBox="0 0 24 24">
+          <path
+            d="M12 5v14M5 12h14"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+          <path
+            d="m15 18-6-6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+          <path
+            d="m9 18 6-6-6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+          <path
+            d="m6 9 6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-arrow-right" viewBox="0 0 24 24">
+          <path
+            d="M5 12h13M14 7l5 5-5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-check" viewBox="0 0 24 24">
+          <path
+            d="m5 12 4.2 4.2L19.5 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.2"
+          />
+        </symbol>
+
+        <symbol id="icon-clock" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="8.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M12 7v5l3.2 2"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-location" viewBox="0 0 24 24">
+          <path
+            d="M19 10c0 5-7 10-7 10s-7-5-7-10a7 7 0 1 1 14 0Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <circle
+            cx="12"
+            cy="10"
+            r="2.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-trending-up" viewBox="0 0 24 24">
+          <path
+            d="M4 16 9 11l3.2 3.2L20 6.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <path
+            d="M15 6.5h5v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-trending-down" viewBox="0 0 24 24">
+          <path
+            d="m4 8 5 5 3.2-3.2L20 17.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <path
+            d="M15 17.5h5v-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-alert" viewBox="0 0 24 24">
+          <path
+            d="M10.4 4.2 2.9 17a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.6 4.2a1.9 1.9 0 0 0-3.2 0Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M12 9v4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="12" cy="16.4" r="1" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-layers" viewBox="0 0 24 24">
+          <path
+            d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-sparkles" viewBox="0 0 24 24">
+          <path
+            d="m12 3 1.2 4.1L17.3 8l-4.1 1.2L12 13.3l-1.2-4.1L6.7 8l4.1-.9L12 3ZM18.5 14l.8 2.7 2.7.8-2.7.8-.8 2.7-.8-2.7-2.7-.8 2.7-.8.8-2.7ZM5.2 14.5l.7 2.2 2.2.8-2.2.7-.7 2.3-.8-2.3-2.2-.7 2.2-.8.8-2.2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.6"
+          />
+        </symbol>
+
+        <symbol id="icon-menu" viewBox="0 0 24 24">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-close" viewBox="0 0 24 24">
+          <path
+            d="m6 6 12 12M18 6 6 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-logout" viewBox="0 0 24 24">
+          <path
+            d="M10 5H5.5A2.5 2.5 0 0 0 3 7.5v9A2.5 2.5 0 0 0 5.5 19H10"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M14 8l4 4-4 4M18 12H9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-user" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="8"
+            r="3.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M5.5 20c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <!-- ==========================================================
+         BACKDROP DE MENÚ MÓVIL
+         ========================================================== -->
+    <div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop"></div>
+
+    <div class="app-shell">
+      <!-- ========================================================
+           SIDEBAR PRINCIPAL
+           ======================================================== -->
+      <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+        <a class="sidebar__brand" href="dashboard.html" aria-label="DOCENCIA360, panel principal">
+          <span class="sidebar__brand-mark" aria-hidden="true">
+            <svg><use href="#icon-graduation"></use></svg>
+          </span>
+          <span class="sidebar__brand-name">DOCENCIA<strong>360</strong></span>
+        </a>
+
+        <div class="sidebar__workspace">
+          <span class="sidebar__workspace-icon" aria-hidden="true">
+            <svg class="icon"><use href="#icon-layers"></use></svg>
+          </span>
+          <div class="sidebar__workspace-copy">
+            <small>ESPACIO ACTIVO</small>
+            <strong>Instituto Horizonte</strong>
+          </div>
+        </div>
+
+        <button
+          class="sidebar__collapse"
+          id="sidebar-collapse"
+          type="button"
+          aria-label="Contraer menú lateral"
+          title="Contraer menú lateral"
+        >
+          <svg class="icon"><use href="#icon-chevron-left"></use></svg>
+        </button>
+
+        <div class="sidebar__content">
+          <section class="sidebar__group" aria-labelledby="nav-general">
+            <h2 class="sidebar__group-label" id="nav-general">Principal</h2>
+
+            <nav class="sidebar__nav">
+              <a
+                class="sidebar__nav-link sidebar__nav-link--active"
+                href="dashboard.html"
+                data-tooltip="Panel principal"
+                aria-current="page"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-dashboard"></use>
+                </svg>
+                <span>Panel principal</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="clases.html" data-tooltip="Mis clases">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-calendar"></use>
+                </svg>
+                <span>Mis clases</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="estudiantes.html" data-tooltip="Estudiantes">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-users"></use>
+                </svg>
+                <span>Estudiantes</span>
+              </a>
+            </nav>
+          </section>
+
+          <section class="sidebar__group" aria-labelledby="nav-pedagogia">
+            <h2 class="sidebar__group-label" id="nav-pedagogia">Gestión pedagógica</h2>
+
+            <nav class="sidebar__nav">
+              <a class="sidebar__nav-link" href="planificacion.html" data-tooltip="Planificación">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-book"></use>
+                </svg>
+                <span>Planificación</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="evaluaciones.html" data-tooltip="Evaluaciones">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-clipboard"></use>
+                </svg>
+                <span>Evaluaciones</span>
+                <span class="sidebar__nav-badge" aria-label="8 evaluaciones pendientes">8</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="recursos.html" data-tooltip="Recursos">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-folder"></use>
+                </svg>
+                <span>Recursos</span>
+              </a>
+            </nav>
+          </section>
+
+          <section class="sidebar__group" aria-labelledby="nav-analitica">
+            <h2 class="sidebar__group-label" id="nav-analitica">Análisis</h2>
+
+            <nav class="sidebar__nav">
+              <a class="sidebar__nav-link" href="reportes.html" data-tooltip="Reportes">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-chart"></use>
+                </svg>
+                <span>Reportes</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="configuracion.html" data-tooltip="Configuración">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-settings"></use>
+                </svg>
+                <span>Configuración</span>
+              </a>
+            </nav>
+          </section>
+        </div>
+
+        <footer class="sidebar__footer">
+          <a class="sidebar__help" href="#ayuda" data-tooltip="Centro de ayuda">
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-help"></use>
+            </svg>
+            <span>Centro de ayuda</span>
+          </a>
+        </footer>
+      </aside>
+
+      <!-- ========================================================
+           ÁREA PRINCIPAL
+           ======================================================== -->
+      <section class="app-main">
+        <!-- ======================================================
+             TOPBAR
+             ====================================================== -->
+        <header class="topbar" id="topbar">
+          <a class="mobile-brand" href="dashboard.html" aria-label="DOCENCIA360, panel principal">
+            <span class="mobile-brand__mark" aria-hidden="true">
+              <svg class="icon"><use href="#icon-graduation"></use></svg>
+            </span>
+          </a>
+
+          <button
+            class="mobile-menu-toggle"
+            id="mobile-menu-toggle"
+            type="button"
+            aria-label="Abrir navegación principal"
+            aria-expanded="false"
+          >
+            <svg class="icon"><use href="#icon-menu"></use></svg>
+          </button>
+
+          <div class="topbar__crumbs">
+            <small>DOCENCIA360 / INICIO</small>
+            <strong>Panel docente</strong>
+          </div>
+
+          <div class="topbar__search">
+            <button
+              class="topbar__search-button"
+              id="open-command-palette"
+              type="button"
+              aria-label="Buscar en DOCENCIA360"
+            >
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-search"></use>
+              </svg>
+              <span>Buscar clases, estudiantes o recursos...</span>
+              <kbd class="keyboard-key">⌘ K</kbd>
+            </button>
+          </div>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action"
+              id="theme-toggle"
+              type="button"
+              aria-label="Activar modo oscuro"
+              title="Cambiar tema"
+            >
+              <svg class="icon theme-icon-moon" aria-hidden="true">
+                <use href="#icon-moon"></use>
+              </svg>
+              <svg class="icon theme-icon-sun" aria-hidden="true">
+                <use href="#icon-sun"></use>
+              </svg>
+            </button>
+
+            <div style="position: relative">
+              <button
+                class="topbar__action"
+                id="notification-toggle"
+                type="button"
+                aria-label="Abrir notificaciones"
+                aria-expanded="false"
+                aria-controls="notification-menu"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-bell"></use>
+                </svg>
+                <span class="topbar__notification-dot" aria-hidden="true"></span>
+              </button>
+
+              <div
+                class="floating-menu"
+                id="notification-menu"
+                role="dialog"
+                aria-label="Notificaciones"
+              >
+                <div class="floating-menu__header">
+                  <h3>Notificaciones</h3>
+                  <button type="button" id="mark-notifications-read">
+                    Marcar como leídas
+                  </button>
+                </div>
+
+                <div class="notification-list">
+                  <article class="notification-item">
+                    <span class="notification-item__icon notification-item__icon--amber">
+                      <svg class="icon icon--sm" aria-hidden="true">
+                        <use href="#icon-clipboard"></use>
+                      </svg>
+                    </span>
+                    <div class="notification-item__copy">
+                      <strong>Evaluaciones pendientes</strong>
+                      <p>Tienes 8 evaluaciones de Matemáticas Aplicadas por revisar.</p>
+                      <time datetime="2025-10-15T08:10">Hace 10 minutos</time>
+                    </div>
+                  </article>
+
+                  <article class="notification-item">
+                    <span class="notification-item__icon notification-item__icon--blue">
+                      <svg class="icon icon--sm" aria-hidden="true">
+                        <use href="#icon-calendar"></use>
+                      </svg>
+                    </span>
+                    <div class="notification-item__copy">
+                      <strong>Clase próxima a comenzar</strong>
+                      <p>Matemáticas Aplicadas · 10° A inicia a las 08:00.</p>
+                      <time datetime="2025-10-15T07:50">Hace 30 minutos</time>
+                    </div>
+                  </article>
+
+                  <article class="notification-item">
+                    <span class="notification-item__icon notification-item__icon--green">
+                      <svg class="icon icon--sm" aria-hidden="true">
+                        <use href="#icon-chart"></use>
+                      </svg>
+                    </span>
+                    <div class="notification-item__copy">
+                      <strong>Progreso actualizado</strong>
+                      <p>El grupo 9° B mejoró su nivel de logro esta semana.</p>
+                      <time datetime="2025-10-14T17:20">Ayer</time>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="floating-menu__footer">
+                  <a class="button button--secondary button--small button--full" href="reportes.html">
+                    Ver todas las notificaciones
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="topbar__profile">
+              <button
+                class="topbar__profile-button"
+                id="profile-toggle"
+                type="button"
+                aria-label="Abrir menú de perfil"
+                aria-expanded="false"
+                aria-controls="profile-menu"
+              >
+                <span class="avatar avatar--ana" aria-hidden="true">AM</span>
+                <span class="topbar__profile-copy">
+                  <strong>Ana Martínez</strong>
+                  <small>Docente</small>
+                </span>
+                <svg class="icon icon--xs" aria-hidden="true">
+                  <use href="#icon-chevron-down"></use>
+                </svg>
+              </button>
+
+              <div class="floating-menu profile-menu" id="profile-menu" role="dialog" aria-label="Menú de perfil">
+                <div class="profile-menu__identity">
+                  <span class="avatar avatar--large avatar--ana" aria-hidden="true">AM</span>
+                  <span>
+                    <strong>Ana Martínez</strong>
+                    <small>ana.martinez@horizonte.edu</small>
+                  </span>
+                </div>
+
+                <div class="profile-menu__links">
+                  <a href="configuracion.html">
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-user"></use>
+                    </svg>
+                    Mi perfil
+                  </a>
+
+                  <a href="configuracion.html">
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-settings"></use>
+                    </svg>
+                    Preferencias
+                  </a>
+
+                  <button type="button" data-demo-action="La sesión real se integrará posteriormente.">
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-logout"></use>
+                    </svg>
+                    <span class="danger-link">Cerrar sesión</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- ======================================================
+             CONTENIDO
+             ====================================================== -->
+        <main class="main-inner" id="contenido-principal">
+          <section class="dashboard-heading" aria-labelledby="dashboard-title">
+            <div>
+              <p class="dashboard-heading__date">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-calendar"></use>
+                </svg>
+                <span id="current-date">Martes, 15 de octubre de 2025</span>
+              </p>
+
+              <h1 id="dashboard-title">
+                <span id="greeting">Buenos días</span>, Ana.
+              </h1>
+
+              <p class="dashboard-heading__description">
+                Aquí tienes una visión clara de tu jornada, tus grupos y los avances
+                más importantes de hoy.
+              </p>
+            </div>
+
+            <div class="heading-actions">
+              <a class="button button--secondary" href="planificacion.html">
+                <svg class="icon icon--sm" aria-hidden="true">
+                  <use href="#icon-calendar"></use>
+                </svg>
+                Ver planificación
+              </a>
+
+              <div class="new-action">
+                <button
+                  class="button button--primary"
+                  id="quick-create-toggle"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="quick-create-menu"
+                >
+                  <svg class="icon icon--sm" aria-hidden="true">
+                    <use href="#icon-plus"></use>
+                  </svg>
+                  Crear nuevo
+                </button>
+
+                <div class="floating-menu new-action__menu" id="quick-create-menu" role="dialog" aria-label="Crear nuevo">
+                  <div class="quick-create-list">
+                    <button type="button" data-demo-action="Nueva planificación preparada en modo demostración.">
+                      <span class="quick-create-list__icon">
+                        <svg class="icon icon--sm" aria-hidden="true">
+                          <use href="#icon-book"></use>
+                        </svg>
+                      </span>
+                      <span>
+                        <strong>Planificación</strong>
+                        <small>Diseña una nueva sesión</small>
+                      </span>
+                    </button>
+
+                    <button type="button" data-demo-action="Nueva evaluación preparada en modo demostración.">
+                      <span class="quick-create-list__icon quick-create-list__icon--green">
+                        <svg class="icon icon--sm" aria-hidden="true">
+                          <use href="#icon-clipboard"></use>
+                        </svg>
+                      </span>
+                      <span>
+                        <strong>Evaluación</strong>
+                        <small>Registra una actividad evaluativa</small>
+                      </span>
+                    </button>
+
+                    <button type="button" data-demo-action="Carga de recurso preparada para una futura integración con Storage.">
+                      <span class="quick-create-list__icon quick-create-list__icon--amber">
+                        <svg class="icon icon--sm" aria-hidden="true">
+                          <use href="#icon-folder"></use>
+                        </svg>
+                      </span>
+                      <span>
+                        <strong>Recurso</strong>
+                        <small>Agrega material a tu biblioteca</small>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Banner de jornada -->
+          <section class="daily-banner" aria-labelledby="daily-banner-title">
+            <div class="daily-banner__content">
+              <p class="daily-banner__eyebrow">RESUMEN DE TU JORNADA</p>
+              <h2 id="daily-banner-title">Tienes una jornada bien organizada.</h2>
+              <p>
+                Hoy impartirás 3 clases, tienes 8 evaluaciones pendientes y 2 estudiantes
+                requieren seguimiento especial.
+              </p>
+            </div>
+
+            <div class="daily-banner__summary">
+              <span class="daily-banner__summary-icon" aria-hidden="true">
+                <svg class="icon"><use href="#icon-clock"></use></svg>
+              </span>
+              <span>
+                <p>Próxima clase</p>
+                <strong>08:00 · Matemáticas 10° A</strong>
+              </span>
+            </div>
+          </section>
+
+          <!-- Métricas -->
+          <section class="metrics-grid" aria-label="Resumen de indicadores docentes">
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Clases de hoy</span>
+                <span class="metric-card__icon metric-card__icon--blue" aria-hidden="true">
+                  <svg class="icon"><use href="#icon-calendar"></use></svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value">03</strong>
+                <span class="metric-card__trend metric-card__trend--positive">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-trending-up"></use>
+                  </svg>
+                  1 más
+                </span>
+              </div>
+
+              <div class="metric-card__footer">
+                <span class="metric-card__detail">Primera clase a las 08:00</span>
+                <svg class="mini-sparkline mini-sparkline--blue" viewBox="0 0 68 24" aria-hidden="true">
+                  <path class="mini-sparkline__fill" d="M1 20 L11 15 L21 17 L31 8 L41 12 L51 5 L67 7 L67 24 L1 24 Z"></path>
+                  <path class="mini-sparkline__line" d="M1 20 L11 15 L21 17 L31 8 L41 12 L51 5 L67 7"></path>
+                </svg>
+              </div>
+            </article>
+
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Estudiantes activos</span>
+                <span class="metric-card__icon metric-card__icon--indigo" aria-hidden="true">
+                  <svg class="icon"><use href="#icon-users"></use></svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value">126</strong>
+                <span class="metric-card__trend metric-card__trend--positive">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-trending-up"></use>
+                  </svg>
+                  8 nuevos
+                </span>
+              </div>
+
+              <div class="metric-card__footer">
+                <span class="metric-card__detail">Distribuidos en 6 grupos</span>
+                <svg class="mini-sparkline mini-sparkline--indigo" viewBox="0 0 68 24" aria-hidden="true">
+                  <path class="mini-sparkline__fill" d="M1 18 L11 18 L21 14 L31 15 L41 10 L51 11 L67 4 L67 24 L1 24 Z"></path>
+                  <path class="mini-sparkline__line" d="M1 18 L11 18 L21 14 L31 15 L41 10 L51 11 L67 4"></path>
+                </svg>
+              </div>
+            </article>
+
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Asistencia promedio</span>
+                <span class="metric-card__icon metric-card__icon--green" aria-hidden="true">
+                  <svg class="icon"><use href="#icon-check"></use></svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value">94,2%</>
+                <span class="metric-card__trend metric-card__trend--positive">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-trending-up"></use>
+                  </svg>
+                  2,1%
+                </span>
+              </div>
+
+              <div class="metric-card__footer">
+                <span class="metric-card__detail">Comparado con septiembre</span>
+                <svg class="mini-sparkline mini-sparkline--green" viewBox="0 0 68 24" aria-hidden="true">
+                  <path class="mini-sparkline__fill" d="M1 19 L11 13 L21 16 L31 10 L41 11 L51 6 L67 4 L67 24 L1 24 Z"></path>
+                  <path class="mini-sparkline__line" d="M1 19 L11 13 L21 16 L31 10 L41 11 L51 6 L67 4"></path>
+                </svg>
+              </div>
+            </article>
+
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Por evaluar</span>
+                <span class="metric-card__icon metric-card__icon--amber" aria-hidden="true">
+                  <svg class="icon"><use href="#icon-clipboard"></use></svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value">08</strong>
+                <span class="metric-card__trend metric-card__trend--neutral">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-clock"></use>
+                  </svg>
+                  Esta semana
+                </span>
+              </div>
+
+              <div class="metric-card__footer">
+                <span class="metric-card__detail">4 vencen en las próximas 48 h</span>
+                <svg class="mini-sparkline mini-sparkline--amber" viewBox="0 0 68 24" aria-hidden="true">
+                  <path class="mini-sparkline__fill" d="M1 7 L11 9 L21 6 L31 13 L41 11 L51 17 L67 18 L67 24 L1 24 Z"></path>
+                  <path class="mini-sparkline__line" d="M1 7 L11 9 L21 6 L31 13 L41 11 L51 17 L67 18"></path>
+                </svg>
+              </div>
+            </article>
+          </section>
+
+          <!-- Cuerpo central -->
+          <div class="dashboard-grid">
+            <div class="dashboard-grid__main">
+              <!-- Agenda -->
+              <section class="card schedule-card" aria-labelledby="schedule-title">
+                <header class="card__header">
+                  <div class="card__header-title">
+                    <span class="card__header-icon" aria-hidden="true">
+                      <svg class="icon"><use href="#icon-calendar"></use></svg>
+                    </span>
+                    <span>
+                      <p class="card__eyebrow">MI AGENDA</p>
+                      <h2 class="card__title" id="schedule-title">Clases programadas</h2>
+                    </span>
+                  </div>
+
+                  <a class="card__link" href="clases.html">
+                    Ver calendario
+                    <svg class="icon icon--xs" aria-hidden="true">
+                      <use href="#icon-arrow-right"></use>
+                    </svg>
+                  </a>
+                </header>
+
+                <div class="schedule-card__body">
+                  <div class="schedule-day-tabs" role="tablist" aria-label="Días de la agenda">
+                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                      Lun
+                      <strong>13</strong>
+                    </button>
+
+                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                      Mar
+                      <strong>14</strong>
+                    </button>
+
+                    <button class="schedule-day-tab schedule-day-tab--active" type="button" role="tab" aria-selected="true">
+                      Mié
+                      <strong>15</strong>
+                    </button>
+
+                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                      Jue
+                      <strong>16</strong>
+                    </button>
+
+                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                      Vie
+                      <strong>17</strong>
+                    </button>
+                  </div>
+
+                  <div class="schedule-list">
+                    <article class="schedule-item">
+                      <div class="schedule-item__time">
+                        08:00
+                        <small>90 min</small>
+                      </div>
+
+                      <div class="schedule-item__content">
+                        <h4>Matemáticas Aplicadas</h4>
+                        <p>
+                          <svg class="icon" aria-hidden="true">
+                            <use href="#icon-location"></use>
+                          </svg>
+                          10° A · Aula 204 · 28 estudiantes
+                        </p>
+                      </div>
+
+                      <div class="schedule-item__action">
+                        <button class="button button--secondary button--small" type="button" data-open-attendance>
+                          <svg class="icon icon--xs" aria-hidden="true">
+                            <use href="#icon-check"></use>
+                          </svg>
+                          Asistencia
+                        </button>
+                      </div>
+                    </article>
+
+                    <article class="schedule-item">
+                      <div class="schedule-item__time">
+                        10:30
+                        <small>90 min</small>
+                      </div>
+
+                      <div class="schedule-item__content">
+                        <h4>Álgebra y Funciones</h4>
+                        <p>
+                          <svg class="icon" aria-hidden="true">
+                            <use href="#icon-location"></use>
+                          </svg>
+                          9° B · Aula 108 · 31 estudiantes
+                        </p>
+                      </div>
+
+                      <div class="schedule-item__action">
+                        <span class="status-badge status-badge--blue">Próxima</span>
+                      </div>
+                    </article>
+
+                    <article class="schedule-item">
+                      <div class="schedule-item__time">
+                        14:15
+                        <small>80 min</small>
+                      </div>
+
+                      <div class="schedule-item__content">
+                        <h4>Geometría y Medición</h4>
+                        <p>
+                          <svg class="icon" aria-hidden="true">
+                            <use href="#icon-location"></use>
+                          </svg>
+                          8° A · Aula 203 · 26 estudiantes
+                        </p>
+                      </div>
+
+                      <div class="schedule-item__action">
+                        <span class="status-badge status-badge--amber">Pendiente</span>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+
+                <footer class="schedule-card__footer">
+                  <button class="button button--ghost button--small" type="button" data-demo-action="Vista semanal de clases disponible próximamente.">
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-calendar"></use>
+                    </svg>
+                    Consultar agenda semanal
+                  </button>
+                </footer>
+              </section>
+
+              <!-- Rendimiento -->
+              <section class="card performance-card" aria-labelledby="performance-title">
+                <header class="card__header">
+                  <div class="card__header-title">
+                    <span class="card__header-icon card__header-icon--indigo" aria-hidden="true">
+                      <svg class="icon"><use href="#icon-chart"></use></svg>
+                    </span>
+                    <span>
+                      <p class="card__eyebrow">SEGUIMIENTO PEDAGÓGICO</p>
+                      <h2 class="card__title" id="performance-title">Rendimiento de tus grupos</h2>
+                    </span>
+                  </div>
+
+                  <select
+                    id="performance-period"
+                    class="button button--small"
+                    aria-label="Seleccionar periodo de rendimiento"
+                  >
+                    <option>Últimas 6 semanas</option>
+                    <option>Este mes</option>
+                    <option>Periodo académico</option>
+                  </select>
+                </header>
+
+                <div class="performance-card__body">
+                  <div class="performance-summary">
+                    <div class="performance-summary__main">
+                      <div class="performance-summary__circle" aria-label="79 por ciento de logro promedio">
+                        <span class="performance-summary__circle-inner">79%</span>
+                      </div>
+
+                      <div class="performance-summary__copy">
+                        <p>Logro promedio general</p>
+                        <strong>Objetivos de aprendizaje</strong>
+                      </div>
+                    </div>
+
+                    <span class="performance-summary__trend">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-trending-up"></use>
+                      </svg>
+                      6,8% este mes
+                    </span>
+                  </div>
+
+                  <div class="performance-chart" aria-label="Gráfico de progreso de aprendizaje durante seis semanas">
+                    <div class="performance-chart__grid" aria-hidden="true">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+
+                    <svg class="performance-chart__svg" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
+                      <path
+                        class="performance-chart__area"
+                        d="M0,118 C48,105 76,107 120,94 C167,80 187,89 240,69 C285,52 324,65 360,54 C410,38 443,52 480,29 C522,7 557,23 600,13 L600,150 L0,150 Z"
+                      ></path>
+
+                      <path
+                        class="performance-chart__line"
+                        d="M0,118 C48,105 76,107 120,94 C167,80 187,89 240,69 C285,52 324,65 360,54 C410,38 443,52 480,29 C522,7 557,23 600,13"
+                      ></path>
+
+                      <circle class="performance-chart__point" cx="0" cy="118" r="4.4"></circle>
+                      <circle class="performance-chart__point" cx="120" cy="94" r="4.4"></circle>
+                      <circle class="performance-chart__point" cx="240" cy="69" r="4.4"></circle>
+                      <circle class="performance-chart__point" cx="360" cy="54" r="4.4"></circle>
+                      <circle class="performance-chart__point" cx="480" cy="29" r="4.4"></circle>
+                      <circle class="performance-chart__point" cx="600" cy="13" r="4.4"></circle>
+                    </svg>
+
+                    <div class="performance-chart__labels" aria-hidden="true">
+                      <span>Sem. 1</span>
+                      <span>Sem. 2</span>
+                      <span>Sem. 3</span>
+                      <span>Sem. 4</span>
+                      <span>Sem. 5</span>
+                      <span>Sem. 6</span>
+                    </div>
+                  </div>
+
+                  <div class="performance-legend">
+                    <span>Progreso promedio de los grupos</span>
+                    <span>Meta institucional: 75%</span>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <!-- Columna lateral -->
+            <aside class="dashboard-grid__aside">
+              <!-- Prioridades -->
+              <section class="card priorities-card" aria-labelledby="priorities-title">
+                <header class="card__header">
+                  <div class="card__header-title">
+                    <span class="card__header-icon card__header-icon--emerald" aria-hidden="true">
+                      <svg class="icon"><use href="#icon-check"></use></svg>
+                    </span>
+                    <span>
+                      <p class="card__eyebrow">ENFOQUE DEL DÍA</p>
+                      <h2 class="card__title" id="priorities-title">Mis prioridades</h2>
+                    </span>
+                  </div>
+
+                  <button
+                    class="button button--ghost button--icon button--small"
+                    type="button"
+                    aria-label="Agregar prioridad"
+                    data-demo-action="Nueva prioridad preparada en modo demostración."
+                  >
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-plus"></use>
+                    </svg>
+                  </button>
+                </header>
+
+                <div class="priorities-card__body">
+                  <div class="priority-item">
+                    <button class="priority-item__checkbox" type="button" aria-label="Completar prioridad: Revisar evaluación diagnóstica">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-check"></use>
+                      </svg>
+                    </button>
+
+                    <div class="priority-item__copy">
+                      <strong>Revisar evaluación diagnóstica</strong>
+                      <p>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#icon-clock"></use>
+                        </svg>
+                        Matemáticas 10° A · Hoy
+                      </p>
+                    </div>
+
+                    <span class="priority-item__flag priority-item__flag--rose" aria-label="Alta prioridad"></span>
+                  </div>
+
+                  <div class="priority-item">
+                    <button class="priority-item__checkbox" type="button" aria-label="Completar prioridad: Preparar guía de ejercicios">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-check"></use>
+                      </svg>
+                    </button>
+
+                    <div class="priority-item__copy">
+                      <strong>Preparar guía de ejercicios</strong>
+                      <p>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#icon-clock"></use>
+                        </svg>
+                        Álgebra 9° B · Mañana
+                      </p>
+                    </div>
+
+                    <span class="priority-item__flag priority-item__flag--amber" aria-label="Prioridad media"></span>
+                  </div>
+
+                  <div class="priority-item is-done">
+                    <button class="priority-item__checkbox" type="button" aria-label="Marcar como pendiente: Actualizar recursos de geometría">
+                      <svg class="icon" aria-hidden="true">
+                        <use href="#icon-check"></use>
+                      </svg>
+                    </button>
+
+                    <div class="priority-item__copy">
+                      <strong>Actualizar recursos de geometría</strong>
+                      <p>
+                        <svg class="icon" aria-hidden="true">
+                          <use href="#icon-check"></use>
+                        </svg>
+                        Completado hoy
+                      </p>
+                    </div>
+
+                    <span class="priority-item__flag priority-item__flag--blue" aria-label="Prioridad normal"></span>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Atención requerida -->
+              <section class="card attention-card" aria-labelledby="attention-title">
+                <header class="card__header">
+                  <div class="card__header-title">
+                    <span class="card__header-icon card__header-icon--amber" aria-hidden="true">
+                      <svg class="icon"><use href="#icon-alert"></use></svg>
+                    </span>
+                    <span>
+                      <p class="card__eyebrow">ACOMPAÑAMIENTO</p>
+                      <h2 class="card__title" id="attention-title">Atención requerida</h2>
+                    </span>
+                  </div>
+
+                  <a class="card__link" href="estudiantes.html">Ver todos</a>
+                </header>
+
+                <div class="attention-card__intro">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-sparkles"></use>
+                  </svg>
+                  2 estudiantes necesitan seguimiento.
+                </div>
+
+                <div class="attention-list">
+                  <article class="attention-item">
+                    <span class="avatar avatar--small avatar--mateo" aria-hidden="true">MR</span>
+                    <div class="attention-item__copy">
+                      <strong>Mateo Ramírez</strong>
+                      <p>10° A · Asistencia bajo el 80%</p>
+                    </div>
+                    <span class="attention-item__metric">76%</span>
+                  </article>
+
+                  <article class="attention-item">
+                    <span class="avatar avatar--small avatar--sofia" aria-hidden="true">SG</span>
+                    <div class="attention-item__copy">
+                      <strong>Sofía González</strong>
+                      <p>9° B · Objetivos en refuerzo</p>
+                    </div>
+                    <span class="attention-item__metric">61%</span>
+                  </article>
+                </div>
+
+                <div class="attention-card__footer">
+                  <button class="button button--secondary button--small button--full" type="button" data-demo-action="Vista de seguimiento estudiantil preparada para el próximo módulo.">
+                    Revisar seguimiento
+                  </button>
+                </div>
+              </section>
+            </aside>
+          </div>
+
+          <!-- Sección inferior -->
+          <div class="dashboard-bottom">
+            <!-- Progreso de planificación -->
+            <section class="card planning-card" aria-labelledby="planning-progress-title">
+              <header class="card__header">
+                <div class="card__header-title">
+                  <span class="card__header-icon" aria-hidden="true">
+                    <svg class="icon"><use href="#icon-book"></use></svg>
+                  </span>
+                  <span>
+                    <p class="card__eyebrow">COBERTURA CURRICULAR</p>
+                    <h2 class="card__title" id="planning-progress-title">Progreso de planificación</h2>
+                  </span>
+                </div>
+
+                <a class="card__link" href="planificacion.html">
+                  Detalle por grupo
+                  <svg class="icon icon--xs" aria-hidden="true">
+                    <use href="#icon-arrow-right"></use>
+                  </svg>
+                </a>
+              </header>
+
+              <div class="planning-card__body">
+                <div class="planning-progress">
+                  <div class="planning-progress__score">
+                    <small>AVANCE GENERAL</small>
+                    <strong>76%</strong>
+                    <span>12 de 16 unidades completadas</span>
+                  </div>
+
+                  <div class="planning-groups">
+                    <div class="planning-group">
+                      <span class="planning-group__name">Matemáticas 10° A</span>
+                      <span class="planning-group__bar"><span style="width: 84%"></span></span>
+                      <span class="planning-group__percent">84%</span>
+                    </div>
+
+                    <div class="planning-group">
+                      <span class="planning-group__name">Álgebra 9° B</span>
+                      <span class="planning-group__bar"><span style="width: 76%"></span></span>
+                      <span class="planning-group__percent">76%</span>
+                    </div>
+
+                    <div class="planning-group">
+                      <span class="planning-group__name">Geometría 8° A</span>
+                      <span class="planning-group__bar"><span style="width: 69%"></span></span>
+                      <span class="planning-group__percent">69%</span>
+                    </div>
+
+                    <div class="planning-group">
+                      <span class="planning-group__name">Estadística 10° B</span>
+                      <span class="planning-group__bar"><span style="width: 73%"></span></span>
+                      <span class="planning-group__percent">73%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Actividad reciente -->
+            <section class="card activity-card" aria-labelledby="activity-title">
+              <header class="card__header">
+                <div class="card__header-title">
+                  <span class="card__header-icon card__header-icon--indigo" aria-hidden="true">
+                    <svg class="icon"><use href="#icon-layers"></use></svg>
+                  </span>
+                  <span>
+                    <p class="card__eyebrow">ÚLTIMOS CAMBIOS</p>
+                    <h2 class="card__title" id="activity-title">Actividad reciente</h2>
+                  </span>
+                </div>
+              </header>
+
+              <div class="activity-card__body">
+                <div class="activity-timeline">
+                  <article class="activity-item">
+                    <span class="activity-item__dot activity-item__dot--blue" aria-hidden="true">
+                      <svg class="icon icon--sm"><use href="#icon-book"></use></svg>
+                    </span>
+                    <div class="activity-item__copy">
+                      <p>Actualizaste la planificación de <strong>Álgebra y Funciones · 9° B</strong>.</p>
+                      <time datetime="2025-10-15T07:35">Hace 35 minutos</time>
+                    </div>
+                  </article>
+
+                  <article class="activity-item">
+                    <span class="activity-item__dot activity-item__dot--green" aria-hidden="true">
+                      <svg class="icon icon--sm"><use href="#icon-check"></use></svg>
+                    </span>
+                    <div class="activity-item__copy">
+                      <p>Registraste asistencia para <strong>Geometría y Medición · 8° A</strong>.</p>
+                      <time datetime="2025-10-14T15:40">Ayer, 15:40</time>
+                    </div>
+                  </article>
+
+                  <article class="activity-item">
+                    <span class="activity-item__dot activity-item__dot--violet" aria-hidden="true">
+                      <svg class="icon icon--sm"><use href="#icon-folder"></use></svg>
+                    </span>
+                    <div class="activity-item__copy">
+                      <p>Agregaste el recurso <strong>Guía de funciones lineales</strong>.</p>
+                      <time datetime="2025-10-14T11:10">Ayer, 11:10</time>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <!-- ==========================================================
+         NAVEGACIÓN INFERIOR MÓVIL
+         ========================================================== -->
+    <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
+      <a class="active" href="dashboard.html" aria-current="page">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-dashboard"></use>
+        </svg>
+        Inicio
+      </a>
+
+      <a href="clases.html">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-calendar"></use>
+        </svg>
+        Clases
+      </a>
+
+      <button
+        class="mobile-bottom-nav__create"
+        id="mobile-quick-create"
+        type="button"
+        aria-label="Crear elemento nuevo"
+      >
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use href="#icon-plus"></use>
+          </svg>
+        </span>
+        Crear
+      </button>
+
+      <a href="estudiantes.html">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-users"></use>
+        </svg>
+        Alumnos
+      </a>
+
+      <a href="reportes.html">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-chart"></use>
+        </svg>
+        Reportes
+      </a>
+    </nav>
+
+    <!-- ==========================================================
+         MODAL: REGISTRO LOCAL DE ASISTENCIA
+         ========================================================== -->
+    <div
+      class="modal-backdrop"
+      id="attendance-modal-backdrop"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="attendance-modal-title"
+    >
+      <section class="attendance-modal">
+        <header class="attendance-modal__header">
+          <div class="attendance-modal__title-group">
+            <span class="attendance-modal__title-icon" aria-hidden="true">
+              <svg class="icon"><use href="#icon-check"></use></svg>
+            </span>
+
+            <div>
+              <h2 id="attendance-modal-title">Registrar asistencia</h2>
+              <p>Matemáticas Aplicadas · 10° A · Miércoles 15 de octubre</p>
+            </div>
+          </div>
+
+          <button
+            class="modal-close"
+            type="button"
+            aria-label="Cerrar registro de asistencia"
+            data-close-modal="attendance-modal-backdrop"
+          >
+            <svg class="icon icon--sm" aria-hidden="true">
+              <use href="#icon-close"></use>
+            </svg>
+          </button>
+        </header>
+
+        <form id="attendance-form">
+          <div class="attendance-modal__body">
+            <div class="attendance-summary">
+              <div class="attendance-summary__item">
+                <strong id="attendance-present-count">28</strong>
+                <span>Presentes</span>
+              </div>
+
+              <div class="attendance-summary__item">
+                <strong id="attendance-late-count">0</strong>
+                <span>Tardanzas</span>
+              </div>
+
+              <div class="attendance-summary__item">
+                <strong id="attendance-absent-count">0</strong>
+                <span>Ausentes</span>
+              </div>
+            </div>
+
+            <div class="attendance-students">
+              <label class="attendance-student">
+                <span class="avatar avatar--small avatar--mateo" aria-hidden="true">MR</span>
+                <span class="attendance-student__info">
+                  <strong>Mateo Ramírez</strong>
+                  <small>Estudiante · 10° A</small>
+                </span>
+                <select class="attendance-select" name="mateo" aria-label="Asistencia de Mateo Ramírez">
+                  <option value="present">Presente</option>
+                  <option value="late">Tardanza</option>
+                  <option value="absent">Ausente</option>
+                </select>
+              </label>
+
+              <label class="attendance-student">
+                <span class="avatar avatar--small avatar--sofia" aria-hidden="true">SG</span>
+                <span class="attendance-student__info">
+                  <strong>Sofía González</strong>
+                  <small>Estudiante · 10° A</small>
+                </span>
+                <select class="attendance-select" name="sofia" aria-label="Asistencia de Sofía González">
+                  <option value="present">Presente</option>
+                  <option value="late">Tardanza</option>
+                  <option value="absent">Ausente</option>
+                </select>
+              </label>
+
+              <label class="attendance-student">
+                <span class="avatar avatar--small avatar--lucas" aria-hidden="true">LC</span>
+                <span class="attendance-student__info">
+                  <strong>Lucas Contreras</strong>
+                  <small>Estudiante · 10° A</small>
+                </span>
+                <select class="attendance-select" name="lucas" aria-label="Asistencia de Lucas Contreras">
+                  <option value="present">Presente</option>
+                  <option value="late">Tardanza</option>
+                  <option value="absent">Ausente</option>
+                </select>
+              </label>
+
+              <label class="attendance-student">
+                <span class="avatar avatar--small avatar--camila" aria-hidden="true">CM</span>
+                <span class="attendance-student__info">
+                  <strong>Camila Muñoz</strong>
+                  <small>Estudiante · 10° A</small>
+                </span>
+                <select class="attendance-select" name="camila" aria-label="Asistencia de Camila Muñoz">
+                  <option value="present">Presente</option>
+                  <option value="late">Tardanza</option>
+                  <option value="absent">Ausente</option>
+                </select>
+              </label>
+
+              <label class="attendance-student">
+                <span class="avatar avatar--small avatar--diego" aria-hidden="true">DP</span>
+                <span class="attendance-student__info">
+                  <strong>Diego Pérez</strong>
+                  <small>Estudiante · 10° A</small>
+                </span>
+                <select class="attendance-select" name="diego" aria-label="Asistencia de Diego Pérez">
+                  <option value="present">Presente</option>
+                  <option value="late">Tardanza</option>
+                  <option value="absent">Ausente</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <footer class="attendance-modal__footer">
+            <p>
+              Modo demostración local. Los cambios no se envían a ningún servicio.
+            </p>
+
+            <button class="button button--primary" type="submit">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-check"></use>
+              </svg>
+              Guardar asistencia
+            </button>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <!-- ==========================================================
+         MODAL: BÚSQUEDA LOCAL
+         ========================================================== -->
+    <div
+      class="modal-backdrop"
+      id="command-modal-backdrop"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Buscar en DOCENCIA360"
+    >
+      <section class="command-modal">
+        <div class="command-search">
+          <svg class="icon" aria-hidden="true">
+            <use href="#icon-search"></use>
+          </svg>
+
+          <label class="sr-only" for="command-search-input">
+            Buscar en DOCENCIA360
+          </label>
+
+          <input
+            id="command-search-input"
+            type="search"
+            placeholder="Busca una clase, estudiante o acción..."
+            autocomplete="off"
+          />
+
+          <kbd class="keyboard-key">ESC</kbd>
+        </div>
+
+        <div class="command-list">
+          <p class="command-list__label">Acciones rápidas</p>
+
+          <button class="command-item" type="button" data-demo-action="Nueva planificación preparada en modo demostración.">
+            <span class="command-item__icon">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-book"></use>
+              </svg>
+            </span>
+            <span>
+              <strong>Crear planificación</strong>
+              <small>Diseña una nueva sesión de clase</small>
+            </span>
+            <kbd class="keyboard-key">↵</kbd>
+          </button>
+
+          <button class="command-item" type="button" data-open-attendance>
+            <span class="command-item__icon">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-check"></use>
+              </svg>
+            </span>
+            <span>
+              <strong>Registrar asistencia</strong>
+              <small>Matemáticas Aplicadas · 10° A</small>
+            </span>
+            <kbd class="keyboard-key">↵</kbd>
+          </button>
+
+          <p class="command-list__label">Navegación</p>
+
+          <a class="command-item" href="estudiantes.html">
+            <span class="command-item__icon">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-users"></use>
+              </svg>
+            </span>
+            <span>
+              <strong>Ir a estudiantes</strong>
+              <small>Consulta perfiles y seguimiento individual</small>
+            </span>
+          </a>
+
+          <a class="command-item" href="reportes.html">
+            <span class="command-item__icon">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-chart"></use>
+              </svg>
+            </span>
+            <span>
+              <strong>Ir a reportes</strong>
+              <small>Visualiza indicadores y progreso académico</small>
+            </span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==========================================================
+         CONTENEDOR DE NOTIFICACIONES VISUALES
+         ========================================================== -->
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- ==========================================================
+         JAVASCRIPT LOCAL
+         No utiliza APIs externas, internet, Supabase ni backend.
+         ========================================================== -->
+    <script>
+      (() => {
+        "use strict";
+
+        const root = document.documentElement;
+        const body = document.body;
+
+        const topbar = document.getElementById("topbar");
+        const sidebarCollapse = document.getElementById("sidebar-collapse");
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileSidebarBackdrop = document.getElementById("mobile-sidebar-backdrop");
+
+        const themeToggle = document.getElementById("theme-toggle");
+
+        const notificationToggle = document.getElementById("notification-toggle");
+        const notificationMenu = document.getElementById("notification-menu");
+        const markNotificationsRead = document.getElementById("mark-notifications-read");
+
+        const profileToggle = document.getElementById("profile-toggle");
+        const profileMenu = document.getElementById("profile-menu");
+
+        const quickCreateToggle = document.getElementById("quick-create-toggle");
+        const quickCreateMenu = document.getElementById("quick-create-menu");
+        const mobileQuickCreate = document.getElementById("mobile-quick-create");
+
+        const attendanceModalBackdrop = document.getElementById(
+          "attendance-modal-backdrop"
+        );
+        const commandModalBackdrop = document.getElementById(
+          "command-modal-backdrop"
+        );
+        const commandSearchInput = document.getElementById("command-search-input");
+
+        const attendanceForm = document.getElementById("attendance-form");
+        const attendanceSelects = document.querySelectorAll(".attendance-select");
+
+        const presentCount = document.getElementById("attendance-present-count");
+        const lateCount = document.getElementById("attendance-late-count");
+        const absentCount = document.getElementById("attendance-absent-count");
+
+        const toastContainer = document.getElementById("toast-container");
+        const greetingElement = document.getElementById("greeting");
+        const dateElement = document.getElementById("current-date");
+
+        let lastFocusedElement = null;
+
+        /* --------------------------------------------------------
+           Utilidades
+           -------------------------------------------------------- */
+        const saveLocalPreference = (key, value) => {
+          try {
+            localStorage.setItem(key, value);
+          } catch (error) {
+            /* El diseño sigue funcionando aunque localStorage no esté disponible. */
+          }
+        };
+
+        const getLocalPreference = (key) => {
+          try {
+            return localStorage.getItem(key);
+          } catch (error) {
+            return null;
+          }
+        };
+
+        const showToast = (message, type = "info") => {
+          const toast = document.createElement("div");
+          toast.className = `toast toast--${type}`;
+
+          toast.innerHTML = `
+            <span class="toast__icon" aria-hidden="true">
+              <svg class="icon icon--sm">
+                <use href="${type === "success" ? "#icon-check" : "#icon-sparkles"}"></use>
+              </svg>
+            </span>
+            <p>${message}</p>
+          `;
+
+          toastContainer.appendChild(toast);
+
+          window.setTimeout(() => {
+            toast.classList.add("is-leaving");
+
+            window.setTimeout(() => {
+              toast.remove();
+            }, 220);
+          }, 3800);
+        };
+
+        const closeFloatingMenus = () => {
+          notificationMenu.classList.remove("is-open");
+          profileMenu.classList.remove("is-open");
+          quickCreateMenu.classList.remove("is-open");
+
+          notificationToggle.setAttribute("aria-expanded", "false");
+          profileToggle.setAttribute("aria-expanded", "false");
+          quickCreateToggle.setAttribute("aria-expanded", "false");
+        };
+
+        const toggleFloatingMenu = (menu, trigger) => {
+          const isOpen = menu.classList.contains("is-open");
+
+          closeFloatingMenus();
+
+          if (!isOpen) {
+            menu.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+          }
+        };
+
+        const openModal = (modal, focusElement = null) => {
+          lastFocusedElement = document.activeElement;
+          closeFloatingMenus();
+
+          modal.classList.add("is-open");
+          modal.setAttribute("aria-hidden", "false");
+          body.classList.add("no-scroll");
+
+          window.setTimeout(() => {
+            if (focusElement) {
+              focusElement.focus();
+            }
+          }, 80);
+        };
+
+        const closeModal = (modal) => {
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+          body.classList.remove("no-scroll");
+
+          if (lastFocusedElement) {
+            lastFocusedElement.focus();
+          }
+        };
+
+        const closeMobileSidebar = () => {
+          body.classList.remove("mobile-sidebar-open");
+          mobileMenuToggle.setAttribute("aria-expanded", "false");
+          mobileMenuToggle.setAttribute("aria-label", "Abrir navegación principal");
+        };
+
+        /* --------------------------------------------------------
+           Fecha y saludo local según la hora del navegador
+           -------------------------------------------------------- */
+        const updateGreetingAndDate = () => {
+          const now = new Date();
+          const hour = now.getHours();
+
+          let greeting = "Buenos días";
+
+          if (hour >= 12 && hour < 19) {
+            greeting = "Buenas tardes";
+          } else if (hour >= 19 || hour < 5) {
+            greeting = "Buenas noches";
+          }
+
+          greetingElement.textContent = greeting;
+
+          const formattedDate = new Intl.DateTimeFormat("es-ES", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }).format(now);
+
+          dateElement.textContent =
+            formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+        };
+
+        updateGreetingAndDate();
+
+        /* --------------------------------------------------------
+           Estado de topbar al desplazarse
+           -------------------------------------------------------- */
+        const updateTopbar = () => {
+          topbar.classList.toggle("is-scrolled", window.scrollY > 8);
+        };
+
+        updateTopbar();
+        window.addEventListener("scroll", updateTopbar, { passive: true });
+
+        /* --------------------------------------------------------
+           Sidebar de escritorio
+           -------------------------------------------------------- */
+        const savedSidebarState = getLocalPreference("docencia360-sidebar");
+
+        if (savedSidebarState === "compact" && window.innerWidth > 760) {
+          body.classList.add("sidebar-is-compact");
+          sidebarCollapse.setAttribute("aria-label", "Expandir menú lateral");
+          sidebarCollapse.setAttribute("title", "Expandir menú lateral");
+        }
+
+        sidebarCollapse.addEventListener("click", () => {
+          const isCompact = body.classList.toggle("sidebar-is-compact");
+
+          saveLocalPreference(
+            "docencia360-sidebar",
+            isCompact ? "compact" : "expanded"
+          );
+
+          sidebarCollapse.setAttribute(
+            "aria-label",
+            isCompact ? "Expandir menú lateral" : "Contraer menú lateral"
+          );
+
+          sidebarCollapse.setAttribute(
+            "title",
+            isCompact ? "Expandir menú lateral" : "Contraer menú lateral"
+          );
+        });
+
+        /* --------------------------------------------------------
+           Sidebar móvil
+           -------------------------------------------------------- */
+        mobileMenuToggle.addEventListener("click", () => {
+          const isOpen = body.classList.toggle("mobile-sidebar-open");
+
+          mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+          mobileMenuToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Cerrar navegación principal" : "Abrir navegación principal"
+          );
+        });
+
+        mobileSidebarBackdrop.addEventListener("click", closeMobileSidebar);
+
+        document.querySelectorAll(".sidebar__nav-link, .sidebar__help").forEach((link) => {
+          link.addEventListener("click", closeMobileSidebar);
+        });
+
+        /* --------------------------------------------------------
+           Modo claro / oscuro
+           -------------------------------------------------------- */
+        const applyTheme = (theme) => {
+          root.dataset.theme = theme;
+
+          const isDark = theme === "dark";
+
+          themeToggle.setAttribute(
+            "aria-label",
+            isDark ? "Activar modo claro" : "Activar modo oscuro"
+          );
+
+          themeToggle.setAttribute(
+            "title",
+            isDark ? "Activar modo claro" : "Activar modo oscuro"
+          );
+
+          const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute(
+              "content",
+              isDark ? "#0a1426" : "#f5f8fc"
+            );
+          }
+        };
+
+        const savedTheme = getLocalPreference("docencia360-theme");
+
+        if (savedTheme === "light" || savedTheme === "dark") {
+          applyTheme(savedTheme);
+        } else {
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+
+          applyTheme(prefersDark ? "dark" : "light");
+        }
+
+        themeToggle.addEventListener("click", () => {
+          const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+
+          applyTheme(nextTheme);
+          saveLocalPreference("docencia360-theme", nextTheme);
+
+          showToast(
+            nextTheme === "dark"
+              ? "Modo oscuro activado."
+              : "Modo claro activado.",
+            "info"
+          );
+        });
+
+        /* --------------------------------------------------------
+           Menús flotantes
+           -------------------------------------------------------- */
+        notificationToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleFloatingMenu(notificationMenu, notificationToggle);
+        });
+
+        profileToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleFloatingMenu(profileMenu, profileToggle);
+        });
+
+        quickCreateToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleFloatingMenu(quickCreateMenu, quickCreateToggle);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (
+            !event.target.closest(".floating-menu") &&
+            !event.target.closest("#notification-toggle") &&
+            !event.target.closest("#profile-toggle") &&
+            !event.target.closest("#quick-create-toggle")
+          ) {
+            closeFloatingMenus();
+          }
+        });
+
+        markNotificationsRead.addEventListener("click", () => {
+          const dot = document.querySelector(".topbar__notification-dot");
+
+          if (dot) {
+            dot.remove();
+          }
+
+          showToast("Las notificaciones fueron marcadas como leídas.", "success");
+        });
+
+        /* --------------------------------------------------------
+           Prioridades interactivas locales
+           -------------------------------------------------------- */
+        document.querySelectorAll(".priority-item__checkbox").forEach((checkbox) => {
+          checkbox.addEventListener("click", () => {
+            const priority = checkbox.closest(".priority-item");
+            const isDone = priority.classList.toggle("is-done");
+            const label = priority.querySelector("strong").textContent.trim();
+
+            checkbox.setAttribute(
+              "aria-label",
+              isDone
+                ? `Marcar como pendiente: ${label}`
+                : `Completar prioridad: ${label}`
+            );
+
+            showToast(
+              isDone
+                ? "Prioridad marcada como completada."
+                : "Prioridad marcada como pendiente.",
+              isDone ? "success" : "info"
+            );
+          });
+        });
+
+        /* --------------------------------------------------------
+           Tabs de agenda locales
+           -------------------------------------------------------- */
+        document.querySelectorAll(".schedule-day-tab").forEach((tab) => {
+          tab.addEventListener("click", () => {
+            document.querySelectorAll(".schedule-day-tab").forEach((currentTab) => {
+              currentTab.classList.remove("schedule-day-tab--active");
+              currentTab.setAttribute("aria-selected", "false");
+            });
+
+            tab.classList.add("schedule-day-tab--active");
+            tab.setAttribute("aria-selected", "true");
+
+            const day = tab.textContent.replace(/\s+/g, " ").trim();
+            showToast(`Agenda de ${day} seleccionada en modo demostración.`, "info");
+          });
+        });
+
+        /* --------------------------------------------------------
+           Filtro de gráfico
+           -------------------------------------------------------- */
+        document
+          .getElementById("performance-period")
+          .addEventListener("change", (event) => {
+            showToast(
+              `Periodo actualizado: ${event.target.value}.`,
+              "info"
+            );
+          });
+
+        /* --------------------------------------------------------
+           Modal de asistencia
+           -------------------------------------------------------- */
+        const openAttendanceModal = () => {
+          openModal(attendanceModalBackdrop);
+        };
+
+        document.querySelectorAll("[data-open-attendance]").forEach((button) => {
+          button.addEventListener("click", () => {
+            if (commandModalBackdrop.classList.contains("is-open")) {
+              closeModal(commandModalBackdrop);
+            }
+
+            openAttendanceModal();
+          });
+        });
+
+        const updateAttendanceCounts = () => {
+          let present = 23;
+          let late = 0;
+          let absent = 0;
+
+          attendanceSelects.forEach((select) => {
+            if (select.value === "present") {
+              present += 1;
+            } else if (select.value === "late") {
+              late += 1;
+            } else if (select.value === "absent") {
+              absent += 1;
+            }
+          });
+
+          presentCount.textContent = present;
+          lateCount.textContent = late;
+          absentCount.textContent = absent;
+        };
+
+        attendanceSelects.forEach((select) => {
+          select.addEventListener("change", updateAttendanceCounts);
+        });
+
+        attendanceForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          closeModal(attendanceModalBackdrop);
+          showToast(
+            "Asistencia guardada localmente. La sincronización se integrará más adelante.",
+            "success"
+          );
+        });
+
+        /* --------------------------------------------------------
+           Paleta de búsqueda
+           -------------------------------------------------------- */
+        const openCommandPalette = () => {
+          openModal(commandModalBackdrop, commandSearchInput);
+        };
+
+        document
+          .getElementById("open-command-palette")
+          .addEventListener("click", openCommandPalette);
+
+        mobileQuickCreate.addEventListener("click", () => {
+          openCommandPalette();
+        });
+
+        commandSearchInput.addEventListener("input", () => {
+          const query = commandSearchInput.value.trim().toLowerCase();
+
+          document.querySelectorAll(".command-item").forEach((item) => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(query) ? "" : "none";
+          });
+        });
+
+        /* --------------------------------------------------------
+           Acciones demostrativas locales
+           -------------------------------------------------------- */
+        document.querySelectorAll("[data-demo-action]").forEach((button) => {
+          button.addEventListener("click", () => {
+            closeFloatingMenus();
+            showToast(button.dataset.demoAction, "info");
+          });
+        });
+
+        /* --------------------------------------------------------
+           Cierre de modales
+           -------------------------------------------------------- */
+        document.querySelectorAll("[data-close-modal]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const modal = document.getElementById(button.dataset.closeModal);
+
+            if (modal) {
+              closeModal(modal);
+            }
+          });
+        });
+
+        [attendanceModalBackdrop, commandModalBackdrop].forEach((modal) => {
+          modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+              closeModal(modal);
+            }
+          });
+        });
+
+        /* --------------------------------------------------------
+           Teclado
+           -------------------------------------------------------- */
+        document.addEventListener("keydown", (event) => {
+          const isCommandShortcut =
+            (event.metaKey || event.ctrlKey) &&
+            event.key.toLowerCase() === "k";
+
+          if (isCommandShortcut) {
+            event.preventDefault();
+
+            if (!commandModalBackdrop.classList.contains("is-open")) {
+              openCommandPalette();
+            }
+
+            return;
+          }
+
+          if (event.key === "Escape") {
+            if (attendanceModalBackdrop.classList.contains("is-open")) {
+              closeModal(attendanceModalBackdrop);
+              return;
+            }
+
+            if (commandModalBackdrop.classList.contains("is-open")) {
+              closeModal(commandModalBackdrop);
+              return;
+            }
+
+            if (body.classList.contains("mobile-sidebar-open")) {
+              closeMobileSidebar();
+              return;
+            }
+
+            closeFloatingMenus();
+          }
+        });
+
+        /* --------------------------------------------------------
+           Limpieza visual al cambiar de tamaño
+           -------------------------------------------------------- */
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 760) {
+            closeMobileSidebar();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
