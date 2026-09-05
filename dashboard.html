@@ -8,34 +8,30 @@
     />
     <meta
       name="description"
-      content="Panel docente de DOCENCIA360: planificación, estudiantes, evaluaciones y seguimiento pedagógico."
+      content="Panel docente de DOCENCIA360 para gestionar clases, estudiantes, planificación, evaluaciones y seguimiento pedagógico."
     />
-    <meta name="theme-color" content="#f5f8fc" />
+    <meta name="theme-color" content="#f4f7fb" />
     <title>Panel docente | DOCENCIA360</title>
 
     <style>
       /* ==========================================================
          DOCENCIA360 · DASHBOARD DOCENTE
-         Archivo autónomo:
-         - Sin librerías externas
-         - Sin APIs
-         - Sin backend
-         - Sin Supabase
-         - Preparado para integraciones futuras
+         Archivo autónomo y local.
+         Sin APIs, backend, Supabase, CDNs o recursos externos.
          ========================================================== */
 
       /* ==========================================================
-         1. TOKENS DEL SISTEMA DE DISEÑO · MODO CLARO
+         1. VARIABLES · MODO CLARO
          ========================================================== */
       :root {
         --font-sans:
           Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
           "Segoe UI", sans-serif;
 
-        --sidebar-width: 276px;
-        --header-height: 78px;
-        --mobile-nav-height: 72px;
-        --content-max-width: 1540px;
+        --sidebar-width: 268px;
+        --topbar-height: 76px;
+        --mobile-bottom-nav-height: 70px;
+        --content-max-width: 1520px;
 
         --blue-800: #1e40af;
         --blue-700: #1d4ed8;
@@ -79,12 +75,6 @@
         --rose-100: #ffe4e6;
         --rose-50: #fff1f2;
 
-        --cyan-700: #0e7490;
-        --cyan-600: #0891b2;
-        --cyan-500: #06b6d4;
-        --cyan-100: #cffafe;
-        --cyan-50: #ecfeff;
-
         --violet-700: #6d28d9;
         --violet-600: #7c3aed;
         --violet-500: #8b5cf6;
@@ -100,57 +90,57 @@
         --slate-400: #cbd5e1;
         --slate-300: #d9e2ec;
         --slate-200: #e2e8f0;
-        --slate-150: #e9eef5;
         --slate-100: #f1f5f9;
         --slate-50: #f8fafc;
 
         --page-bg: #f4f7fb;
         --surface: #ffffff;
         --surface-soft: #f8fafc;
-        --surface-muted: #eff4f9;
-        --surface-hover: #f5f9ff;
+        --surface-muted: #edf3f9;
+        --surface-hover: #f4f8ff;
 
-        --text-strong: #102344;
-        --text: #34425a;
+        --text-strong: #132744;
+        --text: #3c4d66;
         --text-muted: #71819a;
-        --text-faint: #9aa8bd;
-        --line: #e3eaf2;
-        --line-strong: #d5dfeb;
-
-        --sidebar-bg: #0c1c38;
-        --sidebar-bg-deep: #08152c;
-        --sidebar-text: #d9e6fb;
-        --sidebar-muted: #91a5c7;
-        --sidebar-line: rgb(203 213 225 / 0.11);
-        --sidebar-hover: rgb(255 255 255 / 0.07);
-        --sidebar-active: rgb(59 130 246 / 0.25);
-        --sidebar-active-text: #ffffff;
+        --text-faint: #9aa9bd;
+        --line: #e1e9f2;
+        --line-strong: #d2ddea;
 
         --accent: var(--blue-600);
         --accent-hover: var(--blue-700);
         --accent-soft: var(--blue-50);
         --accent-line: var(--blue-100);
 
+        --sidebar-bg: #0b1b36;
+        --sidebar-bg-deep: #071328;
+        --sidebar-text: #deebff;
+        --sidebar-muted: #8fa5c9;
+        --sidebar-line: rgb(203 213 225 / 0.11);
+        --sidebar-hover: rgb(255 255 255 / 0.07);
+        --sidebar-active: rgb(59 130 246 / 0.25);
+
         --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.04);
         --shadow-sm:
-          0 2px 4px rgb(15 23 42 / 0.035),
-          0 6px 14px rgb(15 23 42 / 0.045);
+          0 3px 7px rgb(15 23 42 / 0.04),
+          0 8px 18px rgb(15 23 42 / 0.05);
         --shadow-md:
-          0 5px 12px rgb(15 23 42 / 0.045),
-          0 16px 28px rgb(15 23 42 / 0.07);
+          0 6px 14px rgb(15 23 42 / 0.05),
+          0 18px 32px rgb(15 23 42 / 0.08);
         --shadow-lg:
-          0 10px 24px rgb(15 23 42 / 0.07),
-          0 26px 45px rgb(15 23 42 / 0.1);
+          0 12px 25px rgb(15 23 42 / 0.08),
+          0 28px 52px rgb(15 23 42 / 0.12);
         --shadow-xl:
-          0 16px 34px rgb(15 23 42 / 0.11),
-          0 35px 75px rgb(15 23 42 / 0.15);
-        --shadow-blue: 0 9px 19px rgb(37 99 235 / 0.21);
+          0 18px 38px rgb(15 23 42 / 0.12),
+          0 42px 80px rgb(15 23 42 / 0.16);
+        --shadow-blue:
+          0 9px 20px rgb(37 99 235 / 0.22),
+          0 4px 10px rgb(37 99 235 / 0.12);
 
         --radius-xs: 8px;
         --radius-sm: 11px;
         --radius-md: 14px;
         --radius-lg: 18px;
-        --radius-xl: 23px;
+        --radius-xl: 24px;
         --radius-2xl: 30px;
         --radius-pill: 999px;
 
@@ -159,49 +149,43 @@
       }
 
       /* ==========================================================
-         2. MODO OSCURO
+         2. VARIABLES · MODO OSCURO
          ========================================================== */
       html[data-theme="dark"] {
-        --page-bg: #0a1426;
-        --surface: #101e34;
-        --surface-soft: #14243d;
-        --surface-muted: #182941;
-        --surface-hover: #1b2d4a;
+        --page-bg: #091426;
+        --surface: #102037;
+        --surface-soft: #14253f;
+        --surface-muted: #182b47;
+        --surface-hover: #1a2e4d;
 
-        --text-strong: #ebf3ff;
-        --text: #c8d5e8;
-        --text-muted: #95a8c3;
-        --text-faint: #70849f;
-        --line: #243650;
-        --line-strong: #30445f;
+        --text-strong: #edf5ff;
+        --text: #c9d7ea;
+        --text-muted: #99acc7;
+        --text-faint: #7186a2;
+        --line: #263b58;
+        --line-strong: #324966;
 
-        --sidebar-bg: #081426;
-        --sidebar-bg-deep: #050f20;
-        --sidebar-text: #d9e6fb;
-        --sidebar-muted: #8fa5c7;
-        --sidebar-line: rgb(148 163 184 / 0.14);
-        --sidebar-hover: rgb(255 255 255 / 0.06);
-        --sidebar-active: rgb(59 130 246 / 0.25);
-        --sidebar-active-text: #ffffff;
-
-        --accent: #4f8cff;
-        --accent-hover: #78a8ff;
-        --accent-soft: rgb(59 130 246 / 0.14);
+        --accent: #5d96ff;
+        --accent-hover: #8bb5ff;
+        --accent-soft: rgb(59 130 246 / 0.15);
         --accent-line: rgb(96 165 250 / 0.24);
+
+        --sidebar-bg: #061224;
+        --sidebar-bg-deep: #040d1c;
 
         --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.16);
         --shadow-sm:
-          0 2px 5px rgb(0 0 0 / 0.12),
-          0 8px 18px rgb(0 0 0 / 0.16);
+          0 3px 8px rgb(0 0 0 / 0.14),
+          0 9px 18px rgb(0 0 0 / 0.18);
         --shadow-md:
           0 7px 16px rgb(0 0 0 / 0.18),
-          0 18px 34px rgb(0 0 0 / 0.2);
+          0 20px 36px rgb(0 0 0 / 0.22);
         --shadow-lg:
-          0 12px 25px rgb(0 0 0 / 0.23),
-          0 30px 52px rgb(0 0 0 / 0.26);
+          0 12px 28px rgb(0 0 0 / 0.24),
+          0 32px 58px rgb(0 0 0 / 0.28);
         --shadow-xl:
-          0 18px 38px rgb(0 0 0 / 0.3),
-          0 42px 80px rgb(0 0 0 / 0.32);
+          0 20px 42px rgb(0 0 0 / 0.3),
+          0 46px 84px rgb(0 0 0 / 0.34);
       }
 
       /* ==========================================================
@@ -241,7 +225,7 @@
       }
 
       body.sidebar-is-compact {
-        --sidebar-width: 92px;
+        --sidebar-width: 88px;
       }
 
       h1,
@@ -249,7 +233,6 @@
       h3,
       h4,
       h5,
-      h6,
       p {
         margin: 0;
       }
@@ -278,12 +261,8 @@
         -webkit-tap-highlight-color: transparent;
       }
 
-      button,
       a {
         color: inherit;
-      }
-
-      a {
         text-decoration: none;
       }
 
@@ -294,7 +273,7 @@
       }
 
       :focus-visible {
-        outline: 3px solid rgb(96 165 250 / 0.8);
+        outline: 3px solid rgb(96 165 250 / 0.82);
         outline-offset: 3px;
       }
 
@@ -319,23 +298,23 @@
         position: fixed;
         z-index: 1000;
         top: -100px;
-        left: 20px;
-        padding: 11px 16px;
+        left: 18px;
+        padding: 11px 15px;
         color: #ffffff;
         background: var(--blue-700);
         border-radius: var(--radius-sm);
         box-shadow: var(--shadow-lg);
-        font-size: 0.84rem;
+        font-size: 0.82rem;
         font-weight: 700;
         transition: top var(--transition-fast);
       }
 
       .skip-link:focus {
-        top: 18px;
+        top: 16px;
       }
 
       /* ==========================================================
-         4. ICONOS, BOTONES Y ELEMENTOS REUTILIZABLES
+         4. UTILIDADES Y COMPONENTES
          ========================================================== */
       .icon {
         width: 20px;
@@ -344,8 +323,8 @@
       }
 
       .icon--xs {
-        width: 14px;
-        height: 14px;
+        width: 13px;
+        height: 13px;
       }
 
       .icon--sm {
@@ -371,14 +350,14 @@
         border-radius: var(--radius-sm);
         box-shadow: var(--shadow-xs);
         cursor: pointer;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 730;
         line-height: 1;
         white-space: nowrap;
         transition:
           transform var(--transition-fast),
-          background var(--transition-fast),
           color var(--transition-fast),
+          background var(--transition-fast),
           border-color var(--transition-fast),
           box-shadow var(--transition-fast);
       }
@@ -404,9 +383,6 @@
         color: #ffffff;
         background: linear-gradient(135deg, var(--blue-700), var(--indigo-700));
         border-color: transparent;
-        box-shadow:
-          0 12px 24px rgb(37 99 235 / 0.27),
-          0 5px 10px rgb(37 99 235 / 0.14);
       }
 
       .button--secondary {
@@ -438,9 +414,9 @@
 
       .button--small {
         min-height: 34px;
-        padding: 0 11px;
+        padding: 0 10px;
         border-radius: 9px;
-        font-size: 0.74rem;
+        font-size: 0.71rem;
       }
 
       .button--icon {
@@ -458,6 +434,121 @@
         width: 100%;
       }
 
+      .card {
+        min-width: 0;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xs);
+        transition:
+          background var(--transition-normal),
+          border-color var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card__header {
+        display: flex;
+        min-width: 0;
+        min-height: 70px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 17px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .card__header-title {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 11px;
+      }
+
+      .card__header-icon {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 10px;
+      }
+
+      .card__header-icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      .card__header-icon--emerald {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .card__header-icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      html[data-theme="dark"] .card__header-icon {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+      }
+
+      html[data-theme="dark"] .card__header-icon--indigo {
+        color: #c7d2fe;
+        background: rgb(99 102 241 / 0.16);
+      }
+
+      html[data-theme="dark"] .card__header-icon--emerald {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.14);
+      }
+
+      html[data-theme="dark"] .card__header-icon--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.14);
+      }
+
+      .card__eyebrow {
+        margin-bottom: 2px;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 760;
+        letter-spacing: 0.09em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .card__title {
+        color: var(--text-strong);
+        font-size: 0.94rem;
+        font-weight: 780;
+        letter-spacing: -0.035em;
+        line-height: 1.24;
+      }
+
+      .card__link {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 4px;
+        color: var(--accent);
+        font-size: 0.68rem;
+        font-weight: 740;
+        white-space: nowrap;
+      }
+
+      .card__link:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+      }
+
       .status-badge {
         display: inline-flex;
         min-height: 23px;
@@ -465,7 +556,7 @@
         gap: 5px;
         padding: 0 8px;
         border-radius: var(--radius-pill);
-        font-size: 0.65rem;
+        font-size: 0.62rem;
         font-weight: 760;
         line-height: 1;
         white-space: nowrap;
@@ -484,19 +575,14 @@
         background: var(--blue-50);
       }
 
-      .status-badge--green {
-        color: var(--emerald-700);
-        background: var(--emerald-50);
-      }
-
       .status-badge--amber {
         color: var(--amber-700);
         background: var(--amber-50);
       }
 
-      .status-badge--rose {
-        color: var(--rose-700);
-        background: var(--rose-50);
+      .status-badge--green {
+        color: var(--emerald-700);
+        background: var(--emerald-50);
       }
 
       html[data-theme="dark"] .status-badge--blue {
@@ -504,19 +590,14 @@
         background: rgb(59 130 246 / 0.14);
       }
 
-      html[data-theme="dark"] .status-badge--green {
-        color: var(--emerald-300);
-        background: rgb(16 185 129 / 0.13);
-      }
-
       html[data-theme="dark"] .status-badge--amber {
         color: var(--amber-300);
-        background: rgb(245 158 11 / 0.13);
+        background: rgb(245 158 11 / 0.14);
       }
 
-      html[data-theme="dark"] .status-badge--rose {
-        color: var(--rose-300);
-        background: rgb(244 63 94 / 0.13);
+      html[data-theme="dark"] .status-badge--green {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.14);
       }
 
       .avatar {
@@ -528,7 +609,7 @@
         overflow: hidden;
         color: #ffffff;
         border-radius: 50%;
-        font-size: 0.68rem;
+        font-size: 0.67rem;
         font-weight: 800;
         letter-spacing: -0.03em;
       }
@@ -536,7 +617,7 @@
       .avatar--small {
         width: 28px;
         height: 28px;
-        font-size: 0.58rem;
+        font-size: 0.57rem;
       }
 
       .avatar--large {
@@ -569,119 +650,6 @@
         background: linear-gradient(135deg, #f97316, #c2410c);
       }
 
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-xs);
-        transition:
-          background var(--transition-normal),
-          border-color var(--transition-normal),
-          box-shadow var(--transition-normal);
-      }
-
-      .card:hover {
-        box-shadow: var(--shadow-sm);
-      }
-
-      .card__header {
-        display: flex;
-        min-height: 68px;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 19px 21px;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .card__header-title {
-        display: flex;
-        min-width: 0;
-        align-items: center;
-        gap: 11px;
-      }
-
-      .card__header-icon {
-        display: grid;
-        width: 34px;
-        height: 34px;
-        flex: 0 0 auto;
-        place-items: center;
-        color: var(--blue-600);
-        background: var(--blue-50);
-        border-radius: 10px;
-      }
-
-      .card__header-icon--amber {
-        color: var(--amber-600);
-        background: var(--amber-50);
-      }
-
-      .card__header-icon--emerald {
-        color: var(--emerald-600);
-        background: var(--emerald-50);
-      }
-
-      .card__header-icon--indigo {
-        color: var(--indigo-600);
-        background: var(--indigo-50);
-      }
-
-      html[data-theme="dark"] .card__header-icon {
-        color: var(--blue-300);
-        background: rgb(59 130 246 / 0.13);
-      }
-
-      html[data-theme="dark"] .card__header-icon--amber {
-        color: var(--amber-300);
-        background: rgb(245 158 11 / 0.13);
-      }
-
-      html[data-theme="dark"] .card__header-icon--emerald {
-        color: var(--emerald-300);
-        background: rgb(16 185 129 / 0.13);
-      }
-
-      html[data-theme="dark"] .card__header-icon--indigo {
-        color: var(--indigo-300, #c7d2fe);
-        background: rgb(99 102 241 / 0.14);
-      }
-
-      .card__eyebrow {
-        margin-bottom: 2px;
-        color: var(--text-faint);
-        font-size: 0.61rem;
-        font-weight: 760;
-        letter-spacing: 0.08em;
-        line-height: 1.2;
-        text-transform: uppercase;
-      }
-
-      .card__title {
-        overflow: hidden;
-        color: var(--text-strong);
-        font-size: 0.96rem;
-        font-weight: 780;
-        letter-spacing: -0.035em;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .card__link {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        color: var(--accent);
-        font-size: 0.71rem;
-        font-weight: 740;
-        white-space: nowrap;
-      }
-
-      .card__link:hover {
-        color: var(--accent-hover);
-        text-decoration: underline;
-      }
-
       /* ==========================================================
          5. ESTRUCTURA PRINCIPAL
          ========================================================== */
@@ -702,7 +670,7 @@
       }
 
       /* ==========================================================
-         6. SIDEBAR
+         6. BARRA LATERAL
          ========================================================== */
       .sidebar {
         position: fixed;
@@ -713,11 +681,12 @@
         display: flex;
         width: var(--sidebar-width);
         flex-direction: column;
+        overflow: visible;
         color: var(--sidebar-text);
         background:
           radial-gradient(
-            circle at 15% 0%,
-            rgb(37 99 235 / 0.24),
+            circle at 12% 0%,
+            rgb(37 99 235 / 0.25),
             transparent 28%
           ),
           linear-gradient(180deg, var(--sidebar-bg), var(--sidebar-bg-deep));
@@ -730,12 +699,12 @@
 
       .sidebar__brand {
         display: flex;
-        min-height: 78px;
+        min-height: 76px;
         align-items: center;
         gap: 10px;
-        padding: 0 22px;
-        border-bottom: 1px solid var(--sidebar-line);
+        padding: 0 21px;
         overflow: hidden;
+        border-bottom: 1px solid var(--sidebar-line);
       }
 
       .sidebar__brand-mark {
@@ -750,14 +719,14 @@
         box-shadow: 0 5px 12px rgb(0 0 0 / 0.18);
       }
 
-      .sidebar__brand-mark svg {
+      .sidebar__brand-mark .icon {
         width: 22px;
         height: 22px;
       }
 
       .sidebar__brand-name {
         color: #ffffff;
-        font-size: 1.08rem;
+        font-size: 1.07rem;
         font-weight: 850;
         letter-spacing: -0.055em;
         white-space: nowrap;
@@ -765,7 +734,6 @@
 
       .sidebar__brand-name strong {
         color: var(--blue-300);
-        font-weight: 850;
       }
 
       .sidebar__workspace {
@@ -773,9 +741,9 @@
         min-height: 72px;
         align-items: center;
         gap: 10px;
-        padding: 14px 17px;
-        border-bottom: 1px solid var(--sidebar-line);
+        padding: 13px 17px;
         overflow: hidden;
+        border-bottom: 1px solid var(--sidebar-line);
       }
 
       .sidebar__workspace-icon {
@@ -799,29 +767,29 @@
         display: block;
         margin-bottom: 1px;
         color: var(--sidebar-muted);
-        font-size: 0.58rem;
-        font-weight: 620;
+        font-size: 0.56rem;
+        font-weight: 650;
       }
 
       .sidebar__workspace-copy strong {
         display: block;
         overflow: hidden;
         color: #f8fbff;
-        font-size: 0.72rem;
+        font-size: 0.71rem;
         font-weight: 720;
         text-overflow: ellipsis;
       }
 
       .sidebar__content {
         flex: 1;
-        padding: 19px 12px;
+        padding: 18px 12px;
         overflow-y: auto;
         scrollbar-width: thin;
         scrollbar-color: rgb(148 163 184 / 0.25) transparent;
       }
 
       .sidebar__group + .sidebar__group {
-        margin-top: 23px;
+        margin-top: 22px;
       }
 
       .sidebar__group-label {
@@ -829,8 +797,8 @@
         padding: 0 11px;
         margin: 0 0 8px;
         color: var(--sidebar-muted);
-        font-size: 0.59rem;
-        font-weight: 750;
+        font-size: 0.57rem;
+        font-weight: 760;
         letter-spacing: 0.11em;
         text-transform: uppercase;
         white-space: nowrap;
@@ -851,8 +819,8 @@
         overflow: hidden;
         color: var(--sidebar-muted);
         border-radius: 10px;
-        font-size: 0.79rem;
-        font-weight: 640;
+        font-size: 0.78rem;
+        font-weight: 650;
         white-space: nowrap;
         transition:
           color var(--transition-fast),
@@ -865,9 +833,9 @@
       }
 
       .sidebar__nav-link--active {
-        color: var(--sidebar-active-text);
+        color: #ffffff;
         background: var(--sidebar-active);
-        font-weight: 730;
+        font-weight: 740;
       }
 
       .sidebar__nav-link--active::before {
@@ -883,7 +851,6 @@
       .sidebar__nav-link .icon {
         width: 19px;
         height: 19px;
-        flex: 0 0 auto;
       }
 
       .sidebar__nav-badge {
@@ -896,8 +863,8 @@
         color: #ffffff;
         background: var(--rose-500);
         border-radius: var(--radius-pill);
-        font-size: 0.6rem;
-        font-weight: 780;
+        font-size: 0.59rem;
+        font-weight: 800;
       }
 
       .sidebar__footer {
@@ -913,7 +880,7 @@
         padding: 0 11px;
         color: var(--sidebar-muted);
         border-radius: 10px;
-        font-size: 0.75rem;
+        font-size: 0.74rem;
         font-weight: 650;
         white-space: nowrap;
         transition:
@@ -943,14 +910,14 @@
         cursor: pointer;
         transition:
           color var(--transition-fast),
-          transform var(--transition-fast),
-          background var(--transition-fast);
+          background var(--transition-fast),
+          transform var(--transition-fast);
       }
 
       .sidebar__collapse:hover {
         color: var(--accent);
         background: var(--accent-soft);
-        transform: scale(1.06);
+        transform: scale(1.05);
       }
 
       .sidebar__collapse .icon {
@@ -974,8 +941,8 @@
       body.sidebar-is-compact .sidebar__workspace-copy,
       body.sidebar-is-compact .sidebar__group-label,
       body.sidebar-is-compact .sidebar__nav-link span:not(.sidebar__nav-badge),
-      body.sidebar-is-compact .sidebar__help span,
-      body.sidebar-is-compact .sidebar__nav-badge {
+      body.sidebar-is-compact .sidebar__nav-badge,
+      body.sidebar-is-compact .sidebar__help span {
         display: none;
       }
 
@@ -1001,15 +968,16 @@
         position: sticky;
         z-index: 80;
         top: 0;
-        display: flex;
-        min-height: var(--header-height);
+        display: grid;
+        min-height: var(--topbar-height);
+        grid-template-columns: minmax(155px, 1fr) minmax(220px, 340px) auto;
         align-items: center;
         gap: 20px;
         padding: 0 32px;
-        background: rgb(244 247 251 / 0.8);
+        background: rgb(244 247 251 / 0.84);
         border-bottom: 1px solid transparent;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
         transition:
           background var(--transition-normal),
           border-color var(--transition-normal),
@@ -1017,39 +985,43 @@
       }
 
       html[data-theme="dark"] .topbar {
-        background: rgb(10 20 38 / 0.8);
+        background: rgb(9 20 38 / 0.84);
       }
 
       .topbar.is-scrolled {
         border-color: var(--line);
-        box-shadow: 0 3px 12px rgb(15 23 42 / 0.035);
+        box-shadow: 0 3px 12px rgb(15 23 42 / 0.04);
       }
 
       .topbar__crumbs {
-        min-width: 180px;
+        min-width: 0;
       }
 
       .topbar__crumbs small {
         display: block;
         margin-bottom: 2px;
+        overflow: hidden;
         color: var(--text-faint);
-        font-size: 0.63rem;
-        font-weight: 680;
-        letter-spacing: 0.03em;
+        font-size: 0.6rem;
+        font-weight: 690;
+        letter-spacing: 0.04em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .topbar__crumbs strong {
         display: block;
+        overflow: hidden;
         color: var(--text-strong);
-        font-size: 0.9rem;
+        font-size: 0.87rem;
         font-weight: 760;
         letter-spacing: -0.025em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .topbar__search {
-        position: relative;
-        width: min(100%, 340px);
-        margin-left: auto;
+        min-width: 0;
       }
 
       .topbar__search-button {
@@ -1065,22 +1037,26 @@
         border-radius: 10px;
         box-shadow: var(--shadow-xs);
         cursor: pointer;
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         text-align: left;
         transition:
-          background var(--transition-fast),
           border-color var(--transition-fast),
+          background var(--transition-fast),
           box-shadow var(--transition-fast);
       }
 
       .topbar__search-button:hover {
-        border-color: var(--blue-200);
         background: var(--surface-hover);
+        border-color: var(--blue-200);
         box-shadow: var(--shadow-sm);
       }
 
       .topbar__search-button span {
+        min-width: 0;
         flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .keyboard-key {
@@ -1094,8 +1070,7 @@
         background: var(--surface-muted);
         border: 1px solid var(--line);
         border-radius: 5px;
-        font-family: inherit;
-        font-size: 0.59rem;
+        font-size: 0.56rem;
         font-weight: 700;
         line-height: 1;
       }
@@ -1103,6 +1078,7 @@
       .topbar__actions {
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         gap: 7px;
       }
 
@@ -1123,8 +1099,8 @@
           color var(--transition-fast),
           background var(--transition-fast),
           border-color var(--transition-fast),
-          transform var(--transition-fast),
-          box-shadow var(--transition-fast);
+          box-shadow var(--transition-fast),
+          transform var(--transition-fast);
       }
 
       .topbar__action:hover {
@@ -1160,14 +1136,13 @@
 
       .topbar__profile {
         position: relative;
-        margin-left: 3px;
       }
 
       .topbar__profile-button {
         display: flex;
         min-height: 42px;
         align-items: center;
-        gap: 9px;
+        gap: 8px;
         padding: 3px 7px 3px 3px;
         color: var(--text);
         background: var(--surface);
@@ -1192,38 +1167,48 @@
         text-align: left;
       }
 
-      .topbar__profile-copy strong {
+      .topbar__profile-copy strong,
+      .topbar__profile-copy small {
         display: block;
         overflow: hidden;
-        max-width: 110px;
-        color: var(--text-strong);
-        font-size: 0.71rem;
-        font-weight: 750;
+        max-width: 105px;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
+      .topbar__profile-copy strong {
+        color: var(--text-strong);
+        font-size: 0.69rem;
+        font-weight: 750;
+      }
+
       .topbar__profile-copy small {
-        display: block;
-        overflow: hidden;
-        max-width: 110px;
         margin-top: 1px;
         color: var(--text-faint);
-        font-size: 0.58rem;
-        font-weight: 580;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        font-size: 0.57rem;
+        font-weight: 590;
+      }
+
+      .mobile-brand,
+      .mobile-menu-toggle,
+      .mobile-bottom-nav,
+      .mobile-sidebar-backdrop {
+        display: none;
       }
 
       /* ==========================================================
          8. MENÚS FLOTANTES
          ========================================================== */
+      .menu-wrapper {
+        position: relative;
+      }
+
       .floating-menu {
         position: absolute;
-        z-index: 200;
+        z-index: 250;
         top: calc(100% + 10px);
         right: 0;
-        width: 290px;
+        width: 286px;
         overflow: hidden;
         visibility: hidden;
         background: var(--surface);
@@ -1232,7 +1217,7 @@
         box-shadow: var(--shadow-lg);
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-7px) scale(0.98);
+        transform: translateY(-7px) scale(0.985);
         transform-origin: top right;
         transition:
           opacity var(--transition-fast),
@@ -1251,14 +1236,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 16px 16px 12px;
+        gap: 12px;
+        padding: 15px 15px 12px;
         border-bottom: 1px solid var(--line);
       }
 
       .floating-menu__header h3 {
         color: var(--text-strong);
-        font-size: 0.82rem;
-        font-weight: 770;
+        font-size: 0.8rem;
+        font-weight: 780;
       }
 
       .floating-menu__header button {
@@ -1266,20 +1252,20 @@
         color: var(--accent);
         background: transparent;
         cursor: pointer;
-        font-size: 0.67rem;
+        font-size: 0.64rem;
         font-weight: 720;
       }
 
       .notification-list {
         display: grid;
-        max-height: 360px;
+        max-height: 340px;
         overflow-y: auto;
       }
 
       .notification-item {
         display: flex;
         gap: 10px;
-        padding: 13px 16px;
+        padding: 13px 15px;
         border-bottom: 1px solid var(--line);
         cursor: pointer;
         transition: background var(--transition-fast);
@@ -1323,11 +1309,10 @@
 
       .notification-item__copy strong {
         display: block;
-        margin-bottom: 2px;
         overflow: hidden;
         color: var(--text-strong);
-        font-size: 0.69rem;
-        font-weight: 720;
+        font-size: 0.68rem;
+        font-weight: 730;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
@@ -1335,9 +1320,10 @@
       .notification-item__copy p {
         display: -webkit-box;
         overflow: hidden;
+        margin-top: 2px;
         color: var(--text-muted);
-        font-size: 0.66rem;
-        line-height: 1.43;
+        font-size: 0.64rem;
+        line-height: 1.45;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
       }
@@ -1346,17 +1332,17 @@
         display: block;
         margin-top: 3px;
         color: var(--text-faint);
-        font-size: 0.58rem;
+        font-size: 0.57rem;
         font-weight: 600;
       }
 
       .floating-menu__footer {
-        padding: 11px;
+        padding: 10px;
         border-top: 1px solid var(--line);
       }
 
       .profile-menu {
-        width: 226px;
+        width: 225px;
       }
 
       .profile-menu__identity {
@@ -1369,16 +1355,24 @@
 
       .profile-menu__identity strong {
         display: block;
+        overflow: hidden;
+        max-width: 140px;
         color: var(--text-strong);
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         font-weight: 760;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .profile-menu__identity small {
         display: block;
+        overflow: hidden;
+        max-width: 140px;
         margin-top: 2px;
         color: var(--text-muted);
-        font-size: 0.62rem;
+        font-size: 0.58rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .profile-menu__links {
@@ -1398,7 +1392,7 @@
         background: transparent;
         border-radius: 8px;
         cursor: pointer;
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         font-weight: 660;
         text-align: left;
         transition:
@@ -1412,7 +1406,7 @@
         background: var(--accent-soft);
       }
 
-      .profile-menu__links .danger-link {
+      .profile-menu__links .danger {
         color: var(--rose-600);
       }
 
@@ -1424,18 +1418,22 @@
         align-items: flex-end;
         justify-content: space-between;
         gap: 24px;
-        margin: 5px 0 26px;
+        margin: 4px 0 25px;
+      }
+
+      .dashboard-heading__content {
+        min-width: 0;
       }
 
       .dashboard-heading__date {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 7px;
         margin-bottom: 7px;
         color: var(--blue-700);
-        font-size: 0.69rem;
+        font-size: 0.67rem;
         font-weight: 760;
-        letter-spacing: 0.035em;
+        letter-spacing: 0.025em;
         text-transform: capitalize;
       }
 
@@ -1446,10 +1444,10 @@
 
       .dashboard-heading h1 {
         color: var(--text-strong);
-        font-size: clamp(1.7rem, 3vw, 2.25rem);
-        font-weight: 810;
-        letter-spacing: -0.06em;
-        line-height: 1.1;
+        font-size: clamp(1.72rem, 3vw, 2.28rem);
+        font-weight: 820;
+        letter-spacing: -0.064em;
+        line-height: 1.08;
       }
 
       .dashboard-heading h1 span {
@@ -1457,29 +1455,24 @@
       }
 
       .dashboard-heading__description {
-        max-width: 630px;
+        max-width: 625px;
         margin-top: 9px;
         color: var(--text-muted);
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         line-height: 1.62;
       }
 
       .heading-actions {
         display: flex;
+        flex: 0 0 auto;
         flex-wrap: wrap;
         align-items: center;
         justify-content: flex-end;
         gap: 9px;
       }
 
-      .new-action {
-        position: relative;
-      }
-
-      .new-action__menu {
-        top: calc(100% + 9px);
-        right: 0;
-        width: 245px;
+      .quick-create-menu {
+        width: 246px;
       }
 
       .quick-create-list {
@@ -1490,7 +1483,7 @@
 
       .quick-create-list button {
         display: flex;
-        min-height: 48px;
+        min-height: 49px;
         align-items: center;
         gap: 10px;
         padding: 0 9px;
@@ -1533,7 +1526,7 @@
       .quick-create-list strong {
         display: block;
         color: var(--text-strong);
-        font-size: 0.71rem;
+        font-size: 0.69rem;
         font-weight: 750;
       }
 
@@ -1541,8 +1534,8 @@
         display: block;
         margin-top: 1px;
         color: var(--text-faint);
-        font-size: 0.6rem;
-        font-weight: 560;
+        font-size: 0.57rem;
+        font-weight: 570;
       }
 
       /* ==========================================================
@@ -1555,34 +1548,34 @@
         align-items: center;
         justify-content: space-between;
         gap: 24px;
-        padding: 26px 29px;
-        margin-bottom: 22px;
+        padding: 25px 28px;
+        margin-bottom: 21px;
         overflow: hidden;
         color: #ffffff;
         background:
           radial-gradient(
             circle at 88% 17%,
-            rgb(147 197 253 / 0.45),
+            rgb(147 197 253 / 0.43),
             transparent 21%
           ),
           radial-gradient(
-            circle at 76% 100%,
-            rgb(129 140 248 / 0.55),
+            circle at 75% 100%,
+            rgb(129 140 248 / 0.52),
             transparent 28%
           ),
-          linear-gradient(120deg, #1749a2 0%, #2563eb 52%, #4338ca 100%);
+          linear-gradient(120deg, #1749a2 0%, #2563eb 53%, #4338ca 100%);
         border-radius: var(--radius-xl);
         box-shadow:
-          0 13px 26px rgb(37 99 235 / 0.18),
-          0 4px 12px rgb(37 99 235 / 0.12);
+          0 13px 26px rgb(37 99 235 / 0.17),
+          0 4px 12px rgb(37 99 235 / 0.1);
       }
 
       .daily-banner::before {
         position: absolute;
-        top: -95px;
-        right: 9%;
-        width: 240px;
-        height: 240px;
+        top: -105px;
+        right: 11%;
+        width: 245px;
+        height: 245px;
         border: 1px solid rgb(255 255 255 / 0.17);
         border-radius: 50%;
         content: "";
@@ -1590,10 +1583,10 @@
 
       .daily-banner::after {
         position: absolute;
-        right: -55px;
-        bottom: -74px;
-        width: 207px;
-        height: 207px;
+        right: -60px;
+        bottom: -80px;
+        width: 215px;
+        height: 215px;
         border: 1px solid rgb(255 255 255 / 0.17);
         border-radius: 50%;
         content: "";
@@ -1602,6 +1595,7 @@
       .daily-banner__content {
         position: relative;
         z-index: 1;
+        min-width: 0;
       }
 
       .daily-banner__eyebrow {
@@ -1610,8 +1604,8 @@
         gap: 7px;
         margin-bottom: 7px;
         color: rgb(219 234 254 / 0.9);
-        font-size: 0.65rem;
-        font-weight: 750;
+        font-size: 0.62rem;
+        font-weight: 760;
         letter-spacing: 0.085em;
         text-transform: uppercase;
       }
@@ -1627,15 +1621,15 @@
       .daily-banner__content h2 {
         margin-bottom: 7px;
         color: #ffffff;
-        font-size: clamp(1.1rem, 2vw, 1.42rem);
-        font-weight: 770;
-        letter-spacing: -0.04em;
+        font-size: clamp(1.06rem, 2vw, 1.38rem);
+        font-weight: 780;
+        letter-spacing: -0.042em;
       }
 
       .daily-banner__content p {
-        max-width: 630px;
-        color: rgb(239 246 255 / 0.82);
-        font-size: 0.81rem;
+        max-width: 620px;
+        color: rgb(239 246 255 / 0.84);
+        font-size: 0.79rem;
         line-height: 1.55;
       }
 
@@ -1643,12 +1637,12 @@
         position: relative;
         z-index: 1;
         display: flex;
-        min-width: max-content;
+        min-width: 248px;
         align-items: center;
-        gap: 17px;
-        padding: 13px 16px;
-        background: rgb(255 255 255 / 0.13);
-        border: 1px solid rgb(255  255 / 0.18);
+        gap: 12px;
+        padding: 13px 15px;
+        background: rgb(255 255 255 / 0.14);
+        border: 1px solid rgb(255 255 255 / 0.2);
         border-radius: 14px;
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
@@ -1658,47 +1652,44 @@
         display: grid;
         width: 38px;
         height: 38px;
+        flex: 0 0 auto;
         place-items: center;
         color: var(--blue-700);
-        background: #ffffff;
+        background #ffffff;
         border-radius: 11px;
       }
 
-      .daily-banner__summary-icon .icon {
-        width: 21px;
-        height: 21px;
-      }
-
       .daily-banner__summary p {
-        margin-bottom: 1px;
-        color: rgb(219 234 254 / 0.83);
-        font-size: 0.62rem;
-        font-weight: 640;
+        margin-bottom: 2px;
+        color: rgb(219 234 254 / 0.85);
+        font-size: 0.61rem;
+        font-weight: 650;
       }
 
       .daily-banner__summary strong {
         display: block;
         color: #ffffff;
-        font-size: 0.89rem;
-        font-weight: 780;
+        font-size: 0.82rem;
+        font-weight: 770;
         letter-spacing: -0.02em;
+        line-height: 1.35;
       }
 
       /* ==========================================================
-         11. MÉTRICAS
+         11. INDICADORES
          ========================================================== */
       .metrics-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 16px;
-        margin-bottom: 22px;
+        gap: 15px;
+        margin-bottom: 21px;
       }
 
       .metric-card {
         position: relative;
+        min-width: 0;
         min-height: 151px;
-        padding: 19px;
-        overflow: hidden;
+        padding: 18px;
       }
 
       .metric-card__top {
@@ -1711,8 +1702,9 @@
       .metric-card__label {
         display: block;
         color: var(--text-muted);
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         font-weight: 680;
+        line-height: 1.35;
       }
 
       .metric-card__icon {
@@ -1746,36 +1738,37 @@
 
       html[data-theme="dark"] .metric-card__icon--blue {
         color: var(--blue-300);
-        background: rgb(59 130 246 / 0.13);
+        background: rgb(59 130 246 / 0.14);
       }
 
       html[data-theme="dark"] .metric-card__icon--indigo {
         color: #c7d2fe;
-        background: rgb(99 102 241 / 0.14);
+        background: rgb(99 102 241 / 0.16);
       }
 
       html[data-theme="dark"] .metric-card__icon--green {
         color: var(--emerald-300);
-        background: rgb(16 185 129 / 0.13);
+        background: rgb(16 185 129 / 0.14);
       }
 
       html[data-theme="dark"] .metric-card__icon--amber {
         color: var(--amber-300);
-        background: rgb(245 158 11 / 0.13);
+        background: rgb(245 158 11 / 0.14);
       }
 
       .metric-card__value-row {
         display: flex;
+        min-width: 0;
         align-items: flex-end;
-        gap: 8px;
+        gap: 7px;
         margin-top: 14px;
       }
 
       .metric-card__value {
         color: var(--text-strong);
-        font-size: 1.72rem;
+        font-size: 1.68rem;
         font-weight: 820;
-        letter-spacing: -0.065em;
+        letter-spacing: -0.07em;
         line-height: 1;
       }
 
@@ -1787,8 +1780,10 @@
         padding: 0 6px;
         margin-bottom: 1px;
         border-radius: var(--radius-pill);
-        font-size: 0.6rem;
+        font-size: 0.56rem;
         font-weight: 760;
+        line-height: 1;
+        white-space: nowrap;
       }
 
       .metric-card__trend .icon {
@@ -1808,16 +1803,17 @@
 
       html[data-theme="dark"] .metric-card__trend--positive {
         color: var(--emerald-300);
-        background: rgb(16 185 129 / 0.13);
+        background: rgb(16 185 129 / 0.14);
       }
 
       html[data-theme="dark"] .metric-card__trend--neutral {
         color: var(--amber-300);
-        background: rgb(245 158 11 / 0.13);
+        background: rgb(245 158 11 / 0.14);
       }
 
       .metric-card__footer {
         display: flex;
+        min-width: 0;
         align-items: center;
         justify-content: space-between;
         gap: 8px;
@@ -1825,14 +1821,19 @@
       }
 
       .metric-card__detail {
+        min-width: 0;
+        overflow: hidden;
         color: var(--text-faint);
-        font-size: 0.63rem;
+        font-size: 0.6rem;
         font-weight: 590;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .mini-sparkline {
-        width: 68px;
-        height: 24px;
+        width: 61px;
+        height: 23px;
+        flex: 0 0 auto;
         overflow: visible;
       }
 
@@ -1880,39 +1881,40 @@
       }
 
       /* ==========================================================
-         12. DISTRIBUCIÓN DEL CONTENIDO
+         12. CONTENIDO CENTRAL
          ========================================================== */
-      .dashboard-grid {
+      .content-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.62fr) minmax(310px, 0.76fr);
-        gap: 22px;
+        grid-template-columns: minmax(0, 1.62fr) minmax(320px, 0.78fr);
+        gap: 21px;
         align-items: start;
       }
 
-      .dashboard-grid__main,
-      .dashboard-grid__aside {
+      .content-grid__main,
+      .content-grid__aside {
         display: grid;
-        gap: 22px;
+        min-width: 0;
+        gap: 21px;
       }
 
-      .dashboard-bottom {
+      .bottom-grid {
         display: grid;
         grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
-        gap: 22px;
-        margin-top: 22px;
+        gap: 21px;
+        margin-top: 21px;
       }
 
       /* ==========================================================
-         13. AGENDA DE CLASES
+         13. AGENDA
          ========================================================== */
       .schedule-card__body {
-        padding: 5px 21px 10px;
+        padding: 5px 20px 10px;
       }
 
       .schedule-day-tabs {
         display: flex;
         gap: 6px;
-        padding: 15px 0;
+        padding: 14px 0;
         overflow-x: auto;
         scrollbar-width: none;
       }
@@ -1923,8 +1925,8 @@
 
       .schedule-day-tab {
         display: grid;
-        min-width: 49px;
-        min-height: 50px;
+        min-width: 48px;
+        min-height: 49px;
         padding: 6px 8px;
         place-items: center;
         color: var(--text-faint);
@@ -1932,7 +1934,7 @@
         border: 1px solid transparent;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 0.62rem;
+        font-size: 0.6rem;
         font-weight: 690;
         transition:
           color var(--transition-fast),
@@ -1942,8 +1944,8 @@
 
       .schedule-day-tab strong {
         color: inherit;
-        font-size: 0.85rem;
-        font-weight: 790;
+        font-size: 0.82rem;
+        font-weight: 800;
         line-height: 1.1;
       }
 
@@ -1961,7 +1963,7 @@
       html[data-theme="dark"] .schedule-day-tab--active {
         color: var(--blue-300);
         background: rgb(59 130 246 / 0.14);
-        border-color: rgb(96 165 250 / 0.21);
+        border-color: rgb(96 165 250 / 0.23);
       }
 
       .schedule-list {
@@ -1970,7 +1972,7 @@
 
       .schedule-item {
         display: grid;
-        grid-template-columns: 51px minmax(0, 1fr) auto;
+        grid-template-columns: 52px minmax(0, 1fr) auto;
         gap: 12px;
         align-items: center;
         padding: 15px 0;
@@ -1979,8 +1981,8 @@
 
       .schedule-item__time {
         color: var(--blue-700);
-        font-size: 0.72rem;
-        font-weight: 780;
+        font-size: 0.69rem;
+        font-weight: 790;
         letter-spacing: -0.015em;
       }
 
@@ -1988,7 +1990,7 @@
         display: block;
         margin-top: 1px;
         color: var(--text-faint);
-        font-size: 0.58rem;
+        font-size: 0.55rem;
         font-weight: 600;
       }
 
@@ -1999,7 +2001,7 @@
       .schedule-item__content h4 {
         overflow: hidden;
         color: var(--text-strong);
-        font-size: 0.79rem;
+        font-size: 0.77rem;
         font-weight: 750;
         letter-spacing: -0.018em;
         text-overflow: ellipsis;
@@ -2008,12 +2010,13 @@
 
       .schedule-item__content p {
         display: flex;
+        min-width: 0;
         align-items: center;
         gap: 4px;
         margin-top: 3px;
         overflow: hidden;
         color: var(--text-muted);
-        font-size: 0.64rem;
+        font-size: 0.61rem;
         font-weight: 580;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -2025,48 +2028,50 @@
       }
 
       .schedule-item__action {
-        min-width: 108px;
+        min-width: 100px;
+        text-align: right;
       }
 
       .schedule-item__action .button {
-        min-height: 32px;
+        min-height: 31px;
         padding: 0 9px;
-        font-size: 0.66rem;
+        font-size: 0.63rem;
       }
 
       .schedule-card__footer {
         display: flex;
-        align-items: center;
         justify-content: center;
-        padding: 14px 21px 17px;
+        padding: 13px 20px 16px;
         border-top: 1px solid var(--line);
       }
 
       /* ==========================================================
-         14. RENDIMIENTO DE GRUPOS
+         14. RENDIMIENTO
          ========================================================== */
       .performance-card__body {
-        padding: 20px 21px 17px;
+        padding: 19px 20px 17px;
       }
 
       .performance-summary {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
+        gap: 14px;
         margin-bottom: 18px;
       }
 
       .performance-summary__main {
         display: flex;
+        min-width: 0;
         align-items: center;
-        gap: 12px;
+        gap: 11px;
       }
 
       .performance-summary__circle {
         display: grid;
         width: 52px;
         height: 52px;
+        flex: 0 0 auto;
         place-items: center;
         background: conic-gradient(
           var(--blue-600) 0 79%,
@@ -2083,31 +2088,43 @@
         color: var(--text-strong);
         background: var(--surface);
         border-radius: 50%;
-        font-size: 0.69rem;
+        font-size: 0.68rem;
         font-weight: 810;
       }
 
+      .performance-summary__copy {
+        min-width: 0;
+      }
+
       .performance-summary__copy p {
-        margin-bottom: 2px;
+        overflow: hidden;
         color: var(--text-muted);
-        font-size: 0.66rem;
-        font-weight: 630;
+        font-size: 0.63rem;
+        font-weight: 620;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .performance-summary__copy strong {
         display: block;
+        overflow: hidden;
+        margin-top: 2px;
         color: var(--text-strong);
-        font-size: 0.85rem;
+        font-size: 0.81rem;
         font-weight: 770;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .performance-summary__trend {
         display: inline-flex;
+        flex: 0 0 auto;
         align-items: center;
         gap: 4px;
         color: var(--emerald-700);
-        font-size: 0.65rem;
+        font-size: 0.62rem;
         font-weight: 730;
+        white-space: nowrap;
       }
 
       .performance-summary__trend .icon {
@@ -2118,12 +2135,12 @@
       .performance-chart {
         position: relative;
         height: 175px;
-        padding: 11px 0 0;
+        margin-top: 3px;
       }
 
       .performance-chart__grid {
         position: absolute;
-        inset: 8px 0 27px 0;
+        inset: 8px 0 28px;
         display: grid;
         grid-template-rows: repeat(4, 1fr);
         pointer-events: none;
@@ -2135,15 +2152,14 @@
 
       .performance-chart__svg {
         position: absolute;
-        inset: 5px 0 23px;
+        inset: 5px 0 24px;
         width: 100%;
-        height: calc(100% - 28px);
+        height: calc(100% - 29px);
         overflow: visible;
       }
 
       .performance-chart__area {
-        fill: url(#performance-area-gradient);
-        opacity: 0.24;
+        fill: rgb(59 130 246 / 0.15);
       }
 
       .performance-chart__line {
@@ -2168,15 +2184,15 @@
         display: flex;
         justify-content: space-between;
         color: var(--text-faint);
-        font-size: 0.58rem;
+        font-size: 0.56rem;
         font-weight: 660;
       }
 
       .performance-legend {
         display: flex;
         flex-wrap: wrap;
-        gap: 14px;
-        margin-top: 11px;
+        gap: 13px;
+        margin-top: 10px;
       }
 
       .performance-legend span {
@@ -2184,15 +2200,15 @@
         align-items: center;
         gap: 5px;
         color: var(--text-muted);
-        font-size: 0.61rem;
-        font-weight: 620;
+        font-size: 0.59rem;
+        font-weight: 630;
       }
 
       .performance-legend span::before {
         width: 7px;
         height: 7px;
-        border-radius: 50%;
         background: var(--blue-500);
+        border-radius: 50%;
         content: "";
       }
 
@@ -2200,18 +2216,45 @@
         background: var(--emerald-500);
       }
 
+      .period-select {
+        width: 142px;
+        min-height: 33px;
+        padding: 0 28px 0 9px;
+        color: var(--text-muted);
+        background-color: var(--surface);
+        background-image:
+          linear-gradient(45deg, transparent 50%, currentColor 50%),
+          linear-gradient(135deg, currentColor 50%, transparent 50%);
+        background-position:
+          calc(100% - 13px) 14px,
+          calc(100% - 9px) 14px;
+        background-repeat: no-repeat;
+        background-size: 4px 4px, 4px 4px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.62rem;
+        font-weight: 680;
+        appearance: none;
+      }
+
+      .period-select option {
+        color: var(--slate-800);
+        background: #ffffff;
+      }
+
       /* ==========================================================
          15. PRIORIDADES
          ========================================================== */
       .priorities-card__body {
-        padding: 7px 17px 13px;
+        padding: 6px 16px 12px;
       }
 
       .priority-item {
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        padding: 13px 4px;
+        padding: 13px 3px;
         border-bottom: 1px solid var(--line);
       }
 
@@ -2220,7 +2263,6 @@
       }
 
       .priority-item__checkbox {
-        position: relative;
         display: grid;
         width: 19px;
         height: 19px;
@@ -2239,8 +2281,8 @@
       }
 
       .priority-item__checkbox:hover {
-        border-color: var(--blue-400);
         background: var(--blue-50);
+        border-color: var(--blue-400);
       }
 
       .priority-item__checkbox .icon {
@@ -2276,19 +2318,19 @@
       .priority-item__copy strong {
         display: block;
         color: var(--text-strong);
-        font-size: 0.71rem;
-        font-weight: 710;
-        line-height: 1.4;
+        font-size: 0.7rem;
+        font-weight: 720;
+        line-height: 1.42;
         transition: color var(--transition-fast);
       }
 
       .priority-item__copy p {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 4px;
         margin-top: 4px;
         color: var(--text-faint);
-        font-size: 0.61rem;
+        font-size: 0.59rem;
         font-weight: 590;
       }
 
@@ -2321,22 +2363,18 @@
       }
 
       /* ==========================================================
-         16. ATENCIÓN REQUERIDA
+         16. ALERTAS DE SEGUIMIENTO
          ========================================================== */
-      .attention-card {
-        overflow: hidden;
-      }
-
       .attention-card__intro {
         display: flex;
         align-items: center;
         gap: 8px;
-        padding: 12px 17px;
+        padding: 12px 16px;
         color: var(--amber-800);
         background: var(--amber-50);
         border-bottom: 1px solid var(--amber-100);
-        font-size: 0.66rem;
-        font-weight: 680;
+        font-size: 0.63rem;
+        font-weight: 690;
       }
 
       .attention-card__intro .icon {
@@ -2346,17 +2384,18 @@
 
       html[data-theme="dark"] .attention-card__intro {
         color: var(--amber-300);
-        background: rgb(245 158 11 / 0.1);
-        border-color: rgb(245 158 11 / 0.15);
+        background: rgb(245 158 11 / 0.11);
+        border-color: rgb(245 158 11 / 0.16);
       }
 
       .attention-list {
         display: grid;
-        padding: 5px 17px 12px;
+        padding: 5px 16px 11px;
       }
 
       .attention-item {
         display: flex;
+        min-width: 0;
         align-items: center;
         gap: 10px;
         padding: 12px 1px;
@@ -2376,45 +2415,45 @@
         display: block;
         overflow: hidden;
         color: var(--text-strong);
-        font-size: 0.7rem;
+        font-size: 0.69rem;
         font-weight: 730;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .attention-item__copy p {
-        margin-top: 2px;
         overflow: hidden;
+        margin-top: 2px;
         color: var(--text-muted);
-        font-size: 0.61rem;
+        font-size: 0.59rem;
         font-weight: 580;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
       .attention-item__metric {
-        min-width: 37px;
+        min-width: 36px;
         color: var(--rose-600);
-        font-size: 0.66rem;
-        font-weight: 780;
+        font-size: 0.65rem;
+        font-weight: 790;
         text-align: right;
       }
 
       .attention-card__footer {
-        padding: 0 17px 16px;
+        padding: 0 16px 16px;
       }
 
       /* ==========================================================
          17. PLANIFICACIÓN
          ========================================================== */
       .planning-card__body {
-        padding: 20px 21px 22px;
+        padding: 20px;
       }
 
       .planning-progress {
         display: grid;
         grid-template-columns: 190px minmax(0, 1fr);
-        gap: 24px;
+        gap: 23px;
         align-items: center;
       }
 
@@ -2427,9 +2466,9 @@
         color: #ffffff;
         background:
           radial-gradient(
-            circle at 85% 12%,
-            rgb(147 197 253 / 0.32),
-            transparent 33%
+            circle at 84% 14%,
+            rgb(147 197 253 / 0.3),
+            transparent 34%
           ),
           linear-gradient(135deg, var(--blue-700), var(--indigo-600));
         border-radius: 14px;
@@ -2437,8 +2476,8 @@
 
       .planning-progress__score small {
         margin-bottom: 5px;
-        color: rgb(219 234 254 / 0.82);
-        font-size: 0.63rem;
+        color: rgb(219 234 254 / 0.84);
+        font-size: 0.61rem;
         font-weight: 650;
       }
 
@@ -2451,9 +2490,10 @@
 
       .planning-progress__score span {
         margin-top: 7px;
-        color: rgb(239 246 255 / 0.83);
-        font-size: 0.64rem;
+        color: rgb(239 246 255 / 0.84);
+        font-size: 0.62rem;
         font-weight: 610;
+        line-height: 1.4;
       }
 
       .planning-groups {
@@ -2463,18 +2503,22 @@
 
       .planning-group {
         display: grid;
-        grid-template-columns: minmax(100px, 1fr) minmax(100px, 2fr) 37px;
-        gap: 12px;
+        grid-template-columns: minmax(108px, 1fr) minmax(90px, 2fr) 37px;
+        gap: 11px;
         align-items: center;
       }
 
       .planning-group__name {
+        overflow: hidden;
         color: var(--text);
-        font-size: 0.68rem;
+        font-size: 0.66rem;
         font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .planning-group__bar {
+        display: block;
         height: 8px;
         overflow: hidden;
         background: var(--surface-muted);
@@ -2490,8 +2534,8 @@
 
       .planning-group__percent {
         color: var(--text-muted);
-        font-size: 0.64rem;
-        font-weight: 730;
+        font-size: 0.62rem;
+        font-weight: 740;
         text-align: right;
       }
 
@@ -2551,17 +2595,17 @@
 
       html[data-theme="dark"] .activity-item__dot--blue {
         color: var(--blue-300);
-        background: rgb(59 130 246 / 0.13);
+        background: rgb(59 130 246 / 0.14);
       }
 
       html[data-theme="dark"] .activity-item__dot--green {
         color: var(--emerald-300);
-        background: rgb(16 185 129 / 0.13);
+        background: rgb(16 185 129 / 0.14);
       }
 
       html[data-theme="dark"] .activity-item__dot--violet {
         color: #ddd6fe;
-        background: rgb(139 92 246 / 0.13);
+        background: rgb(139 92 246 / 0.14);
       }
 
       .activity-item__copy {
@@ -2570,8 +2614,8 @@
 
       .activity-item__copy p {
         color: var(--text);
-        font-size: 0.68rem;
-        line-height: 1.48;
+        font-size: 0.66rem;
+        line-height: 1.5;
       }
 
       .activity-item__copy p strong {
@@ -2583,22 +2627,12 @@
         display: block;
         margin-top: 3px;
         color: var(--text-faint);
-        font-size: 0.6rem;
+        font-size: 0.58rem;
         font-weight: 590;
       }
 
       /* ==========================================================
-         19. NAVEGACIÓN MÓVIL
-         ========================================================== */
-      .mobile-brand,
-      .mobile-menu-toggle,
-      .mobile-bottom-nav,
-      .mobile-sidebar-backdrop {
-        display: none;
-      }
-
-      /* ==========================================================
-         20. MODAL DE ASISTENCIA
+         19. MODALES
          ========================================================== */
       .modal-backdrop {
         position: fixed;
@@ -2607,7 +2641,7 @@
         display: grid;
         padding: 24px;
         place-items: center;
-        background: rgb(6 15 31 / 0.62);
+        background: rgb(5 14 30 / 0.64);
         opacity: 0;
         pointer-events: none;
         transition: opacity var(--transition-normal);
@@ -2618,7 +2652,7 @@
         pointer-events: auto;
       }
 
-      .attendance-modal {
+      .modal {
         width: min(100%, 610px);
         max-height: min(760px, calc(100dvh - 48px));
         overflow: hidden;
@@ -2627,33 +2661,34 @@
         border-radius: var(--radius-xl);
         box-shadow: var(--shadow-xl);
         opacity: 0;
-        transform: translateY(16px) scale(0.985);
+        transform: translateY(18px) scale(0.985);
         transition:
           opacity var(--transition-normal),
           transform var(--transition-normal);
       }
 
-      .modal-backdrop.is-open .attendance-modal {
+      .modal-backdrop.is-open .modal {
         opacity: 1;
         transform: translateY(0) scale(1);
       }
 
-      .attendance-modal__header {
+      .modal__header {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 16px;
-        padding: 23px 24px 19px;
+        gap: 15px;
+        padding: 21px 23px 18px;
         border-bottom: 1px solid var(--line);
       }
 
-      .attendance-modal__title-group {
+      .modal__title-group {
         display: flex;
+        min-width: 0;
         align-items: center;
-        gap: 12px;
+        gap: 11px;
       }
 
-      .attendance-modal__title-icon {
+      .modal__title-icon {
         display: grid;
         width: 39px;
         height: 39px;
@@ -2664,28 +2699,27 @@
         border-radius: 11px;
       }
 
-      .attendance-modal__title-icon .icon {
-        width: 21px;
-        height: 21px;
-      }
-
-      .attendance-modal__header h2 {
+      .modal__title-group h2 {
         color: var(--text-strong);
-        font-size: 1rem;
+        font-size: 0.98rem;
         font-weight: 790;
         letter-spacing: -0.035em;
       }
 
-      .attendance-modal__header p {
+      .modal__title-group p {
         margin-top: 3px;
+        overflow: hidden;
         color: var(--text-muted);
-        font-size: 0.68rem;
+        font-size: 0.65rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .modal-close {
         display: grid;
         width: 34px;
         height: 34px;
+        flex: 0 0 auto;
         padding: 0;
         place-items: center;
         color: var(--text-muted);
@@ -2703,17 +2737,17 @@
       }
 
       .attendance-modal__body {
-        max-height: calc(min(760px, 100dvh - 48px) - 177px);
-        padding: 18px 24px;
+        max-height: calc(min(760px, 100dvh - 48px) - 173px);
+        padding: 17px 23px;
         overflow-y: auto;
       }
 
       .attendance-summary {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 8px;
         padding: 12px;
-        margin-bottom: 16px;
+        margin-bottom: 15px;
         background: var(--surface-soft);
         border: 1px solid var(--line);
         border-radius: 12px;
@@ -2726,7 +2760,7 @@
       .attendance-summary__item strong {
         display: block;
         color: var(--text-strong);
-        font-size: 0.95rem;
+        font-size: 0.94rem;
         font-weight: 800;
         letter-spacing: -0.04em;
       }
@@ -2735,7 +2769,7 @@
         display: block;
         margin-top: 1px;
         color: var(--text-muted);
-        font-size: 0.57rem;
+        font-size: 0.56rem;
         font-weight: 650;
       }
 
@@ -2745,6 +2779,7 @@
 
       .attendance-student {
         display: flex;
+        min-width: 0;
         align-items: center;
         gap: 10px;
         padding: 10px 1px;
@@ -2764,8 +2799,8 @@
         display: block;
         overflow: hidden;
         color: var(--text-strong);
-        font-size: 0.72rem;
-        font-weight: 720;
+        font-size: 0.71rem;
+        font-weight: 730;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
@@ -2774,7 +2809,7 @@
         display: block;
         margin-top: 2px;
         color: var(--text-faint);
-        font-size: 0.59rem;
+        font-size: 0.58rem;
       }
 
       .attendance-select {
@@ -2793,10 +2828,16 @@
         background-size: 4px 4px, 4px 4px;
         border: 1px solid var(--emerald-100);
         border-radius: 7px;
-        appearance: none;
         cursor: pointer;
-        font-size: 0.62rem;
+        font-size: 0.6rem;
         font-weight: 720;
+        appearance: none;
+      }
+
+      html[data-theme="dark"] .attendance-select {
+        color: var(--emerald-300);
+        background-color: rgb(16 185 129 / 0.14);
+        border-color: rgb(16 185 129 / 0.22);
       }
 
       .attendance-select option {
@@ -2804,47 +2845,24 @@
         background: #ffffff;
       }
 
-      html[data-theme="dark"] .attendance-select {
-        color: var(--emerald-300);
-        background-color: rgb(16 185 129 / 0.13);
-        border-color: rgb(16 185 129 / 0.2);
-      }
-
-      .attendance-modal__footer {
+      .modal__footer {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding: 16px 24px;
+        padding: 15px 23px;
         border-top: 1px solid var(--line);
       }
 
-      .attendance-modal__footer p {
+      .modal__footer p {
         color: var(--text-faint);
-        font-size: 0.61rem;
+        font-size: 0.59rem;
         font-weight: 570;
+        line-height: 1.45;
       }
 
-      /* ==========================================================
-         21. PALETA DE BÚSQUEDA
-         ========================================================== */
       .command-modal {
-        width: min(100%, 590px);
-        overflow: hidden;
-        background: var(--surface);
-        border: 1px solid var(--line);
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-xl);
-        opacity: 0;
-        transform: translateY(-10px) scale(0.98);
-        transition:
-          opacity var(--transition-normal),
-          transform var(--transition-normal);
-      }
-
-      .modal-backdrop.is-open .command-modal {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        width: min(100%, 580px);
       }
 
       .command-search {
@@ -2861,12 +2879,13 @@
 
       .command-search input {
         width: 100%;
+        min-width: 0;
         padding: 0;
         color: var(--text-strong);
         background: transparent;
         border: 0;
         outline: 0;
-        font-size: 0.86rem;
+        font-size: 0.84rem;
         font-weight: 620;
       }
 
@@ -2883,7 +2902,7 @@
       .command-list__label {
         padding: 7px 8px 4px;
         color: var(--text-faint);
-        font-size: 0.59rem;
+        font-size: 0.57rem;
         font-weight: 760;
         letter-spacing: 0.09em;
         text-transform: uppercase;
@@ -2921,27 +2940,34 @@
         border-radius: 8px;
       }
 
-      .command-item strong {
-        display: block;
-        color: var(--text-strong);
-        font-size: 0.7rem;
-        font-weight: 740;
+      .command-item__copy {
+        min-width: 0;
+        flex: 1;
       }
 
-      .command-item small {
+      .command-item__copy strong {
         display: block;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.69rem;
+        font-weight: 740;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .command-item__copy small {
+        display: block;
+        overflow: hidden;
         margin-top: 1px;
         color: var(--text-faint);
-        font-size: 0.58rem;
+        font-size: 0.57rem;
         font-weight: 580;
-      }
-
-      .command-item kbd {
-        margin-left: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       /* ==========================================================
-         22. TOASTS
+         20. TOASTS
          ========================================================== */
       .toast-container {
         position: fixed;
@@ -2966,17 +2992,11 @@
         box-shadow: var(--shadow-lg);
         opacity: 0;
         transform: translateY(12px);
-        animation: toast-in 260ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation: toast-in 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
 
-      .toast--success .toast__icon {
-        color: var(--emerald-600);
-        background: var(--emerald-50);
-      }
-
-      .toast--info .toast__icon {
-        color: var(--blue-600);
-        background: var(--blue-50);
+      .toast.is-leaving {
+        animation: toast-out 200ms ease forwards;
       }
 
       .toast__icon {
@@ -2985,23 +3005,21 @@
         height: 29px;
         flex: 0 0 auto;
         place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
         border-radius: 8px;
       }
 
-      .toast__icon .icon {
-        width: 16px;
-        height: 16px;
+      .toast--success .toast__icon {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
       }
 
       .toast p {
         color: var(--text);
-        font-size: 0.71rem;
+        font-size: 0.69rem;
         font-weight: 650;
         line-height: 1.4;
-      }
-
-      .toast.is-leaving {
-        animation: toast-out 200ms ease forwards;
       }
 
       @keyframes toast-in {
@@ -3019,36 +3037,56 @@
       }
 
       /* ==========================================================
-         23. RESPONSIVE · LAPTOP Y TABLET HORIZONTAL
+         21. RESPONSIVE · TABLET / LAPTOP
          ========================================================== */
-      @media (max-width: 1250px) {
+      @media (max-width: 1240px) {
         .main-inner {
-          padding: 25px 24px 46px;
+          padding: 25px 24px 48px;
         }
 
         .topbar {
+          gap: 16px;
           padding: 0 24px;
         }
 
-        .dashboard-grid {
-          grid-template-columns: minmax(0, 1.45fr) minmax(285px, 0.75fr);
+        .metrics-grid {
+          gap: 12px;
+        }
+
+        .metric-card {
+          padding: 16px;
+        }
+
+        .metric-card__value {
+          font-size: 1.52rem;
+        }
+
+        .content-grid,
+        .bottom-grid {
           gap: 18px;
         }
 
-        .dashboard-grid__main,
-        .dashboard-grid__aside,
-        .dashboard-bottom {
+        .content-grid__main,
+        .content-grid__aside {
           gap: 18px;
         }
 
-        .dashboard-bottom {
+        .bottom-grid {
           margin-top: 18px;
         }
       }
 
       @media (max-width: 1120px) and (min-width: 761px) {
         body {
-          --sidebar-width: 92px;
+          --sidebar-width: 84px;
+        }
+
+        body.sidebar-is-compact {
+          --sidebar-width: 84px;
+        }
+
+        .sidebar__collapse {
+          display: none;
         }
 
         .sidebar__brand,
@@ -3062,9 +3100,8 @@
         .sidebar__workspace-copy,
         .sidebar__group-label,
         .sidebar__nav-link span:not(.sidebar__nav-badge),
-        .sidebar__help span,
         .sidebar__nav-badge,
-        .sidebar__collapse {
+        .sidebar__help span {
           display: none;
         }
 
@@ -3083,98 +3120,69 @@
           padding-left: 10px;
         }
 
-        .sidebar__nav-link {
-          position: relative;
+        .topbar {
+          grid-template-columns: minmax(120px, 1fr) minmax(200px, 290px) auto;
         }
 
-        .sidebar__nav-link::after,
-        .sidebar__help::after {
-          position: absolute;
-          z-index: 300;
-          left: calc(100% + 11px);
-          padding: 6px 8px;
-          color: #ffffff;
-          visibility: hidden;
-          background: var(--slate-900);
-          border-radius: 6px;
-          box-shadow: var(--shadow-md);
-          content: attr(data-tooltip);
-          font-size: 0.64rem;
-          font-weight: 680;
-          opacity: 0;
-          pointer-events: none;
-          transform: translateX(-5px);
-          transition:
-            opacity var(--transition-fast),
-            visibility var(--transition-fast),
-            transform var(--transition-fast);
+        .topbar__profile-copy,
+        .topbar__profile-button > .icon {
+          display: none;
         }
 
-        .sidebar__nav-link:hover::after,
-        .sidebar__help:hover::after {
-          visibility: visible;
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        .metrics-grid {
-          gap: 12px;
-        }
-
-        .metric-card {
-          padding: 16px;
-        }
-
-        .metric-card__value {
-          font-size: 1.52rem;
-        }
-
-        .dashboard-bottom {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* ==========================================================
-         24. RESPONSIVE · TABLET VERTICAL
-         ========================================================== */
-      @media (max-width: 940px) {
-        .topbar__crumbs {
-          min-width: auto;
-        }
-
-        .topbar__search {
-          width: min(100%, 260px);
+        .topbar__profile-button {
+          padding-right: 3px;
         }
 
         .metrics-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .dashboard-grid {
+        .content-grid {
           grid-template-columns: 1fr;
         }
 
-        .dashboard-grid__aside {
+        .content-grid__aside {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          align-items: start;
         }
 
-        .planning-progress {
-          grid-template-columns: 165px minmax(0, 1fr);
+        .bottom-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 930px) and (min-width: 761px) {
+        .dashboard-heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .heading-actions {
+          justify-content: flex-start;
+        }
+
+        .daily-banner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .daily-banner__summary {
+          min-width: 0;
         }
       }
 
       /* ==========================================================
-         25. RESPONSIVE · MÓVIL
+         22. RESPONSIVE · MÓVIL
          ========================================================== */
       @media (max-width: 760px) {
         :root {
           --sidebar-width: 0px;
-          --header-height: 64px;
+          --topbar-height: 64px;
         }
 
         body {
-          padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+          padding-bottom: calc(
+            var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom)
+          );
         }
 
         body.sidebar-is-compact {
@@ -3183,9 +3191,9 @@
 
         .sidebar {
           z-index: 450;
-          width: min(82vw, 294px);
+          width: min(83vw, 295px);
           transform: translateX(-105%);
-          box-shadow: 16px 0 40px rgb(0 0 0 / 0.28);
+          box-shadow: 16px 0 42px rgb(0 0 0 / 0.3);
         }
 
         body.mobile-sidebar-open .sidebar {
@@ -3195,16 +3203,16 @@
         .sidebar__brand,
         .sidebar__workspace {
           justify-content: flex-start;
-          padding-right: 19px;
-          padding-left: 19px;
+          padding-right: 18px;
+          padding-left: 18px;
         }
 
         .sidebar__brand-name,
         .sidebar__workspace-copy,
         .sidebar__group-label,
         .sidebar__nav-link span:not(.sidebar__nav-badge),
-        .sidebar__help span,
-        .sidebar__nav-badge {
+        .sidebar__nav-badge,
+        .sidebar__help span {
           display: initial;
         }
 
@@ -3227,7 +3235,7 @@
           z-index: 400;
           inset: 0;
           display: block;
-          background: rgb(4 13 28 / 0.52);
+          background: rgb(4 13 28 / 0.54);
           opacity: 0;
           pointer-events: none;
           transition: opacity var(--transition-normal);
@@ -3243,19 +3251,19 @@
         }
 
         .topbar {
-          gap: 10px;
-          padding: 0 16px;
-          background: rgb(244 247 251 / 0.88);
+          grid-template-columns: 38px minmax(0, 1fr) auto;
+          gap: 8px;
+          padding: 0 15px;
+          background: rgb(244 247 251 / 0.9);
         }
 
         html[data-theme="dark"] .topbar {
-          background: rgb(10 20 38 / 0.88);
+          background: rgb(9 20 38 / 0.9);
         }
 
         .mobile-brand {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
+          display: grid;
+          place-items: center;
         }
 
         .mobile-brand__mark {
@@ -3274,19 +3282,26 @@
           height: 21px;
         }
 
+        .mobile-menu-toggle {
+          display: grid;
+          width: 38px;
+          height: 38px;
+          padding: 0;
+          place-items: center;
+          color: var(--text-muted);
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          box-shadow: var(--shadow-xs);
+          cursor: pointer;
+        }
+
         .topbar__crumbs {
           display: none;
         }
 
-        .topbar__search {
-          flex: 1;
-          width: auto;
-          margin-left: 0;
-        }
-
         .topbar__search-button {
           min-height: 38px;
-          padding: 0 10px;
         }
 
         .topbar__search-button .keyboard-key {
@@ -3306,20 +3321,6 @@
           display: none;
         }
 
-        .mobile-menu-toggle {
-          display: grid;
-          width: 38px;
-          height: 38px;
-          padding: 0;
-          place-items: center;
-          color: var(--text-muted);
-          background: var(--surface);
-          border: 1px solid var(--line);
-          border-radius: 10px;
-          box-shadow: var(--shadow-xs);
-          cursor: pointer;
-        }
-
         .main-inner {
           padding: 20px 16px 26px;
         }
@@ -3331,43 +3332,46 @@
 
         .dashboard-heading__date {
           margin-bottom: 6px;
-          font-size: 0.64rem;
+          font-size: 0.62rem;
         }
 
         .dashboard-heading h1 {
-          font-size: clamp(1.58rem, 7vw, 2rem);
+          font-size: clamp(1.55rem, 7.4vw, 2rem);
         }
 
         .dashboard-heading__description {
           margin-top: 7px;
-          font-size: 0.8rem;
+          font-size: 0.79rem;
+          line-height: 1.58;
         }
 
         .heading-actions {
-          justify-content: flex-start;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           margin-top: 16px;
         }
 
         .heading-actions .button {
-          flex: 1;
+          width: 100%;
+          padding-inline: 10px;
         }
 
         .daily-banner {
           min-height: 0;
           align-items: flex-start;
           flex-direction: column;
-          gap: 17px;
-          padding: 21px 20px;
+          gap: 16px;
+          padding: 21px 19px;
           margin-bottom: 16px;
           border-radius: 18px;
         }
 
         .daily-banner__content h2 {
-          font-size: 1.04rem;
+          font-size: 1.03rem;
         }
 
         .daily-banner__content p {
-          font-size: 0.75rem;
+          font-size: 0.74rem;
         }
 
         .daily-banner__summary {
@@ -3376,6 +3380,7 @@
         }
 
         .metrics-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 11px;
           margin-bottom: 16px;
         }
@@ -3387,7 +3392,7 @@
         }
 
         .metric-card__label {
-          font-size: 0.64rem;
+          font-size: 0.62rem;
         }
 
         .metric-card__icon {
@@ -3403,39 +3408,43 @@
 
         .metric-card__value-row {
           gap: 5px;
-          margin-top: 13px;
+          margin-top: 12px;
         }
 
         .metric-card__value {
-          font-size: 1.45rem;
+          font-size: 1.42rem;
         }
 
         .metric-card__trend {
           padding: 0 5px;
-          font-size: 0.54rem;
+          font-size: 0.51rem;
         }
 
         .metric-card__detail {
-          font-size: 0.57rem;
+          font-size: 0.55rem;
         }
 
         .mini-sparkline {
-          width: 48px;
-          height: 20px;
+          width: 44px;
+          height: 19px;
         }
 
-        .dashboard-grid,
-        .dashboard-grid__main,
-        .dashboard-grid__aside,
-        .dashboard-bottom {
+        .content-grid,
+        .content-grid__main,
+        .content-grid__aside,
+        .bottom-grid {
           gap: 16px;
         }
 
-        .dashboard-grid__aside {
+        .content-grid {
           grid-template-columns: 1fr;
         }
 
-        .dashboard-bottom {
+        .content-grid__aside {
+          grid-template-columns: 1fr;
+        }
+
+        .bottom-grid {
           grid-template-columns: 1fr;
           margin-top: 16px;
         }
@@ -3445,7 +3454,7 @@
         }
 
         .card__header {
-          min-height: 62px;
+          min-height: 63px;
           padding: 15px 16px;
         }
 
@@ -3461,11 +3470,15 @@
         }
 
         .card__eyebrow {
-          font-size: 0.55rem;
+          font-size: 0.53rem;
         }
 
         .card__title {
-          font-size: 0.87rem;
+          font-size: 0.84rem;
+        }
+
+        .card__link {
+          font-size: 0.62rem;
         }
 
         .schedule-card__body {
@@ -3479,51 +3492,53 @@
         .schedule-day-tab {
           min-width: 45px;
           min-height: 46px;
-          font-size: 0.58rem;
+          font-size: 0.56rem;
         }
 
         .schedule-day-tab strong {
-          font-size: 0.77rem;
+          font-size: 0.75rem;
         }
 
         .schedule-item {
-          grid-template-columns: 42px minmax(0, 1fr);
+          grid-template-columns: 43px minmax(0, 1fr);
           gap: 9px;
           padding: 13px 0;
         }
 
         .schedule-item__time {
-          font-size: 0.65rem;
+          font-size: 0.64rem;
         }
 
         .schedule-item__content h4 {
-          font-size: 0.73rem;
+          font-size: 0.72rem;
         }
 
         .schedule-item__content p {
-          font-size: 0.59rem;
+          font-size: 0.57rem;
         }
 
         .schedule-item__action {
-          grid-column: 2;
+          grid-column 2;
           min-width: 0;
           margin-top: -2px;
+          text-align: left;
         }
 
         .schedule-item__action .button {
           min-height: 29px;
-          padding: 0 8px;
-          font-size: 0.61rem;
-               .schedule-card__footer {
+          font-size: 0.59rem;
+        }
+
+        .schedule-card__footer {
           padding: 12px 16px 14px;
         }
 
         .performance-card__body {
-          padding: 16px 16px 14px;
+          padding: 16px;
         }
 
         .performance-summary {
-          margin-bottom: 13px;
+          margin-bottom: 14px;
         }
 
         .performance-summary__circle {
@@ -3534,23 +3549,27 @@
         .performance-summary__circle-inner {
           width: 36px;
           height: 36px;
-          font-size: 0.61rem;
-        }
-
-        .performance-summary__copy p {
           font-size: 0.6rem;
         }
 
+        .performance-summary__copy p {
+          font-size: 0.57rem;
+        }
+
         .performance-summary__copy strong {
-          font-size: 0.76rem;
+          font-size: 0.72rem;
         }
 
         .performance-summary__trend {
-          font-size: 0.58rem;
+          font-size: 0.56rem;
         }
 
         .performance-chart {
-          height: 151px;
+          height: 150px;
+        }
+
+        .performance-chart__labels {
+          font-size: 0.49rem;
         }
 
         .performance-legend {
@@ -3559,6 +3578,11 @@
         }
 
         .performance-legend span {
+          font-size: 0.54rem;
+        }
+
+        .period-select {
+          width: 108px;
           font-size: 0.56rem;
         }
 
@@ -3566,13 +3590,9 @@
           padding: 5px 13px 10px;
         }
 
-        .priority-item {
-          padding: 11px 3px;
-        }
-
         .attention-card__intro {
           padding: 11px 14px;
-          font-size: 0.62rem;
+          font-size: 0.6rem;
         }
 
         .attention-list {
@@ -3590,21 +3610,21 @@
         }
 
         .planning-progress__score {
-          min-height: 100px;
+          min-height: 101px;
           padding: 17px;
         }
 
         .planning-progress__score strong {
-          font-size: 1.75rem;
+          font-size: 1.72rem;
         }
 
         .planning-group {
-          grid-template-columns: 85px minmax(60px, 1fr) 33px;
-          gap: 9px;
+          grid-template-columns: 86px minmax(60px, 1fr) 33px;
+          gap: 8px;
         }
 
         .planning-group__name {
-          font-size: 0.63rem;
+          font-size: 0.61rem;
         }
 
         .activity-card__body {
@@ -3618,18 +3638,20 @@
           bottom: 0;
           left: 0;
           display: grid;
-          height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+          height: calc(
+            var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom)
+          );
           grid-template-columns: repeat(5, 1fr);
           padding: 7px 7px env(safe-area-inset-bottom);
-          background: rgb(255 255 255 / 0.93);
+          background: rgb(255 255 255 / 0.94);
           border-top: 1px solid var(--line);
-          box-shadow: 0 -6px 20px rgb(15 23 42 / 0.07);
+          box-shadow: 0 -6px 20px rgb(15 23 42 / 0.08);
           backdrop-filter: blur(14px);
           -webkit-backdrop-filter: blur(14px);
         }
 
         html[data-theme="dark"] .mobile-bottom-nav {
-          background: rgb(16 30 52 / 0.94);
+          background: rgb(16 32 55 / 0.95);
         }
 
         .mobile-bottom-nav a,
@@ -3642,7 +3664,7 @@
           color: var(--text-faint);
           background: transparent;
           cursor: pointer;
-          font-size: 0.55rem;
+          font-size: 0.53rem;
           font-weight: 650;
         }
 
@@ -3665,10 +3687,6 @@
           background: var(--blue-600);
           border-radius: 0 0 4px 4px;
           content: "";
-        }
-
-        .mobile-bottom-nav__create {
-          position: relative;
         }
 
         .mobile-bottom-nav__create span {
@@ -3694,58 +3712,88 @@
           padding: 14px;
         }
 
-        .attendance-modal {
+        .modal {
           max-height: calc(100dvh - 28px);
           border-radius: 18px;
         }
 
-        .attendance-modal__header {
+        .modal__header {
           padding: 18px 17px 15px;
         }
 
+        .modal__title-group h2 {
+          font-size: 0.89rem;
+        }
+
+        .modal__title-group p {
+          font-size: 0.6rem;
+        }
+
         .attendance-modal__body {
-          max-height: calc(100dvh - 184px);
+          max-height: calc(100dvh - 182px);
           padding: 15px 17px;
         }
 
-        .attendance-modal__footer {
+        .modal__footer {
           align-items: flex-start;
           flex-direction: column;
           padding: 13px 17px;
         }
 
-        .attendance-modal__footer .button {
+        .modal__footer .button {
           width: 100%;
-        }
-
-        .command-modal {
-          border-radius: 16px;
         }
 
         .toast-container {
           right: 12px;
-          bottom: calc(var(--mobile-nav-height) + 13px + env(safe-area-inset-bottom));
+          bottom: calc(
+            var(--mobile-bottom-nav-height) +
+              13px +
+              env(safe-area-inset-bottom)
+          );
           width: calc(100% - 24px);
         }
       }
 
       /* ==========================================================
-         26. RESPONSIVE · TELÉFONOS PEQUEÑOS
+         23. RESPONSIVE · MÓVILES PEQUEÑOS
          ========================================================== */
-      @media (max-width: 420px) {
-        .topbar__search-button span {
-          display: none;
+      @media (max-width: 430px) {
+        .topbar {
+          grid-template-columns: 38px 38px minmax(0, 1fr) auto;
+        }
+
+        .mobile-brand {
+          grid-column: 1;
+        }
+
+        .mobile-menu-toggle {
+          grid-column: 2;
+        }
+
+        .topbar__search {
+          grid-column: 3;
         }
 
         .topbar__search-button {
           justify-content: center;
-          width: 40px;
           padding: 0;
         }
 
-        .topbar__search {
-          flex: 0 0 auto;
-          width: 40px;
+        .topbar__search-button span {
+          display: none;
+        }
+
+        .topbar__actions {
+          grid-column: 4;
+        }
+
+        .topbar__actions > .menu-wrapper {
+          display: none;
+        }
+
+        .heading-actions {
+          grid-template-columns: 1fr;
         }
 
         .metrics-grid {
@@ -3753,28 +3801,37 @@
         }
 
         .metric-card {
-          min-height: 116px;
+          min-height: 112px;
         }
 
         .metric-card__value-row {
-          margin-top: 9px;
+          margin-top: 8px;
         }
 
         .daily-banner__summary {
           padding: 11px;
         }
 
-        .heading-actions {
-          display: grid;
-          grid-template-columns: 1fr;
+        .performance-summary {
+          align-items: flex-start;
+          flex-direction: column;
         }
 
-        .heading-actions .button {
-          width: 100%;
+        .performance-summary__trend {
+          margin-left: 57px;
         }
 
-        .schedule-item__action .button {
-          width: 100%;
+        .card__header {
+          align-items: flex-start;
+        }
+
+        .card__link {
+          margin-top: 3px;
+        }
+
+        .period-select {
+          width: 96px;
+          font-size: 0.52rem;
         }
 
         .attendance-summary {
@@ -3785,7 +3842,7 @@
         .attendance-select {
           min-width: 77px;
           padding-left: 6px;
-          font-size: 0.56rem;
+          font-size: 0.55rem;
         }
 
         .attendance-student {
@@ -3800,7 +3857,7 @@
       }
 
       /* ==========================================================
-         27. ACCESIBILIDAD · REDUCCIÓN DE MOVIMIENTO
+         24. ACCESIBILIDAD
          ========================================================== */
       @media (prefers-reduced-motion: reduce) {
         *,
@@ -3821,7 +3878,7 @@
     </a>
 
     <!-- ==========================================================
-         SPRITE DE ICONOS SVG LOCAL
+         ICONOS SVG LOCALES
          ========================================================== -->
     <svg
       class="sr-only"
@@ -3830,11 +3887,6 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <linearGradient id="performance-area-gradient" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.75" />
-          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0" />
-        </linearGradient>
-
         <symbol id="icon-graduation" viewBox="0 0 24 24">
           <path
             d="m3 9 9-5 9 5-9 5-9-5Z"
@@ -4124,17 +4176,6 @@
           />
         </symbol>
 
-        <symbol id="icon-chevron-right" viewBox="0 0 24 24">
-          <path
-            d="m9 18 6-6-6-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </symbol>
-
         <symbol id="icon-chevron-down" viewBox="0 0 24 24">
           <path
             d="m6 9 6 6 6-6"
@@ -4224,25 +4265,6 @@
           />
         </symbol>
 
-        <symbol id="icon-trending-down" viewBox="0 0 24 24">
-          <path
-            d="m4 8 5 5 3.2-3.2L20 17.5"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-          <path
-            d="M15 17.5h5v-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </symbol>
-
         <symbol id="icon-alert" viewBox="0 0 24 24">
           <path
             d="M10.4 4.2 2.9 17a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.6 4.2a1.9 1.9 0 0 0-3.2 0Z"
@@ -4303,6 +4325,24 @@
           />
         </symbol>
 
+        <symbol id="icon-user" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="8"
+            r="3.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M5.5 20c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
         <symbol id="icon-logout" viewBox="0 0 24 24">
           <path
             d="M10 5H5.5A2.5 2.5 0 0 0 3 7.5v9A2.5 2.5 0 0 0 5.5 19H10"
@@ -4321,40 +4361,23 @@
             stroke-width="1.8"
           />
         </symbol>
-
-        <symbol id="icon-user" viewBox="0 0 24 24">
-          <circle
-            cx="12"
-            cy="8"
-            r="3.2"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.8"
-          />
-          <path
-            d="M5.5 20c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-width="1.8"
-          />
-        </symbol>
       </defs>
     </svg>
 
-    <!-- ==========================================================
-         BACKDROP DE MENÚ MÓVIL
-         ========================================================== -->
     <div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop"></div>
 
     <div class="app-shell">
       <!-- ========================================================
-           SIDEBAR PRINCIPAL
+           SIDEBAR
            ======================================================== -->
-      <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
-        <a class="sidebar__brand" href="dashboard.html" aria-label="DOCENCIA360, panel principal">
+      <aside class="sidebar" aria-label="Navegación principal">
+        <a
+          class="sidebar__brand"
+          href="dashboard.html"
+          aria-label="DOCENCIA360, panel principal"
+        >
           <span class="sidebar__brand-mark" aria-hidden="true">
-            <svg><use href="#icon-graduation"></use></svg>
+            <svg class="icon"><use href="#icon-graduation"></use></svg>
           </span>
           <span class="sidebar__brand-name">DOCENCIA<strong>360</strong></span>
         </a>
@@ -4363,6 +4386,7 @@
           <span class="sidebar__workspace-icon" aria-hidden="true">
             <svg class="icon"><use href="#icon-layers"></use></svg>
           </span>
+
           <div class="sidebar__workspace-copy">
             <small>ESPACIO ACTIVO</small>
             <strong>Instituto Horizonte</strong>
@@ -4380,14 +4404,13 @@
         </button>
 
         <div class="sidebar__content">
-          <section class="sidebar__group" aria-labelledby="nav-general">
-            <h2 class="sidebar__group-label" id="nav-general">Principal</h2>
+          <section class="sidebar__group" aria-labelledby="sidebar-general">
+            <h2 class="sidebar__group-label" id="sidebar-general">Principal</h2>
 
             <nav class="sidebar__nav">
               <a
                 class="sidebar__nav-link sidebar__nav-link--active"
                 href="dashboard.html"
-                data-tooltip="Panel principal"
                 aria-current="page"
               >
                 <svg class="icon" aria-hidden="true">
@@ -4396,14 +4419,14 @@
                 <span>Panel principal</span>
               </a>
 
-              <a class="sidebar__nav-link" href="clases.html" data-tooltip="Mis clases">
+              <a class="sidebar__nav-link" href="clases.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-calendar"></use>
                 </svg>
                 <span>Mis clases</span>
               </a>
 
-              <a class="sidebar__nav-link" href="estudiantes.html" data-tooltip="Estudiantes">
+              <a class="sidebar__nav-link" href="estudiantes.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-users"></use>
                 </svg>
@@ -4412,26 +4435,28 @@
             </nav>
           </section>
 
-          <section class="sidebar__group" aria-labelledby="nav-pedagogia">
-            <h2 class="sidebar__group-label" id="nav-pedagogia">Gestión pedagógica</h2>
+          <section class="sidebar__group" aria-labelledby="sidebar-pedagogia">
+            <h2 class="sidebar__group-label" id="sidebar-pedagogia">
+              Gestión pedagógica
+            </h2>
 
             <nav class="sidebar__nav">
-              <a class="sidebar__nav-link" href="planificacion.html" data-tooltip="Planificación">
+              <a class="sidebar__nav-link" href="planificacion.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-book"></use>
                 </svg>
                 <span>Planificación</span>
               </a>
 
-              <a class="sidebar__nav-link" href="evaluaciones.html" data-tooltip="Evaluaciones">
+              <a class="sidebar__nav-link" href="evaluaciones.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-clipboard"></use>
                 </svg>
                 <span>Evaluaciones</span>
-                <span class="sidebar__nav-badge" aria-label="8 evaluaciones pendientes">8</span>
+                <span class="sidebar__nav-badge" aria-label="8 pendientes">8</span>
               </a>
 
-              <a class="sidebar__nav-link" href="recursos.html" data-tooltip="Recursos">
+              <a class="sidebar__nav-link" href="recursos.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-folder"></use>
                 </svg>
@@ -4440,18 +4465,18 @@
             </nav>
           </section>
 
-          <section class="sidebar__group" aria-labelledby="nav-analitica">
-            <h2 class="sidebar__group-label" id="nav-analitica">Análisis</h2>
+          <section class="sidebar__group" aria-labelledby="sidebar-reportes">
+            <h2 class="sidebar__group-label" id="sidebar-reportes">Análisis</h2>
 
             <nav class="sidebar__nav">
-              <a class="sidebar__nav-link" href="reportes.html" data-tooltip="Reportes">
+              <a class="sidebar__nav-link" href="reportes.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-chart"></use>
                 </svg>
                 <span>Reportes</span>
               </a>
 
-              <a class="sidebar__nav-link" href="configuracion.html" data-tooltip="Configuración">
+              <a class="sidebar__nav-link" href="configuracion.html">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-settings"></use>
                 </svg>
@@ -4462,7 +4487,7 @@
         </div>
 
         <footer class="sidebar__footer">
-          <a class="sidebar__help" href="#ayuda" data-tooltip="Centro de ayuda">
+          <a class="sidebar__help" href="#ayuda">
             <svg class="icon" aria-hidden="true">
               <use href="#icon-help"></use>
             </svg>
@@ -4475,11 +4500,12 @@
            ÁREA PRINCIPAL
            ======================================================== -->
       <section class="app-main">
-        <!-- ======================================================
-             TOPBAR
-             ====================================================== -->
         <header class="topbar" id="topbar">
-          <a class="mobile-brand" href="dashboard.html" aria-label="DOCENCIA360, panel principal">
+          <a
+            class="mobile-brand"
+            href="dashboard.html"
+            aria-label="DOCENCIA360, panel principal"
+          >
             <span class="mobile-brand__mark" aria-hidden="true">
               <svg class="icon"><use href="#icon-graduation"></use></svg>
             </span>
@@ -4492,7 +4518,9 @@
             aria-label="Abrir navegación principal"
             aria-expanded="false"
           >
-            <svg class="icon"><use href="#icon-menu"></use></svg>
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-menu"></use>
+            </svg>
           </button>
 
           <div class="topbar__crumbs">
@@ -4531,7 +4559,7 @@
               </svg>
             </button>
 
-            <div style="position: relative">
+            <div class="menu-wrapper">
               <button
                 class="topbar__action"
                 id="notification-toggle"
@@ -4543,7 +4571,11 @@
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-bell"></use>
                 </svg>
-                <span class="topbar__notification-dot" aria-hidden="true"></span>
+                <span
+                  class="topbar__notification-dot"
+                  id="notification-dot"
+                  aria-hidden="true"
+                ></span>
               </button>
 
               <div
@@ -4554,31 +4586,41 @@
               >
                 <div class="floating-menu__header">
                   <h3>Notificaciones</h3>
-                  <button type="button" id="mark-notifications-read">
-                    Marcar como leídas
+                  <button id="mark-notifications-read" type="button">
+                    Marcar leídas
                   </button>
                 </div>
 
                 <div class="notification-list">
                   <article class="notification-item">
-                    <span class="notification-item__icon notification-item__icon--amber">
-                      <svg class="icon icon--sm" aria-hidden="true">
+                    <span
+                      class="notification-item__icon notification-item__icon--amber"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
                         <use href="#icon-clipboard"></use>
                       </svg>
                     </span>
+
                     <div class="notification-item__copy">
                       <strong>Evaluaciones pendientes</strong>
-                      <p>Tienes 8 evaluaciones de Matemáticas Aplicadas por revisar.</p>
+                      <p>
+                        Tienes 8 evaluaciones de Matemáticas Aplicadas por revisar.
+                      </p>
                       <time datetime="2025-10-15T08:10">Hace 10 minutos</time>
                     </div>
                   </article>
 
                   <article class="notification-item">
-                    <span class="notification-item__icon notification-item__icon--blue">
-                      <svg class="icon icon--sm" aria-hidden="true">
+                    <span
+                      class="notification-item__icon notification-item__icon--blue"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
                         <use href="#icon-calendar"></use>
                       </svg>
                     </span>
+
                     <div class="notification-item__copy">
                       <strong>Clase próxima a comenzar</strong>
                       <p>Matemáticas Aplicadas · 10° A inicia a las 08:00.</p>
@@ -4587,11 +4629,15 @@
                   </article>
 
                   <article class="notification-item">
-                    <span class="notification-item__icon notification-item__icon--green">
-                      <svg class="icon icon--sm" aria-hidden="true">
+                    <span
+                      class="notification-item__icon notification-item__icon--green"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
                         <use href="#icon-chart"></use>
                       </svg>
                     </span>
+
                     <div class="notification-item__copy">
                       <strong>Progreso actualizado</strong>
                       <p>El grupo 9° B mejoró su nivel de logro esta semana.</p>
@@ -4601,14 +4647,17 @@
                 </div>
 
                 <div class="floating-menu__footer">
-                  <a class="button button--secondary button--small button--full" href="reportes.html">
+                  <a
+                    class="button button--secondary button--small button--full"
+                    href="reportes.html"
+                  >
                     Ver todas las notificaciones
                   </a>
                 </div>
               </div>
             </div>
 
-            <div class="topbar__profile">
+            <div class="topbar__profile menu-wrapper">
               <button
                 class="topbar__profile-button"
                 id="profile-toggle"
@@ -4618,18 +4667,28 @@
                 aria-controls="profile-menu"
               >
                 <span class="avatar avatar--ana" aria-hidden="true">AM</span>
+
                 <span class="topbar__profile-copy">
                   <strong>Ana Martínez</strong>
                   <small>Docente</small>
                 </span>
+
                 <svg class="icon icon--xs" aria-hidden="true">
                   <use href="#icon-chevron-down"></use>
                 </svg>
               </button>
 
-              <div class="floating-menu profile-menu" id="profile-menu" role="dialog" aria-label="Menú de perfil">
+              <div
+                class="floating-menu profile-menu"
+                id="profile-menu"
+                role="dialog"
+                aria-label="Menú de perfil"
+              >
                 <div class="profile-menu__identity">
-                  <span class="avatar avatar--large avatar--ana" aria-hidden="true">AM</span>
+                  <span class="avatar avatar--large avatar--ana" aria-hidden="true">
+                    AM
+                  </span>
+
                   <span>
                     <strong>Ana Martínez</strong>
                     <small>ana.martinez@horizonte.edu</small>
@@ -4651,11 +4710,14 @@
                     Preferencias
                   </a>
 
-                  <button type="button" data-demo-action="La sesión real se integrará posteriormente.">
-                    <svg class="icon icon--sm" aria-hidden="true">
+                  <button
+                    type="button"
+                    data-demo-action="El cierre de sesión real se integrará junto con la autenticación."
+                  >
+                    <svg class="icon icon--sm danger" aria-hidden="true">
                       <use href="#icon-logout"></use>
                     </svg>
-                    <span class="danger-link">Cerrar sesión</span>
+                    <span class="danger">Cerrar sesión</span>
                   </button>
                 </div>
               </div>
@@ -4663,17 +4725,17 @@
           </div>
         </header>
 
-        <!-- ======================================================
-             CONTENIDO
-             ====================================================== -->
         <main class="main-inner" id="contenido-principal">
+          <!-- ====================================================
+               ENCABEZADO
+               ==================================================== -->
           <section class="dashboard-heading" aria-labelledby="dashboard-title">
-            <div>
+            <div class="dashboard-heading__content">
               <p class="dashboard-heading__date">
                 <svg class="icon" aria-hidden="true">
                   <use href="#icon-calendar"></use>
                 </svg>
-                <span id="current-date">Martes, 15 de octubre de 2025</span>
+                <span id="current-date">Miércoles, 15 de octubre de 2025</span>
               </p>
 
               <h1 id="dashboard-title">
@@ -4682,7 +4744,7 @@
 
               <p class="dashboard-heading__description">
                 Aquí tienes una visión clara de tu jornada, tus grupos y los avances
-                más importantes de hoy.
+                pedagógicos más importantes de hoy.
               </p>
             </div>
 
@@ -4691,14 +4753,15 @@
                 <svg class="icon icon--sm" aria-hidden="true">
                   <use href="#icon-calendar"></use>
                 </svg>
-                Ver planificación
+                Planificación
               </a>
 
-              <div class="new-action">
+              <div class="menu-wrapper">
                 <button
                   class="button button--primary"
                   id="quick-create-toggle"
                   type="button"
+                  aria-label="Crear nuevo elemento"
                   aria-expanded="false"
                   aria-controls="quick-create-menu"
                 >
@@ -4708,38 +4771,61 @@
                   Crear nuevo
                 </button>
 
-                <div class="floating-menu new-action__menu" id="quick-create-menu" role="dialog" aria-label="Crear nuevo">
+                <div
+                  class="floating-menu quick-create-menu"
+                  id="quick-create-menu"
+                  role="dialog"
+                  aria-label="Opciones para crear elementos"
+                >
                   <div class="quick-create-list">
-                    <button type="button" data-demo-action="Nueva planificación preparada en modo demostración.">
-                      <span class="quick-create-list__icon">
-                        <svg class="icon icon--sm" aria-hidden="true">
+                    <button
+                      type="button"
+                      data-demo-action="Nueva planificación preparada en modo demostración."
+                    >
+                      <span class="quick-create-list__icon" aria-hidden="true">
+                        <svg class="icon icon--sm">
                           <use href="#icon-book"></use>
                         </svg>
                       </span>
+
                       <span>
                         <strong>Planificación</strong>
                         <small>Diseña una nueva sesión</small>
                       </span>
                     </button>
 
-                    <button type="button" data-demo-action="Nueva evaluación preparada en modo demostración.">
-                      <span class="quick-create-list__icon quick-create-list__icon--green">
-                        <svg class="icon icon--sm" aria-hidden="true">
+                    <button
+                      type="button"
+                      data-demo-action="Nueva evaluación preparada en modo demostración."
+                    >
+                      <span
+                        class="quick-create-list__icon quick-create-list__icon--green"
+                        aria-hidden="true"
+                      >
+                        <svg class="icon icon--sm">
                           <use href="#icon-clipboard"></use>
                         </svg>
                       </span>
+
                       <span>
                         <strong>Evaluación</strong>
                         <small>Registra una actividad evaluativa</small>
                       </span>
                     </button>
 
-                    <button type="button" data-demo-action="Carga de recurso preparada para una futura integración con Storage.">
-                      <span class="quick-create-list__icon quick-create-list__icon--amber">
-                        <svg class="icon icon--sm" aria-hidden="true">
+                    <button
+                      type="button"
+                      data-demo-action="Carga de recurso preparada para una futura integración con Storage."
+                    >
+                      <span
+                        class="quick-create-list__icon quick-create-list__icon--amber"
+                        aria-hidden="true"
+                      >
+                        <svg class="icon icon--sm">
                           <use href="#icon-folder"></use>
                         </svg>
                       </span>
+
                       <span>
                         <strong>Recurso</strong>
                         <small>Agrega material a tu biblioteca</small>
@@ -4751,14 +4837,16 @@
             </div>
           </section>
 
-          <!-- Banner de jornada -->
+          <!-- ====================================================
+               BANNER DE JORNADA
+               ==================================================== -->
           <section class="daily-banner" aria-labelledby="daily-banner-title">
             <div class="daily-banner__content">
               <p class="daily-banner__eyebrow">RESUMEN DE TU JORNADA</p>
               <h2 id="daily-banner-title">Tienes una jornada bien organizada.</h2>
               <p>
-                Hoy impartirás 3 clases, tienes 8 evaluaciones pendientes y 2 estudiantes
-                requieren seguimiento especial.
+                Hoy impartirás 3 clases, tienes 8 evaluaciones pendientes y 2
+                estudiantes requieren seguimiento especial.
               </p>
             </div>
 
@@ -4766,6 +4854,7 @@
               <span class="daily-banner__summary-icon" aria-hidden="true">
                 <svg class="icon"><use href="#icon-clock"></use></svg>
               </span>
+
               <span>
                 <p>Próxima clase</p>
                 <strong>08:00 · Matemáticas 10° A</strong>
@@ -4773,12 +4862,17 @@
             </div>
           </section>
 
-          <!-- Métricas -->
-          <section class="metrics-grid" aria-label="Resumen de indicadores docentes">
+          <!-- ====================================================
+               MÉTRICAS
+               ==================================================== -->
+          <section class="metrics-grid" aria-label="Indicadores principales">
             <article class="metric-card card">
               <div class="metric-card__top">
                 <span class="metric-card__label">Clases de hoy</span>
-                <span class="metric-card__icon metric-card__icon--blue" aria-hidden="true">
+                <span
+                  class="metric-card__icon metric-card__icon--blue"
+                  aria-hidden="true"
+                >
                   <svg class="icon"><use href="#icon-calendar"></use></svg>
                 </span>
               </div>
@@ -4795,9 +4889,19 @@
 
               <div class="metric-card__footer">
                 <span class="metric-card__detail">Primera clase a las 08:00</span>
-                <svg class="mini-sparkline mini-sparkline--blue" viewBox="0 0 68 24" aria-hidden="true">
-                  <path class="mini-sparkline__fill" d="M1 20 L11 15 L21 17 L31 8 L41 12 L51 5 L67 7 L67 24 L1 24 Z"></path>
-                  <path class="mini-sparkline__line" d="M1 20 L11 15 L21 17 L31 8 L41 12 L51 5 L67 7"></path>
+                <svg
+                  class="mini-sparkline mini-sparkline--blue"
+                  viewBox="0 0 68 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="mini-sparkline__fill"
+                    d="M1 20 L11 15 L21 17 L31 8 L41 12 L51 5 L67 7 L67 24 L1 24 Z"
+                  ></path>
+                  <path
+                    class="mini-sparkline__line"
+                    d="M1 20 L11 15 L21 17 L31 8 L41 12 L51 5 L67 7"
+                  ></path>
                 </svg>
               </div>
             </article>
@@ -4805,7 +4909,10 @@
             <article class="metric-card card">
               <div class="metric-card__top">
                 <span class="metric-card__label">Estudiantes activos</span>
-                <span class="metric-card__icon metric-card__icon--indigo" aria-hidden="true">
+                <span
+                  class="metric-card__icon metric-card__icon--indigo"
+                  aria-hidden="true"
+                >
                   <svg class="icon"><use href="#icon-users"></use></svg>
                 </span>
               </div>
@@ -4822,9 +4929,19 @@
 
               <div class="metric-card__footer">
                 <span class="metric-card__detail">Distribuidos en 6 grupos</span>
-                <svg class="mini-sparkline mini-sparkline--indigo" viewBox="0 0 68 24" aria-hidden="true">
-                  <path class="mini-sparkline__fill" d="M1 18 L11 18 L21 14 L31 15 L41 10 L51 11 L67 4 L67 24 L1 24 Z"></path>
-                  <path class="mini-sparkline__line" d="M1 18 L11 18 L21 14 L31 15 L41 10 L51 11 L67 4"></path>
+                <svg
+                  class="mini-sparkline mini-sparkline--indigo"
+                  viewBox="0 0 68 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="mini-sparkline__fill"
+                    d="M1 18 L11 18 L21 14 L31 15 L41 10 L51 11 L67 4 L67 24 L1 24 Z"
+                  ></path>
+                  <path
+                    class="mini-sparkline__line"
+                    d="M1 18 L11 18 L21 14 L31 15 L41 10 L51 11 L67 4"
+                  ></path>
                 </svg>
               </div>
             </article>
@@ -4832,13 +4949,16 @@
             <article class="metric-card card">
               <div class="metric-card__top">
                 <span class="metric-card__label">Asistencia promedio</span>
-                <span class="metric-card__icon metric-card__icon--green" aria-hidden="true">
+                <span
+                  class="metric-card__icon metric-card__icon--green"
+                  aria-hidden="true"
+                >
                   <svg class="icon"><use href="#icon-check"></use></svg>
                 </span>
               </div>
 
-              <div class="metric-card__value-row">
-                <strong class="metric-card__value">94,2%</>
+              <div class="metric-card__-row">
+                <strong class="metric-card__value">94,2%</strong>
                 <span class="metric-card__trend metric-card__trend--positive">
                   <svg class="icon" aria-hidden="true">
                     <use href="#icon-trending-up"></use>
@@ -4849,9 +4969,19 @@
 
               <div class="metric-card__footer">
                 <span class="metric-card__detail">Comparado con septiembre</span>
-                <svg class="mini-sparkline mini-sparkline--green" viewBox="0 0 68 24" aria-hidden="true">
-                  <path class="mini-sparkline__fill" d="M1 19 L11 13 L21 16 L31 10 L41 11 L51 6 L67 4 L67 24 L1 24 Z"></path>
-                  <path class="mini-sparkline__line" d="M1 19 L11 13 L21 16 L31 10 L41 11 L51 6 L67 4"></path>
+                <svg
+                  class="mini-sparkline mini-sparkline--green"
+                  viewBox="0 0 68 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="mini-sparkline__fill"
+                    d="M1 19 L11 13 L21 16 L31 10 L41 11 L51 6 L67 4 L67 24 L1 24 Z"
+                  ></path>
+                  <path
+                    class="mini-sparkline__line"
+                    d="M1 19 L11 13 L21 16 L31 10 L41 11 L51 6 L67 4"
+                  ></path>
                 </svg>
               </div>
             </article>
@@ -4859,7 +4989,10 @@
             <article class="metric-card card">
               <div class="metric-card__top">
                 <span class="metric-card__label">Por evaluar</span>
-                <span class="metric-card__icon metric-card__icon--amber" aria-hidden="true">
+                <span
+                  class="metric-card__icon metric-card__icon--amber"
+                  aria-hidden="true"
+                >
                   <svg class="icon"><use href="#icon-clipboard"></use></svg>
                 </span>
               </div>
@@ -4876,27 +5009,42 @@
 
               <div class="metric-card__footer">
                 <span class="metric-card__detail">4 vencen en las próximas 48 h</span>
-                <svg class="mini-sparkline mini-sparkline--amber" viewBox="0 0 68 24" aria-hidden="true">
-                  <path class="mini-sparkline__fill" d="M1 7 L11 9 L21 6 L31 13 L41 11 L51 17 L67 18 L67 24 L1 24 Z"></path>
-                  <path class="mini-sparkline__line" d="M1 7 L11 9 L21 6 L31 13 L41 11 L51 17 L67 18"></path>
+                <svg
+                  class="mini-sparkline mini-sparkline--amber"
+                  viewBox="0 0 68 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    class="mini-sparkline__fill"
+                    d="M1 7 L11 9 L21 6 L31 13 L41 11 L51 17 L67 18 L67 24 L1 24 Z"
+                  ></path>
+                  <path
+                    class="mini-sparkline__line"
+                    d="M1 7 L11 9 L21 6 L31 13 L41 11 L51 17 L67 18"
+                  ></path>
                 </svg>
               </div>
             </article>
           </section>
 
-          <!-- Cuerpo central -->
-          <div class="dashboard-grid">
-            <div class="dashboard-grid__main">
+          <!-- ====================================================
+               CONTENIDO PRINCIPAL
+               ==================================================== -->
+          <div class="content-grid">
+            <div class="content-grid__main">
               <!-- Agenda -->
-              <section class="card schedule-card" aria-labelledby="schedule-title">
+              <section class="card" aria-labelledby="schedule-title">
                 <header class="card__header">
                   <div class="card__header-title">
                     <span class="card__header-icon" aria-hidden="true">
                       <svg class="icon"><use href="#icon-calendar"></use></svg>
                     </span>
+
                     <span>
                       <p class="card__eyebrow">MI AGENDA</p>
-                      <h2 class="card__title" id="schedule-title">Clases programadas</h2>
+                      <h2 class="card__title" id="schedule-title">
+                        Clases programadas
+                      </h2>
                     </span>
                   </div>
 
@@ -4909,28 +5057,57 @@
                 </header>
 
                 <div class="schedule-card__body">
-                  <div class="schedule-day-tabs" role="tablist" aria-label="Días de la agenda">
-                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                  <div
+                    class="schedule-day-tabs"
+                    role="tablist"
+                    aria-label="Días de la agenda"
+                  >
+                    <button
+                      class="schedule-day-tab"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                    >
                       Lun
                       <strong>13</strong>
                     </button>
 
-                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                    <button
+                      class="schedule-day-tab"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                    >
                       Mar
                       <strong>14</strong>
                     </button>
 
-                    <button class="schedule-day-tab schedule-day-tab--active" type="button" role="tab" aria-selected="true">
+                    <button
+                      class="schedule-day-tab schedule-day-tab--active"
+                      type="button"
+                      role="tab"
+                      aria-selected="true"
+                    >
                       Mié
                       <strong>15</strong>
                     </button>
 
-                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                    <button
+                      class="schedule-day-tab"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                    >
                       Jue
                       <strong>16</strong>
                     </button>
 
-                    <button class="schedule-day-tab" type="button" role="tab" aria-selected="false">
+                    <button
+                      class="schedule-day-tab"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                    >
                       Vie
                       <strong>17</strong>
                     </button>
@@ -4954,7 +5131,11 @@
                       </div>
 
                       <div class="schedule-item__action">
-                        <button class="button button--secondary button--small" type="button" data-open-attendance>
+                        <button
+                          class="button button--secondary button--small"
+                          type="button"
+                          data-open-attendance
+                        >
                           <svg class="icon icon--xs" aria-hidden="true">
                             <use href="#icon-check"></use>
                           </svg>
@@ -5008,7 +5189,11 @@
                 </div>
 
                 <footer class="schedule-card__footer">
-                  <button class="button button--ghost button--small" type="button" data-demo-action="Vista semanal de clases disponible próximamente.">
+                  <button
+                    class="button button--ghost button--small"
+                    type="button"
+                    data-demo-action="La vista semanal completa estará disponible en el módulo de clases."
+                  >
                     <svg class="icon icon--sm" aria-hidden="true">
                       <use href="#icon-calendar"></use>
                     </svg>
@@ -5018,22 +5203,28 @@
               </section>
 
               <!-- Rendimiento -->
-              <section class="card performance-card" aria-labelledby="performance-title">
+              <section class="card" aria-labelledby="performance-title">
                 <header class="card__header">
                   <div class="card__header-title">
-                    <span class="card__header-icon card__header-icon--indigo" aria-hidden="true">
+                    <span
+                      class="card__header-icon card__header-icon--indigo"
+                      aria-hidden="true"
+                    >
                       <svg class="icon"><use href="#icon-chart"></use></svg>
                     </span>
+
                     <span>
                       <p class="card__eyebrow">SEGUIMIENTO PEDAGÓGICO</p>
-                      <h2 class="card__title" id="performance-title">Rendimiento de tus grupos</h2>
+                      <h2 class="card__title" id="performance-title">
+                        Rendimiento de tus grupos
+                      </h2>
                     </span>
                   </div>
 
                   <select
+                    class="period-select"
                     id="performance-period"
-                    class="button button--small"
-                    aria-label="Seleccionar periodo de rendimiento"
+                    aria-label="Seleccionar periodo"
                   >
                     <option>Últimas 6 semanas</option>
                     <option>Este mes</option>
@@ -5044,7 +5235,10 @@
                 <div class="performance-card__body">
                   <div class="performance-summary">
                     <div class="performance-summary__main">
-                      <div class="performance-summary__circle" aria-label="79 por ciento de logro promedio">
+                      <div
+                        class="performance-summary__circle"
+                        aria-label="Logro promedio de 79 por ciento"
+                      >
                         <span class="performance-summary__circle-inner">79%</span>
                       </div>
 
@@ -5062,7 +5256,10 @@
                     </span>
                   </div>
 
-                  <div class="performance-chart" aria-label="Gráfico de progreso de aprendizaje durante seis semanas">
+                  <div
+                    class="performance-chart"
+                    aria-label="Gráfico de progreso de seis semanas"
+                  >
                     <div class="performance-chart__grid" aria-hidden="true">
                       <span></span>
                       <span></span>
@@ -5070,7 +5267,12 @@
                       <span></span>
                     </div>
 
-                    <svg class="performance-chart__svg" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
+                    <svg
+                      class="performance-chart__svg"
+                      viewBox="0 0 600 150"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                    >
                       <path
                         class="performance-chart__area"
                         d="M0,118 C48,105 76,107 120,94 C167,80 187,89 240,69 C285,52 324,65 360,54 C410,38 443,52 480,29 C522,7 557,23 600,13 L600,150 L0,150 Z"
@@ -5081,12 +5283,12 @@
                         d="M0,118 C48,105 76,107 120,94 C167,80 187,89 240,69 C285,52 324,65 360,54 C410,38 443,52 480,29 C522,7 557,23 600,13"
                       ></path>
 
-                      <circle class="performance-chart__point" cx="0" cy="118" r="4.4"></circle>
-                      <circle class="performance-chart__point" cx="120" cy="94" r="4.4"></circle>
-                      <circle class="performance-chart__point" cx="240" cy="69" r="4.4"></circle>
-                      <circle class="performance-chart__point" cx="360" cy="54" r="4.4"></circle>
-                      <circle class="performance-chart__point" cx="480" cy="29" r="4.4"></circle>
-                      <circle class="performance-chart__point" cx="600" cy="13" r="4.4"></circle>
+                      <circle class="performance-chart__point" cx="0" cy="118" r="4.2"></circle>
+                      <circle class="performance-chart__point" cx="120" cy="94" r="4.2"></circle>
+                      <circle class="performance-chart__point" cx="240" cy="69" r="4.2"></circle>
+                      <circle class="performance-chart__point" cx="360" cy="54" r="4.2"></circle>
+                      <circle class="performance-chart__point" cx="480" cy="29" r="4.2"></circle>
+                      <circle class="performance-chart__point" cx="600" cy="13" r="4.2"></circle>
                     </svg>
 
                     <div class="performance-chart__labels" aria-hidden="true">
@@ -5108,17 +5310,22 @@
             </div>
 
             <!-- Columna lateral -->
-            <aside class="dashboard-grid__aside">
-              <!-- Prioridades -->
-              <section class="card priorities-card" aria-labelledby="priorities-title">
+            <aside class="content-grid__aside">
+              <section class="card" aria-labelledby="priorities-title">
                 <header class="card__header">
                   <div class="card__header-title">
-                    <span class="card__header-icon card__header-icon--emerald" aria-hidden="true">
+                    <span
+                      class="card__header-icon card__header-icon--emerald"
+                      aria-hidden="true"
+                    >
                       <svg class="icon"><use href="#icon-check"></use></svg>
                     </span>
+
                     <span>
                       <p class="card__eyebrow">ENFOQUE DEL DÍA</p>
-                      <h2 class="card__title" id="priorities-title">Mis prioridades</h2>
+                      <h2 class="card__title" id="priorities-title">
+                        Mis prioridades
+                      </h2>
                     </span>
                   </div>
 
@@ -5136,7 +5343,11 @@
 
                 <div class="priorities-card__body">
                   <div class="priority-item">
-                    <button class="priority-item__checkbox" type="button" aria-label="Completar prioridad: Revisar evaluación diagnóstica">
+                    <button
+                      class="priority-item__checkbox"
+                      type="button"
+                      aria-label="Completar prioridad: Revisar evaluación diagnóstica"
+                    >
                       <svg class="icon" aria-hidden="true">
                         <use href="#icon-check"></use>
                       </svg>
@@ -5152,11 +5363,18 @@
                       </p>
                     </div>
 
-                    <span class="priority-item__flag priority-item__flag--rose" aria-label="Alta prioridad"></span>
+                    <span
+                      class="priority-item__flag priority-item__flag--rose"
+                      aria-label="Alta prioridad"
+                    ></span>
                   </div>
 
                   <div class="priority-item">
-                    <button class="priority-item__checkbox" type="button" aria-label="Completar prioridad: Preparar guía de ejercicios">
+                    <button
+                      class="priority-item__checkbox"
+                      type="button"
+                      aria-label="Completar prioridad: Preparar guía de ejercicios"
+                    >
                       <svg class="icon" aria-hidden="true">
                         <use href="#icon-check"></use>
                       </svg>
@@ -5172,11 +5390,18 @@
                       </p>
                     </div>
 
-                    <span class="priority-item__flag priority-item__flag--amber" aria-label="Prioridad media"></span>
+                    <span
+                      class="priority-item__flag priority-item__flag--amber"
+                      aria-label="Prioridad media"
+                    ></span>
                   </div>
 
                   <div class="priority-item is-done">
-                    <button class="priority-item__checkbox" type="button" aria-label="Marcar como pendiente: Actualizar recursos de geometría">
+                    <button
+                      class="priority-item__checkbox"
+                      type="button"
+                      aria-label="Marcar como pendiente: Actualizar recursos de geometría"
+                    >
                       <svg class="icon" aria-hidden="true">
                         <use href="#icon-check"></use>
                       </svg>
@@ -5192,21 +5417,29 @@
                       </p>
                     </div>
 
-                    <span class="priority-item__flag priority-item__flag--blue" aria-label="Prioridad normal"></span>
+                    <span
+                      class="priority-item__flag priority-item__flag--blue"
+                      aria-label="Prioridad normal"
+                    ></span>
                   </div>
                 </div>
               </section>
 
-              <!-- Atención requerida -->
-              <section class="card attention-card" aria-labelledby="attention-title">
+              <section class="card" aria-labelledby="attention-title">
                 <header class="card__header">
                   <div class="card__header-title">
-                    <span class="card__header-icon card__header-icon--amber" aria-hidden="true">
+                    <span
+                      class="card__header-icon card__header-icon--amber"
+                      aria-hidden="true"
+                    >
                       <svg class="icon"><use href="#icon-alert"></use></svg>
                     </span>
+
                     <span>
                       <p class="card__eyebrow">ACOMPAÑAMIENTO</p>
-                      <h2 class="card__title" id="attention-title">Atención requerida</h2>
+                      <h2 class="card__title" id="attention-title">
+                        Atención requerida
+                      </h2>
                     </span>
                   </div>
 
@@ -5222,26 +5455,38 @@
 
                 <div class="attention-list">
                   <article class="attention-item">
-                    <span class="avatar avatar--small avatar--mateo" aria-hidden="true">MR</span>
+                    <span class="avatar avatar--small avatar--mateo" aria-hidden="true">
+                      MR
+                    </span>
+
                     <div class="attention-item__copy">
                       <strong>Mateo Ramírez</strong>
                       <p>10° A · Asistencia bajo el 80%</p>
                     </div>
+
                     <span class="attention-item__metric">76%</span>
                   </article>
 
                   <article class="attention-item">
-                    <span class="avatar avatar--small avatar--sofia" aria-hidden="true">SG</span>
+                    <span class="avatar avatar--small avatar--sofia" aria-hidden="true">
+                      SG
+                    </span>
+
                     <div class="attention-item__copy">
                       <strong>Sofía González</strong>
                       <p>9° B · Objetivos en refuerzo</p>
                     </div>
+
                     <span class="attention-item__metric">61%</span>
                   </article>
                 </div>
 
                 <div class="attention-card__footer">
-                  <button class="button button--secondary button--small button--full" type="button" data-demo-action="Vista de seguimiento estudiantil preparada para el próximo módulo.">
+                  <button
+                    class="button button--secondary button--small button--full"
+                    type="button"
+                    data-demo-action="La vista detallada de seguimiento estará disponible en el módulo de estudiantes."
+                  >
                     Revisar seguimiento
                   </button>
                 </div>
@@ -5249,23 +5494,27 @@
             </aside>
           </div>
 
-          <!-- Sección inferior -->
-          <div class="dashboard-bottom">
-            <!-- Progreso de planificación -->
-            <section class="card planning-card" aria-labelledby="planning-progress-title">
+          <!-- ====================================================
+               CONTENIDO INFERIOR
+               ==================================================== -->
+          <div class="bottom-grid">
+            <section class="card" aria-labelledby="planning-progress-title">
               <header class="card__header">
                 <div class="card__header-title">
                   <span class="card__header-icon" aria-hidden="true">
                     <svg class="icon"><use href="#icon-book"></use></svg>
                   </span>
+
                   <span>
                     <p class="card__eyebrow">COBERTURA CURRICULAR</p>
-                    <h2 class="card__title" id="planning-progress-title">Progreso de planificación</h2>
+                    <h2 class="card__title" id="planning-progress-title">
+                      Progreso de planificación
+                    </h2>
                   </span>
                 </div>
 
                 <a class="card__link" href="planificacion.html">
-                  Detalle por grupo
+                  Detalle
                   <svg class="icon icon--xs" aria-hidden="true">
                     <use href="#icon-arrow-right"></use>
                   </svg>
@@ -5283,25 +5532,33 @@
                   <div class="planning-groups">
                     <div class="planning-group">
                       <span class="planning-group__name">Matemáticas 10° A</span>
-                      <span class="planning-group__bar"><span style="width: 84%"></span></span>
+                      <span class="planning-group__bar">
+                        <span style="width: 84%"></span>
+                      </span>
                       <span class="planning-group__percent">84%</span>
                     </div>
 
                     <div class="planning-group">
                       <span class="planning-group__name">Álgebra 9° B</span>
-                      <span class="planning-group__bar"><span style="width: 76%"></span></span>
+                      <span class="planning-group__bar">
+                        <span style="width: 76%"></span>
+                      </span>
                       <span class="planning-group__percent">76%</span>
                     </div>
 
                     <div class="planning-group">
                       <span class="planning-group__name">Geometría 8° A</span>
-                      <span class="planning-group__bar"><span style="width: 69%"></span></span>
+                      <span class="planning-group__bar">
+                        <span style="width: 69%"></span>
+                      </span>
                       <span class="planning-group__percent">69%</span>
                     </div>
 
                     <div class="planning-group">
                       <span class="planning-group__name">Estadística 10° B</span>
-                      <span class="planning-group__bar"><span style="width: 73%"></span></span>
+                      <span class="planning-group__bar">
+                        <span style="width: 73%"></span>
+                      </span>
                       <span class="planning-group__percent">73%</span>
                     </div>
                   </div>
@@ -5309,16 +5566,21 @@
               </div>
             </section>
 
-            <!-- Actividad reciente -->
-            <section class="card activity-card" aria-labelledby="activity-title">
+            <section class="card" aria-labelledby="activity-title">
               <header class="card__header">
                 <div class="card__header-title">
-                  <span class="card__header-icon card__header-icon--indigo" aria-hidden="true">
+                  <span
+                    class="card__header-icon card__header-icon--indigo"
+                    aria-hidden="true"
+                  >
                     <svg class="icon"><use href="#icon-layers"></use></svg>
                   </span>
+
                   <span>
                     <p class="card__eyebrow">ÚLTIMOS CAMBIOS</p>
-                    <h2 class="card__title" id="activity-title">Actividad reciente</h2>
+                    <h2 class="card__title" id="activity-title">
+                      Actividad reciente
+                    </h2>
                   </span>
                 </div>
               </header>
@@ -5326,31 +5588,58 @@
               <div class="activity-card__body">
                 <div class="activity-timeline">
                   <article class="activity-item">
-                    <span class="activity-item__dot activity-item__dot--blue" aria-hidden="true">
-                      <svg class="icon icon--sm"><use href="#icon-book"></use></svg>
+                    <span
+                      class="activity-item__dot activity-item__dot--blue"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
+                        <use href="#icon-book"></use>
+                      </svg>
                     </span>
+
                     <div class="activity-item__copy">
-                      <p>Actualizaste la planificación de <strong>Álgebra y Funciones · 9° B</strong>.</p>
+                      <p>
+                        Actualizaste la planificación de
+                        <strong>Álgebra y Funciones · 9° B</strong>.
+                      </p>
                       <time datetime="2025-10-15T07:35">Hace 35 minutos</time>
                     </div>
                   </article>
 
                   <article class="activity-item">
-                    <span class="activity-item__dot activity-item__dot--green" aria-hidden="true">
-                      <svg class="icon icon--sm"><use href="#icon-check"></use></svg>
+                    <span
+                      class="activity-item__dot activity-item__dot--green"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
+                        <use href="#icon-check"></use>
+                      </svg>
                     </span>
+
                     <div class="activity-item__copy">
-                      <p>Registraste asistencia para <strong>Geometría y Medición · 8° A</strong>.</p>
+                      <p>
+                        Registraste asistencia para
+                        <strong>Geometría y Medición · 8° A</strong>.
+                      </p>
                       <time datetime="2025-10-14T15:40">Ayer, 15:40</time>
                     </div>
                   </article>
 
                   <article class="activity-item">
-                    <span class="activity-item__dot activity-item__dot--violet" aria-hidden="true">
-                      <svg class="icon icon--sm"><use href="#icon-folder"></use></svg>
+                    <span
+                      class="activity-item__dot activity-item__dot--violet"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
+                        <use href="#icon-folder"></use>
+                      </svg>
                     </span>
+
                     <div class="activity-item__copy">
-                      <p>Agregaste el recurso <strong>Guía de funciones lineales</strong>.</p>
+                      <p>
+                        Agregaste el recurso
+                        <strong>Guía de funciones lineales</strong>.
+                      </p>
                       <time datetime="2025-10-14T11:10">Ayer, 11:10</time>
                     </div>
                   </article>
@@ -5363,7 +5652,7 @@
     </div>
 
     <!-- ==========================================================
-         NAVEGACIÓN INFERIOR MÓVIL
+         NAVEGACIÓN INFERIOR PARA MÓVILES
          ========================================================== -->
     <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
       <a class="active" href="dashboard.html" aria-current="page">
@@ -5410,7 +5699,7 @@
     </nav>
 
     <!-- ==========================================================
-         MODAL: REGISTRO LOCAL DE ASISTENCIA
+         MODAL DE ASISTENCIA LOCAL
          ========================================================== -->
     <div
       class="modal-backdrop"
@@ -5420,16 +5709,16 @@
       aria-modal="true"
       aria-labelledby="attendance-modal-title"
     >
-      <section class="attendance-modal">
-        <header class="attendance-modal__header">
-          <div class="attendance-modal__title-group">
-            <span class="attendance-modal__title-icon" aria-hidden="true">
+      <section class="modal">
+        <header class="modal__header">
+          <div class="modal__title-group">
+            <span class="modal__title-icon" aria-hidden="true">
               <svg class="icon"><use href="#icon-check"></use></svg>
             </span>
 
             <div>
               <h2 id="attendance-modal-title">Registrar asistencia</h2>
-              <p>Matemáticas Aplicadas · 10° A · Miércoles 15 de octubre</p>
+              <p>Matemáticas Aplicadas · 10° A · Miércoles</p>
             </div>
           </div>
 
@@ -5466,12 +5755,20 @@
 
             <div class="attendance-students">
               <label class="attendance-student">
-                <span class="avatar avatar--small avatar--mateo" aria-hidden="true">MR</span>
+                <span class="avatar avatar--small avatar--mateo" aria-hidden="true">
+                  MR
+                </span>
+
                 <span class="attendance-student__info">
                   <strong>Mateo Ramírez</strong>
                   <small>Estudiante · 10° A</small>
                 </span>
-                <select class="attendance-select" name="mateo" aria-label="Asistencia de Mateo Ramírez">
+
+                <select
+                  class="attendance-select"
+                  name="mateo"
+                  aria-label="Asistencia de Mateo Ramírez"
+                >
                   <option value="present">Presente</option>
                   <option value="late">Tardanza</option>
                   <option value="absent">Ausente</option>
@@ -5479,12 +5776,20 @@
               </label>
 
               <label class="attendance-student">
-                <span class="avatar avatar--small avatar--sofia" aria-hidden="true">SG</span>
+                <span class="avatar avatar--small avatar--sofia" aria-hidden="true">
+                  SG
+                </span>
+
                 <span class="attendance-student__info">
                   <strong>Sofía González</strong>
                   <small>Estudiante · 10° A</small>
                 </span>
-                <select class="attendance-select" name="sofia" aria-label="Asistencia de Sofía González">
+
+                <select
+                  class="attendance-select"
+                  name="sofia"
+                  aria-label="Asistencia de Sofía González"
+                >
                   <option value="present">Presente</option>
                   <option value="late">Tardanza</option>
                   <option value="absent">Ausente</option>
@@ -5492,12 +5797,20 @@
               </label>
 
               <label class="attendance-student">
-                <span class="avatar avatar--small avatar--lucas" aria-hidden="true">LC</span>
+                <span class="avatar avatar--small avatar--lucas" aria-hidden="true">
+                  LC
+                </span>
+
                 <span class="attendance-student__info">
                   <strong>Lucas Contreras</strong>
                   <small>Estudiante · 10° A</small>
                 </span>
-                <select class="attendance-select" name="lucas" aria-label="Asistencia de Lucas Contreras">
+
+                <select
+                  class="attendance-select"
+                  name="lucas"
+                  aria-label="Asistencia de Lucas Contreras"
+                >
                   <option value="present">Presente</option>
                   <option value="late">Tardanza</option>
                   <option value="absent">Ausente</option>
@@ -5505,12 +5818,20 @@
               </label>
 
               <label class="attendance-student">
-                <span class="avatar avatar--small avatar--camila" aria-hidden="true">CM</span>
+                <span class="avatar avatar--small avatar--camila" aria-hidden="true">
+                  CM
+                </span>
+
                 <span class="attendance-student__info">
                   <strong>Camila Muñoz</strong>
                   <small>Estudiante · 10° A</small>
                 </span>
-                <select class="attendance-select" name="camila" aria-label="Asistencia de Camila Muñoz">
+
+                <select
+                  class="attendance-select"
+                  name="camila"
+                  aria-label="Asistencia de Camila Muñoz"
+                >
                   <option value="present">Presente</option>
                   <option value="late">Tardanza</option>
                   <option value="absent">Ausente</option>
@@ -5518,12 +5839,20 @@
               </label>
 
               <label class="attendance-student">
-                <span class="avatar avatar--small avatar--diego" aria-hidden="true">DP</span>
+                <span class="avatar avatar--small avatar--diego" aria-hidden="true">
+                  DP
+                </span>
+
                 <span class="attendance-student__info">
                   <strong>Diego Pérez</strong>
                   <small>Estudiante · 10° A</small>
                 </span>
-                <select class="attendance-select" name="diego" aria-label="Asistencia de Diego Pérez">
+
+                <select
+                  class="attendance-select"
+                  name="diego"
+                  aria-label="Asistencia de Diego Pérez"
+                >
                   <option value="present">Presente</option>
                   <option value="late">Tardanza</option>
                   <option value="absent">Ausente</option>
@@ -5532,7 +5861,7 @@
             </div>
           </div>
 
-          <footer class="attendance-modal__footer">
+          <footer class="modal__footer">
             <p>
               Modo demostración local. Los cambios no se envían a ningún servicio.
             </p>
@@ -5549,7 +5878,7 @@
     </div>
 
     <!-- ==========================================================
-         MODAL: BÚSQUEDA LOCAL
+         MODAL DE BÚSQUEDA LOCAL
          ========================================================== -->
     <div
       class="modal-backdrop"
@@ -5559,7 +5888,7 @@
       aria-modal="true"
       aria-label="Buscar en DOCENCIA360"
     >
-      <section class="command-modal">
+      <section class="modal command-modal">
         <div class="command-search">
           <svg class="icon" aria-hidden="true">
             <use href="#icon-search"></use>
@@ -5582,53 +5911,59 @@
         <div class="command-list">
           <p class="command-list__label">Acciones rápidas</p>
 
-          <button class="command-item" type="button" data-demo-action="Nueva planificación preparada en modo demostración.">
-            <span class="command-item__icon">
-              <svg class="icon icon--sm" aria-hidden="true">
+          <button
+            class="command-item"
+            type="button"
+            data-demo-action="Nueva planificación preparada en modo demostración."
+          >
+            <span class="command-item__icon" aria-hidden="true">
+              <svg class="icon icon--sm">
                 <use href="#icon-book"></use>
               </svg>
             </span>
-            <span>
+
+            <span class="command-item__copy">
               <strong>Crear planificación</strong>
               <small>Diseña una nueva sesión de clase</small>
             </span>
-            <kbd class="keyboard-key">↵</kbd>
           </button>
 
           <button class="command-item" type="button" data-open-attendance>
-            <span class="command-item__icon">
-              <svg class="icon icon--sm" aria-hidden="true">
+            <span class="command-item__icon" aria-hidden="true">
+              <svg class="icon icon--sm">
                 <use href="#icon-check"></use>
               </svg>
             </span>
-            <span>
+
+            <span class="command-item__copy">
               <strong>Registrar asistencia</strong>
               <small>Matemáticas Aplicadas · 10° A</small>
             </span>
-            <kbd class="keyboard-key">↵</kbd>
           </button>
 
           <p class="command-list__label">Navegación</p>
 
           <a class="command-item" href="estudiantes.html">
-            <span class="command-item__icon">
-              <svg class="icon icon--sm" aria-hidden="true">
+            <span class="command-item__icon" aria-hidden="true">
+              <svg class="icon icon--sm">
                 <use href="#icon-users"></use>
               </svg>
             </span>
-            <span>
+
+            <span class="command-item__copy">
               <strong>Ir a estudiantes</strong>
               <small>Consulta perfiles y seguimiento individual</small>
             </span>
           </a>
 
           <a class="command-item" href="reportes.html">
-            <span class="command-item__icon">
-              <svg class="icon icon--sm" aria-hidden="true">
+            <span class="command-item__icon" aria-hidden="true">
+              <svg class="icon icon--sm">
                 <use href="#icon-chart"></use>
               </svg>
             </span>
-            <span>
+
+            <span class="command-item__copy">
               <strong>Ir a reportes</strong>
               <small>Visualiza indicadores y progreso académico</small>
             </span>
@@ -5637,14 +5972,15 @@
       </section>
     </div>
 
-    <!-- ==========================================================
-         CONTENEDOR DE NOTIFICACIONES VISUALES
-         ========================================================== -->
-    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <div
+      class="toast-container"
+      id="toast-container"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
 
     <!-- ==========================================================
          JAVASCRIPT LOCAL
-         No utiliza APIs externas, internet, Supabase ni backend.
          ========================================================== -->
     <script>
       (() => {
@@ -5656,13 +5992,20 @@
         const topbar = document.getElementById("topbar");
         const sidebarCollapse = document.getElementById("sidebar-collapse");
         const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
-        const mobileSidebarBackdrop = document.getElementById("mobile-sidebar-backdrop");
+        const mobileSidebarBackdrop = document.getElementById(
+          "mobile-sidebar-backdrop"
+        );
 
         const themeToggle = document.getElementById("theme-toggle");
 
-        const notificationToggle = document.getElementById("notification-toggle");
+        const notificationToggle = document.getElementById(
+          "notification-toggle"
+        );
         const notificationMenu = document.getElementById("notification-menu");
-        const markNotificationsRead = document.getElementById("mark-notifications-read");
+        const notificationDot = document.getElementById("notification-dot");
+        const markNotificationsRead = document.getElementById(
+          "mark-notifications-read"
+        );
 
         const profileToggle = document.getElementById("profile-toggle");
         const profileMenu = document.getElementById("profile-menu");
@@ -5677,48 +6020,52 @@
         const commandModalBackdrop = document.getElementById(
           "command-modal-backdrop"
         );
-        const commandSearchInput = document.getElementById("command-search-input");
+        const commandSearchInput = document.getElementById(
+          "command-search-input"
+        );
 
         const attendanceForm = document.getElementById("attendance-form");
-        const attendanceSelects = document.querySelectorAll(".attendance-select");
+        const attendanceSelects = document.querySelectorAll(
+          ".attendance-select"
+        );
 
-        const presentCount = document.getElementById("attendance-present-count");
+        const presentCount = document.getElementById(
+          "attendance-present-count"
+        );
         const lateCount = document.getElementById("attendance-late-count");
         const absentCount = document.getElementById("attendance-absent-count");
 
-        const toastContainer = document.getElementById("toast-container");
         const greetingElement = document.getElementById("greeting");
         const dateElement = document.getElementById("current-date");
+        const toastContainer = document.getElementById("toast-container");
 
         let lastFocusedElement = null;
 
-        /* --------------------------------------------------------
-           Utilidades
-           -------------------------------------------------------- */
-        const saveLocalPreference = (key, value) => {
+        const getPreference = (key) => {
           try {
-            localStorage.setItem(key, value);
-          } catch (error) {
-            /* El diseño sigue funcionando aunque localStorage no esté disponible. */
+            return localStorage.getItem(key);
+          } catch {
+            return null;
           }
         };
 
-        const getLocalPreference = (key) => {
+        const savePreference = (key, value) => {
           try {
-            return localStorage.getItem(key);
-          } catch (error) {
-            return null;
+            localStorage.setItem(key, value);
+          } catch {
+            /* La interfaz sigue funcionando sin localStorage. */
           }
         };
 
         const showToast = (message, type = "info") => {
           const toast = document.createElement("div");
-          toast.className = `toast toast--${type}`;
+          const icon = type === "success" ? "#icon-check" : "#icon-sparkles";
 
+          toast.className = `toast toast--${type}`;
           toast.innerHTML = `
             <span class="toast__icon" aria-hidden="true">
               <svg class="icon icon--sm">
-                <use href="${type === "success" ? "#icon-check" : "#icon-sparkles"}"></use>
+                <use href="${icon}"></use>
               </svg>
             </span>
             <p>${message}</p>
@@ -5732,7 +6079,7 @@
             window.setTimeout(() => {
               toast.remove();
             }, 220);
-          }, 3800);
+          }, 3600);
         };
 
         const closeFloatingMenus = () => {
@@ -5756,7 +6103,7 @@
           }
         };
 
-        const openModal = (modal, focusElement = null) => {
+        const openModal = (modal, focusTarget = null) => {
           lastFocusedElement = document.activeElement;
           closeFloatingMenus();
 
@@ -5764,11 +6111,9 @@
           modal.setAttribute("aria-hidden", "false");
           body.classList.add("no-scroll");
 
-          window.setTimeout(() => {
-            if (focusElement) {
-              focusElement.focus();
-            }
-          }, 80);
+          if (focusTarget) {
+            window.setTimeout(() => focusTarget.focus(), 80);
+          }
         };
 
         const closeModal = (modal) => {
@@ -5784,21 +6129,23 @@
         const closeMobileSidebar = () => {
           body.classList.remove("mobile-sidebar-open");
           mobileMenuToggle.setAttribute("aria-expanded", "false");
-          mobileMenuToggle.setAttribute("aria-label", "Abrir navegación principal");
+          mobileMenuToggle.setAttribute(
+            "aria-label",
+            "Abrir navegación principal"
+          );
         };
 
-        /* --------------------------------------------------------
-           Fecha y saludo local según la hora del navegador
-           -------------------------------------------------------- */
         const updateGreetingAndDate = () => {
           const now = new Date();
-          const hour = now.getHours();
+          const currentHour = now.getHours();
 
           let greeting = "Buenos días";
 
-          if (hour >= 12 && hour < 19) {
+          if (currentHour >= 12 && currentHour < 19) {
             greeting = "Buenas tardes";
-          } else if (hour >= 19 || hour < 5) {
+          }
+
+          if (currentHour >= 19 || currentHour < 5) {
             greeting = "Buenas noches";
           }
 
@@ -5817,122 +6164,120 @@
 
         updateGreetingAndDate();
 
-        /* --------------------------------------------------------
-           Estado de topbar al desplazarse
-           -------------------------------------------------------- */
-        const updateTopbar = () => {
+        const updateTopbarState = () => {
           topbar.classList.toggle("is-scrolled", window.scrollY > 8);
         };
 
-        updateTopbar();
-        window.addEventListener("scroll", updateTopbar, { passive: true });
-
-        /* --------------------------------------------------------
-           Sidebar de escritorio
-           -------------------------------------------------------- */
-        const savedSidebarState = getLocalPreference("docencia360-sidebar");
-
-        if (savedSidebarState === "compact" && window.innerWidth > 760) {
-          body.classList.add("sidebar-is-compact");
-          sidebarCollapse.setAttribute("aria-label", "Expandir menú lateral");
-          sidebarCollapse.setAttribute("title", "Expandir menú lateral");
-        }
-
-        sidebarCollapse.addEventListener("click", () => {
-          const isCompact = body.classList.toggle("sidebar-is-compact");
-
-          saveLocalPreference(
-            "docencia360-sidebar",
-            isCompact ? "compact" : "expanded"
-          );
-
-          sidebarCollapse.setAttribute(
-            "aria-label",
-            isCompact ? "Expandir menú lateral" : "Contraer menú lateral"
-          );
-
-          sidebarCollapse.setAttribute(
-            "title",
-            isCompact ? "Expandir menú lateral" : "Contraer menú lateral"
-          );
+        updateTopbarState();
+        window.addEventListener("scroll", updateTopbarState, {
+          passive: true,
         });
 
-        /* --------------------------------------------------------
-           Sidebar móvil
-           -------------------------------------------------------- */
-        mobileMenuToggle.addEventListener("click", () => {
-          const isOpen = body.classList.toggle("mobile-sidebar-open");
-
-          mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
-          mobileMenuToggle.setAttribute(
-            "aria-label",
-            isOpen ? "Cerrar navegación principal" : "Abrir navegación principal"
-          );
-        });
-
-        mobileSidebarBackdrop.addEventListener("click", closeMobileSidebar);
-
-        document.querySelectorAll(".sidebar__nav-link, .sidebar__help").forEach((link) => {
-          link.addEventListener("click", closeMobileSidebar);
-        });
-
-        /* --------------------------------------------------------
-           Modo claro / oscuro
-           -------------------------------------------------------- */
         const applyTheme = (theme) => {
           root.dataset.theme = theme;
 
-          const isDark = theme === "dark";
+          const darkModeIsActive = theme === "dark";
 
           themeToggle.setAttribute(
             "aria-label",
-            isDark ? "Activar modo claro" : "Activar modo oscuro"
+            darkModeIsActive ? "Activar modo claro" : "Activar modo oscuro"
           );
 
           themeToggle.setAttribute(
             "title",
-            isDark ? "Activar modo claro" : "Activar modo oscuro"
+            darkModeIsActive ? "Activar modo claro" : "Activar modo oscuro"
           );
 
-          const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+          const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-          if (metaThemeColor) {
-            metaThemeColor.setAttribute(
+          if (themeMeta) {
+            themeMeta.setAttribute(
               "content",
-              isDark ? "#0a1426" : "#f5f8fc"
+              darkModeIsActive ? "#091426" : "#f4f7fb"
             );
           }
         };
 
-        const savedTheme = getLocalPreference("docencia360-theme");
+        const savedTheme = getPreference("docencia360-theme");
 
-        if (savedTheme === "light" || savedTheme === "dark") {
+        if (savedTheme === "dark" || savedTheme === "light") {
           applyTheme(savedTheme);
         } else {
-          const prefersDark = window.matchMedia(
+          const devicePrefersDark = window.matchMedia(
             "(prefers-color-scheme: dark)"
           ).matches;
 
-          applyTheme(prefersDark ? "dark" : "light");
+          applyTheme(devicePrefersDark ? "dark" : "light");
         }
 
         themeToggle.addEventListener("click", () => {
           const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
 
           applyTheme(nextTheme);
-          saveLocalPreference("docencia360-theme", nextTheme);
+          savePreference("docencia360-theme", nextTheme);
 
           showToast(
             nextTheme === "dark"
               ? "Modo oscuro activado."
-              : "Modo claro activado.",
-            "info"
+              : "Modo claro activado."
           );
         });
 
-        /* --------------------------------------------------------
-           Menús flotantes
-           -------------------------------------------------------- */
+        const savedSidebarState = getPreference("docencia360-sidebar");
+
+        if (savedSidebarState === "compact" && window.innerWidth > 1120) {
+          body.classList.add("sidebar-is-compact");
+          sidebarCollapse.setAttribute("aria-label", "Expandir menú lateral");
+          sidebarCollapse.setAttribute("title", "Expandir menú lateral");
+        }
+
+        sidebarCollapse.addEventListener("click", () => {
+          if (window.innerWidth <= 1120) {
+            return;
+          }
+
+          const compact = body.classList.toggle("sidebar-is-compact");
+
+          savePreference(
+            "docencia360-sidebar",
+            compact ? "compact" : "expanded"
+          );
+
+          sidebarCollapse.setAttribute(
+            "aria-label",
+            compact ? "Expandir menú lateral" : "Contraer menú lateral"
+          );
+
+          sidebarCollapse.setAttribute(
+            "title",
+            compact ? "Expandir menú lateral" : "Contraer menú lateral"
+          );
+        });
+
+        mobileMenuToggle.addEventListener("click", () => {
+          const sidebarIsOpen = body.classList.toggle("mobile-sidebar-open");
+
+          mobileMenuToggle.setAttribute(
+            "aria-expanded",
+            String(sidebarIsOpen)
+          );
+
+          mobileMenuToggle.setAttribute(
+            "aria-label",
+            sidebarIsOpen
+              ? "Cerrar navegación principal"
+              : "Abrir navegación principal"
+          );
+        });
+
+        mobileSidebarBackdrop.addEventListener("click", closeMobileSidebar);
+
+        document
+          .querySelectorAll(".sidebar__nav-link, .sidebar__help")
+          .forEach((link) => {
+            link.addEventListener("click", closeMobileSidebar);
+          });
+
         notificationToggle.addEventListener("click", (event) => {
           event.stopPropagation();
           toggleFloatingMenu(notificationMenu, notificationToggle);
@@ -5949,84 +6294,75 @@
         });
 
         document.addEventListener("click", (event) => {
-          if (
-            !event.target.closest(".floating-menu") &&
-            !event.target.closest("#notification-toggle") &&
-            !event.target.closest("#profile-toggle") &&
-            !event.target.closest("#quick-create-toggle")
-          ) {
+          const clickedInsideMenu = event.target.closest(".floating-menu");
+          const clickedOnTrigger = event.target.closest(
+            "#notification-toggle, #profile-toggle, #quick-create-toggle"
+          );
+
+          if (!clickedInsideMenu && !clickedOnTrigger) {
             closeFloatingMenus();
           }
         });
 
         markNotificationsRead.addEventListener("click", () => {
-          const dot = document.querySelector(".topbar__notification-dot");
-
-          if (dot) {
-            dot.remove();
+          if (notificationDot) {
+            notificationDot.remove();
           }
 
           showToast("Las notificaciones fueron marcadas como leídas.", "success");
         });
 
-        /* --------------------------------------------------------
-           Prioridades interactivas locales
-           -------------------------------------------------------- */
-        document.querySelectorAll(".priority-item__checkbox").forEach((checkbox) => {
-          checkbox.addEventListener("click", () => {
-            const priority = checkbox.closest(".priority-item");
-            const isDone = priority.classList.toggle("is-done");
-            const label = priority.querySelector("strong").textContent.trim();
+        document
+          .querySelectorAll(".priority-item__checkbox")
+          .forEach((checkbox) => {
+            checkbox.addEventListener("click", () => {
+              const priorityItem = checkbox.closest(".priority-item");
+              const priorityText = priorityItem
+                .querySelector(".priority-item__copy strong")
+                .textContent.trim();
 
-            checkbox.setAttribute(
-              "aria-label",
-              isDone
-                ? `Marcar como pendiente: ${label}`
-                : `Completar prioridad: ${label}`
-            );
+              const completed = priorityItem.classList.toggle("is-done");
 
-            showToast(
-              isDone
-                ? "Prioridad marcada como completada."
-                : "Prioridad marcada como pendiente.",
-              isDone ? "success" : "info"
-            );
+              checkbox.setAttribute(
+                "aria-label",
+                completed
+                  ? `Marcar como pendiente: ${priorityText}`
+                  : `Completar prioridad: ${priorityText}`
+              );
+
+              showToast(
+                completed
+                  ? "Prioridad marcada como completada."
+                  : "Prioridad marcada como pendiente.",
+                completed ? "success" : "info"
+              );
+            });
           });
-        });
 
-        /* --------------------------------------------------------
-           Tabs de agenda locales
-           -------------------------------------------------------- */
         document.querySelectorAll(".schedule-day-tab").forEach((tab) => {
           tab.addEventListener("click", () => {
-            document.querySelectorAll(".schedule-day-tab").forEach((currentTab) => {
-              currentTab.classList.remove("schedule-day-tab--active");
-              currentTab.setAttribute("aria-selected", "false");
+            document.querySelectorAll(".schedule-day-tab").forEach((current) => {
+              current.classList.remove("schedule-day-tab--active");
+              current.setAttribute("aria-selected", "false");
             });
 
             tab.classList.add("schedule-day-tab--active");
             tab.setAttribute("aria-selected", "true");
 
-            const day = tab.textContent.replace(/\s+/g, " ").trim();
-            showToast(`Agenda de ${day} seleccionada en modo demostración.`, "info");
+            const selectedDay = tab.textContent.replace(/\s+/g, " ").trim();
+
+            showToast(
+              `Agenda de ${selectedDay} seleccionada en modo demostración.`
+            );
           });
         });
 
-        /* --------------------------------------------------------
-           Filtro de gráfico
-           -------------------------------------------------------- */
         document
           .getElementById("performance-period")
           .addEventListener("change", (event) => {
-            showToast(
-              `Periodo actualizado: ${event.target.value}.`,
-              "info"
-            );
+            showToast(`Periodo actualizado: ${event.target.value}.`);
           });
 
-        /* --------------------------------------------------------
-           Modal de asistencia
-           -------------------------------------------------------- */
         const openAttendanceModal = () => {
           openModal(attendanceModalBackdrop);
         };
@@ -6034,7 +6370,8 @@
         document.querySelectorAll("[data-open-attendance]").forEach((button) => {
           button.addEventListener("click", () => {
             if (commandModalBackdrop.classList.contains("is-open")) {
-              closeModal(commandModalBackdrop);
+              commandModalBackdrop.classList.remove("is-open");
+              commandModalBackdrop.setAttribute("aria-hidden", "true");
             }
 
             openAttendanceModal();
@@ -6049,9 +6386,13 @@
           attendanceSelects.forEach((select) => {
             if (select.value === "present") {
               present += 1;
-            } else if (select.value === "late") {
+            }
+
+            if (select.value === "late") {
               late += 1;
-            } else if (select.value === "absent") {
+            }
+
+            if (select.value === "absent") {
               absent += 1;
             }
           });
@@ -6069,15 +6410,13 @@
           event.preventDefault();
 
           closeModal(attendanceModalBackdrop);
+
           showToast(
             "Asistencia guardada localmente. La sincronización se integrará más adelante.",
             "success"
           );
         });
 
-        /* --------------------------------------------------------
-           Paleta de búsqueda
-           -------------------------------------------------------- */
         const openCommandPalette = () => {
           openModal(commandModalBackdrop, commandSearchInput);
         };
@@ -6086,32 +6425,30 @@
           .getElementById("open-command-palette")
           .addEventListener("click", openCommandPalette);
 
-        mobileQuickCreate.addEventListener("click", () => {
-          openCommandPalette();
-        });
+        mobileQuickCreate.addEventListener("click", openCommandPalette);
 
         commandSearchInput.addEventListener("input", () => {
-          const query = commandSearchInput.value.trim().toLowerCase();
+          const searchQuery = commandSearchInput.value.trim().toLowerCase();
 
           document.querySelectorAll(".command-item").forEach((item) => {
-            const text = item.textContent.toLowerCase();
-            item.style.display = text.includes(query) ? "" : "none";
+            const itemText = item.textContent.toLowerCase();
+
+            item.style.display = itemText.includes(searchQuery) ? "" : "none";
           });
         });
 
-        /* --------------------------------------------------------
-           Acciones demostrativas locales
-           -------------------------------------------------------- */
         document.querySelectorAll("[data-demo-action]").forEach((button) => {
           button.addEventListener("click", () => {
             closeFloatingMenus();
-            showToast(button.dataset.demoAction, "info");
+
+            if (commandModalBackdrop.classList.contains("is-open")) {
+              closeModal(commandModalBackdrop);
+            }
+
+            showToast(button.dataset.demoAction);
           });
         });
 
-        /* --------------------------------------------------------
-           Cierre de modales
-           -------------------------------------------------------- */
         document.querySelectorAll("[data-close-modal]").forEach((button) => {
           button.addEventListener("click", () => {
             const modal = document.getElementById(button.dataset.closeModal);
@@ -6130,15 +6467,12 @@
           });
         });
 
-        /* --------------------------------------------------------
-           Teclado
-           -------------------------------------------------------- */
         document.addEventListener("keydown", (event) => {
-          const isCommandShortcut =
+          const commandShortcut =
             (event.metaKey || event.ctrlKey) &&
             event.key.toLowerCase() === "k";
 
-          if (isCommandShortcut) {
+          if (commandShortcut) {
             event.preventDefault();
 
             if (!commandModalBackdrop.classList.contains("is-open")) {
@@ -6168,12 +6502,13 @@
           }
         });
 
-        /* --------------------------------------------------------
-           Limpieza visual al cambiar de tamaño
-           -------------------------------------------------------- */
         window.addEventListener("resize", () => {
           if (window.innerWidth > 760) {
             closeMobileSidebar();
+          }
+
+          if (window.innerWidth <= 1120) {
+            body.classList.remove("sidebar-is-compact");
           }
         });
       })();
