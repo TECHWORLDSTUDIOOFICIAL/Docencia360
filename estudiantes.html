@@ -1,0 +1,6025 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="Módulo de estudiantes de DOCENCIA360 para gestionar perfiles, seguimiento académico, asistencia y rendimiento."
+    />
+    <meta name="theme-color" content="#f4f7fb" />
+    <title>Estudiantes | DOCENCIA360</title>
+
+    <style>
+      :root {
+        --font-sans:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+
+        --sidebar-width: 268px;
+        --topbar-height: 76px;
+        --mobile-bottom-nav-height: 70px;
+        --content-max-width: 1520px;
+
+        --blue-800: #1e40af;
+        --blue-700: #1d4ed8;
+        --blue-600: #2563eb;
+        --blue-500: #3b82f6;
+        --blue-400: #60a5fa;
+        --blue-300: #93c5fd;
+        --blue-200: #bfdbfe;
+        --blue-100: #dbeafe;
+        --blue-50: #eff6ff;
+
+        --indigo-700: #4338ca;
+        --indigo-600: #4f46e5;
+        --indigo-500: #6366f1;
+        --indigo-100: #e0e7ff;
+        --indigo-50: #eef2ff;
+
+        --emerald-700: #047857;
+        --emerald-600: #059669;
+        --emerald-500: #10b981;
+        --emerald-300: #6ee7b7;
+        --emerald-100: #d1fae5;
+        --emerald-50: #ecfdf5;
+
+        --amber-700: #b45309;
+        --amber-600: #d97706;
+        --amber-500: #f59e0b;
+        --amber-300: #fcd34d;
+        --amber-100: #fef3c7;
+        --amber-50: #fffbeb;
+
+        --rose-700: #be123c;
+        --rose-600: #e11d48;
+        --rose-500: #f43f5e;
+        --rose-100: #ffe4e6;
+        --rose-50: #fff1f2;
+
+        --violet-600: #7c3aed;
+        --violet-500: #8b5cf6;
+        --violet-100: #ede9fe;
+        --violet-50: #f5f3ff;
+
+        --slate-950: #0f172a;
+        --slate-900: #1e293b;
+        --slate-800: #334155;
+        --slate-700: #475569;
+        --slate-600: #64748b;
+        --slate-500: #94a3b8;
+        --slate-400: #cbd5e1;
+        --slate-300: #d9e2ec;
+        --slate-200: #e2e8f0;
+        --slate-100: #f1f5f9;
+        --slate-50: #f8fafc;
+
+        --page-bg: #f4f7fb;
+        --surface: #ffffff;
+        --surface-soft: #f8fafc;
+        --surface-muted: #edf3f9;
+        --surface-hover: #f4f8ff;
+
+        --text-strong: #132744;
+        --text: #3c4d66;
+        --text-muted: #71819a;
+        --text-faint: #9aa9bd;
+        --line: #e1e9f2;
+        --line-strong: #d2ddea;
+
+        --accent: var(--blue-600);
+        --accent-hover: var(--blue-700);
+        --accent-soft: var(--blue-50);
+        --accent-line: var(--blue-100);
+
+        --sidebar-bg: #0b1b36;
+        --sidebar-bg-deep: #071328;
+        --sidebar-text: #deebff;
+        --sidebar-muted: #8fa5c9;
+        --sidebar-line: rgb(203 213 225 / 0.11);
+        --sidebar-hover: rgb(255 255 255 / 0.07);
+        --sidebar-active: rgb(59 130 246 / 0.25);
+
+        --shadow-xs: 0 1px 2px rgb(15 23 42 / 0.04);
+        --shadow-sm:
+          0 3px 7px rgb(15 23 42 / 0.04),
+          0 8px 18px rgb(15 23 42 / 0.05);
+        --shadow-md:
+          0 6px 14px rgb(15 23 42 / 0.05),
+          0 18px 32px rgb(15 23 42 / 0.08);
+        --shadow-lg:
+          0 12px 25px rgb(15 23 42 / 0.08),
+          0 28px 52px rgb(15 23 42 / 0.12);
+        --shadow-xl:
+          0 18px 38px rgb(15 23 42 / 0.12),
+          0 42px 80px rgb(15 23 42 / 0.16);
+        --shadow-blue:
+          0 9px 20px rgb(37 99 235 / 0.22),
+          0 4px 10px rgb(37 99 235 / 0.12);
+
+        --radius-xs: 8px;
+        --radius-sm: 11px;
+        --radius-md: 14px;
+        --radius-lg: 18px;
+        --radius-xl: 24px;
+        --radius-pill: 999px;
+
+        --transition-fast: 150ms ease;
+        --transition-normal: 240ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      html[data-theme="dark"] {
+        --page-bg: #091426;
+        --surface: #102037;
+        --surface-soft: #14253f;
+        --surface-muted: #182b47;
+        --surface-hover: #1a2e4d;
+
+        --text-strong: #edf5ff;
+        --text: #c9d7ea;
+        --text-muted: #99acc7;
+        --text-faint: #7186a2;
+        --line: #263b58;
+        --line-strong: #324966;
+
+        --accent: #5d96ff;
+        --accent-hover: #8bb5ff;
+        --accent-soft: rgb(59 130 246 / 0.15);
+        --accent-line: rgb(96 165 250 / 0.24);
+
+        --sidebar-bg: #061224;
+        --sidebar-bg-deep: #040d1c;
+
+        --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.16);
+        --shadow-sm:
+          0 3px 8px rgb(0 0 0 / 0.14),
+          0 9px 18px rgb(0 0 0 / 0.18);
+        --shadow-md:
+          0 7px 16px rgb(0 0 0 / 0.18),
+          0 20px 36px rgb(0 0 0 / 0.22);
+        --shadow-lg:
+          0 12px 28px rgb(0 0 0 / 0.24),
+          0 32px 58px rgb(0 0 0 / 0.28);
+        --shadow-xl:
+          0 20px 42px rgb(0 0 0 / 0.3),
+          0 46px 84px rgb(0 0 0 / 0.34);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--page-bg);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+        color: var(--text);
+        background: var(--page-bg);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background var(--transition-normal),
+          color var(--transition-normal);
+      }
+
+      body.no-scroll {
+        overflow: hidden;
+      }
+
+      body.sidebar-is-compact {
+        --sidebar-width: 88px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+      }
+
+      ul,
+      ol {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+      }
+
+      button,
+      a,
+      input,
+      select,
+      textarea {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgb(96 165 250 / 0.82);
+        outline-offset: 3px;
+      }
+
+      ::selection {
+        color: #ffffff;
+        background: var(--blue-600);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .skip-link {
+        position: fixed;
+        z-index: 1000;
+        top: -100px;
+        left: 18px;
+        padding: 11px 15px;
+        color: #ffffff;
+        background: var(--blue-700);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-lg);
+        font-size: 0.82rem;
+        font-weight: 700;
+        transition: top var(--transition-fast);
+      }
+
+      .skip-link:focus {
+        top: 16px;
+      }
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        flex: 0 0 auto;
+      }
+
+      .icon--xs {
+        width: 13px;
+        height: 13px;
+      }
+
+      .icon--sm {
+        width: 17px;
+        height: 17px;
+      }
+
+      .icon--lg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 15px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 730;
+        line-height: 1;
+        white-space: nowrap;
+        transition:
+          transform var(--transition-fast),
+          color var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .button:hover {
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      .button--primary {
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+        border-color: transparent;
+        box-shadow: var(--shadow-blue);
+      }
+
+      .button--primary:hover {
+        color: #ffffff;
+        background: linear-gradient(135deg, var(--blue-700), var(--indigo-700));
+        border-color: transparent;
+      }
+
+      .button--secondary {
+        color: var(--blue-700);
+        background: var(--accent-soft);
+        border-color: var(--accent-line);
+        box-shadow: none;
+      }
+
+      .button--secondary:hover {
+        color: var(--blue-800);
+        background: var(--surface);
+        border-color: var(--blue-300);
+      }
+
+      .button--ghost {
+        color: var(--text-muted);
+        background: transparent;
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      .button--ghost:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-color: transparent;
+        box-shadow: none;
+      }
+
+      .button--danger {
+        color: var(--rose-600);
+        background: var(--rose-50);
+        border-color: var(--rose-100);
+        box-shadow: none;
+      }
+
+      .button--danger:hover {
+        color: #ffffff;
+        background: var(--rose-600);
+        border-color: var(--rose-600);
+      }
+
+      .button--small {
+        min-height: 34px;
+        padding: 0 10px;
+        border-radius: 9px;
+        font-size: 0.71rem;
+      }
+
+      .button--icon {
+        width: 42px;
+        min-width: 42px;
+        padding: 0;
+      }
+
+      .button--icon.button--small {
+        width: 34px;
+        min-width: 34px;
+      }
+
+      .button--full {
+        width: 100%;
+      }
+
+      .card {
+        min-width: 0;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xs);
+        transition:
+          background var(--transition-normal),
+          border-color var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      .card:hover {
+        box-shadow: var(--shadow-sm);
+      }
+
+      .card__header {
+        display: flex;
+        min-width: 0;
+        min-height: 70px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 17px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .card__header-title {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 11px;
+      }
+
+      .card__header-icon {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 10px;
+      }
+
+      .card__header-icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      .card__header-icon--emerald {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .card__header-icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      html[data-theme="dark"] .card__header-icon {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+      }
+
+      html[data-theme="dark"] .card__header-icon--indigo {
+        color: #c7d2fe;
+        background: rgb(99 102 241 / 0.16);
+      }
+
+      html[data-theme="dark"] .card__header-icon--emerald {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.14);
+      }
+
+      html[data-theme="dark"] .card__header-icon--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.14);
+      }
+
+      .card__eyebrow {
+        margin-bottom: 2px;
+        color: var(--text-faint);
+        font-size: 0.58rem;
+        font-weight: 760;
+        letter-spacing: 0.09em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .card__title {
+        color: var(--text-strong);
+        font-size: 0.94rem;
+        font-weight: 780;
+        letter-spacing: -0.035em;
+        line-height: 1.24;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        min-height: 23px;
+        align-items: center;
+        gap: 5px;
+        padding: 0 8px;
+        border-radius: var(--radius-pill);
+        font-size: 0.62rem;
+        font-weight: 760;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
+      .status-badge::before {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .status-badge--blue {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .status-badge--amber {
+        color: var(--amber-700);
+        background: var(--amber-50);
+      }
+
+      .status-badge--green {
+        color: var(--emerald-700);
+        background: var(--emerald-50);
+      }
+
+      .status-badge--rose {
+        color: var(--rose-700);
+        background: var(--rose-50);
+      }
+
+      html[data-theme="dark"] .status-badge--blue {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+      }
+
+      html[data-theme="dark"] .status-badge--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.14);
+      }
+
+      html[data-theme="dark"] .status-badge--green {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.14);
+      }
+
+      html[data-theme="dark"] .status-badge--rose {
+        color: #fda4af;
+        background: rgb(244 63 94 / 0.14);
+      }
+
+      .avatar {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: #ffffff;
+        border-radius: 50%;
+        font-size: 0.67rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .avatar--small {
+        width: 28px;
+        height: 28px;
+        font-size: 0.57rem;
+      }
+
+      .avatar--large {
+        width: 48px;
+        height: 48px;
+        font-size: 0.78rem;
+      }
+
+      .avatar--xlarge {
+        width: 64px;
+        height: 64px;
+        font-size: 1.02rem;
+      }
+
+      .avatar--ana {
+        background: linear-gradient(135deg, #f59e0b, #ea580c);
+      }
+
+      .avatar--mateo {
+        background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+      }
+
+      .avatar--sofia {
+        background: linear-gradient(135deg, #ec4899, #be185d);
+      }
+
+      .avatar--lucas {
+        background: linear-gradient(135deg, #14b8a6, #047857);
+      }
+
+      .avatar--camila {
+        background: linear-gradient(135deg, #8b5cf6, #5b21b6);
+      }
+
+      .avatar--diego {
+        background: linear-gradient(135deg, #f97316, #c2410c);
+      }
+
+      .avatar--isabella {
+        background: linear-gradient(135deg, #06b6d4, #0891b2);
+      }
+
+      .avatar--sebastian {
+        background: linear-gradient(135deg, #84cc16, #65a30d);
+      }
+
+      .avatar--valentina {
+        background: linear-gradient(135deg, #f43f5e, #e11d48);
+      }
+
+      .avatar--santiago {
+        background: linear-gradient(135deg, #6366f1, #4f46e5);
+      }
+
+      .app-shell {
+        min-height: 100vh;
+      }
+
+      .app-main {
+        min-height: 100vh;
+        margin-left: var(--sidebar-width);
+        transition: margin-left var(--transition-normal);
+      }
+
+      .main-inner {
+        width: min(100%, calc(var(--content-max-width) + 64px));
+        padding: 28px 32px 54px;
+        margin: 0 auto;
+      }
+
+      .sidebar {
+        position: fixed;
+        z-index: 120;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        width: var(--sidebar-width);
+        flex-direction: column;
+        overflow: visible;
+        color: var(--sidebar-text);
+        background:
+          radial-gradient(
+            circle at 12% 0%,
+            rgb(37 99 235 / 0.25),
+            transparent 28%
+          ),
+          linear-gradient(180deg, var(--sidebar-bg), var(--sidebar-bg-deep));
+        border-right: 1px solid rgb(148 163 184 / 0.09);
+        box-shadow: 10px 0 30px rgb(15 23 42 / 0.06);
+        transition:
+          width var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .sidebar__brand {
+        display: flex;
+        min-height: 76px;
+        align-items: center;
+        gap: 10px;
+        padding: 0 21px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--sidebar-line);
+      }
+
+      .sidebar__brand-mark {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-700);
+        background: #ffffff;
+        border-radius: 11px;
+        box-shadow: 0 5px 12px rgb(0 0 0 / 0.18);
+      }
+
+      .sidebar__brand-mark .icon {
+        width: 22px;
+        height: 22px;
+      }
+
+      .sidebar__brand-name {
+        color: #ffffff;
+        font-size: 1.07rem;
+        font-weight: 850;
+        letter-spacing: -0.055em;
+        white-space: nowrap;
+      }
+
+      .sidebar__brand-name strong {
+        color: var(--blue-300);
+      }
+
+      .sidebar__workspace {
+        display: flex;
+        min-height: 72px;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 17px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--sidebar-line);
+      }
+
+      .sidebar__workspace-icon {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-200);
+        background: rgb(59 130 246 / 0.2);
+        border: 1px solid rgb(147 197 253 / 0.15);
+        border-radius: 9px;
+      }
+
+      .sidebar__workspace-copy {
+        min-width: 0;
+        white-space: nowrap;
+      }
+
+      .sidebar__workspace-copy small {
+        display: block;
+        margin-bottom: 1px;
+        color: var(--sidebar-muted);
+        font-size: 0.56rem;
+        font-weight: 650;
+      }
+
+      .sidebar__workspace-copy strong {
+        display: block;
+        overflow: hidden;
+        color: #f8fbff;
+        font-size: 0.71rem;
+        font-weight: 720;
+        text-overflow: ellipsis;
+      }
+
+      .sidebar__content {
+        flex: 1;
+        padding: 18px 12px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(148 163 184 / 0.25) transparent;
+      }
+
+      .sidebar__group + .sidebar__group {
+        margin-top: 22px;
+      }
+
+      .sidebar__group-label {
+        display: block;
+        padding: 0 11px;
+        margin: 0 0 8px;
+        color: var(--sidebar-muted);
+        font-size: 0.57rem;
+        font-weight: 760;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      .sidebar__nav {
+        display: grid;
+        gap: 4px;
+      }
+
+      .sidebar__nav-link {
+        position: relative;
+        display: flex;
+        min-height: 44px;
+        align-items: center;
+        gap: 12px;
+        padding: 0 11px;
+        overflow: hidden;
+        color: var(--sidebar-muted);
+        border-radius: 10px;
+        font-size: 0.78rem;
+        font-weight: 650;
+        white-space: nowrap;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .sidebar__nav-link:hover {
+        color: #ffffff;
+        background: var(--sidebar-hover);
+      }
+
+      .sidebar__nav-link--active {
+        color: #ffffff;
+        background: var(--sidebar-active);
+        font-weight: 740;
+      }
+
+      .sidebar__nav-link--active::before {
+        position: absolute;
+        left: 0;
+        width: 3px;
+        height: 21px;
+        background: var(--blue-400);
+        border-radius: 0 3px 3px 0;
+        content: "";
+      }
+
+      .sidebar__nav-link .icon {
+        width: 19px;
+        height: 19px;
+      }
+
+      .sidebar__nav-badge {
+        display: grid;
+        min-width: 19px;
+        height: 19px;
+        padding: 0 5px;
+        margin-left: auto;
+        place-items: center;
+        color: #ffffff;
+        background: var(--rose-500);
+        border-radius: var(--radius-pill);
+        font-size: 0.59rem;
+        font-weight: 800;
+      }
+
+      .sidebar__footer {
+        padding: 13px 12px 16px;
+        border-top: 1px solid var(--sidebar-line);
+      }
+
+      .sidebar__help {
+        display: flex;
+        min-height: 42px;
+        align-items: center;
+        gap: 11px;
+        padding: 0 11px;
+        color: var(--sidebar-muted);
+        border-radius: 10px;
+        font-size: 0.74rem;
+        font-weight: 650;
+        white-space: nowrap;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .sidebar__help:hover {
+        color: #ffffff;
+        background: var(--sidebar-hover);
+      }
+
+      .sidebar__collapse {
+        position: absolute;
+        top: 91px;
+        right: -15px;
+        display: grid;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        place-items: center;
+        color: var(--text-muted);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        box-shadow: var(--shadow-sm);
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .sidebar__collapse:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+        transform: scale(1.05);
+      }
+
+      .sidebar__collapse .icon {
+        width: 17px;
+        height: 17px;
+        transition: transform var(--transition-normal);
+      }
+
+      body.sidebar-is-compact .sidebar__collapse .icon {
+        transform: rotate(180deg);
+      }
+
+      body.sidebar-is-compact .sidebar__brand,
+      body.sidebar-is-compact .sidebar__workspace {
+        justify-content: center;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      body.sidebar-is-compact .sidebar__brand-name,
+      body.sidebar-is-compact .sidebar__workspace-copy,
+      body.sidebar-is-compact .sidebar__group-label,
+      body.sidebar-is-compact .sidebar__nav-link span:not(.sidebar__nav-badge),
+      body.sidebar-is-compact .sidebar__nav-badge,
+      body.sidebar-is-compact .sidebar__help span {
+        display: none;
+      }
+
+      body.sidebar-is-compact .sidebar__nav-link,
+      body.sidebar-is-compact .sidebar__help {
+        justify-content: center;
+        padding: 0;
+      }
+
+      body.sidebar-is-compact .sidebar__nav-link--active::before {
+        left: 2px;
+      }
+
+      body.sidebar-is-compact .sidebar__footer {
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      .topbar {
+        position: sticky;
+        z-index: 80;
+        top: 0;
+        display: grid;
+        min-height: var(--topbar-height);
+        grid-template-columns: minmax(155px, 1fr) minmax(220px, 340px) auto;
+        align-items: center;
+        gap: 20px;
+        padding: 0 32px;
+        background: rgb(244 247 251 / 0.84);
+        border-bottom: 1px solid transparent;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        transition:
+          background var(--transition-normal),
+          border-color var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      html[data-theme="dark"] .topbar {
+        background: rgb(9 20 38 / 0.84);
+      }
+
+      .topbar.is-scrolled {
+        border-color: var(--line);
+        box-shadow: 0 3px 12px rgb(15 23 42 / 0.04);
+      }
+
+      .topbar__crumbs {
+        min-width: 0;
+      }
+
+      .topbar__crumbs small {
+        display: block;
+        margin-bottom: 2px;
+        overflow: hidden;
+        color: var(--text-faint);
+        font-size: 0.6rem;
+        font-weight: 690;
+        letter-spacing: 0.04em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .topbar__crumbs strong {
+        display: block;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.87rem;
+        font-weight: 760;
+        letter-spacing: -0.025em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .topbar__search {
+        min-width: 0;
+      }
+
+      .topbar__search-button {
+        display: flex;
+        width: 100%;
+        min-height: 40px;
+        align-items: center;
+        gap: 9px;
+        padding: 0 10px 0 12px;
+        color: var(--text-faint);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        font-size: 0.73rem;
+        text-align: left;
+        transition:
+          border-color var(--transition-fast),
+          background var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .topbar__search-button:hover {
+        background: var(--surface-hover);
+        border-color: var(--blue-200);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .topbar__search-button span {
+        min-width: 0;
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .keyboard-key {
+        display: inline-flex;
+        min-width: 20px;
+        min-height: 20px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+        color: var(--text-faint);
+        background: var(--surface-muted);
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        font-size: 0.56rem;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .topbar__actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 7px;
+      }
+
+      .topbar__action {
+        position: relative;
+        display: grid;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        place-items: center;
+        color: var(--text-muted);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .topbar__action:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+
+      .topbar__notification-dot {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        width: 7px;
+        height: 7px;
+        background: var(--rose-500);
+        border: 1.5px solid var(--surface);
+        border-radius: 50%;
+      }
+
+      .theme-icon-sun {
+        display: none;
+      }
+
+      html[data-theme="dark"] .theme-icon-moon {
+        display: none;
+      }
+
+      html[data-theme="dark"] .theme-icon-sun {
+        display: block;
+      }
+
+      .topbar__profile {
+        position: relative;
+      }
+
+      .topbar__profile-button {
+        display: flex;
+        min-height: 42px;
+        align-items: center;
+        gap: 8px;
+        padding: 3px 7px 3px 3px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow-xs);
+        cursor: pointer;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .topbar__profile-button:hover {
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1px);
+      }
+
+      .topbar__profile-copy {
+        min-width: 0;
+        text-align: left;
+      }
+
+      .topbar__profile-copy strong,
+      .topbar__profile-copy small {
+        display: block;
+        overflow: hidden;
+        max-width: 105px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .topbar__profile-copy strong {
+        color: var(--text-strong);
+        font-size: 0.69rem;
+        font-weight: 750;
+      }
+
+      .topbar__profile-copy small {
+        margin-top: 1px;
+        color: var(--text-faint);
+        font-size: 0.57rem;
+        font-weight: 590;
+      }
+
+      .mobile-brand,
+      .mobile-menu-toggle,
+      .mobile-bottom-nav,
+      .mobile-sidebar-backdrop {
+        display: none;
+      }
+
+      .menu-wrapper {
+        position: relative;
+      }
+
+      .floating-menu {
+        position: absolute;
+        z-index: 250;
+        top: calc(100% + 10px);
+        right: 0;
+        width: 286px;
+        overflow: hidden;
+        visibility: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-7px) scale(0.985);
+        transform-origin: top right;
+        transition:
+          opacity var(--transition-fast),
+          visibility var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .floating-menu.is-open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+      }
+
+      .floating-menu__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 15px 15px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .floating-menu__header h3 {
+        color: var(--text-strong);
+        font-size: 0.8rem;
+        font-weight: 780;
+      }
+
+      .floating-menu__header button {
+        padding: 0;
+        color: var(--accent);
+        background: transparent;
+        cursor: pointer;
+        font-size: 0.64rem;
+        font-weight: 720;
+      }
+
+      .notification-list {
+        display: grid;
+        max-height: 340px;
+        overflow-y: auto;
+      }
+
+      .notification-item {
+        display: flex;
+        gap: 10px;
+        padding: 13px 15px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .notification-item:last-child {
+        border-bottom: 0;
+      }
+
+      .notification-item__icon {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 9px;
+      }
+
+      .notification-item__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .notification-item__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      .notification-item__copy {
+        min-width: 0;
+      }
+
+      .notification-item__copy strong {
+        display: block;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.68rem;
+        font-weight: 730;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .notification-item__copy p {
+        margin-top: 2px;
+        color: var(--text-muted);
+        font-size: 0.64rem;
+        line-height: 1.45;
+      }
+
+      .floating-menu__footer {
+        padding: 10px;
+        border-top: 1px solid var(--line);
+      }
+
+      .profile-menu {
+        width: 225px;
+      }
+
+      .profile-menu__identity {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .profile-menu__identity strong,
+      .profile-menu__identity small {
+        display: block;
+        overflow: hidden;
+        max-width: 140px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .profile-menu__identity strong {
+        color: var(--text-strong);
+        font-size: 0.73rem;
+        font-weight: 760;
+      }
+
+      .profile-menu__identity small {
+        margin-top: 2px;
+        color: var(--text-muted);
+        font-size: 0.58rem;
+      }
+
+      .profile-menu__links {
+        display: grid;
+        gap: 2px;
+        padding: 7px;
+      }
+
+      .profile-menu__links a,
+      .profile-menu__links button {
+        display: flex;
+        min-height: 37px;
+        align-items: center;
+        gap: 9px;
+        padding: 0 9px;
+        color: var(--text-muted);
+        background: transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.7rem;
+        font-weight: 660;
+        text-align: left;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .profile-menu__links a:hover,
+      .profile-menu__links button:hover {
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      .danger {
+        color: var(--rose-600) !important;
+      }
+
+      .page-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 4px 0 25px;
+      }
+
+      .page-heading__content {
+        min-width: 0;
+      }
+
+      .page-heading__date {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 7px;
+        color: var(--blue-700);
+        font-size: 0.67rem;
+        font-weight: 760;
+        letter-spacing: 0.025em;
+        text-transform: capitalize;
+      }
+
+      .page-heading__date .icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      .page-heading h1 {
+        color: var(--text-strong);
+        font-size: clamp(1.72rem, 3vw, 2.28rem);
+        font-weight: 820;
+        letter-spacing: -0.064em;
+        line-height: 1.08;
+      }
+
+      .page-heading h1 span {
+        color: var(--accent);
+      }
+
+      .page-heading__description {
+        max-width: 680px;
+        margin-top: 9px;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        line-height: 1.62;
+      }
+
+      .heading-actions {
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 9px;
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px;
+        margin-bottom: 21px;
+      }
+
+      .metric-card {
+        position: relative;
+        min-width: 0;
+        min-height: 137px;
+        padding: 18px;
+      }
+
+      .metric-card__top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .metric-card__label {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        font-weight: 680;
+        line-height: 1.35;
+      }
+
+      .metric-card__icon {
+        display: grid;
+        width: 35px;
+        height: 35px;
+        flex: 0 0 auto;
+        place-items: center;
+        border-radius: 10px;
+      }
+
+      .metric-card__icon--blue {
+        color: var(--blue-600);
+        background: var(--blue-50);
+      }
+
+      .metric-card__icon--indigo {
+        color: var(--indigo-600);
+        background: var(--indigo-50);
+      }
+
+      .metric-card__icon--green {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .metric-card__icon--amber {
+        color: var(--amber-600);
+        background: var(--amber-50);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--blue {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--indigo {
+        color: #c7d2fe;
+        background: rgb(99 102 241 / 0.16);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--green {
+        color: var(--emerald-300);
+        background: rgb(16 185 129 / 0.14);
+      }
+
+      html[data-theme="dark"] .metric-card__icon--amber {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.14);
+      }
+
+      .metric-card__value-row {
+        display: flex;
+        min-width: 0;
+        align-items: flex-end;
+        gap: 7px;
+        margin-top: 14px;
+      }
+
+      .metric-card__value {
+        color: var(--text-strong);
+        font-size: 1.68rem;
+        font-weight: 820;
+        letter-spacing: -0.07em;
+        line-height: 1;
+      }
+
+      .metric-card__detail {
+        display: block;
+        margin-top: 12px;
+        overflow: hidden;
+        color: var(--text-faint);
+        font-size: 0.6rem;
+        font-weight: 590;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .toolbar-card {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.6fr) repeat(2, minmax(140px, 0.8fr)) auto;
+        gap: 10px;
+        align-items: center;
+        padding: 13px;
+        margin-bottom: 21px;
+      }
+
+      .search-field {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        min-height: 40px;
+        align-items: center;
+      }
+
+      .search-field .icon {
+        position: absolute;
+        left: 12px;
+        color: var(--text-faint);
+        pointer-events: none;
+      }
+
+      .search-field input,
+      .filter-select {
+        width: 100%;
+        min-height: 40px;
+        color: var(--text);
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        outline: 0;
+        font-size: 0.71rem;
+        font-weight: 620;
+        transition:
+          background var(--transition-fast),
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast);
+      }
+
+      .search-field input {
+        padding: 0 12px 0 39px;
+      }
+
+      .filter-select {
+        padding: 0 29px 0 10px;
+        background-image:
+          linear-gradient(45deg, transparent 50%, currentColor 50%),
+          linear-gradient(135deg, currentColor 50%, transparent 50%);
+        background-position:
+          calc(100% - 13px) 17px,
+          calc(100% - 9px) 17px;
+        background-repeat: no-repeat;
+        background-size: 4px 4px, 4px 4px;
+        appearance: none;
+      }
+
+      .search-field input:focus,
+      .filter-select:focus {
+        background: var(--surface);
+        border-color: var(--blue-400);
+        box-shadow: 0 0 0 3px rgb(59 130 246 / 0.12);
+      }
+
+      .view-toggle {
+        display: flex;
+        min-height: 40px;
+        align-items: center;
+        gap: 3px;
+        padding: 3px;
+        background: var(--surface-muted);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+      }
+
+      .view-toggle button {
+        display: grid;
+        width: 34px;
+        height: 32px;
+        place-items: center;
+        color: var(--text-faint);
+        background: transparent;
+        border-radius: 7px;
+        cursor: pointer;
+      }
+
+      .view-toggle button:hover,
+      .view-toggle button.is-active {
+        color: var(--accent);
+        background: var(--surface);
+        box-shadow: var(--shadow-xs);
+      }
+
+      .students-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 21px;
+        align-items: start;
+      }
+
+      .students-main {
+        min-width: 0;
+      }
+
+      .students-panel {
+        overflow: visible;
+      }
+
+      .students-panel__header {
+        display: flex;
+        min-height: 70px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 17px 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .students-panel__header h2 {
+        color: var(--text-strong);
+        font-size: 0.95rem;
+        font-weight: 790;
+        letter-spacing: -0.035em;
+      }
+
+      .students-panel__header p {
+        margin-top: 3px;
+        color: var(--text-muted);
+        font-size: 0.63rem;
+      }
+
+      .students-count {
+        display: inline-flex;
+        min-height: 25px;
+        align-items: center;
+        padding: 0 9px;
+        color: var(--blue-700);
+        background: var(--blue-50);
+        border-radius: var(--radius-pill);
+        font-size: 0.61rem;
+        font-weight: 760;
+        white-space: nowrap;
+      }
+
+      html[data-theme="dark"] .students-count {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+      }
+
+      .students-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .student-card {
+        position: relative;
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        padding: 17px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 15px;
+        box-shadow: var(--shadow-xs);
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .student-card:hover {
+        border-color: var(--accent-line);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+
+      .student-card__top {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .student-card__info {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .student-card__name {
+        display: -webkit-box;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.85rem;
+        font-weight: 780;
+        letter-spacing: -0.03em;
+        line-height: 1.3;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+      }
+
+      .student-card__meta {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-top: 3px;
+        overflow: hidden;
+        color: var(--text-muted);
+        font-size: 0.6rem;
+        font-weight: 620;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .student-card__stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding-top: 15px;
+        margin-top: 15px;
+        border-top: 1px solid var(--line);
+      }
+
+      .student-card__stat {
+        min-width: 0;
+      }
+
+      .student-card__stat-label {
+        display: block;
+        overflow: hidden;
+        color: var(--text-faint);
+        font-size: 0.55rem;
+        font-weight: 620;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .student-card__stat-value {
+        display: flex;
+        align-items: baseline;
+        gap: 5px;
+        margin-top: 3px;
+      }
+
+      .student-card__stat-value strong {
+        color: var(--text-strong);
+        font-size: 0.88rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .student-card__stat-value small {
+        color: var(--text-muted);
+        font-size: 0.55rem;
+        font-weight: 650;
+      }
+
+      .student-card__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding-top: 14px;
+        margin-top: 14px;
+        border-top: 1px solid var(--line);
+      }
+
+      .student-card__actions {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .student-card__actions .button {
+        min-height: 32px;
+        padding: 0 9px;
+        font-size: 0.62rem;
+      }
+
+      .students-grid.is-list {
+        grid-template-columns: 1fr;
+      }
+
+      .students-grid.is-list .student-card {
+        display: grid;
+        grid-template-columns: minmax(190px, 1.3fr) minmax(0, 1fr) minmax(140px, 0.7fr);
+        gap: 18px;
+        align-items: center;
+      }
+
+      .students-grid.is-list .student-card__top {
+        gap: 10px;
+      }
+
+      .students-grid.is-list .student-card__stats {
+        padding-top: 0;
+        margin-top: 0;
+        border-top: 0;
+      }
+
+      .students-grid.is-list .student-card__footer {
+        padding-top: 0;
+        margin-top: 0;
+        border-top: 0;
+      }
+
+      .empty-state {
+        display: grid;
+        min-height: 260px;
+        padding: 30px;
+        place-items: center;
+        text-align: center;
+      }
+
+      .empty-state__icon {
+        display: grid;
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 12px;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 15px;
+      }
+
+      .empty-state h3 {
+        color: var(--text-strong);
+        font-size: 0.92rem;
+        font-weight: 780;
+      }
+
+      .empty-state p {
+        max-width: 310px;
+        margin: 6px auto 15px;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        line-height: 1.55;
+      }
+
+      .attention-card__intro {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        color: var(--amber-800);
+        background: var(--amber-50);
+        border-bottom: 1px solid var(--amber-100);
+        font-size: 0.63rem;
+        font-weight: 690;
+      }
+
+      .attention-card__intro .icon {
+        width: 16px;
+        height: 16px;
+      }
+
+      html[data-theme="dark"] .attention-card__intro {
+        color: var(--amber-300);
+        background: rgb(245 158 11 / 0.11);
+        border-color: rgb(245 158 11 / 0.16);
+      }
+
+      .attention-list {
+        display: grid;
+        padding: 5px 16px 11px;
+      }
+
+      .attention-item {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 1px;
+        border-bottom: 1px solid var(--line);
+        cursor: pointer;
+        transition: background var(--transition-fast);
+      }
+
+      .attention-item:last-child {
+        border-bottom: 0;
+      }
+
+      .attention-item:hover {
+        background: var(--surface-hover);
+      }
+
+      .attention-item__copy {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .attention-item__copy strong {
+        display: block;
+        overflow: hidden;
+        color: var(--text-strong);
+        font-size: 0.69rem;
+        font-weight: 730;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .attention-item__copy p {
+        overflow: hidden;
+        margin-top: 2px;
+        color: var(--text-muted);
+        font-size: 0.59rem;
+        font-weight: 580;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .attention-item__metric {
+        min-width: 36px;
+        color: var(--rose-600);
+        font-size: 0.65rem;
+        font-weight: 790;
+        text-align: right;
+      }
+
+      .info-card__body {
+        padding: 17px;
+      }
+
+      .info-card__body p {
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        line-height: 1.6;
+      }
+
+      .info-card__list {
+        display: grid;
+        gap: 11px;
+        margin-top: 15px;
+      }
+
+      .info-card__list li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text);
+        font-size: 0.64rem;
+        font-weight: 650;
+      }
+
+      .info-card__list .icon {
+        color: var(--emerald-600);
+      }
+
+      .modal-backdrop {
+        position: fixed;
+        z-index: 500;
+        inset: 0;
+        display: grid;
+        padding: 24px;
+        place-items: center;
+        background: rgb(5 14 30 / 0.64);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-normal);
+      }
+
+      .modal-backdrop.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal {
+        width: min(100%, 650px);
+        max-height: min(820px, calc(100dvh - 48px));
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+        transition:
+          opacity var(--transition-normal),
+          transform var(--transition-normal);
+      }
+
+      .modal-backdrop.is-open .modal {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .modal__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 21px 23px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .modal__title-group {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 11px;
+      }
+
+      .modal__title-icon {
+        display: grid;
+        width: 39px;
+        height: 39px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 11px;
+      }
+
+      .modal__title-group h2 {
+        color: var(--text-strong);
+        font-size: 0.98rem;
+        font-weight: 790;
+        letter-spacing: -0.035em;
+      }
+
+      .modal__title-group p {
+        margin-top: 3px;
+        color: var(--text-muted);
+        font-size: 0.65rem;
+      }
+
+      .modal-close {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        padding: 0;
+        place-items: center;
+        color: var(--text-muted);
+        background: var(--surface-muted);
+        border-radius: 9px;
+        cursor: pointer;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .modal-close:hover {
+        color: var(--rose-600);
+        background: var(--rose-50);
+      }
+
+      .modal__body {
+        max-height: calc(min(820px, 100dvh - 48px) - 155px);
+        padding: 20px 23px;
+        overflow-y: auto;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 15px;
+      }
+
+      .form-field {
+        min-width: 0;
+      }
+
+      .form-field--full {
+        grid-column: 1 / -1;
+      }
+
+      .form-field label {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--text-strong);
+        font-size: 0.65rem;
+        font-weight: 720;
+      }
+
+      .form-field label span {
+        color: var(--rose-600);
+      }
+
+      .form-field input,
+      .form-field select,
+      .form-field textarea {
+        width: 100%;
+        min-height: 40px;
+        padding: 0 11px;
+        color: var(--text);
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        outline: 0;
+        font-size: 0.71rem;
+        font-weight: 610;
+        transition:
+          border-color var(--transition-fast),
+          box-shadow var(--transition-fast),
+          background var(--transition-fast);
+      }
+
+      .form-field textarea {
+        min-height: 82px;
+        padding-top: 10px;
+        resize: vertical;
+      }
+
+      .form-field input:focus,
+      .form-field select:focus,
+      .form-field textarea:focus {
+        background: var(--surface);
+        border-color: var(--blue-400);
+        box-shadow: 0 0 0 3px rgb(59 130 246 / 0.12);
+      }
+
+      .form-field__hint {
+        display: block;
+        margin-top: 5px;
+        color: var(--text-faint);
+        font-size: 0.56rem;
+        line-height: 1.4;
+      }
+
+      .modal__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 15px 23px;
+        border-top: 1px solid var(--line);
+      }
+
+      .modal__footer-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+      }
+
+      .detail-body {
+        padding: 21px 23px;
+      }
+
+      .detail-hero {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding-bottom: 19px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .detail-hero h3 {
+        color: var(--text-strong);
+        font-size: 1.02rem;
+        font-weight: 810;
+        letter-spacing: -0.04em;
+      }
+
+      .detail-hero p {
+        margin-top: 4px;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+      }
+
+      .detail-tabs {
+        display: flex;
+        gap: 4px;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .detail-tab {
+        display: inline-flex;
+        min-height: 34px;
+        align-items: center;
+        gap: 6px;
+        padding: 0 13px;
+        color: var(--text-muted);
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 0.67rem;
+        font-weight: 700;
+        transition:
+          color var(--transition-fast),
+          background var(--transition-fast),
+          border-color var(--transition-fast);
+      }
+
+      .detail-tab:hover {
+        color: var(--blue-700);
+        background: var(--blue-50);
+      }
+
+      .detail-tab.is-active {
+        color: var(--blue-700);
+        background: var(--blue-50);
+        border-color: var(--blue-100);
+      }
+
+      html[data-theme="dark"] .detail-tab.is-active {
+        color: var(--blue-300);
+        background: rgb(59 130 246 / 0.14);
+        border-color: rgb(96 165 250 / 0.23);
+      }
+
+      .detail-tab-panel {
+        display: none;
+        padding-top: 18px;
+      }
+
+      .detail-tab-panel.is-active {
+        display: block;
+      }
+
+      .detail-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 9px;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .detail-stat {
+        padding: 13px 10px;
+        text-align: center;
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 11px;
+      }
+
+      .detail-stat strong {
+        display: block;
+        color: var(--text-strong);
+        font-size: 1.05rem;
+        font-weight: 820;
+        letter-spacing: -0.03em;
+      }
+
+      .detail-stat span {
+        display: block;
+        margin-top: 2px;
+        color: var(--text-muted);
+        font-size: 0.57rem;
+        font-weight: 640;
+      }
+
+      .detail-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .detail-list__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        padding-bottom: 11px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .detail-list__row:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .detail-list__label {
+        color: var(--text-muted);
+        font-size: 0.65rem;
+        font-weight: 620;
+      }
+
+      .detail-list__value {
+        color: var(--text-strong);
+        font-size: 0.67rem;
+        font-weight: 730;
+        text-align: right;
+      }
+
+      .detail-progress {
+        display: grid;
+        gap: 14px;
+      }
+
+      .detail-progress__item {
+        display: grid;
+        gap: 7px;
+      }
+
+      .detail-progress__item-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .detail-progress__item-label {
+        color: var(--text);
+        font-size: 0.68rem;
+        font-weight: 680;
+      }
+
+      .detail-progress__item-value {
+        color: var(--text-strong);
+        font-size: 0.68rem;
+        font-weight: 780;
+      }
+
+      .detail-progress__bar {
+        height: 8px;
+        overflow: hidden;
+        background: var(--surface-muted);
+        border-radius: var(--radius-pill);
+      }
+
+      .detail-progress__bar span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--blue-500), var(--indigo-500));
+        border-radius: inherit;
+      }
+
+      .detail-empty {
+        display: grid;
+        min-height: 140px;
+        padding: 20px;
+        place-items: center;
+        text-align: center;
+        background: var(--surface-soft);
+        border: 1px dashed var(--line);
+        border-radius: 12px;
+      }
+
+      .detail-empty p {
+        color: var(--text-muted);
+        font-size: 0.68rem;
+      }
+
+      .toast-container {
+        position: fixed;
+        z-index: 700;
+        right: 22px;
+        bottom: 22px;
+        display: grid;
+        width: min(calc(100% - 32px), 370px);
+        gap: 10px;
+        pointer-events: none;
+      }
+
+      .toast {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 13px;
+        color: var(--text);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        opacity: 0;
+        transform: translateY(12px);
+        animation: toast-in 250ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .toast.is-leaving {
+        animation: toast-out 200ms ease forwards;
+      }
+
+      .toast__icon {
+        display: grid;
+        width: 29px;
+        height: 29px;
+        flex: 0 0 auto;
+        place-items: center;
+        color: var(--blue-600);
+        background: var(--blue-50);
+        border-radius: 8px;
+      }
+
+      .toast--success .toast__icon {
+        color: var(--emerald-600);
+        background: var(--emerald-50);
+      }
+
+      .toast--danger .toast__icon {
+        color: var(--rose-600);
+        background: var(--rose-50);
+      }
+
+      .toast p {
+        color: var(--text);
+        font-size: 0.69rem;
+        font-weight: 650;
+        line-height: 1.4;
+      }
+
+      @keyframes toast-in {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes toast-out {
+        to {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+      }
+
+      @media (max-width: 1240px) {
+        .main-inner {
+          padding: 25px 24px 48px;
+        }
+
+        .topbar {
+          gap: 16px;
+          padding: 0 24px;
+        }
+
+        .metrics-grid {
+          gap: 12px;
+        }
+
+        .metric-card {
+          padding: 16px;
+        }
+
+        .metric-card__value {
+          font-size: 1.52rem;
+        }
+
+        .toolbar-card {
+          grid-template-columns: minmax(200px, 1.3fr) repeat(2, minmax(125px, 0.7fr)) auto;
+        }
+      }
+
+      @media (max-width: 1120px) and (min-width: 761px) {
+        body {
+          --sidebar-width: 84px;
+        }
+
+        body.sidebar-is-compact {
+          --sidebar-width: 84px;
+        }
+
+        .sidebar__collapse {
+          display: none;
+        }
+
+        .sidebar__brand,
+        .sidebar__workspace {
+          justify-content: center;
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+
+        .sidebar__brand-name,
+        .sidebar__workspace-copy,
+        .sidebar__group-label,
+        .sidebar__nav-link span:not(.sidebar__nav-badge),
+        .sidebar__nav-badge,
+        .sidebar__help span {
+          display: none;
+        }
+
+        .sidebar__nav-link,
+        .sidebar__help {
+          justify-content: center;
+          padding: 0;
+        }
+
+        .sidebar__nav-link--active::before {
+          left: 2px;
+        }
+
+        .sidebar__footer {
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+
+        .topbar {
+          grid-template-columns: minmax(120px, 1fr) minmax(200px, 290px) auto;
+        }
+
+        .topbar__profile-copy,
+        .topbar__profile-button > .icon {
+          display: none;
+        }
+
+        .topbar__profile-button {
+          padding-right: 3px;
+        }
+
+        .metrics-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .toolbar-card {
+          grid-template-columns: minmax(180px, 1fr) repeat(2, minmax(115px, 0.7fr));
+        }
+
+        .view-toggle {
+          grid-column: 1 / -1;
+          width: max-content;
+        }
+
+        .students-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .students-aside {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+        }
+      }
+
+      @media (max-width: 930px) and (min-width: 761px) {
+        .page-heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .heading-actions {
+          justify-content: flex-start;
+        }
+
+        .toolbar-card {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .search-field {
+          grid-column: 1 / -1;
+        }
+
+        .view-toggle {
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 760px) {
+        :root {
+          --sidebar-width: 0px;
+          --topbar-height: 64px;
+        }
+
+        body {
+          padding-bottom: calc(
+            var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom)
+          );
+        }
+
+        body.sidebar-is-compact {
+          --sidebar-width: 0px;
+        }
+
+        .sidebar {
+          z-index: 450;
+          width: min(83vw, 295px);
+          transform: translateX(-105%);
+          box-shadow: 16px 0 42px rgb(0 0 0 / 0.3);
+        }
+
+        body.mobile-sidebar-open .sidebar {
+          transform: translateX(0);
+        }
+
+        .sidebar__collapse {
+          display: none;
+        }
+
+        .mobile-sidebar-backdrop {
+          position: fixed;
+          z-index: 400;
+          inset: 0;
+          display: block;
+          background: rgb(4 13 28 / 0.54);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity var(--transition-normal);
+        }
+
+        body.mobile-sidebar-open .mobile-sidebar-backdrop {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .app-main {
+          margin-left: 0;
+        }
+
+        .topbar {
+          grid-template-columns: 38px minmax(0, 1fr) auto;
+          gap: 8px;
+          padding: 0 15px;
+          background: rgb(244 247 251 / 0.9);
+        }
+
+        html[data-theme="dark"] .topbar {
+          background: rgb(9 20 38 / 0.9);
+        }
+
+        .mobile-brand {
+          display: grid;
+          place-items: center;
+        }
+
+        .mobile-brand__mark {
+          display: grid;
+          width: 34px;
+          height: 34px;
+          place-items: center;
+          color: #ffffff;
+          background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+          border-radius: 10px;
+          box-shadow: var(--shadow-blue);
+        }
+
+        .mobile-brand__mark .icon {
+          width: 21px;
+          height: 21px;
+        }
+
+        .mobile-menu-toggle {
+          display: grid;
+          width: 38px;
+          height: 38px;
+          padding: 0;
+          place-items: center;
+          color: var(--text-muted);
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          box-shadow: var(--shadow-xs);
+          cursor: pointer;
+        }
+
+        .topbar__crumbs {
+          display: none;
+        }
+
+        .topbar__search-button {
+          min-height: 38px;
+        }
+
+        .topbar__search-button .keyboard-key {
+          display: none;
+        }
+
+        .topbar__actions {
+          gap: 5px;
+        }
+
+        .topbar__action {
+          width: 38px;
+          height: 38px;
+        }
+
+        .topbar__profile {
+          display: none;
+        }
+
+        .main-inner {
+          padding: 20px 16px 26px;
+        }
+
+        .page-heading {
+          display: block;
+          margin: 1px 0 20px;
+        }
+
+        .page-heading__date {
+          margin-bottom: 6px;
+          font-size: 0.62rem;
+        }
+
+        .page-heading h1 {
+          font-size: clamp(1.55rem, 7.4vw, 2rem);
+        }
+
+        .page-heading__description {
+          margin-top: 7px;
+          font-size: 0.79rem;
+          line-height: 1.58;
+        }
+
+        .heading-actions {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 16px;
+        }
+
+        .heading-actions .button {
+          width: 100%;
+          padding-inline: 10px;
+        }
+
+        .metrics-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 11px;
+          margin-bottom: 16px;
+        }
+
+        .metric-card {
+          min-height: 119px;
+          padding: 15px;
+          border-radius: 14px;
+        }
+
+        .metric-card__label {
+          font-size: 0.62rem;
+        }
+
+        .metric-card__icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 9px;
+        }
+
+        .metric-card__icon .icon {
+          width: 17px;
+          height: 17px;
+        }
+
+        .metric-card__value-row {
+          gap: 5px;
+          margin-top: 12px;
+        }
+
+        .metric-card__value {
+          font-size: 1.42rem;
+        }
+
+        .metric-card__detail {
+          margin-top: 9px;
+          font-size: 0.55rem;
+        }
+
+        .toolbar-card {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+          margin-bottom: 16px;
+          padding: 10px;
+        }
+
+        .search-field {
+          grid-column: 1 / -1;
+        }
+
+        .view-toggle {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .students-layout {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .students-grid {
+          grid-template-columns: 1fr;
+          gap: 11px;
+          padding: 12px;
+        }
+
+        .students-panel__header {
+          min-height: 63px;
+          padding: 15px 16px;
+        }
+
+        .students-panel__header h2 {
+          font-size: 0.86rem;
+        }
+
+        .students-panel__header p {
+          font-size: 0.58rem;
+        }
+
+        .student-card {
+          padding: 15px;
+        }
+
+        .student-card__footer {
+          padding-top: 12px;
+          margin-top: 12px;
+        }
+
+        .student-card__actions .button {
+          font-size: 0.59rem;
+        }
+
+        .students-grid.is-list .student-card {
+          display: flex;
+        }
+
+        .students-grid.is-list .student-card__top {
+          gap: 10px;
+        }
+
+        .students-grid.is-list .student-card__stats {
+          padding-top: 15px;
+          margin-top: 15px;
+          border-top: 1px solid var(--line);
+        }
+
+        .students-grid.is-list .student-card__footer {
+          padding-top: 12px;
+          margin-top: 12px;
+          border-top: 1px solid var(--line);
+        }
+
+        .students-aside {
+          display: grid;
+          gap: 16px;
+        }
+
+        .mobile-bottom-nav {
+          position: fixed;
+          z-index: 200;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: grid;
+          height: calc(
+            var(--mobile-bottom-nav-height) + env(safe-area-inset-bottom)
+          );
+          grid-template-columns: repeat(5, 1fr);
+          padding: 7px 7px env(safe-area-inset-bottom);
+          background: rgb(255 255 255 / 0.94);
+          border-top: 1px solid var(--line);
+          box-shadow: 0 -6px 20px rgb(15 23 42 / 0.08);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+        }
+
+        html[data-theme="dark"] .mobile-bottom-nav {
+          background: rgb(16 32 55 / 0.95);
+        }
+
+        .mobile-bottom-nav a,
+        .mobile-bottom-nav button {
+          position: relative;
+          display: grid;
+          min-width: 0;
+          padding: 3px 0;
+          place-items: center;
+          color: var(--text-faint);
+          background: transparent;
+          cursor: pointer;
+          font-size: 0.53rem;
+          font-weight: 650;
+        }
+
+        .mobile-bottom-nav a .icon,
+        .mobile-bottom-nav button .icon {
+          width: 20px;
+          height: 20px;
+          margin-bottom: 2px;
+        }
+
+        .mobile-bottom-nav a.active {
+          color: var(--blue-600);
+        }
+
+        .mobile-bottom-nav a.active::before {
+          position: absolute;
+          top: 0;
+          width: 19px;
+          height: 3px;
+          background: var(--blue-600);
+          border-radius: 0 0 4px 4px;
+          content: "";
+        }
+
+        .mobile-bottom-nav__create span {
+          display: grid;
+          width: 34px;
+          height: 34px;
+          margin-top: -18px;
+          place-items: center;
+          color: #ffffff;
+          background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+          border: 3px solid var(--page-bg);
+          border-radius: 50%;
+          box-shadow: var(--shadow-blue);
+        }
+
+        .mobile-bottom-nav__create .icon {
+          width: 19px;
+          height: 19px;
+          margin: 0;
+        }
+
+        .modal-backdrop {
+          padding: 14px;
+        }
+
+        .modal {
+          max-height: calc(100dvh - 28px);
+          border-radius: 18px;
+        }
+
+        .modal__header {
+          padding: 18px 17px 15px;
+        }
+
+        .modal__title-group h2 {
+          font-size: 0.89rem;
+        }
+
+        .modal__title-group p {
+          font-size: 0.6rem;
+        }
+
+        .modal__body {
+          max-height: calc(100dvh - 170px);
+          padding: 16px 17px;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+          gap: 13px;
+        }
+
+        .form-field--full {
+          grid-column: auto;
+        }
+
+        .modal__footer {
+          align-items: stretch;
+          flex-direction: column;
+          padding: 13px 17px;
+        }
+
+        .modal__footer-actions {
+          width: 100%;
+          margin-left: 0;
+        }
+
+        .modal__footer-actions .button {
+          flex: 1;
+        }
+
+        .detail-body {
+          padding: 17px;
+        }
+
+        .detail-stats {
+          gap: 5px;
+        }
+
+        .detail-stat {
+          padding: 11px 5px;
+        }
+
+        .detail-tabs {
+          gap: 3px;
+          overflow-x: auto;
+        }
+
+        .detail-tab {
+          min-height: 32px;
+          padding: 0 10px;
+          font-size: 0.62rem;
+        }
+
+        .toast-container {
+          right: 12px;
+          bottom: calc(
+            var(--mobile-bottom-nav-height) +
+              13px +
+              env(safe-area-inset-bottom)
+          );
+          width: calc(100% - 24px);
+        }
+      }
+
+      @media (max-width: 430px) {
+        .topbar {
+          grid-template-columns: 38px 38px minmax(0, 1fr) auto;
+        }
+
+        .mobile-brand {
+          grid-column: 1;
+        }
+
+        .mobile-menu-toggle {
+          grid-column: 2;
+        }
+
+        .topbar__search {
+          grid-column: 3;
+        }
+
+        .topbar__search-button {
+          justify-content: center;
+          padding: 0;
+        }
+
+        .topbar__search-button span {
+          display: none;
+        }
+
+        .topbar__actions {
+          grid-column: 4;
+        }
+
+        .topbar__actions > .menu-wrapper {
+          display: none;
+        }
+
+        .heading-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .metrics-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric-card {
+          min-height: 108px;
+        }
+
+        .toolbar-card {
+          grid-template-columns: 1fr;
+        }
+
+        .search-field,
+        .view-toggle {
+          grid-column: auto;
+        }
+
+        .view-toggle {
+          width: 100%;
+        }
+
+        .students-panel__header {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .students-count {
+          align-self: flex-start;
+        }
+
+        .student-card__actions {
+          gap: 2px;
+        }
+
+        .student-card__actions .button {
+          padding-inline: 6px;
+        }
+
+        .detail-stats {
+          grid-template-columns: 1fr;
+        }
+
+        .detail-stat {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 10px 12px;
+          text-align: left;
+        }
+
+        .detail-stat span {
+          margin-top: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#contenido-principal">
+      Ir al contenido principal
+    </a>
+
+    <svg
+      class="sr-only"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <symbol id="icon-graduation" viewBox="0 0 24 24">
+          <path
+            d="m3 9 9-5 9 5-9 5-9-5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M6.5 11.1V16c0 1.7 2.5 3.1 5.5 3.1s5.5-1.4 5.5-3.1v-4.9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M21 9v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-dashboard" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="3.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="13.5"
+            y="3.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="3.5"
+            y="13.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="13.5"
+            y="13.5"
+            width="7"
+            height="7"
+            rx="1.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-calendar" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="15"
+            rx="2.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M7.5 3.5v4M16.5 3.5v4M3.5 10h17"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-users" viewBox="0 0 24 24">
+          <circle
+            cx="9"
+            cy="8"
+            r="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M3.5 19c.5-3.2 2.5-5 5.5-5s5 1.8 5.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M16 5.4a2.8 2.8 0 0 1 0 5.2M20.5 18.8a4.5 4.5 0 0 0-3.2-4.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.7"
+          />
+        </symbol>
+
+        <symbol id="icon-book" viewBox="0 0 24 24">
+          <path
+            d="M4.5 5.7A2.7 2.7 0 0 1 7.2 3h4.2A2.6 2.6 0 0 1 14 5.6V20a2.6 2.6 0 0 0-2.6-2.6H7.2A2.7 2.7 0 0 0 4.5 20V5.7ZM19.5 5.7A2.7 2.7 0 0 0 16.8 3H14v17a2.6 2.6 0 0 1 2.6-2.6h.2a2.7 2.7 0 0 1 2.7 2.6V5.7Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-clipboard" viewBox="0 0 24 24">
+          <rect
+            x="5"
+            y="4.5"
+            width="14"
+            height="16"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M9 4.5V3.7c0-.9.7-1.7 1.7-1.7h2.6c.9 0 1.7.8 1.7 1.7v.8M8.5 10h7M8.5 14h7"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-folder" viewBox="0 0 24 24">
+          <path
+            d="M3.5 7.2A2.2 2.2 0 0 1 5.7 5h4l1.8 2h6.8a2.2 2.2 0 0 1 2.2 2.2v8.6a2.2 2.2 0 0 1-2.2 2.2H5.7a2.2 2.2 0 0 1-2.2-2.2V7.2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-chart" viewBox="0 0 24 24">
+          <path
+            d="M4 20V4M4 20h17"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="m7 15 3.2-3.5 3 2 4.8-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+          <circle cx="18" cy="7.5" r="1.3" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-settings" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M19.4 13.5a1.7 1.7 0 0 0 .3 1.9l.1.1-2.1 2.1-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5v.3h-3v-.3a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-2.1-2.1.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H5v-3h.3a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1 2.1-2.1.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V4h3v.3a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 2.1 2.1-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.3v3h-.3a1.7 1.7 0 0 0-1.5 1Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.4"
+          />
+        </symbol>
+
+        <symbol id="icon-help" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M9.7 9.3a2.5 2.5 0 1 1 4.2 1.8c-1.2 1-1.9 1.4-1.9 2.9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="12" cy="16.8" r="1" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-search" viewBox="0 0 24 24">
+          <circle
+            cx="10.8"
+            cy="10.8"
+            r="6.3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+          />
+          <path
+            d="m16 16 4 4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.9"
+          />
+        </symbol>
+
+        <symbol id="icon-bell" viewBox="0 0 24 24">
+          <path
+            d="M18 10a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="3.8"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M12 2.5v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+          <path
+            d="M20.4 14.8A8.5 8.5 0 0 1 9.2 3.6 8.5 8.5 0 1 0 20.4 14.8Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-plus" viewBox="0 0 24 24">
+          <path
+            d="M12 5v14M5 12h14"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+          <path
+            d="m15 18-6-6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+          <path
+            d="m6 9 6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-close" viewBox="0 0 24 24">
+          <path
+            d="m6 6 12 12M18 6 6 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-user" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="8"
+            r="3.2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M5.5 20c.7-3.2 3.1-5 6.5-5s5.8 1.8 6.5 5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-logout" viewBox="0 0 24 24">
+          <path
+            d="M10 5H5.5A2.5 2.5 0 0 0 3 7.5v9A2.5 2.5 0 0 0 5.5 19H10"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="m14 8 4 4-4 4M18 12H9"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-grid" viewBox="0 0 24 24">
+          <rect
+            x="4"
+            y="4"
+            width="6"
+            height="6"
+            rx="1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="14"
+            y="4"
+            width="6"
+            height="6"
+            rx="1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="4"
+            y="14"
+            width="6"
+            height="6"
+            rx="1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <rect
+            x="14"
+            y="14"
+            width="6"
+            height="6"
+            rx="1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-list" viewBox="0 0 24 24">
+          <path
+            d="M8 6h12M8 12h12M8 18h12"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="4.5" cy="6" r="1" fill="currentColor" />
+          <circle cx="4.5" cy="12" r="1" fill="currentColor" />
+          <circle cx="4.5" cy="18" r="1" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-edit" viewBox="0 0 24 24">
+          <path
+            d="m4 16.5-.8 3.9 3.9-.8L18.5 8.2a2.1 2.1 0 0 0-3-3L4 16.5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="m13.8 6.2 4 4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-trash" viewBox="0 0 24 24">
+          <path
+            d="M5 7h14M10 4h4l1 3H9l1-3ZM7 7l.8 13h8.4L17 7M10 11v5M14 11v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-eye" viewBox="0 0 24 24">
+          <path
+            d="M3.5 12s3.2-6 8.5-6 8.5 6 8.5 6-3.2 6-8.5 6-8.5-6-8.5-6Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            r="2.3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-check" viewBox="0 0 24 24">
+          <path
+            d="m5 12 4.2 4.2L19.5 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.2"
+          />
+        </symbol>
+
+        <symbol id="icon-mail" viewBox="0 0 24 24">
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="13"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="m3.5 7.5 8.5 6 8.5-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-phone" viewBox="0 0 24 24">
+          <path
+            d="M5.3 3h3.3l1.5 4-1.9 1.2a10 10 0 0 0 5.6 5.6L15 12.2l4 1.5v3.3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-alert" viewBox="0 0 24 24">
+          <path
+            d="M10.4 4.2 2.9 17a2 2 0 0 0 1.7 3h14.8a2 2 0 0 0 1.7-3L13.6 4.2a1.9 1.9 0 0 0-3.2 0Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+          <path
+            d="M12 9v4"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="12" cy="16.4" r="1" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-layers" viewBox="0 0 24 24">
+          <path
+            d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+
+        <symbol id="icon-menu" viewBox="0 0 24 24">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2"
+          />
+        </symbol>
+
+        <symbol id="icon-info" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="9"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <path
+            d="M12 11v5"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="1.8"
+          />
+          <circle cx="12" cy="8" r="1" fill="currentColor" />
+        </symbol>
+
+        <symbol id="icon-download" viewBox="0 0 24 24">
+          <path
+            d="M12 3v13M8 12l4 4 4-4M4 20h16"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.8"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop"></div>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegación principal">
+        <a
+          class="sidebar__brand"
+          href="dashboard.html"
+          aria-label="DOCENCIA360, panel principal"
+        >
+          <span class="sidebar__brand-mark" aria-hidden="true">
+            <svg class="icon">
+              <use href="#icon-graduation"></use>
+            </svg>
+          </span>
+
+          <span class="sidebar__brand-name">
+            DOCENCIA<strong>360</strong>
+          </span>
+        </a>
+
+        <div class="sidebar__workspace">
+          <span class="sidebar__workspace-icon" aria-hidden="true">
+            <svg class="icon">
+              <use href="#icon-layers"></use>
+            </svg>
+          </span>
+
+          <div class="sidebar__workspace-copy">
+            <small>ESPACIO ACTIVO</small>
+            <strong>Instituto Horizonte</strong>
+          </div>
+        </div>
+
+        <button
+          class="sidebar__collapse"
+          id="sidebar-collapse"
+          type="button"
+          aria-label="Contraer menú lateral"
+          title="Contraer menú lateral"
+        >
+          <svg class="icon">
+            <use href="#icon-chevron-left"></use>
+          </svg>
+        </button>
+
+        <div class="sidebar__content">
+          <section class="sidebar__group" aria-labelledby="sidebar-general">
+            <h2 class="sidebar__group-label" id="sidebar-general">
+              Principal
+            </h2>
+
+            <nav class="sidebar__nav">
+              <a class="sidebar__nav-link" href="dashboard.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-dashboard"></use>
+                </svg>
+                <span>Panel principal</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="clases.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-calendar"></use>
+                </svg>
+                <span>Mis clases</span>
+              </a>
+
+              <a
+                class="sidebar__nav-link sidebar__nav-link--active"
+                href="estudiantes.html"
+                aria-current="page"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-users"></use>
+                </svg>
+                <span>Estudiantes</span>
+              </a>
+            </nav>
+          </section>
+
+          <section class="sidebar__group" aria-labelledby="sidebar-pedagogia">
+            <h2 class="sidebar__group-label" id="sidebar-pedagogia">
+              Gestión pedagógica
+            </h2>
+
+            <nav class="sidebar__nav">
+              <a class="sidebar__nav-link" href="planificacion.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-book"></use>
+                </svg>
+                <span>Planificación</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="evaluaciones.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-clipboard"></use>
+                </svg>
+                <span>Evaluaciones</span>
+                <span class="sidebar__nav-badge">8</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="recursos.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-folder"></use>
+                </svg>
+                <span>Recursos</span>
+              </a>
+            </nav>
+          </section>
+
+          <section class="sidebar__group" aria-labelledby="sidebar-reportes">
+            <h2 class="sidebar__group-label" id="sidebar-reportes">
+              Análisis
+            </h2>
+
+            <nav class="sidebar__nav">
+              <a class="sidebar__nav-link" href="reportes.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-chart"></use>
+                </svg>
+                <span>Reportes</span>
+              </a>
+
+              <a class="sidebar__nav-link" href="configuracion.html">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-settings"></use>
+                </svg>
+                <span>Configuración</span>
+              </a>
+            </nav>
+          </section>
+        </div>
+
+        <footer class="sidebar__footer">
+          <a class="sidebar__help" href="#ayuda">
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-help"></use>
+            </svg>
+            <span>Centro de ayuda</span>
+          </a>
+        </footer>
+      </aside>
+
+      <section class="app-main">
+        <header class="topbar" id="topbar">
+          <a
+            class="mobile-brand"
+            href="dashboard.html"
+            aria-label="DOCENCIA360, panel principal"
+          >
+            <span class="mobile-brand__mark" aria-hidden="true">
+              <svg class="icon">
+                <use href="#icon-graduation"></use>
+              </svg>
+            </span>
+          </a>
+
+          <button
+            class="mobile-menu-toggle"
+            id="mobile-menu-toggle"
+            type="button"
+            aria-label="Abrir navegación principal"
+            aria-expanded="false"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-menu"></use>
+            </svg>
+          </button>
+
+          <div class="topbar__crumbs">
+            <small>DOCENCIA360 / PRINCIPAL</small>
+            <strong>Estudiantes</strong>
+          </div>
+
+          <div class="topbar__search">
+            <button
+              class="topbar__search-button"
+              id="open-command-palette"
+              type="button"
+              aria-label="Buscar en DOCENCIA360"
+            >
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-search"></use>
+              </svg>
+              <span>Buscar clases, estudiantes o recursos...</span>
+              <kbd class="keyboard-key">⌘ K</kbd>
+            </button>
+          </div>
+
+          <div class="topbar__actions">
+            <button
+              class="topbar__action"
+              id="theme-toggle"
+              type="button"
+              aria-label="Activar modo oscuro"
+              title="Cambiar tema"
+            >
+              <svg class="icon theme-icon-moon" aria-hidden="true">
+                <use href="#icon-moon"></use>
+              </svg>
+
+              <svg class="icon theme-icon-sun" aria-hidden="true">
+                <use href="#icon-sun"></use>
+              </svg>
+            </button>
+
+            <div class="menu-wrapper">
+              <button
+                class="topbar__action"
+                id="notification-toggle"
+                type="button"
+                aria-label="Abrir notificaciones"
+                aria-expanded="false"
+                aria-controls="notification-menu"
+              >
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-bell"></use>
+                </svg>
+
+                <span
+                  class="topbar__notification-dot"
+                  id="notification-dot"
+                  aria-hidden="true"
+                ></span>
+              </button>
+
+              <div
+                class="floating-menu"
+                id="notification-menu"
+                role="dialog"
+                aria-label="Notificaciones"
+              >
+                <div class="floating-menu__header">
+                  <h3>Notificaciones</h3>
+                  <button id="mark-notifications-read" type="button">
+                    Marcar leídas
+                  </button>
+                </div>
+
+                <div class="notification-list">
+                  <article class="notification-item">
+                    <span
+                      class="notification-item__icon notification-item__icon--amber"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
+                        <use href="#icon-alert"></use>
+                      </svg>
+                    </span>
+
+                    <div class="notification-item__copy">
+                      <strong>Seguimiento requerido</strong>
+                      <p>
+                        2 estudiantes necesitan atención pedagógica especial.
+                      </p>
+                    </div>
+                  </article>
+
+                  <article class="notification-item">
+                    <span
+                      class="notification-item__icon notification-item__icon--blue"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon icon--sm">
+                        <use href="#icon-users"></use>
+                      </svg>
+                    </span>
+
+                    <div class="notification-item__copy">
+                      <strong>Nuevos estudiantes</strong>
+                      <p>3 estudiantes fueron matriculados en tus grupos.</p>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="floating-menu__footer">
+                  <a
+                    class="button button--secondary button--small button--full"
+                    href="reportes.html"
+                  >
+                    Ver todas las notificaciones
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="topbar__profile menu-wrapper">
+              <button
+                class="topbar__profile-button"
+                id="profile-toggle"
+                type="button"
+                aria-label="Abrir menú de perfil"
+                aria-expanded="false"
+                aria-controls="profile-menu"
+              >
+                <span class="avatar avatar--ana" aria-hidden="true">AM</span>
+
+                <span class="topbar__profile-copy">
+                  <strong>Ana Martínez</strong>
+                  <small>Docente</small>
+                </span>
+
+                <svg class="icon icon--xs" aria-hidden="true">
+                  <use href="#icon-chevron-down"></use>
+                </svg>
+              </button>
+
+              <div
+                class="floating-menu profile-menu"
+                id="profile-menu"
+                role="dialog"
+                aria-label="Menú de perfil"
+              >
+                <div class="profile-menu__identity">
+                  <span class="avatar avatar--ana" aria-hidden="true">AM</span>
+
+                  <span>
+                    <strong>Ana Martínez</strong>
+                    <small>ana.martinez@horizonte.edu</small>
+                  </span>
+                </div>
+
+                <div class="profile-menu__links">
+                  <a href="configuracion.html">
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-user"></use>
+                    </svg>
+                    Mi perfil
+                  </a>
+
+                  <a href="configuracion.html">
+                    <svg class="icon icon--sm" aria-hidden="true">
+                      <use href="#icon-settings"></use>
+                    </svg>
+                    Preferencias
+                  </a>
+
+                  <button id="logout-button" type="button">
+                    <svg class="icon icon--sm danger" aria-hidden="true">
+                      <use href="#icon-logout"></use>
+                    </svg>
+                    <span class="danger">Cerrar sesión</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main class="main-inner" id="contenido-principal">
+          <section class="page-heading" aria-labelledby="page-title">
+            <div class="page-heading__content">
+              <p class="page-heading__date">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-users"></use>
+                </svg>
+                <span id="current-date">Viernes, 11 de septiembre de 2026</span>
+              </p>
+
+              <h1 id="page-title">
+                Tus <span>estudiantes</span>
+              </h1>
+
+              <p class="page-heading__description">
+                Consulta perfiles, rendimiento académico, asistencia y realiza seguimiento personalizado de cada estudiante.
+              </p>
+            </div>
+
+            <div class="heading-actions">
+              <button
+                class="button button--secondary"
+                id="export-students-button"
+                type="button"
+              >
+                <svg class="icon icon--sm" aria-hidden="true">
+                  <use href="#icon-download"></use>
+                </svg>
+                Exportar listado
+              </button>
+
+              <button
+                class="button button--primary"
+                id="new-student-button"
+                type="button"
+              >
+                <svg class="icon icon--sm" aria-hidden="true">
+                  <use href="#icon-plus"></use>
+                </svg>
+                Nuevo estudiante
+              </button>
+            </div>
+          </section>
+
+          <section class="metrics-grid" aria-label="Indicadores de estudiantes">
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Total estudiantes</span>
+
+                <span class="metric-card__icon metric-card__icon--blue">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-users"></use>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value" id="metric-total">126</strong>
+              </div>
+
+              <span class="metric-card__detail">
+                Estudiantes a tu cargo este periodo
+              </span>
+            </article>
+
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Rendimiento promedio</span>
+
+                <span class="metric-card__icon metric-card__icon--indigo">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-chart"></use>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value" id="metric-performance">
+                  78,5%
+                </strong>
+              </div>
+
+              <span class="metric-card__detail">
+                Promedio general de logro académico
+              </span>
+            </article>
+
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Asistencia promedio</span>
+
+                <span class="metric-card__icon metric-card__icon--green">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-check"></use>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value" id="metric-attendance">
+                  94,2%
+                </strong>
+              </div>
+
+              <span class="metric-card__detail">
+                Promedio de asistencia de tus grupos
+              </span>
+            </article>
+
+            <article class="metric-card card">
+              <div class="metric-card__top">
+                <span class="metric-card__label">Requieren seguimiento</span>
+
+                <span class="metric-card__icon metric-card__icon--amber">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-alert"></use>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="metric-card__value-row">
+                <strong class="metric-card__value" id="metric-attention">
+                  04
+                </strong>
+              </div>
+
+              <span class="metric-card__detail">
+                Estudiantes con alertas académicas
+              </span>
+            </article>
+          </section>
+
+          <section class="toolbar-card card" aria-label="Filtros de estudiantes">
+            <div class="search-field">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-search"></use>
+              </svg>
+
+              <label class="sr-only" for="student-search">
+                Buscar un estudiante
+              </label>
+
+              <input
+                id="student-search"
+                type="search"
+                placeholder="Buscar por nombre, apellido o código..."
+                autocomplete="off"
+              />
+            </div>
+
+            <div>
+              <label class="sr-only" for="class-filter">Filtrar por clase</label>
+
+              <select class="filter-select" id="class-filter">
+                <option value="all">Todas las clases</option>
+                <option value="mat-10a">Matemáticas 10° A</option>
+                <option value="alg-9b">Álgebra 9° B</option>
+                <option value="geo-8a">Geometría 8° A</option>
+                <option value="est-10b">Estadística 10° B</option>
+                <option value="tal-11a">Taller 11° A</option>
+                <option value="ref-9a">Refuerzo 9° A</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="sr-only" for="status-filter">
+                Filtrar por estado
+              </label>
+
+              <select class="filter-select" id="status-filter">
+                <option value="all">Todos los estados</option>
+                <option value="active">Activos</option>
+                <option value="attention">Requieren atención</option>
+                <option value="excellent">Rendimiento alto</option>
+              </select>
+            </div>
+
+            <div class="view-toggle" aria-label="Cambiar vista">
+              <button
+                class="is-active"
+                id="grid-view-button"
+                type="button"
+                aria-label="Vista de tarjetas"
+                aria-pressed="true"
+              >
+                <svg class="icon icon--sm" aria-hidden="true">
+                  <use href="#icon-grid"></use>
+                </svg>
+              </button>
+
+              <button
+                id="list-view-button"
+                type="button"
+                aria-label="Vista de lista"
+                aria-pressed="false"
+              >
+                <svg class="icon icon--sm" aria-hidden="true">
+                  <use href="#icon-list"></use>
+                </svg>
+              </button>
+            </div>
+          </section>
+
+          <div class="students-layout">
+            <section class="students-main card" aria-labelledby="students-title">
+              <header class="students-panel__header">
+                <div>
+                  <h2 id="students-title">Listado de estudiantes</h2>
+                  <p id="students-subtitle">
+                    Selecciona un estudiante para ver su perfil completo.
+                  </p>
+                </div>
+
+                <span class="students-count" id="students-count">
+                  126 estudiantes
+                </span>
+              </header>
+
+              <div class="students-grid" id="students-grid"></div>
+            </section>
+
+            <aside class="students-aside">
+              <section class="card" aria-labelledby="attention-title">
+                <header class="card__header">
+                  <div class="card__header-title">
+                    <span
+                      class="card__header-icon card__header-icon--amber"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon">
+                        <use href="#icon-alert"></use>
+                      </svg>
+                    </span>
+
+                    <span>
+                      <p class="card__eyebrow">ACOMPAÑAMIENTO</p>
+                      <h2 class="card__title" id="attention-title">
+                        Atención requerida
+                      </h2>
+                    </span>
+                  </div>
+                </header>
+
+                <div class="attention-card__intro">
+                  <svg class="icon" aria-hidden="true">
+                    <use href="#icon-info"></use>
+                  </svg>
+                  4 estudiantes necesitan seguimiento.
+                </div>
+
+                <div class="attention-list" id="attention-list"></div>
+              </section>
+
+              <section class="card" aria-labelledby="help-title">
+                <header class="card__header">
+                  <div class="card__header-title">
+                    <span
+                      class="card__header-icon card__header-icon--emerald"
+                      aria-hidden="true"
+                    >
+                      <svg class="icon">
+                        <use href="#icon-info"></use>
+                      </svg>
+                    </span>
+
+                    <span>
+                      <p class="card__eyebrow">GESTIÓN DOCENTE</p>
+                      <h2 class="card__title" id="help-title">
+                        Acciones disponibles
+                      </h2>
+                    </span>
+                  </div>
+                </header>
+
+                <div class="info-card__body">
+                  <p>
+                    Desde cada perfil podrás consultar historial académico, asistencia, evaluaciones y agregar observaciones.
+                  </p>
+
+                  <ul class="info-card__list">
+                    <li>
+                      <svg class="icon icon--sm" aria-hidden="true">
+                        <use href="#icon-check"></use>
+                      </svg>
+                      Historial de asistencia
+                    </li>
+
+                    <li>
+                      <svg class="icon icon--sm" aria-hidden="true">
+                        <use href="#icon-chart"></use>
+                      </svg>
+                      Progreso académico
+                    </li>
+
+                    <li>
+                      <svg class="icon icon--sm" aria-hidden="true">
+                        <use href="#icon-edit"></use>
+                      </svg>
+                      Observaciones docentes
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </main>
+      </section>
+    </div>
+
+    <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
+      <a href="dashboard.html">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-dashboard"></use>
+        </svg>
+        Inicio
+      </a>
+
+      <a href="clases.html">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-calendar"></use>
+        </svg>
+        Clases
+      </a>
+
+      <button
+        class="mobile-bottom-nav__create"
+        id="mobile-new-student"
+        type="button"
+        aria-label="Crear nuevo estudiante"
+      >
+        <span>
+          <svg class="icon" aria-hidden="true">
+            <use href="#icon-plus"></use>
+          </svg>
+        </span>
+        Crear
+      </button>
+
+      <a class="active" href="estudiantes.html" aria-current="page">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-users"></use>
+        </svg>
+        Alumnos
+      </a>
+
+      <a href="reportes.html">
+        <svg class="icon" aria-hidden="true">
+          <use href="#icon-chart"></use>
+        </svg>
+        Reportes
+      </a>
+    </nav>
+
+    <div
+      class="modal-backdrop"
+      id="student-modal-backdrop"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="student-modal-title"
+    >
+      <section class="modal">
+        <header class="modal__header">
+          <div class="modal__title-group">
+            <span class="modal__title-icon" aria-hidden="true">
+              <svg class="icon">
+                <use href="#icon-user"></use>
+              </svg>
+            </span>
+
+            <div>
+              <h2 id="student-modal-title">Crear nuevo estudiante</h2>
+              <p id="student-modal-subtitle">
+                Completa la información básica del estudiante.
+              </p>
+            </div>
+          </div>
+
+          <button
+            class="modal-close"
+            type="button"
+            aria-label="Cerrar formulario"
+            data-close-modal="student-modal-backdrop"
+          >
+            <svg class="icon icon--sm" aria-hidden="true">
+              <use href="#icon-close"></use>
+            </svg>
+          </button>
+        </header>
+
+        <form id="student-form">
+          <div class="modal__body">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="student-firstname">
+                  Nombre <span>*</span>
+                </label>
+
+                <input
+                  id="student-firstname"
+                  name="firstname"
+                  type="text"
+                  required
+                  placeholder="Ej. Mateo"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="student-lastname">
+                  Apellido <span>*</span>
+                </label>
+
+                <input
+                  id="student-lastname"
+                  name="lastname"
+                  type="text"
+                  required
+                  placeholder="Ej. Ramírez"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="student-code">Código de estudiante</label>
+
+                <input
+                  id="student-code"
+                  name="code"
+                  type="text"
+                  placeholder="Ej. EST-2026-001"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="student-email">Correo electrónico</label>
+
+                <input
+                  id="student-email"
+                  name="email"
+                  type="email"
+                  placeholder="estudiante@ejemplo.com"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="student-phone">Teléfono</label>
+
+                <input
+                  id="student-phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="+56 9 1234 5678"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="student-birthdate">Fecha de nacimiento</label>
+
+                <input
+                  id="student-birthdate"
+                  name="birthdate"
+                  type="date"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="student-class">
+                  Clase asignada <span>*</span>
+                </label>
+
+                <select id="student-class" name="class" required>
+                  <option value="">Seleccionar clase</option>
+                  <option value="mat-10a">Matemáticas 10° A</option>
+                  <option value="alg-9b">Álgebra 9° B</option>
+                  <option value="geo-8a">Geometría 8° A</option>
+                  <option value="est-10b">Estadística 10° B</option>
+                  <option value="tal-11a">Taller 11° A</option>
+                  <option value="ref-9a">Refuerzo 9° A</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="student-avatar">Color de avatar</label>
+
+                <select id="student-avatar" name="avatar">
+                  <option value="mateo">Azul</option>
+                  <option value="sofia">Rosa</option>
+                  <option value="lucas">Verde azulado</option>
+                  <option value="camila">Violeta</option>
+                  <option value="diego">Naranja</option>
+                  <option value="ana">Ámbar</option>
+                  <option value="isabella">Cian</option>
+                  <option value="sebastian">Lima</option>
+                  <option value="valentina">Rojo</option>
+                  <option value="santiago">Índigo</option>
+                </select>
+              </div>
+
+              <div class="form-field form-field--full">
+                <label for="student-notes">Observaciones iniciales</label>
+
+                <textarea
+                  id="student-notes"
+                  name="notes"
+                  placeholder="Agrega cualquier observación relevante sobre el estudiante..."
+                ></textarea>
+
+                <small class="form-field__hint">
+                  Esta información quedará guardada localmente en este navegador.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <footer class="modal__footer">
+            <button
+              class="button button--danger"
+              id="delete-student-button"
+              type="button"
+              hidden
+            >
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-trash"></use>
+              </svg>
+              Eliminar
+            </button>
+
+            <div class="modal__footer-actions">
+              <button
+                class="button button--ghost"
+                type="button"
+                data-close-modal="student-modal-backdrop"
+              >
+                Cancelar
+              </button>
+
+              <button class="button button--primary" type="submit">
+                <svg class="icon icon--sm" aria-hidden="true">
+                  <use href="#icon-check"></use>
+                </svg>
+                <span id="save-student-label">Guardar estudiante</span>
+              </button>
+            </div>
+          </footer>
+        </form>
+      </section>
+    </div>
+
+    <div
+      class="modal-backdrop"
+      id="detail-modal-backdrop"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="detail-modal-title"
+    >
+      <section class="modal">
+        <header class="modal__header">
+          <div class="modal__title-group">
+            <span class="modal__title-icon" aria-hidden="true">
+              <svg class="icon">
+                <use href="#icon-eye"></use>
+              </svg>
+            </span>
+
+            <div>
+              <h2 id="detail-modal-title">Perfil del estudiante</h2>
+              <p>Información académica y seguimiento</p>
+            </div>
+          </div>
+
+          <button
+            class="modal-close"
+            type="button"
+            aria-label="Cerrar perfil"
+            data-close-modal="detail-modal-backdrop"
+          >
+            <svg class="icon icon--sm" aria-hidden="true">
+              <use href="#icon-close"></use>
+            </svg>
+          </button>
+        </header>
+
+        <div class="detail-body" id="detail-body"></div>
+
+        <footer class="modal__footer">
+          <button
+            class="button button--secondary"
+            id="detail-contact-button"
+            type="button"
+          >
+            <svg class="icon icon--sm" aria-hidden="true">
+              <use href="#icon-mail"></use>
+            </svg>
+            Contactar
+          </button>
+
+          <div class="modal__footer-actions">
+            <button
+              class="button button--ghost"
+              type="button"
+              data-close-modal="detail-modal-backdrop"
+            >
+              Cerrar
+            </button>
+
+            <button class="button button--primary" id="detail-edit-button" type="button">
+              <svg class="icon icon--sm" aria-hidden="true">
+                <use href="#icon-edit"></use>
+              </svg>
+              Editar perfil
+            </button>
+          </div>
+        </footer>
+      </section>
+    </div>
+
+    <div
+      class="toast-container"
+      id="toast-container"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const root = document.documentElement;
+        const body = document.body;
+
+        const topbar = document.getElementById("topbar");
+        const sidebarCollapse = document.getElementById("sidebar-collapse");
+        const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileSidebarBackdrop = document.getElementById(
+          "mobile-sidebar-backdrop"
+        );
+
+        const themeToggle = document.getElementById("theme-toggle");
+
+        const notificationToggle = document.getElementById(
+          "notification-toggle"
+        );
+        const notificationMenu = document.getElementById("notification-menu");
+        const notificationDot = document.getElementById("notification-dot");
+        const markNotificationsRead = document.getElementById(
+          "mark-notifications-read"
+        );
+
+        const profileToggle = document.getElementById("profile-toggle");
+        const profileMenu = document.getElementById("profile-menu");
+        const logoutButton = document.getElementById("logout-button");
+
+        const studentSearch = document.getElementById("student-search");
+        const classFilter = document.getElementById("class-filter");
+        const statusFilter = document.getElementById("status-filter");
+        const studentsGrid = document.getElementById("students-grid");
+        const studentsCount = document.getElementById("students-count");
+        const attentionList = document.getElementById("attention-list");
+
+        const gridViewButton = document.getElementById("grid-view-button");
+        const listViewButton = document.getElementById("list-view-button");
+
+        const studentModalBackdrop = document.getElementById(
+          "student-modal-backdrop"
+        );
+        const detailModalBackdrop = document.getElementById(
+          "detail-modal-backdrop"
+        );
+
+        const studentForm = document.getElementById("student-form");
+        const studentModalTitle = document.getElementById("student-modal-title");
+        const studentModalSubtitle = document.getElementById(
+          "student-modal-subtitle"
+        );
+        const saveStudentLabel = document.getElementById("save-student-label");
+        const deleteStudentButton = document.getElementById(
+          "delete-student-button"
+        );
+
+        const detailBody = document.getElementById("detail-body");
+        const detailEditButton = document.getElementById("detail-edit-button");
+        const detailContactButton = document.getElementById(
+          "detail-contact-button"
+        );
+
+        const toastContainer = document.getElementById("toast-container");
+        const currentDate = document.getElementById("current-date");
+
+        let selectedView = "grid";
+        let editingStudentId = null;
+        let selectedDetailId = null;
+        let lastFocusedElement = null;
+
+        const initialStudents = [
+          {
+            id: "student-mateo",
+            firstname: "Mateo",
+            lastname: "Ramírez",
+            code: "EST-2026-001",
+            email: "mateo.ramirez@example.com",
+            phone: "+56 9 8765 4321",
+            birthdate: "2010-03-15",
+            class: "mat-10a",
+            className: "Matemáticas 10° A",
+            avatar: "mateo",
+            attendance: 76,
+            performance: 82,
+            status: "attention",
+            notes: "Requiere apoyo adicional en asistencia."
+          },
+          {
+            id: "student-sofia",
+            firstname: "Sofía",
+            lastname: "González",
+            code: "EST-2026-002",
+            email: "sofia.gonzalez@example.com",
+            phone: "+56 9 7654 3210",
+            birthdate: "2011-07-22",
+            class: "alg-9b",
+            className: "Álgebra 9° B",
+            avatar: "sofia",
+            attendance: 88,
+            performance: 61,
+            status: "attention",
+            notes: "Dificultades en objetivos de álgebra básica."
+          },
+          {
+            id: "student-lucas",
+            firstname: "Lucas",
+            lastname: "Contreras",
+            code: "EST-2026-003",
+            email: "lucas.contreras@example.com",
+            phone: "+56 9 6543 2109",
+            birthdate: "2010-11-08",
+            class: "mat-10a",
+            className: "Matemáticas 10° A",
+            avatar: "lucas",
+            attendance: 96,
+            performance: 91,
+            status: "excellent",
+            notes: "Excelente participación y compromiso."
+          },
+          {
+            id: "student-camila",
+            firstname: "Camila",
+            lastname: "Muñoz",
+            code: "EST-2026-004",
+            email: "camila.munoz@example.com",
+            phone: "+56 9 5432 1098",
+            birthdate: "2010-05-14",
+            class: "mat-10a",
+            className: "Matemáticas 10° A",
+            avatar: "camila",
+            attendance: 92,
+            performance: 87,
+            status: "active",
+            notes: ""
+          },
+          {
+            id: "student-diego",
+            firstname: "Diego",
+            lastname: "Pérez",
+            code: "EST-2026-005",
+            email: "diego.perez@example.com",
+            phone: "+56 9 4321 0987",
+            birthdate: "2010-09-30",
+            class: "mat-10a",
+            className: "Matemáticas 10° A",
+            avatar: "diego",
+            attendance: 94,
+            performance: 84,
+            status: "active",
+            notes: ""
+          },
+          {
+            id: "student-isabella",
+            firstname: "Isabella",
+            lastname: "Torres",
+            code: "EST-2026-006",
+            email: "isabella.torres@example.com",
+            phone: "+56 9 3210 9876",
+            birthdate: "2011-02-18",
+            class: "alg-9b",
+            className: "Álgebra 9° B",
+            avatar: "isabella",
+            attendance: 97,
+            performance: 89,
+            status: "active",
+            notes: ""
+          },
+          {
+            id: "student-sebastian",
+            firstname: "Sebastián",
+            lastname: "Vargas",
+            code: "EST-2026-007",
+            email: "sebastian.vargas@example.com",
+            phone: "+56 9 2109 8765",
+            birthdate: "2011-06-25",
+            class: "alg-9b",
+            className: "Álgebra 9° B",
+            avatar: "sebastian",
+            attendance: 90,
+            performance: 78,
+            status: "active",
+            notes: ""
+          },
+          {
+            id: "student-valentina",
+            firstname: "Valentina",
+            lastname: "Morales",
+            code: "EST-2026-008",
+            email: "valentina.morales@example.com",
+            phone: "+56 9 1098 7654",
+            birthdate: "2012-04-12",
+            class: "geo-8a",
+            className: "Geometría 8° A",
+            avatar: "valentina",
+            attendance: 95,
+            performance: 86,
+            status: "active",
+            notes: ""
+          },
+          {
+            id: "student-santiago",
+            firstname: "Santiago",
+            lastname: "Rojas",
+            code: "EST-2026-009",
+            email: "santiago.rojas@example.com",
+            phone: "+56 9 0987 6543",
+            birthdate: "2012-10-05",
+            class: "geo-8a",
+            className: "Geometría 8° A",
+            avatar: "santiago",
+            attendance: 93,
+            performance: 81,
+            status: "active",
+            notes: ""
+          },
+          {
+            id: "student-ana",
+            firstname: "Ana",
+            lastname: "Herrera",
+            code: "EST-2026-010",
+            email: "ana.herrera@example.com",
+            phone: "+56 9 9876 5432",
+            birthdate: "2010-12-20",
+            class: "est-10b",
+            className: "Estadística 10° B",
+            avatar: "ana",
+            attendance: 98,
+            performance: 93,
+            status: "excellent",
+            notes: "Desempeño sobresaliente en análisis de datos."
+          }
+        ];
+
+        const getPreference = (key) => {
+          try {
+            return localStorage.getItem(key);
+          } catch {
+            return null;
+          }
+        };
+
+        const savePreference = (key, value) => {
+          try {
+            localStorage.setItem(key, value);
+          } catch {
+          }
+        };
+
+        const loadStudents = () => {
+          try {
+            const saved = localStorage.getItem("docencia360-students");
+
+            if (saved) {
+              const parsed = JSON.parse(saved);
+
+              if (Array.isArray(parsed)) {
+                return parsed;
+              }
+            }
+          } catch {
+          }
+
+          return initialStudents.map((item) => ({ ...item }));
+        };
+
+        let students = loadStudents();
+
+        const persistStudents = () => {
+          try {
+            localStorage.setItem("docencia360-students", JSON.stringify(students));
+          } catch {
+          }
+        };
+
+        const escapeHTML = (value) => {
+          return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+        };
+
+        const formatNumber = (value) => {
+          return new Intl.NumberFormat("es-ES").format(Number(value) || 0);
+        };
+
+        const showToast = (message, type = "info") => {
+          const toast = document.createElement("div");
+          const icon =
+            type === "success"
+              ? "#icon-check"
+              : type === "danger"
+                ? "#icon-alert"
+                : "#icon-info";
+
+          toast.className = `toast toast--${type}`;
+          toast.innerHTML = `
+            <span class="toast__icon" aria-hidden="true">
+              <svg class="icon icon--sm">
+                <use href="${icon}"></use>
+              </svg>
+            </span>
+            <p></p>
+          `;
+
+          toast.querySelector("p").textContent = message;
+          toastContainer.appendChild(toast);
+
+          window.setTimeout(() => {
+            toast.classList.add("is-leaving");
+
+            window.setTimeout(() => {
+              toast.remove();
+            }, 220);
+          }, 3600);
+        };
+
+        const updateDate = () => {
+          const date = new Intl.DateTimeFormat("es-ES", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          }).format(new Date());
+
+          currentDate.textContent =
+            date.charAt(0).toUpperCase() + date.slice(1);
+        };
+
+        const updateTopbar = () => {
+          topbar.classList.toggle("is-scrolled", window.scrollY > 8);
+        };
+
+        const applyTheme = (theme) => {
+          root.dataset.theme = theme;
+
+          const isDark = theme === "dark";
+
+          themeToggle.setAttribute(
+            "aria-label",
+            isDark ? "Activar modo claro" : "Activar modo oscuro"
+          );
+
+          themeToggle.setAttribute(
+            "title",
+            isDark ? "Activar modo claro" : "Activar modo oscuro"
+          );
+
+          const themeMeta = document.querySelector(
+            'meta[name="theme-color"]'
+          );
+
+          if (themeMeta) {
+            themeMeta.setAttribute("content", isDark ? "#091426" : "#f4f7fb");
+          }
+        };
+
+        const closeFloatingMenus = () => {
+          notificationMenu.classList.remove("is-open");
+          profileMenu.classList.remove("is-open");
+
+          notificationToggle.setAttribute("aria-expanded", "false");
+          profileToggle.setAttribute("aria-expanded", "false");
+        };
+
+        const toggleFloatingMenu = (menu, trigger) => {
+          const isOpen = menu.classList.contains("is-open");
+
+          closeFloatingMenus();
+
+          if (!isOpen) {
+            menu.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+          }
+        };
+
+        const openModal = (modal, focusTarget = null) => {
+          lastFocusedElement = document.activeElement;
+          closeFloatingMenus();
+
+          modal.classList.add("is-open");
+          modal.setAttribute("aria-hidden", "false");
+          body.classList.add("no-scroll");
+
+          if (focusTarget) {
+            window.setTimeout(() => focusTarget.focus(), 80);
+          }
+        };
+
+        const closeModal = (modal) => {
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+
+          const anotherModalIsOpen = document.querySelector(
+            ".modal-backdrop.is-open"
+          );
+
+          if (!anotherModalIsOpen) {
+            body.classList.remove("no-scroll");
+          }
+
+          if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+            lastFocusedElement.focus();
+          }
+        };
+
+        const closeMobileSidebar = () => {
+          body.classList.remove("mobile-sidebar-open");
+          mobileMenuToggle.setAttribute("aria-expanded", "false");
+          mobileMenuToggle.setAttribute(
+            "aria-label",
+            "Abrir navegación principal"
+          );
+        };
+
+        const updateMetrics = () => {
+          const activeStudents = students.filter(
+            (item) => item.status !== "inactive"
+          );
+
+          const totalStudents = activeStudents.length;
+
+          const avgPerformance =
+            activeStudents.length > 0
+              ? activeStudents.reduce(
+                  (total, item) => total + Number(item.performance || 0),
+                  0
+                ) / activeStudents.length
+              : 0;
+
+          const avgAttendance =
+            activeStudents.length > 0
+              ? activeStudents.reduce(
+                  (total, item) => total + Number(item.attendance || 0),
+                  0
+                ) / activeStudents.length
+              : 0;
+
+          const attentionCount = activeStudents.filter(
+            (item) => item.status === "attention"
+          ).length;
+
+          document.getElementById("metric-total").textContent =
+            formatNumber(totalStudents);
+
+          document.getElementById("metric-performance").textContent =
+            `${avgPerformance.toFixed(1).replace(".", ",")}%`;
+
+          document.getElementById("metric-attendance").textContent =
+            `${avgAttendance.toFixed(1).replace(".", ",")}%`;
+
+          document.getElementById("metric-attention").textContent = String(
+            attentionCount
+          ).padStart(2, "0");
+        };
+
+        const getFilteredStudents = () => {
+          const query = studentSearch.value.trim().toLowerCase();
+          const classId = classFilter.value;
+          const status = statusFilter.value;
+
+          return students
+            .filter((item) => {
+              const searchableText = [
+                item.firstname,
+                item.lastname,
+                item.code,
+                item.email
+              ]
+                .join(" ")
+                .toLowerCase();
+
+              const matchesQuery =
+                query.length === 0 || searchableText.includes(query);
+
+              const matchesClass = classId === "all" || item.class === classId;
+              const matchesStatus =
+                status === "all" || item.status === status;
+
+              return matchesQuery && matchesClass && matchesStatus;
+            })
+            .sort((a, b) => {
+              if (a.status !== b.status) {
+                if (a.status === "attention") return -1;
+                if (b.status === "attention") return 1;
+                if (a.status === "excellent") return -1;
+                if (b.status === "excellent") return 1;
+              }
+
+              return a.lastname.localeCompare(b.lastname);
+            });
+        };
+
+        const getStatusBadge = (status, attendance, performance) => {
+          if (status === "attention") {
+            return '<span class="status-badge status-badge--rose">Requiere atención</span>';
+          }
+
+          if (status === "excellent" || performance >= 90) {
+            return '<span class="status-badge status-badge--green">Alto rendimiento</span>';
+          }
+
+          if (attendance >= 95) {
+            return '<span class="status-badge status-badge--blue">Excelente asistencia</span>';
+          }
+
+          return '<span class="status-badge status-badge--blue">Activo</span>';
+        };
+
+        const renderStudentCard = (item) => {
+          const fullName = `${item.firstname} ${item.lastname}`;
+          const initials = `${item.firstname.charAt(0)}${item.lastname.charAt(0)}`;
+
+          return `
+            <article class="student-card">
+              <div class="student-card__top">
+                <span class="avatar avatar--${escapeHTML(
+                  item.avatar || "mateo"
+                )}" aria-hidden="true">
+                  ${escapeHTML(initials)}
+                </span>
+
+                <div class="student-card__info">
+                  <h3 class="student-card__name">${escapeHTML(fullName)}</h3>
+                  <p class="student-card__meta">
+                    ${escapeHTML(item.code || "Sin código")} • ${escapeHTML(
+                      item.className
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div class="student-card__stats">
+                <div class="student-card__stat">
+                  <span class="student-card__stat-label">Asistencia</span>
+                  <div class="student-card__stat-value">
+                    <strong>${Number(item.attendance || 0)
+                      .toFixed(0)
+                      .replace(".", ",")}%</strong>
+                  </div>
+                </div>
+
+                <div class="student-card__stat">
+                  <span class="student-card__stat-label">Rendimiento</span>
+                  <div class="student-card__stat-value">
+                    <strong>${Number(item.performance || 0)
+                      .toFixed(0)
+                      .replace(".", ",")}%</strong>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="student-card__footer">
+                ${getStatusBadge(item.status, item.attendance, item.performance)}
+
+                <div class="student-card__actions">
+                  <button
+                    class="button button--ghost button--small"
+                    type="button"
+                    data-student-action="detail"
+                    data-student-id="${escapeHTML(item.id)}"
+                  >
+                    <svg class="icon icon--xs" aria-hidden="true">
+                      <use href="#icon-eye"></use>
+                    </svg>
+                    Ver perfil
+                  </button>
+
+                  <button
+                    class="button button--small"
+                    type="button"
+                    data-student-action="edit"
+                    data-student-id="${escapeHTML(item.id)}"
+                    aria-label="Editar ${escapeHTML(fullName)}"
+                  >
+                    <svg class="icon icon--xs" aria-hidden="true">
+                      <use href="#icon-edit"></use>
+                    </svg>
+                  </button>
+                </div>
+              </footer>
+            </article>
+          `;
+        };
+
+        const renderStudents = () => {
+          const filteredStudents = getFilteredStudents();
+
+          studentsGrid.classList.toggle("is-list", selectedView === "list");
+
+          studentsCount.textContent =
+            filteredStudents.length === 1
+              ? "1 estudiante"
+              : `${filteredStudents.length} estudiantes`;
+
+          if (filteredStudents.length === 0) {
+            studentsGrid.innerHTML = `
+              <div class="empty-state">
+                <div>
+                  <span class="empty-state__icon" aria-hidden="true">
+                    <svg class="icon icon--lg">
+                      <use href="#icon-search"></use>
+                    </svg>
+                  </span>
+                  <h3>No encontramos estudiantes</h3>
+                  <p>
+                    Prueba con otro término de búsqueda o cambia los filtros
+                    seleccionados.
+                  </p>
+                  <button
+                    class="button button--secondary button--small"
+                    type="button"
+                    id="clear-filters-button"
+                  >
+                    Limpiar filtros
+                  </button>
+                </div>
+              </div>
+            `;
+
+            const clearFiltersButton = document.getElementById(
+              "clear-filters-button"
+            );
+
+            if (clearFiltersButton) {
+              clearFiltersButton.addEventListener("click", clearFilters);
+            }
+
+            return;
+          }
+
+          studentsGrid.innerHTML = filteredStudents
+            .map(renderStudentCard)
+            .join("");
+        };
+
+        const renderAttentionList = () => {
+          const attentionStudents = students
+            .filter((item) => item.status === "attention")
+            .slice(0, 4);
+
+          if (attentionStudents.length === 0) {
+            attentionList.innerHTML = `
+              <div class="empty-state">
+                <div>
+                  <h3>Sin alertas</h3>
+                  <p>No hay estudiantes que requieran seguimiento especial.</p>
+                </div>
+              </div>
+            `;
+
+            return;
+          }
+
+          attentionList.innerHTML = attentionStudents
+            .map(
+              (item) => {
+                const fullName = `${item.firstname} ${item.lastname}`;
+                const initials = `${item.firstname.charAt(0)}${item.lastname.charAt(0)}`;
+                const metric =
+                  item.attendance < 80
+                    ? `${item.attendance}%`
+                    : `${item.performance}%`;
+
+                return `
+                  <article class="attention-item" data-student-id="${escapeHTML(
+                    item.id
+                  )}">
+                    <span class="avatar avatar--small avatar--${escapeHTML(
+                      item.avatar || "mateo"
+                    )}" aria-hidden="true">
+                      ${escapeHTML(initials)}
+                    </span>
+
+                    <div class="attention-item__copy">
+                      <strong>${escapeHTML(fullName)}</strong>
+                      <p>${escapeHTML(item.className)} · ${
+                        item.attendance < 80
+                          ? "Asistencia bajo el 80%"
+                          : "Objetivos en refuerzo"
+                      }</p>
+                    </div>
+
+                    <span class="attention-item__metric">${metric}</span>
+                  </article>
+                `;
+              }
+            )
+            .join("");
+
+          document.querySelectorAll(".attention-item").forEach((element) => {
+            element.addEventListener("click", () => {
+              const id = element.dataset.studentId;
+              openDetailModal(id);
+            });
+          });
+        };
+
+        const renderAll = () => {
+          updateMetrics();
+          renderStudents();
+          renderAttentionList();
+        };
+
+        const clearFilters = () => {
+          studentSearch.value = "";
+          classFilter.value = "all";
+          statusFilter.value = "all";
+          renderStudents();
+        };
+
+        const getStudentById = (id) => {
+          return students.find((item) => item.id === id);
+        };
+
+        const getFormValue = (id) => {
+          return document.getElementById(id).value.trim();
+        };
+
+        const setFormValue = (id, value) => {
+          document.getElementById(id).value = value ?? "";
+        };
+
+        const resetStudentForm = () => {
+          studentForm.reset();
+
+          setFormValue("student-class", "");
+          setFormValue("student-avatar", "mateo");
+          setFormValue("student-notes", "");
+        };
+
+        const openStudentModal = (id = null) => {
+          editingStudentId = id;
+          resetStudentForm();
+
+          if (id) {
+            const item = getStudentById(id);
+
+            if (!item) {
+              return;
+            }
+
+            studentModalTitle.textContent = "Editar estudiante";
+            studentModalSubtitle.textContent =
+              "Actualiza la información del estudiante.";
+            saveStudentLabel.textContent = "Guardar cambios";
+            deleteStudentButton.hidden = false;
+
+            setFormValue("student-firstname", item.firstname);
+            setFormValue("student-lastname", item.lastname);
+            setFormValue("student-code", item.code);
+            setFormValue("student-email", item.email);
+            setFormValue("student-phone", item.phone);
+            setFormValue("student-birthdate", item.birthdate);
+            setFormValue("student-class", item.class);
+            setFormValue("student-avatar", item.avatar || "mateo");
+            setFormValue("student-notes", item.notes);
+          } else {
+            studentModalTitle.textContent = "Crear nuevo estudiante";
+            studentModalSubtitle.textContent =
+              "Completa la información básica del estudiante.";
+            saveStudentLabel.textContent = "Guardar estudiante";
+            deleteStudentButton.hidden = true;
+          }
+
+          openModal(studentModalBackdrop, document.getElementById("student-firstname"));
+        };
+
+        const openDetailModal = (id) => {
+          const item = getStudentById(id);
+
+          if (!item) {
+            return;
+          }
+
+          selectedDetailId = id;
+
+          const fullName = `${item.firstname} ${item.lastname}`;
+          const initials = `${item.firstname.charAt(0)}${item.lastname.charAt(0)}`;
+
+          detailBody.innerHTML = `
+            <div class="detail-hero">
+              <span class="avatar avatar--xlarge avatar--${escapeHTML(
+                item.avatar || "mateo"
+              )}" aria-hidden="true">
+                ${escapeHTML(initials)}
+              </span>
+
+              <div>
+                <h3>${escapeHTML(fullName)}</h3>
+                <p>${escapeHTML(item.className)} · ${escapeHTML(
+                  item.code || "Sin código"
+                )}</p>
+              </div>
+            </div>
+
+            <div class="detail-tabs">
+              <button
+                class="detail-tab is-active"
+                type="button"
+                data-tab="info"
+              >
+                <svg class="icon icon--xs" aria-hidden="true">
+                  <use href="#icon-user"></use>
+                </svg>
+                Información
+              </button>
+
+              <button
+                class="detail-tab"
+                type="button"
+                data-tab="academic"
+              >
+                <svg class="icon icon--xs" aria-hidden="true">
+                  <use href="#icon-chart"></use>
+                </svg>
+                Rendimiento
+              </button>
+
+              <button
+                class="detail-tab"
+                type="button"
+                data-tab="notes"
+              >
+                <svg class="icon icon--xs" aria-hidden="true">
+                  <use href="#icon-edit"></use>
+                </svg>
+                Observaciones
+              </button>
+            </div>
+
+            <div class="detail-tab-panel is-active" data-panel="info">
+              <div class="detail-stats">
+                <div class="detail-stat">
+                  <strong>${Number(item.attendance || 0)
+                    .toFixed(1)
+                    .replace(".", ",")}%</strong>
+                  <span>Asistencia</span>
+                </div>
+
+                <div class="detail-stat">
+                  <strong>${Number(item.performance || 0)
+                    .toFixed(1)
+                    .replace(".", ",")}%</strong>
+                  <span>Rendimiento</span>
+                </div>
+
+                <div class="detail-stat">
+                  <strong>${getStatusBadge(
+                    item.status,
+                    item.attendance,
+                    item.performance
+                  ).match(/>(.*?)</)[1]}</strong>
+                  <span>Estado</span>
+                </div>
+              </div>
+
+              <div class="detail-list">
+                <div class="detail-list__row">
+                  <span class="detail-list__label">Correo electrónico</span>
+                  <strong class="detail-list__value">
+                    ${escapeHTML(item.email || "Sin registrar")}
+                  </strong>
+                </div>
+
+                <div class="detail-list__row">
+                  <span class="detail-list__label">Teléfono</span>
+                  <strong class="detail-list__value">
+                    ${escapeHTML(item.phone || "Sin registrar")}
+                  </strong>
+                </div>
+
+                <div class="detail-list__row">
+                  <span class="detail-list__label">Fecha de nacimiento</span>
+                  <strong class="detail-list__value">
+                    ${
+                      item.birthdate
+                        ? new Date(item.birthdate + "T00:00:00")
+                            .toLocaleDateString("es-ES", {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric"
+                            })
+                        : "Sin registrar"
+                    }
+                  </strong>
+                </div>
+
+                <div class="detail-list__row">
+                  <span class="detail-list__label">Clase asignada</span>
+                  <strong class="detail-list__value">
+                    ${escapeHTML(item.className)}
+                  </strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-tab-panel" data-panel="academic">
+              <div class="detail-progress">
+                <div class="detail-progress__item">
+                  <div class="detail-progress__item-top">
+                    <span class="detail-progress__item-label">Asistencia a clases</span>
+                    <strong class="detail-progress__item-value">
+                      ${Number(item.attendance || 0)
+                        .toFixed(1)
+                        .replace(".", ",")}%
+                    </strong>
+                  </div>
+                  <span class="detail-progress__bar">
+                    <span style="width: ${Math.max(
+                      0,
+                      Math.min(100, Number(item.attendance || 0))
+                    )}%"></span>
+                  </span>
+                </div>
+
+                <div class="detail-progress__item">
+                  <div class="detail-progress__item-top">
+                    <span class="detail-progress__item-label">Logro de objetivos</span>
+                    <strong class="detail-progress__item-value">
+                      ${Number(item.performance || 0)
+                        .toFixed(1)
+                        .replace(".", ",")}%
+                    </strong>
+                  </div>
+                  <span class="detail-progress__bar">
+                    <span style="width: ${Math.max(
+                      0,
+                      Math.min(100, Number(item.performance || 0))
+                    )}%"></span>
+                  </span>
+                </div>
+
+                <div class="detail-progress__item">
+                  <div class="detail-progress__item-top">
+                    <span class="detail-progress__item-label">Participación</span>
+                    <strong class="detail-progress__item-value">
+                      ${Math.floor(70 + Math.random() * 25)}%
+                    </strong>
+                  </div>
+                  <span class="detail-progress__bar">
+                    <span style="width: ${Math.floor(70 + Math.random() * 25)}%"></span>
+                  </span>
+                </div>
+              </div>
+
+              <div class="detail-empty">
+                <p>
+                  El historial académico detallado estará disponible cuando se integren las evaluaciones.
+                </p>
+              </div>
+            </div>
+
+            <div class="detail-tab-panel" data-panel="notes">
+              ${
+                item.notes
+                  ? `<p style="color: var(--text); font-size: 0.73rem; line-height: 1.6; padding: 15px; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 11px;">${escapeHTML(
+                      item.notes
+                    )}</p>`
+                  : '<div class="detail-empty"><p>No hay observaciones registradas para este estudiante.</p></div>'
+              }
+            </div>
+          `;
+
+          document.querySelectorAll(".detail-tab").forEach((tab) => {
+            tab.addEventListener("click", () => {
+              const targetPanel = tab.dataset.tab;
+
+              document.querySelectorAll(".detail-tab").forEach((t) => {
+                t.classList.remove("is-active");
+              });
+
+              document.querySelectorAll(".detail-tab-panel").forEach((p) => {
+                p.classList.remove("is-active");
+              });
+
+              tab.classList.add("is-active");
+              document
+                .querySelector(`[data-panel="${targetPanel}"]`)
+                .classList.add("is-active");
+            });
+          });
+
+          openModal(detailModalBackdrop);
+        };
+
+        const createStudentFromForm = () => {
+          const firstname = getFormValue("student-firstname");
+          const lastname = getFormValue("student-lastname");
+          const classId = getFormValue("student-class");
+
+          if (!firstname || !lastname || !classId) {
+            showToast("Completa los campos obligatorios.", "danger");
+            return null;
+          }
+
+          const classOption = document.querySelector(
+            `#student-class option[value="${classId}"]`
+          );
+
+          return {
+            id: editingStudentId || `student-${Date.now()}`,
+            firstname,
+            lastname,
+            code: getFormValue("student-code") || `EST-${Date.now()}`,
+            email: getFormValue("student-email"),
+            phone: getFormValue("student-phone"),
+            birthdate: getFormValue("student-birthdate"),
+            class: classId,
+            className: classOption ? classOption.textContent : classId,
+            avatar: getFormValue("student-avatar"),
+            attendance: editingStudentId
+              ? Number(getStudentById(editingStudentId)?.attendance || 0)
+              : 95,
+            performance: editingStudentId
+              ? Number(getStudentById(editingStudentId)?.performance || 0)
+              : 80,
+            status: editingStudentId
+              ? getStudentById(editingStudentId)?.status || "active"
+              : "active",
+            notes: getFormValue("student-notes")
+          };
+        };
+
+        studentForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const nextStudent = createStudentFromForm();
+
+          if (!nextStudent) {
+            return;
+          }
+
+          if (editingStudentId) {
+            students = students.map((item) =>
+              item.id === editingStudentId ? nextStudent : item
+            );
+
+            showToast("El estudiante fue actualizado correctamente.", "success");
+          } else {
+            students.unshift(nextStudent);
+            showToast("El nuevo estudiante fue creado correctamente.", "success");
+          }
+
+          persistStudents();
+          renderAll();
+          closeModal(studentModalBackdrop);
+        });
+
+        deleteStudentButton.addEventListener("click", () => {
+          if (!editingStudentId) {
+            return;
+          }
+
+          const item = getStudentById(editingStudentId);
+
+          if (!item) {
+            return;
+          }
+
+          const fullName = `${item.firstname} ${item.lastname}`;
+
+          const confirmed = window.confirm(
+            `¿Quieres eliminar al estudiante "${fullName}"?`
+          );
+
+          if (!confirmed) {
+            return;
+          }
+
+          students = students.filter((student) => student.id !== editingStudentId);
+          persistStudents();
+          renderAll();
+          closeModal(studentModalBackdrop);
+          showToast("El estudiante fue eliminado.", "success");
+        });
+
+        studentsGrid.addEventListener("click", (event) => {
+          const actionButton = event.target.closest("[data-student-action]");
+
+          if (!actionButton) {
+            return;
+          }
+
+          const action = actionButton.dataset.studentAction;
+          const id = actionButton.dataset.studentId;
+          const item = getStudentById(id);
+
+          if (!item) {
+            return;
+          }
+
+          if (action === "detail") {
+            openDetailModal(id);
+          }
+
+          if (action === "edit") {
+            openStudentModal(id);
+          }
+        });
+
+        detailEditButton.addEventListener("click", () => {
+          if (!selectedDetailId) {
+            return;
+          }
+
+          closeModal(detailModalBackdrop);
+          openStudentModal(selectedDetailId);
+        });
+
+        detailContactButton.addEventListener("click", () => {
+          const item = getStudentById(selectedDetailId);
+
+          if (!item) {
+            return;
+          }
+
+          if (item.email) {
+            showToast(
+              `La funcionalidad de contacto se integrará próximamente.`,
+              "info"
+            );
+          } else {
+            showToast("Este estudiante no tiene correo registrado.", "danger");
+          }
+        });
+
+        [studentSearch, classFilter, statusFilter].forEach((element) => {
+          element.addEventListener("input", renderStudents);
+          element.addEventListener("change", renderStudents);
+        });
+
+        const setView = (view) => {
+          selectedView = view;
+
+          const isGrid = view === "grid";
+
+          gridViewButton.classList.toggle("is-active", isGrid);
+          listViewButton.classList.toggle("is-active", !isGrid);
+
+          gridViewButton.setAttribute("aria-pressed", String(isGrid));
+          listViewButton.setAttribute("aria-pressed", String(!isGrid));
+
+          renderStudents();
+        };
+
+        gridViewButton.addEventListener("click", () => setView("grid"));
+        listViewButton.addEventListener("click", () => setView("list"));
+
+        document
+          .getElementById("new-student-button")
+          .addEventListener("click", () => openStudentModal());
+
+        document
+          .getElementById("mobile-new-student")
+          .addEventListener("click", () => openStudentModal());
+
+        document
+          .getElementById("export-students-button")
+          .addEventListener("click", () => {
+            showToast(
+              "La exportación de listados estará disponible próximamente.",
+              "info"
+            );
+          });
+
+        themeToggle.addEventListener("click", () => {
+          const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+
+          applyTheme(nextTheme);
+          savePreference("docencia360-theme", nextTheme);
+
+          showToast(
+            nextTheme === "dark"
+              ? "Modo oscuro activado."
+              : "Modo claro activado.",
+            "success"
+          );
+        });
+
+        sidebarCollapse.addEventListener("click", () => {
+          if (window.innerWidth <= 1120) {
+            return;
+          }
+
+          const compact = body.classList.toggle("sidebar-is-compact");
+
+          savePreference(
+            "docencia360-sidebar",
+            compact ? "compact" : "expanded"
+          );
+
+          sidebarCollapse.setAttribute(
+            "aria-label",
+            compact ? "Expandir menú lateral" : "Contraer menú lateral"
+          );
+
+          sidebarCollapse.setAttribute(
+            "title",
+            compact ? "Expandir menú lateral" : "Contraer menú lateral"
+          );
+        });
+
+        mobileMenuToggle.addEventListener("click", () => {
+          const isOpen = body.classList.toggle("mobile-sidebar-open");
+
+          mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+          mobileMenuToggle.setAttribute(
+            "aria-label",
+            isOpen
+              ? "Cerrar navegación principal"
+              : "Abrir navegación principal"
+          );
+        });
+
+        mobileSidebarBackdrop.addEventListener("click", closeMobileSidebar);
+
+        document
+          .querySelectorAll(".sidebar__nav-link, .sidebar__help")
+          .forEach((link) => {
+            link.addEventListener("click", closeMobileSidebar);
+          });
+
+        notificationToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleFloatingMenu(notificationMenu, notificationToggle);
+        });
+
+        profileToggle.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleFloatingMenu(profileMenu, profileToggle);
+        });
+
+        document.addEventListener("click", (event) => {
+          const clickedMenu = event.target.closest(".floating-menu");
+          const clickedTrigger = event.target.closest(
+            "#notification-toggle, #profile-toggle"
+          );
+
+          if (!clickedMenu && !clickedTrigger) {
+            closeFloatingMenus();
+          }
+        });
+
+        markNotificationsRead.addEventListener("click", () => {
+          if (notificationDot) {
+            notificationDot.remove();
+          }
+
+          showToast("Las notificaciones fueron marcadas como leídas.", "success");
+        });
+
+        logoutButton.addEventListener("click", () => {
+          closeFloatingMenus();
+          showToast(
+            "El cierre de sesión se conectará junto con Supabase Auth.",
+            "info"
+          );
+        });
+
+        document
+          .getElementById("open-command-palette")
+          .addEventListener("click", () => {
+            showToast(
+              "La paleta de comandos se agregará en la próxima iteración.",
+              "info"
+            );
+          });
+
+        document.querySelectorAll("[data-close-modal]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const modal = document.getElementById(button.dataset.closeModal);
+
+            if (modal) {
+              closeModal(modal);
+            }
+          });
+        });
+
+        [studentModalBackdrop, detailModalBackdrop].forEach((modal) => {
+          modal.addEventListener("click", (event) => {
+            if (event.target === modal) {
+              closeModal(modal);
+            }
+          });
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            const openModalElement = document.querySelector(
+              ".modal-backdrop.is-open"
+            );
+
+            if (openModalElement) {
+              closeModal(openModalElement);
+              return;
+            }
+
+            if (body.classList.contains("mobile-sidebar-open")) {
+              closeMobileSidebar();
+              return;
+            }
+
+            closeFloatingMenus();
+          }
+        });
+
+        window.addEventListener("scroll", updateTopbar, {
+          passive: true
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 760) {
+            closeMobileSidebar();
+          }
+
+          if (window.innerWidth <= 1120) {
+            body.classList.remove("sidebar-is-compact");
+          }
+        });
+
+        const savedTheme = getPreference("docencia360-theme");
+
+        if (savedTheme === "dark" || savedTheme === "light") {
+          applyTheme(savedTheme);
+        } else {
+          const prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+          applyTheme(prefersDark ? "dark" : "light");
+        }
+
+        const savedSidebarState = getPreference("docencia360-sidebar");
+
+        if (savedSidebarState === "compact" && window.innerWidth > 1120) {
+          body.classList.add("sidebar-is-compact");
+          sidebarCollapse.setAttribute(
+            "aria-label",
+            "Expandir menú lateral"
+          );
+          sidebarCollapse.setAttribute("title", "Expandir menú lateral");
+        }
+
+        updateDate();
+        updateTopbar();
+        renderAll();
+      })();
+    </script>
+  </body>
+</html>
+                  
