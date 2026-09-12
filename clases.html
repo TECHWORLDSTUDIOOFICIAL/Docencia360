@@ -611,8 +611,6 @@
         background: linear-gradient(135deg, #ec4899, #be185d);
       }
 
-      /* Estructura */
-
       .app-shell {
         min-height: 100vh;
       }
@@ -628,8 +626,6 @@
         padding: 28px 32px 54px;
         margin: 0 auto;
       }
-
-      /* Sidebar */
 
       .sidebar {
         position: fixed;
@@ -920,8 +916,6 @@
         padding-left: 10px;
       }
 
-      /* Barra superior */
-
       .topbar {
         position: sticky;
         z-index: 80;
@@ -1154,8 +1148,6 @@
         display: none;
       }
 
-      /* Menús flotantes */
-
       .menu-wrapper {
         position: relative;
       }
@@ -1343,8 +1335,6 @@
         color: var(--rose-600) !important;
       }
 
-      /* Encabezado */
-
       .page-heading {
         display: flex;
         align-items: flex-end;
@@ -1402,8 +1392,6 @@
         justify-content: flex-end;
         gap: 9px;
       }
-
-      /* Métricas */
 
       .metrics-grid {
         display: grid;
@@ -1510,8 +1498,6 @@
         white-space: nowrap;
       }
 
-      /* Barra de herramientas */
-
       .toolbar-card {
         display: grid;
         grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(130px, 0.7fr)) auto;
@@ -1605,8 +1591,6 @@
         background: var(--surface);
         box-shadow: var(--shadow-xs);
       }
-
-      /* Contenido */
 
       .classes-layout {
         display: grid;
@@ -1706,7 +1690,7 @@
         background: var(--emerald-500);
       }
 
- .class-card[data-color="amber"] .class-card__accent {
+      .class-card[data-color="amber"] .class-card__accent {
         background: var(--amber-500);
       }
 
@@ -2019,8 +2003,6 @@
         line-height: 1.55;
       }
 
-      /* Agenda lateral */
-
       .schedule-list {
         display: grid;
         padding: 6px 17px 13px;
@@ -2117,8 +2099,6 @@
       .info-card__list .icon {
         color: var(--emerald-600);
       }
-
-      /* Modales */
 
       .modal-backdrop {
         position: fixed;
@@ -2406,8 +2386,6 @@
         text-align: right;
       }
 
-      /* Toast */
-
       .toast-container {
         position: fixed;
         z-index: 700;
@@ -2479,8 +2457,6 @@
           transform: translateY(10px);
         }
       }
-
-      /* Responsive tablet */
 
       @media (max-width: 1240px) {
         .main-inner {
@@ -2612,8 +2588,6 @@
           grid-column: auto;
         }
       }
-
-      /* Responsive móvil */
 
       @media (max-width: 760px) {
         :root {
@@ -3169,7 +3143,6 @@
       Ir al contenido principal
     </a>
 
-    <!-- Iconos SVG locales -->
     <svg
       class="sr-only"
       aria-hidden="true"
@@ -3427,7 +3400,7 @@
             stroke-width="1.8"
           />
           <path
-            d="M12 25v2M12 19.5v2M21.5 12h-2M4.5 12h-2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3"
+            d="M12 2v2M12 20v2M22 12h-2M4 12H2M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4M18.7 18.7l-1.4-1.4M6.7 6.7 5.3 5.3"
             fill="none"
             stroke="currentColor"
             stroke-linecap="round"
@@ -3748,7 +3721,6 @@
     <div class="mobile-sidebar-backdrop" id="mobile-sidebar-backdrop"></div>
 
     <div class="app-shell">
-      <!-- Sidebar -->
       <aside class="sidebar" aria-label="Navegación principal">
         <a
           class="sidebar__brand"
@@ -3888,7 +3860,6 @@
         </footer>
       </aside>
 
-      <!-- Área principal -->
       <section class="app-main">
         <header class="topbar" id="topbar">
           <a
@@ -3939,8 +3910,7 @@
             <button
               class="topbar__action"
               id="theme-toggle"
-              type="button"
-              aria-label="Activar modo oscuro"
+              type="button"aria-label="Activar modo oscuro"
               title="Cambiar tema"
             >
               <svg class="icon theme-icon-moon" aria-hidden="true">
@@ -4096,7 +4066,6 @@
         </header>
 
         <main class="main-inner" id="contenido-principal">
-          <!-- Encabezado -->
           <section class="page-heading" aria-labelledby="page-title">
             <div class="page-heading__content">
               <p class="page-heading__date">
@@ -4141,7 +4110,6 @@
             </div>
           </section>
 
-          <!-- Métricas -->
           <section class="metrics-grid" aria-label="Indicadores de clases">
             <article class="metric-card card">
               <div class="metric-card__top">
@@ -4230,7 +4198,6 @@
             </article>
           </section>
 
-          <!-- Filtros -->
           <section class="toolbar-card card" aria-label="Filtros de clases">
             <div class="search-field">
               <svg class="icon icon--sm" aria-hidden="true">
@@ -4312,7 +4279,6 @@
             </div>
           </section>
 
-          <!-- Clases y agenda -->
           <div class="classes-layout">
             <section class="classes-main card" aria-labelledby="classes-title">
               <header class="classes-panel__header">
@@ -4426,7 +4392,6 @@
       </section>
     </div>
 
-    <!-- Navegación móvil -->
     <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
       <a href="dashboard.html">
         <svg class="icon" aria-hidden="true">
@@ -4471,7 +4436,6 @@
       </a>
     </nav>
 
-    <!-- Modal crear/editar clase -->
     <div
       class="modal-backdrop"
       id="class-modal-backdrop"
@@ -4717,7 +4681,6 @@
       </section>
     </div>
 
-    <!-- Modal detalle -->
     <div
       class="modal-backdrop"
       id="detail-modal-backdrop"
@@ -4787,7 +4750,6 @@
       </section>
     </div>
 
-    <!-- Modal de búsqueda -->
     <div
       class="modal-backdrop"
       id="command-modal-backdrop"
@@ -5011,7 +4973,8 @@
             sessions: 3,
             color: "indigo",
             status: "active",
-            description              "Trabajo con expresiones algebraicas, ecuaciones y representación gráfica."
+            description:
+              "Trabajo con expresiones algebraicas, ecuaciones y representación gráfica."
           },
           {
             id: "class-geo-8a",
@@ -5092,25 +5055,6 @@
             status: "active",
             description:
               "Espacio de acompañamiento para estudiantes que requieren apoyo adicional."
-          },
-          {
-            id: "class-ant-8b",
-            name: "Antiguo Taller de Geometría",
-            subject: "Matemáticas",
-            grade: "8°",
-            section: "B",
-            code: "ANT-8B",
-            day: "Jueves",
-            start: "11:30",
-            end: "12:30",
-            room: "Aula 105",
-            students: 20,
-            attendance: 88,
-            progress: 100,
-            sessions: 0,
-            color: "blue",
-            status: "archived",
-            description: "Grupo archivado del periodo académico anterior."
           }
         ];
 
@@ -5134,7 +5078,6 @@
           try {
             localStorage.setItem(key, value);
           } catch {
-            /* La página continúa funcionando sin almacenamiento local. */
           }
         };
 
@@ -5150,7 +5093,6 @@
               }
             }
           } catch {
-            /* Se utilizarán los datos iniciales. */
           }
 
           return initialClasses.map((item) => ({ ...item }));
@@ -5162,7 +5104,6 @@
           try {
             localStorage.setItem("docencia360-classes", JSON.stringify(classes));
           } catch {
-            /* La página continúa funcionando sin almacenamiento local. */
           }
         };
 
@@ -5483,26 +5424,26 @@
                 <button
                   class="button button--ghost button--small"
                   type="button"
-                  data-class-action="detail"
+                  data-class-action="enter"
                   data-class-id="${escapeHTML(item.id)}"
                 >
                   <svg class="icon icon--xs" aria-hidden="true">
-                    <use href="#icon-eye"></use>
+                    <use href="#icon-arrow-right"></use>
                   </svg>
-                  Ver detalle
+                  Entrar a esta clase
                 </button>
 
                 <div class="class-card__actions">
                   <button
                     class="button button--secondary button--small"
                     type="button"
-                    data-class-action="attendance"
+                    data-class-action="detail"
                     data-class-id="${escapeHTML(item.id)}"
                   >
                     <svg class="icon icon--xs" aria-hidden="true">
-                      <use href="#icon-check"></use>
+                      <use href="#icon-eye"></use>
                     </svg>
-                    Asistencia
+                    Detalle
                   </button>
 
                   <button
@@ -5914,19 +5855,16 @@
             return;
           }
 
+          if (action === "enter") {
+            window.location.href = `clasepanel.html?id=${encodeURIComponent(id)}`;
+          }
+
           if (action === "detail") {
             openDetailModal(id);
           }
 
           if (action === "edit") {
             openClassModal(id);
-          }
-
-          if (action === "attendance") {
-            showToast(
-              `Registro de asistencia preparado para ${item.name}.`,
-              "success"
-            );
           }
         });
 
